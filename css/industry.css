@@ -1,3 +1,7 @@
+/**
+ * For the entire wrapper around body
+ */
+
 #wrapper {
   position: relative;
   width: 1000px;
@@ -5,42 +9,61 @@
   overflow: hidden;
 }
 
-#wrapper * {
+#wrapper > * {
   position: absolute;
 }
 
-/* #wrapper div:nth-child(1) {
-  top: 70px;
-}
-
-#wrapper div:nth-child(2) {
-  top: 120px;
-} */
+/**
+ * The graph
+ */
 
 canvas#graph {
   width: 400px;
   height: 400px;
   background-color: #eee;
-  /* left: 20px; */
   top: 70px;
 }
 
-.header {
+/**
+ * For all the "panels" (i.e. the parts beside the graph)
+ */
+ 
+#beside-graph {
   left: 500px;
 }
 
-.header p {
-  text-indent: 20px;
+#beside-graph .header:not(:first-child) {
+  margin-top: 20px;
 }
 
-.header p:nth-child(1) {
+/* #beside-graph div:nth-child(1) {
+  top: 0px;
+}
+
+#beside-graph div:nth-child(2) {
+  top: 100px;
+} */
+
+/**
+ * For each individual "panel" beside the graph
+ */
+
+/* .header {
+  left: 500px;
+} */
+
+.header p {
+  margin: 0px;
+}
+
+/* .header p:nth-child(2) {
   top: 20px;
 }
 
-.header p:nth-child(2) {
+.header p:nth-child(3) {
   top: 40px;
 }
 
-.header p:nth-child(3) {
+.header p:nth-child(4) {
   top: 60px;
-}
+} */
