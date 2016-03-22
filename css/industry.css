@@ -32,38 +32,18 @@ canvas#graph {
   left: 500px;
 }
 
-#beside-graph .header:not(:first-child) {
+#beside-graph .panel:not(:first-child) {
   margin-top: 20px;
 }
-
-/* #beside-graph div:nth-child(1) {
-  top: 0px;
-}
-
-#beside-graph div:nth-child(2) {
-  top: 100px;
-} */
 
 /**
  * For each individual "panel" beside the graph
  */
 
-/* .header {
-  left: 500px;
-} */
-
-.header p {
+.panel p {
   margin: 0px;
 }
 
-/* .header p:nth-child(2) {
-  top: 20px;
+.panel p:first-child {
+  font-weight: bold;
 }
-
-.header p:nth-child(3) {
-  top: 40px;
-}
-
-.header p:nth-child(4) {
-  top: 60px;
-} */
