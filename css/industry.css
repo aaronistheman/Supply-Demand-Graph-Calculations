@@ -1,0 +1,46 @@
+#wrapper {
+  position: relative;
+  width: 1000px;
+  height: 600px;
+  overflow: hidden;
+}
+
+#wrapper * {
+  position: absolute;
+}
+
+/* #wrapper div:nth-child(1) {
+  top: 70px;
+}
+
+#wrapper div:nth-child(2) {
+  top: 120px;
+} */
+
+canvas#graph {
+  width: 400px;
+  height: 400px;
+  background-color: #eee;
+  /* left: 20px; */
+  top: 70px;
+}
+
+.header {
+  left: 500px;
+}
+
+.header p {
+  text-indent: 20px;
+}
+
+.header p:nth-child(1) {
+  top: 20px;
+}
+
+.header p:nth-child(2) {
+  top: 40px;
+}
+
+.header p:nth-child(3) {
+  top: 60px;
+}
