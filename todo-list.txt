@@ -1,0 +1,12 @@
+DON'T FORGET UNIT TESTS AND MULTIPLE BRANCHES
+
+Next:
+-add text fields and text boxes for options that are not always present;
+requires jQuery
+-decide whether to make this a single-page application
+  -could change the fields shown (in response to what the user wants
+  to graph) (perhaps with AJAX or PHP or ASP or something)
+-readme
+-determine a better way to decide how to orient the graphs (that is,
+a better way than slope, which could be difficult for the user to understand)
+-graph supply and demand

@@ -1,0 +1,49 @@
+/**
+ * For the entire wrapper around body
+ */
+
+#wrapper {
+  position: relative;
+  width: 1000px;
+  height: 600px;
+  overflow: hidden;
+}
+
+#wrapper > * {
+  position: absolute;
+}
+
+/**
+ * The graph
+ */
+
+canvas#graph {
+  width: 400px;
+  height: 400px;
+  background-color: #eee;
+  top: 70px;
+}
+
+/**
+ * For all the "panels" (i.e. the parts beside the graph)
+ */
+ 
+#beside-graph {
+  left: 500px;
+}
+
+#beside-graph .panel:not(:first-child) {
+  margin-top: 20px;
+}
+
+/**
+ * For each individual "panel" beside the graph
+ */
+
+.panel p {
+  margin: 0px;
+}
+
+.panel p:first-child {
+  font-weight: bold;
+}
