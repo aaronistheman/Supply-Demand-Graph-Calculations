@@ -1,7 +1,6 @@
 DON'T FORGET UNIT TESTS AND MULTIPLE BRANCHES
 
 Next:
--readme
 -add text fields and text boxes for options that are not always present;
 requires AngularJS (use data-ng, not ng)
   -make this a single-page application
