@@ -1,8 +1,6 @@
 DON'T FORGET UNIT TESTS AND MULTIPLE BRANCHES
 
 Next:
--use that Angular directive that prevents the page from flickering while
-AngularJS loads
 -figure out problem with scrolling
   -may have to use data-ng-disabled instead of data-ng-if/switch
 -see if making ng-models keeps the data from disappearing if input elements
