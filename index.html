@@ -92,8 +92,7 @@
           </div> <!-- subsidy info -->
 
           <div> <!-- price mechanism info -->
-            <br><p>Price Mechanism: <select
-              data-ng-model="priceMechanism">
+            <br><p>Price Mechanism: <select data-ng-model="priceMechanism">
               <option value="none">None</option>
               <option value="floor">Floor</option>
               <option value="ceiling">Ceiling</option>
@@ -104,8 +103,19 @@
           </div> <!-- price mechanism info -->
 
         </div> <!-- if closed, public economy -->
-
         <div data-ng-if="!isClosed"> <!-- if open, public economy -->
+
+          <div> <!-- trade info -->
+            <br><p>Trade Factor: <select data-ng-model="tradeFactor">
+              <option value="none">None</option>
+              <option value="tariff">Tariff</option>
+              <option value="quota">Quota</option>
+            </select></p>
+            <div data-ng-if="tradeFactor != 'none'">
+              <p>How Much: <input type="number" name="trade-factor"
+                value=0 /></p>
+            </div>
+          </div> <!-- trade info -->
 
         </div> <!-- if open, public economy -->
 

@@ -1,17 +1,18 @@
 DON'T FORGET UNIT TESTS AND MULTIPLE BRANCHES
 
 Next:
--add open, public economy stuff
 -use that Angular directive that prevents the page from flickering while
 AngularJS loads
 -figure out problem with scrolling
   -may have to use data-ng-disabled instead of data-ng-if/switch
+-see if making ng-models keeps the data from disappearing if input elements
+are removed by AngularJS
 -determine a better way to decide how to orient the graphs (that is,
 a better way than slope, which could be difficult for the user to understand)
 -graph supply and demand
   -use ng-change to check of way to decide how to orient the graphs is
   being changed (so can redraw the graph)
-  
+
 Eventually:
 -allow graphing of firm or aggregate
   -could use AngularJS if possible
@@ -20,9 +21,12 @@ Eventually:
 -using tables to more neatly present the calculated data
 -use AngularJS to note errorneous text field inputs
   -price floor or ceiling has to matter
+-option to hi lite deadweight loss (and maybe even each surplus) on graph
+-decide which Riemann sum to use (probably either midpoint or trapezoidal)
 
 Considerable:
 -could make graph by asking for points from the user and making
 a line graph out of them
 -option to save applied inputs and apply them later
--allow the panels to be in more than one column
+-allow the panels to be in more than one column; see how it was done with
+CSS in one of the card games
