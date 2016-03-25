@@ -12,13 +12,14 @@ be able to apply settings (e.g. an excise tax) and to see calculations
 I am working on it during the March and April of 2016, towards the
 beginning of my spring quarter of my first year at UC Davis.
 
-I will make it with JavaScript, HTML, and CSS, probably with the
-help of jQuery, AngularJS, and/or QUnit.
+I will make it with HTML, CSS, JavaScript, jQuery, AngularJS, and QUnit.
 
 Features
 --------
 
-To be decided.
+AngularJS is used to only show the user the options that make sense
+(e.g. if the user does not check the box for "Government", then he/she
+will not be asked where the price floor is).
 
 Releases
 --------
@@ -38,10 +39,13 @@ How to Run Unit Tests
 
 To be announced.
 
-Use of Git hooks
+Use of Git Hooks
 ----------------
 
-To be announced.
+To prevent trailing whitespace, I've enabled the pre-commit Git hook.
+However, this change can't be saved in the repository. To make this
+change, navigate to the directory .git/hooks, and rename "pre-commit.sample"
+to "pre-commit".
 
 Acknowledgements
 ----------------
