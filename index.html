@@ -15,8 +15,7 @@
 <link rel="stylesheet" type="text/css" href="css/style.css" />
 
 </head>
-<!-- <body data-ng-app="" data-ng-controller="ctrl"> -->
-<body data-ng-app="">
+<body data-ng-app="app" data-ng-controller="ctrl">
 
 <div id="wrapper">
   <h1>Graph of <span id="graph-title"></span> Industry</h1><br \>
@@ -53,8 +52,7 @@
 
     <div class="panel">
       <p><b>International Matters</b></p>
-      <p>Closed economy: <input type="checkbox" data-ng-model="isClosed"
-        data-ng-init="isClosed = true" /></p>
+      <p>Closed economy: <input type="checkbox" data-ng-model="isClosed" /></p>
       <div data-ng-if="!isClosed">
         <p>World price: <input type="number" name="world-p" /></p>
         <p>Number of imports: <span id="imports"></span></p>
@@ -120,7 +118,7 @@
   </div> <!-- end beside the graph -->
 </div> <!-- end wrapper -->
 
-<!-- <script src="js/script.js"></script> -->
+<script src="js/script.js"></script>
 
 </body>
 </html>
