@@ -1,10 +1,9 @@
 DON'T FORGET UNIT TESTS AND MULTIPLE BRANCHES
 
 Next:
--add text fields and text boxes for options that are not always present;
-requires AngularJS (use data-ng, not ng)
-  -don't use data-ng-init (so Angular variables aren't local)
-  -use data-ng-disabled or data-ng-if or data-ng-switch
+-add open, public economy stuff
+-use that Angular directive that prevents the page from flickering while
+AngularJS loads
 -figure out problem with scrolling
   -may have to use data-ng-disabled instead of data-ng-if/switch
 -determine a better way to decide how to orient the graphs (that is,
@@ -26,3 +25,4 @@ Considerable:
 -could make graph by asking for points from the user and making
 a line graph out of them
 -option to save applied inputs and apply them later
+-allow the panels to be in more than one column
