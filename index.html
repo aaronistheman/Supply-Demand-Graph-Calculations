@@ -5,12 +5,17 @@
 <meta charset="utf-8" />
 <title>The Industry</title>
 
+<script
+  src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js">
+</script>
+<script
+  src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js">
+</script>
+
 <link rel="stylesheet" type="text/css" href="css/style.css" />
 
-<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-
 </head>
-<body data-ng-app="">
+<body data-ng-app="app" data-ng-controller="ctrl">
 
 <div id="wrapper">
   <h1>Graph of <span id="graph-title"></span> Industry</h1><br \>
@@ -47,8 +52,7 @@
 
     <div class="panel">
       <p><b>International Matters</b></p>
-      <p>Closed economy: <input type="checkbox" data-ng-model="isClosed"
-        data-ng-init="isClosed = true" /></p>
+      <p>Closed economy: <input type="checkbox" data-ng-model="isClosed" /></p>
       <div data-ng-if="!isClosed">
         <p>World price: <input type="number" name="world-p" /></p>
         <p>Number of imports: <span id="imports"></span></p>
@@ -56,8 +60,8 @@
     </div>
 
     <div class="panel">
-      <p><b>Government: <input type="checkbox" data-ng-model="isPublic"
-        data-ng-init="isPublic = false" /></b></p>
+      <p><b>Government: <input type="checkbox" data-ng-model="isPublic" />
+        </b></p>
       <div data-ng-if="isPublic"> <!-- if considering government -->
 
         <br /><p>Deadweight Loss (Area): <span id="dwl">0</span></p><br />
@@ -66,8 +70,7 @@
 
           <div> <!-- tax info -->
             <!-- figure out what the user wants taxed -->
-            <p>Tax On: <select data-ng-model="taxed"
-              data-ng-init="taxed = 'supply'" >
+            <p>Tax On: <select data-ng-model="taxed">
               <option value="demand">Demand</option>
               <option value="supply">Supply</option>
             </select></p>
@@ -79,8 +82,7 @@
 
           <div> <!-- subsidy info -->
             <!-- figure out what the user wants subsidized -->
-            <br><p>Subsidy For: <select data-ng-model="subsidized"
-              data-ng-init="subsidized = 'supply'" >
+            <br><p>Subsidy For: <select data-ng-model="subsidized">
               <option value="demand">Demand</option>
               <option value="supply">Supply</option>
             </select></p>
@@ -91,8 +93,7 @@
 
           <div> <!-- price mechanism info -->
             <br><p>Price Mechanism: <select
-              data-ng-model="priceMechanism"
-              data-ng-init="priceMechanism = 'None'" >
+              data-ng-model="priceMechanism">
               <option value="none">None</option>
               <option value="floor">Floor</option>
               <option value="ceiling">Ceiling</option>
@@ -113,6 +114,8 @@
 
   </div> <!-- end beside the graph -->
 </div> <!-- end wrapper -->
+
+<script src="js/script.js"></script>
 
 </body>
 </html>
