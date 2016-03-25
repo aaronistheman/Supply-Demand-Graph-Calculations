@@ -9,6 +9,7 @@ var angularJS = angular.module("app", []).controller('ctrl', function($scope) {
   $scope.taxed = "supply";
   $scope.subsidized = "supply";
   $scope.priceMechanism = "none";
+  $scope.tradeFactor = "none";
 });
 
 $(document).ready(function() {
