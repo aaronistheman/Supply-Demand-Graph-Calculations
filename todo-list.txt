@@ -3,7 +3,6 @@ DON'T FORGET UNIT TESTS AND MULTIPLE BRANCHES
 Next:
 -add text fields and text boxes for options that are not always present;
 requires AngularJS (use data-ng, not ng)
-  -make this a single-page application
   -mentioned AngularJS in readme
   -use data-ng-disabled or data-ng-if or data-ng-switch
 -determine a better way to decide how to orient the graphs (that is,
