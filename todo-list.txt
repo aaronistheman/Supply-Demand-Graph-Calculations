@@ -16,3 +16,5 @@ Eventually:
   -could use AngularJS if possible
   -could change the fields shown (in response to what the user wants
   to graph) (perhaps with AJAX or PHP or ASP or something)
+-using tables to more neatly present the calculated data
+-use AngularJS to note errorneous text field inputs

@@ -38,10 +38,13 @@ How to Run Unit Tests
 
 To be announced.
 
-Use of Git hooks
+Use of Git Hooks
 ----------------
 
-To be announced.
+To prevent trailing whitespace, I've enabled the pre-commit Git hook.
+However, this change can't be saved in the repository. To make this
+change, navigate to the directory .git/hooks, and rename "pre-commit.sample"
+to "pre-commit".
 
 Acknowledgements
 ----------------

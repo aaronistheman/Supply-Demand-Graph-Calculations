@@ -27,7 +27,7 @@ canvas#graph {
 /**
  * For all the "panels" (i.e. the parts beside the graph)
  */
- 
+
 #beside-graph {
   left: 500px;
 }
