@@ -3,8 +3,11 @@ DON'T FORGET UNIT TESTS AND MULTIPLE BRANCHES
 Next:
 -add text fields and text boxes for options that are not always present;
 requires AngularJS (use data-ng, not ng)
+  -don't use data-ng-init (so Angular variables aren't local)
   -mentioned AngularJS in readme
   -use data-ng-disabled or data-ng-if or data-ng-switch
+-figure out problem with scrolling
+  -may have to use data-ng-disabled instead of data-ng-if/switch
 -determine a better way to decide how to orient the graphs (that is,
 a better way than slope, which could be difficult for the user to understand)
 -graph supply and demand
@@ -18,3 +21,9 @@ Eventually:
   to graph) (perhaps with AJAX or PHP or ASP or something)
 -using tables to more neatly present the calculated data
 -use AngularJS to note errorneous text field inputs
+  -price floor or ceiling has to matter
+
+Considerable:
+-could make graph by asking for points from the user and making
+a line graph out of them
+-option to save applied inputs and apply them later
