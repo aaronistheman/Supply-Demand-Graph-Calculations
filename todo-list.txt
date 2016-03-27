@@ -2,29 +2,39 @@ DON'T FORGET UNIT TESTS AND MULTIPLE BRANCHES
 
 Next:
 -figure out problem with scrolling
-  -may have to use data-ng-disabled instead of data-ng-if/switch
+  -try: data-ng-show
 -see if making ng-models keeps the data from disappearing if input elements
 are removed by AngularJS
--determine a better way to decide how to orient the graphs (that is,
-a better way than slope, which could be difficult for the user to understand)
+-make graph by asking for points from the user and making
+a line graph out of them
+  -have a button "Add Point", and if that button
+  is clicked, while the user hovers over the graph, the coordinates
+  are displayed somewhere
+  -could temporarily use slopes of graphs, but make sure allowing
+  the user to graph the points doesn't become impossible
 -graph supply and demand
   -use ng-change to check of way to decide how to orient the graphs is
   being changed (so can redraw the graph)
+  -if D or S is changed, keep the original D and S, and somehow indicate
+  the new D or new S
 
 Eventually:
 -allow graphing of firm or aggregate
   -could use AngularJS if possible
   -could change the fields shown (in response to what the user wants
   to graph) (perhaps with AJAX or PHP or ASP or something)
--using tables to more neatly present the calculated data
 -use AngularJS to note errorneous text field inputs
-  -price floor or ceiling has to matter
--option to hi lite deadweight loss (and maybe even each surplus) on graph
+  -e.g .price floor or ceiling has to matter
+-option to hi-lite deadweight loss (and maybe even each surplus) on graph
 -decide which Riemann sum to use (probably either midpoint or trapezoidal)
+-look into AJAX, just in case it can help somehow
+-think of where can apply CSS, filters, and other features from AngularJS
+tutorial I forgot about
+-have "enumerators" for number of "ticks" (i.e. precision?)
+  -e.g. thousandths, hundredths
 
 Considerable:
--could make graph by asking for points from the user and making
-a line graph out of them
 -option to save applied inputs and apply them later
 -allow the panels to be in more than one column; see how it was done with
 CSS in one of the card games
+-using tables to more neatly present the calculated data
