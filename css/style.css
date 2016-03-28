@@ -4,9 +4,9 @@
 
 #wrapper {
   position: relative;
-  width: 1000px;
-  height: 600px;
-  overflow: hidden;
+  /* width: 1000px; */
+  /* height: 2000px; */
+  /* overflow: hidden; */
 }
 
 #wrapper > * {
