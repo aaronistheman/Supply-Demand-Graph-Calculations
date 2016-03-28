@@ -1,8 +1,6 @@
 DON'T FORGET UNIT TESTS AND MULTIPLE BRANCHES
 
 Next:
--figure out problem with scrolling
-  -try: data-ng-show
 -see if making ng-models keeps the data from disappearing if input elements
 are removed by AngularJS
 -make graph by asking for points from the user and making
