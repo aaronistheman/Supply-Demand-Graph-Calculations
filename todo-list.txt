@@ -1,8 +1,6 @@
 DON'T FORGET UNIT TESTS AND MULTIPLE BRANCHES
 
 Next:
--see if making ng-models keeps the data from disappearing if input elements
-are removed by AngularJS
 -make graph by asking for points from the user and making
 a line graph out of them
   -have a button "Add Point", and if that button
@@ -36,3 +34,7 @@ Considerable:
 -allow the panels to be in more than one column; see how it was done with
 CSS in one of the card games
 -using tables to more neatly present the calculated data
+-see if is way to keep data in elements removed by ng-if
+  -could use JavaScript/jQuery and, when ng-if creates an element,
+  somehow react to the change to give the appropriate input fields
+  their former values
