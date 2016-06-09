@@ -1,18 +1,32 @@
 DON'T FORGET UNIT TESTS AND MULTIPLE BRANCHES
 
 Next:
--make graph by asking for points from the user and making
-a line graph out of them
-  -have a button "Add Point", and if that button
-  is clicked, while the user hovers over the graph, the coordinates
-  are displayed somewhere
-  -could temporarily use slopes of graphs, but make sure allowing
-  the user to graph the points doesn't become impossible
--graph supply and demand
-  -use ng-change to check of way to decide how to orient the graphs is
-  being changed (so can redraw the graph)
-  -if D or S is changed, keep the original D and S, and somehow indicate
+-hardcode graph data in two JavaScript variables for now;
+make supply and demand graphs out of them
+-graph warnings/errors
+  -if aren't two graphs, say so
+  -if any calculation's integration goes past the final data point
+  of the graph whose final data point's x-coordinate is lowest,
+  then the graphs don't interact, and this should be said
+-calculations:
+  -integration should start at the first given point (rounded up to the next
+  tick), not at zero
+    -use the first given point of the graph that starts later
+    -thus, I should probably always hi lite the regions (and use a legend)
+      -or could have dashed line as left boundary (and maybe at
+      equilibrium)
+  -say somewhere that the first point of intersection is used as
+  the equilibrium point
+-special inputs
+  -if D or S is changed (besides by the addition of a point),
+  keep the original D and S, and somehow indicate
   the new D or new S
+-pick a way to get user's input to make the graph; ideas:
+  -asking for each point one at a time
+    -when the user clicks Add Point, he gets a pop-up menu that asks
+    which graph, what quantity, and what price
+  -have user paste them in certain format in text field
+  -read from file, if possible with just JavaScript/jQuery
 
 Eventually:
 -allow graphing of firm or aggregate
@@ -22,7 +36,6 @@ Eventually:
 -use AngularJS to note errorneous text field inputs
   -e.g .price floor or ceiling has to matter
 -option to hi-lite deadweight loss (and maybe even each surplus) on graph
--decide which Riemann sum to use (probably either midpoint or trapezoidal)
 -look into AJAX, just in case it can help somehow
 -think of where can apply CSS, filters, and other features from AngularJS
 tutorial I forgot about

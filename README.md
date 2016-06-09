@@ -9,8 +9,8 @@ for the products of a firm, an industry, or a country. The user will also
 be able to apply settings (e.g. an excise tax) and to see calculations
 (e.g. consumer surplus, deadweight loss).
 
-I am working on it during the March and April of 2016, towards the
-beginning of my spring quarter of my first year at UC Davis.
+I am working on it during the March and (after a delay) June of 2016,
+towards the end of my first year at UC Davis.
 
 I will make it with HTML, CSS, JavaScript, jQuery, AngularJS, and QUnit.
 
