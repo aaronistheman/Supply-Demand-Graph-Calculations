@@ -14,14 +14,23 @@ function StringInput(theString) {
 StringInput.prototype = {
   constructor : StringInput,
 
+  _advanceStream : function() {
+    this._stream = this._stream.slice(1);
+  },
+
   /**
    * @returns next char in the "input stream", then advances the stream;
    * returns "" if end reached
    */
   get : function() {
     var ch = this._stream[0];
-    this._stream = this._stream.slice(1);
-    return ch;
+
+    if (ch === undefined) // if reached end
+      return "";
+    else {
+      this._advanceStream();
+      return ch;
+    }
   },
 
   /**
@@ -29,8 +38,8 @@ StringInput.prototype = {
    * the char-to-ignore
    */
   ignore : function(charToIgnore) {
-
+    while (this._stream[0] === charToIgnore) // until no more to ignore
+      this._advanceStream();
   },
-
 
 }; // StringInput.prototype
