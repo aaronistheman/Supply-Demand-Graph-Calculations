@@ -3,8 +3,6 @@ DON'T FORGET UNIT TESTS AND MULTIPLE BRANCHES
 Next:
 -hardcode graph data in two JavaScript variables for now;
 make supply and demand graphs out of them
-  -parse input
-    -report error if no semi-colon where expected one
   -graph supply, without Graph custom type
   -graph demand
   -probably use multiple stack canvases (e.g. one for the axes, one
@@ -34,6 +32,8 @@ make supply and demand graphs out of them
     -read from file, if possible with just JavaScript/jQuery
   -ideas regarding the input itself:
     -perhaps have it be specified there what is being graphed
+  -ideas regarding input-checking:
+    -report error if no semi-colon where expected one
 
 Eventually:
 -allow graphing of firm or aggregate

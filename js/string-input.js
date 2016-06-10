@@ -9,16 +9,18 @@ function StringInput(theString) { // constructor
     return new StringInput(theString);
 
   this._stream = theString;
-  this._state = StringInput.states.OK;
+  // this._state = StringInput.states.OK;
 }
 
 /**
  * StringInput "static" variables
  */
+/*
 StringInput.states = {
   OK : 1,
   END : 2,
 };
+*/
 
 /**
  * StringInput methods
@@ -30,8 +32,17 @@ StringInput.prototype = {
     this._stream = this._stream.slice(1);
   },
 
-  getState : function() {
-    return this._state;
+  // getState : function() {
+    // return this._state;
+  // },
+
+  /**
+   * this works because the string slice method returns "" if the slice
+   * would be invalid, so the last advance would leave the stream at "",
+   * the first char of which is undefined
+   */
+  isAtEnd : function() {
+    return this._stream[0] === undefined;
   },
 
   /**
@@ -42,7 +53,7 @@ StringInput.prototype = {
     var ch = this._stream[0];
 
     if (ch === undefined) { // if reached end
-      this._state = StringInput.states.END;
+      // this._state = StringInput.states.END;
       return "";
     }
     else {
@@ -57,7 +68,7 @@ StringInput.prototype = {
    */
   getCharsUntil : function(charToStopAt) {
     var str = "";
-    while (this._stream[0] !== charToStopAt) // while more to add
+    while (this._stream[0] !== charToStopAt && !this.isAtEnd())
     {
       str += this._stream[0];
       this._advanceStream();
@@ -70,7 +81,7 @@ StringInput.prototype = {
    * the char-to-ignore
    */
   ignore : function(charToIgnore) {
-    while (this._stream[0] === charToIgnore) // until no more to ignore
+    while (this._stream[0] === charToIgnore && !this.isAtEnd())
       this._advanceStream();
   },
 
@@ -79,7 +90,7 @@ StringInput.prototype = {
    * the char to not ignore
    */
   ignoreUntil : function(charToNotIgnore) {
-    while (this._stream[0] !== charToNotIgnore) // while more to ignore
+    while (this._stream[0] !== charToNotIgnore && !this.isAtEnd())
       this._advanceStream();
   },
 }; // StringInput.prototype

@@ -13,8 +13,23 @@ function graphSupply(inputString) {
   var p = -1;
   var qString = "";
   var pString = "";
-  for (var i in inputString) { // for each char in input string
+  var sin = new StringInput(inputString);
+  while (!sin.isAtEnd()) {
+    // get q
+    sin.ignore(' ');
+    qString = sin.getCharsUntil(' ');
+    q = parseFloat(qString);
 
+    // get p
+    sin.ignore(' ');
+    pString = sin.getCharsUntil(' ');
+    p = parseFloat(pString);
+
+    // ignore until semi-colon (or reach end)
+    sin.ignore(' ');
+    sin.ignore(';');
+
+    console.log("quantity=" + q + " price=" + p);
   }
 } // graphSupply()
 
