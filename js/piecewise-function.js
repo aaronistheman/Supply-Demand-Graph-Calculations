@@ -9,11 +9,18 @@ function Point(x, y) {
   this.y = y;
 }
 
+/**
+ * General piecewise function custom type that also facilitates
+ * integral approximations (via Riemann sums)
+ */
 function PiecewiseFunction() {
   if (!(this instanceof PiecewiseFunction)) // if user forgot "new"
     return new PiecewiseFunction();
 
   this._points = []; // array of instances of Point
+
+  // For Riemann sums
+  this._numRectangles = 500000;
 }
 
 /**
@@ -21,6 +28,10 @@ function PiecewiseFunction() {
  */
 PiecewiseFunction.prototype = {
   constructor : PiecewiseFunction,
+
+  setNumRectangles : function(num) {
+    this._numRectangles = num;
+  },
 
   getY : function(x) {
     if (x < this._points[0].x
@@ -55,5 +66,13 @@ PiecewiseFunction.prototype = {
 
     // made it past error-checking
     this._points.push(point);
+  },
+
+  getLeftRiemannSum : function(lowerBound, upperBound) {
+
+  },
+
+  getRightRiemannSum : function(lowerBound, upperBound) {
+
   },
 };
