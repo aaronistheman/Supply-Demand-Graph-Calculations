@@ -3,7 +3,6 @@ DON'T FORGET UNIT TESTS AND MULTIPLE BRANCHES
 Next:
 -hardcode graph data in two JavaScript variables for now;
 make supply and demand graphs out of them
-  -graph supply, without Graph custom type
   -graph demand
   -probably use multiple stack canvases (e.g. one for the axes, one
   for supply, one for demand, to make it easier to change what's graphed)

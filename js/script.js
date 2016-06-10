@@ -13,6 +13,8 @@ function graphSupply(inputString) {
   var p = -1;
   var qString = "";
   var pString = "";
+  var qArray = [];
+  var pArray = [];
   var sin = new StringInput(inputString);
   while (!sin.isAtEnd()) {
     // get q
@@ -28,13 +30,22 @@ function graphSupply(inputString) {
     // ignore until semi-colon (or reach end)
     sin.ignore(' ');
     sin.ignore(';');
+
+    qArray.push(q);
+    pArray.push(p);
   }
+
+  for (var i in qArray) {
+    ctx.lineTo(canvas.width * qArray[i] / maxX,
+      canvas.height - canvas.height * pArray[i] / maxY);
+  }
+  ctx.stroke();
 } // graphSupply()
 
 $(document).ready(function() {
   if (!isUnitTesting()) {
     // Hardcoded data; eventually read from file
-    var supplyPoints = "40 0.25 ; 90 0.75 ; 110 1.35";
+    var supplyPoints = "40 0.25 ; 50 0.30 ; 90 0.75 ; 110 1.35";
 
     graphSupply(supplyPoints);
   }
