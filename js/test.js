@@ -22,6 +22,15 @@ QUnit.module(currentTestedFile + ", StringInput.getChar()");
     assert.deepEqual(sin.getChar(), '');
   });
 
+QUnit.module(currentTestedFile + ", StringInput.getCharsUntil()");
+
+  QUnit.test("gets chars until reaches stopper", function(assert) {
+    var sin = new StringInput("abcdefgh");
+    var str = sin.getCharsUntil('e');
+    assert.deepEqual(str, "abcd", "Correct string returned");
+    assert.deepEqual(sin.getChar(), 'e', "Advanced appropriately");
+  });
+
 QUnit.module(currentTestedFile + ", StringInput.ignore()");
 
   QUnit.test("ignores appropriate chars", function(assert) {

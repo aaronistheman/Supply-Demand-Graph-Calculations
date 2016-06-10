@@ -52,6 +52,20 @@ StringInput.prototype = {
   },
 
   /**
+   * @returns a string containing all the chars in the stream until
+   * charToStopAt is reached
+   */
+  getCharsUntil : function(charToStopAt) {
+    var str = "";
+    while (this._stream[0] !== charToStopAt) // while more to add
+    {
+      str += this._stream[0];
+      this._advanceStream();
+    }
+    return str;
+  },
+
+  /**
    * advances on the "input stream" until reaches a char that isn't
    * the char-to-ignore
    */
