@@ -91,7 +91,9 @@ QUnit.module(currentTestedFile + ", Riemann sum methods");
 
     for (var i = 0; i < numRectsArray.length; ++i) {
       pf.setNumRectangles(numRectsArray[i]);
-      assert.ok(pf.getLeftRiemannSum(1.00, 1.45) < obj.answer,
+      var sum = pf.getLeftRiemannSum(1.00, 1.45);
+      console.log(numRectsArray[i] + " " + sum);
+      assert.ok(sum < obj.answer,
         "Correct for " + numRectsArray[i] + " rectangles");
     }
   });
