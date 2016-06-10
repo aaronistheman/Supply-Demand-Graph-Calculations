@@ -9,18 +9,7 @@ function StringInput(theString) { // constructor
     return new StringInput(theString);
 
   this._stream = theString;
-  // this._state = StringInput.states.OK;
 }
-
-/**
- * StringInput "static" variables
- */
-/*
-StringInput.states = {
-  OK : 1,
-  END : 2,
-};
-*/
 
 /**
  * StringInput methods
@@ -31,10 +20,6 @@ StringInput.prototype = {
   _advanceStream : function() {
     this._stream = this._stream.slice(1);
   },
-
-  // getState : function() {
-    // return this._state;
-  // },
 
   /**
    * this works because the string slice method returns "" if the slice
@@ -53,7 +38,6 @@ StringInput.prototype = {
     var ch = this._stream[0];
 
     if (ch === undefined) { // if reached end
-      // this._state = StringInput.states.END;
       return "";
     }
     else {

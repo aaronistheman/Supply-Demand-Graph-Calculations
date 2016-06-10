@@ -28,8 +28,6 @@ function graphSupply(inputString) {
     // ignore until semi-colon (or reach end)
     sin.ignore(' ');
     sin.ignore(';');
-
-    console.log("quantity=" + q + " price=" + p);
   }
 } // graphSupply()
 
