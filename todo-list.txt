@@ -3,6 +3,10 @@ DON'T FORGET UNIT TESTS AND MULTIPLE BRANCHES
 Next:
 -hardcode graph data in two JavaScript variables for now;
 make supply and demand graphs out of them
+  -probably use multiple stack canvases (e.g. one for the axes, one
+  for supply, one for demand, to make it easier to change what's graphed)
+  -plan and implement necessary Graph custom types
+  -labelled axes?
 -graph warnings/errors
   -if aren't two graphs, say so
   -if any calculation's integration goes past the final data point
@@ -21,12 +25,14 @@ make supply and demand graphs out of them
   -if D or S is changed (besides by the addition of a point),
   keep the original D and S, and somehow indicate
   the new D or new S
--pick a way to get user's input to make the graph; ideas:
-  -asking for each point one at a time
-    -when the user clicks Add Point, he gets a pop-up menu that asks
-    which graph, what quantity, and what price
-  -have user paste them in certain format in text field
-  -read from file, if possible with just JavaScript/jQuery
+-pick a way to get user's input to make the graph;
+  -ideas regarding how to get the input:
+    -have user paste them in certain format in text field
+    -read from file, if possible with just JavaScript/jQuery
+  -ideas regarding the input itself:
+    -perhaps have it be specified there what is being graphed
+  -ideas regarding input-checking:
+    -report error if no semi-colon where expected one
 
 Eventually:
 -allow graphing of firm or aggregate

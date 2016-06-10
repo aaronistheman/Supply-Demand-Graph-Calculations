@@ -5,12 +5,8 @@
 <meta charset="utf-8" />
 <title>The Industry</title>
 
-<script
-  src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js">
-</script>
-<script
-  src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js">
-</script>
+<script src="js/jquery.min.js"></script>
+<script src="js/angular.min.js"></script>
 
 <link rel="stylesheet" type="text/css" href="css/style.css" />
 
@@ -20,7 +16,9 @@
 <div id="wrapper">
   <h1>Graph of <span id="graph-title"></span> Industry</h1><br \>
 
-  <canvas id="graph">
+  <!-- Width and height must be specified here (not in CSS), or
+  else canvas drawing is blurry -->
+  <canvas id="graph" width="400" height="400">
   Your web browser doesn't support canvas content.</canvas>
 
   <div id="beside-graph"> <!-- beside the graph -->
@@ -125,6 +123,9 @@
   </div> <!-- end beside the graph -->
 </div> <!-- end wrapper -->
 
+<script src="js/utility.js"></script>
+<script src="js/string-input.js"></script>
+<script src="js/controller.js"></script>
 <script src="js/script.js"></script>
 
 </body>
