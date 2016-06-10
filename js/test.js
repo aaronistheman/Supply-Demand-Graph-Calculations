@@ -52,3 +52,15 @@ QUnit.module(currentTestedFile + ", StringInput.ignoreUntil()");
     sin.ignoreUntil('d');
     assert.deepEqual(sin.getChar(), 'd');
   });
+
+currentTestedFile = "piecewise-function.js";
+QUnit.module(currentTestedFile + ", PiecewiseFunction.getY()");
+
+  QUnit.test("returns correct y-value", function(assert) {
+    // I'll use an integer slope to make things easier to check
+    var pf = new PiecewiseFunction();
+    pf.insert(new Point(5, 8));
+    pf.insert(new Point(9, 16));
+
+    assert.deepEqual(pf.getY(8), 14);
+  });

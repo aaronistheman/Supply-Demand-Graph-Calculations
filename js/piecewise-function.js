@@ -23,7 +23,24 @@ PiecewiseFunction.prototype = {
   constructor : PiecewiseFunction,
 
   getY : function(x) {
+    if (x < this._points[0].x
+      || x > this._points[this._points.length - 1])
+      alertAndThrowException("x out of range");
 
+    // find the first point below x and first point above it
+    var before = null;
+    var after = null;
+    for (var i = 0; i < this._points.length; ++i) { // until find successful
+      if (this._points[i + 1].x > x) { // done looking
+        before = this._points[i];
+        after = this._points[i + 1];
+        break;
+      }
+    }
+
+    var slope = (after.y - before.y) / (after.x - before.x);
+
+    return before.y + (x - before.x) * slope;
   },
 
   /**
