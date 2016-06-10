@@ -37,7 +37,7 @@ Run index.html on a browser that supports Canvas content.
 How to Run Unit Tests
 ---------------------
 
-To be announced.
+Run test.html on a modern browser.
 
 Use of Git Hooks
 ----------------
