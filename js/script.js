@@ -35,6 +35,9 @@ function graphSupply(inputString) {
     pArray.push(p);
   }
 
+  // Draw the lines
+  ctx.moveTo(canvas.width * qArray[0] / maxX,
+    canvas.height - canvas.height * pArray[0] / maxY);
   for (var i in qArray) {
     ctx.lineTo(canvas.width * qArray[i] / maxX,
       canvas.height - canvas.height * pArray[i] / maxY);
@@ -46,7 +49,9 @@ $(document).ready(function() {
   if (!isUnitTesting()) {
     // Hardcoded data; eventually read from file
     var supplyPoints = "40 0.25 ; 50 0.30 ; 90 0.75 ; 110 1.35";
+    var demandPoints = "40 1.25 ; 80 0.75 ; 110 0.25";
 
     graphSupply(supplyPoints);
+    graphSupply(demandPoints);
   }
 }); // document ready function
