@@ -60,12 +60,12 @@ StringInput.prototype = {
       this._advanceStream();
   },
 
-  getNumber : function() {
-
+  /**
+   * advances on the "input stream" until reaches a char that is
+   * the char to not ignore
+   */
+  ignoreUntil : function(charToNotIgnore) {
+    while (this._stream[0] !== charToNotIgnore) // while more to ignore
+      this._advanceStream();
   },
-
-  ignoreUntil : function() {
-
-  },
-
 }; // StringInput.prototype

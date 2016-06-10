@@ -35,3 +35,11 @@ QUnit.module(currentTestedFile + ", StringInput.ignore()");
     sin.ignore('b');
     assert.deepEqual(sin.getChar(), 'a');
   });
+
+QUnit.module(currentTestedFile + ", StringInput.ignoreUntil()");
+
+  QUnit.test("ignores until appropriate char", function(assert) {
+    var sin = new StringInput("abcdef");
+    sin.ignoreUntil('d');
+    assert.deepEqual(sin.getChar(), 'd');
+  });
