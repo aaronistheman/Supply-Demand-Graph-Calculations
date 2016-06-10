@@ -6,4 +6,5 @@ start Notepad++ js/string-input.js
 start Notepad++ test.html
 start Notepad++ js/test.js
 start Notepad++ js/controller.js
+start Notepad++ js/piecewise-function.js
 exit

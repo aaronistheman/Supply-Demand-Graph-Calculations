@@ -5,7 +5,7 @@
 # @example rename-file.sh play.html play.php
 
 # Rename the file
-git mv $1 $2
+mv $1 $2
 
 # Edit the batch file that opens files (if applicable)
 if [ -e open-my-files.bat ]
