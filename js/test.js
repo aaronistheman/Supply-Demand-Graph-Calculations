@@ -67,7 +67,8 @@ QUnit.module(currentTestedFile + ", PiecewiseFunction.getY()");
 
 QUnit.module(currentTestedFile + ", Riemann sum methods");
 
-  var numRectsArray = [10, 100, 500, 1000, 5000, 10000, 500000, 1000000];
+  var numRectsArray = [10, 100, 500, 1000, 5000, 10000,
+    100000, 500000, 1000000];
 
   function setUpRiemannTest(caseNum) {
     switch (caseNum) {
@@ -105,7 +106,9 @@ QUnit.module(currentTestedFile + ", Riemann sum methods");
 
     for (var i = 0; i < numRectsArray.length; ++i) {
       pf.setNumRectangles(numRectsArray[i]);
-      assert.ok(pf.getRightRiemannSum(1.00, 1.45) > obj.answer,
+      var sum = pf.getRightRiemannSum(1.00, 1.45);
+      console.log(numRectsArray[i] + " " + sum);
+      assert.ok(sum > obj.answer,
         "Correct for " + numRectsArray[i] + " rectangles");
     }
   });

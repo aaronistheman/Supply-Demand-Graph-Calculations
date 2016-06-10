@@ -1,8 +1,6 @@
 DON'T FORGET UNIT TESTS AND MULTIPLE BRANCHES
 
 Next:
--piecewise function custom type
-  -test Riemann sums with this
 -Graph custom type
   -should have a demand graph field and a supply graph field
   -probably use multiple stack canvases (e.g. one for the axes, one
