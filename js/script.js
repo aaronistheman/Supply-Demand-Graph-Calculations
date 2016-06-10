@@ -12,11 +12,22 @@ var angularJS = angular.module("app", []).controller('ctrl', function($scope) {
   $scope.tradeFactor = "none";
 }); // Angular JS controller
 
-function graphSupply(supplyPoints) {
+function graphSupply(inputString) {
   var canvas = document.getElementById("graph");
   var ctx = canvas.getContext("2d");
-  ctx.fillStyle = "black";
-  ctx.fillRect(30, 30, 150, 75);
+  // ctx.fillStyle = "black";
+  // ctx.fillRect(30, 30, 150, 75);
+
+  var maxX = 120;
+  var maxY = 1.50;
+
+  var q = -1;
+  var p = -1;
+  var qString = "";
+  var pString = "";
+  for (var i in inputString) { // for each char in input string
+
+  }
 } // graphSupply()
 
 $(document).ready(function() {
