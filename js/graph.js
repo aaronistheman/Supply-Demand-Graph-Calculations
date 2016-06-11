@@ -120,6 +120,14 @@ Graph.prototype = {
     // the line
     this._axesCtx.moveTo(0, 0);
     this._axesCtx.lineTo(this._axesCanvas.width, 0);
+    
+    // draw tick marks
+    for (var i = 1; i <= Graph.NUM_TICKS_X; i++) {
+      this._axesCtx.moveTo(i * this._axesCanvas.width /
+        (Graph.NUM_TICKS_X + 1), -5);
+      this._axesCtx.lineTo(i * this._axesCanvas.width /
+        (Graph.NUM_TICKS_X + 1), -5 + 10);
+    }
 
     // draw labels
     this._axesCtx.save();
@@ -130,7 +138,7 @@ Graph.prototype = {
       var label = Math.round(i * Graph.MAX_X / (Graph.NUM_TICKS_X + 1));
       this._axesCtx.fillText(label,
         i * this._axesCanvas.width / (Graph.NUM_TICKS_X + 1),
-        10);
+        20);
     }
     this._axesCtx.restore();
 
@@ -143,17 +151,12 @@ Graph.prototype = {
     this._axesCtx.lineTo(0, this._axesCanvas.height);
 
     // draw tick marks
-    this._axesCtx.save();
-    // this._axesCtx.scale(1, -1); // so that text isn't upside down
     for (var i = 1; i <= Graph.NUM_TICKS_Y; i++) {
-      // this._axesCtx.beginPath();
       this._axesCtx.moveTo(-5, i * this._axesCanvas.height /
         (Graph.NUM_TICKS_Y + 1));
       this._axesCtx.lineTo(-5 + 10, i * this._axesCanvas.height /
         (Graph.NUM_TICKS_Y + 1));
-      // this._axesCtx.stroke();
     }
-    this._axesCtx.restore();
 
     // draw labels
     this._axesCtx.save();
