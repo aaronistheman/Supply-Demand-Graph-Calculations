@@ -12,6 +12,10 @@ function Graph(supplyDataString, demandDataString) {
 
   this._canvas = document.getElementById("graph");
   this._ctx = this._canvas.getContext('2d');
+
+  // Canvas context settings
+  this._ctx.translate(Graph.OFFSET_X, this._canvas.height - Graph.OFFSET_Y);
+  this._ctx.scale(1 / Graph.MAX_X, -1 / Graph.MAX_Y);
 }
 
 /**
@@ -67,16 +71,13 @@ Graph.prototype = {
   constructor : Graph,
 
   drawAxes : function() {
-    this._ctx.translate(Graph.OFFSET_X, this._canvas.height - Graph.OFFSET_Y);
-    this._ctx.scale(1, -1);
-
     // x-axis
     this._ctx.moveTo(0, 0);
-    this._ctx.lineTo(this._canvas.width, 0);
+    this._ctx.lineTo(this._canvas.width * Graph.MAX_X, 0);
 
     // y-axis
     this._ctx.moveTo(0, 0);
-    this._ctx.lineTo(0, this._canvas.height);
+    this._ctx.lineTo(0, this._canvas.height * Graph.MAX_Y);
 
     this._ctx.stroke();
   },
@@ -86,9 +87,6 @@ Graph.prototype = {
    * @param points array of instances of Point
    */
   _drawGraph : function(points) {
-    this._ctx.save();
-    this._ctx.scale(1 / Graph.MAX_X, 1 / Graph.MAX_Y);
-
     // Move to the first point
     this._ctx.moveTo(this._canvas.width * points[0].x,
       this._canvas.height * points[0].y);
@@ -96,9 +94,8 @@ Graph.prototype = {
       this._ctx.lineTo(this._canvas.width * points[i].x,
         this._canvas.height * points[i].y);
     }
-    this._ctx.stroke();
 
-    this._ctx.restore();
+    this._ctx.stroke();
   },
 
   redrawSupply : function() {

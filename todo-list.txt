@@ -2,7 +2,6 @@ DON'T FORGET UNIT TESTS AND MULTIPLE BRANCHES
 
 Next:
 -Graph custom type
-  -apply context scaling to drawing axes; apply at beginning
   -clear canvas in redraw methods
 -applying and improving Graph type
   -probably use multiple stack canvases (e.g. one for the axes, one
