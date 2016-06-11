@@ -1,22 +1,31 @@
-DON'T FORGET UNIT TESTS AND MULTIPLE BRANCHES
-
 Next:
--plan how to do the calculations
+-remove "graphical inputs"
+-calculations:
+  -general reminders:
+    -integration should start at the first given point
+    (rounded up to the next
+    tick), not at zero
+      -use the first given point of the graph that starts later;
+      ideas of ways to tell the user:
+        -thus, I should probably always hi lite the regions (and use a legend)
+        -could have dashed line as left boundary (and maybe at
+        equilibrium)
+        -say somewhere that the first point of intersection is used as
+        the equilibrium point
+  -closed, private economy; list of calculations:
+    -equilibrium quantity and price
+    -total revenue
+    -consumer surplus
+    -producer surplus
+    -total welfare:
+  -open, private economy
+  -closed, public economy
+  -open, public economy
 -graph warnings/errors
-  -if aren't two graphs, say so
   -if any calculation's integration goes past the final data point
   of the graph whose final data point's x-coordinate is lowest,
   then the graphs don't interact, and this should be said
--calculations:
-  -integration should start at the first given point (rounded up to the next
-  tick), not at zero
-    -use the first given point of the graph that starts later
-    -thus, I should probably always hi lite the regions (and use a legend)
-      -or could have dashed line as left boundary (and maybe at
-      equilibrium)
-  -say somewhere that the first point of intersection is used as
-  the equilibrium point
--special inputs
+-regarding inputs that change S or D
   -if D or S is changed (besides by the addition of a point),
   keep the original D and S, and somehow indicate
   the new D or new S
