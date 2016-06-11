@@ -14,20 +14,23 @@ function Graph(supplyDataString, demandDataString) {
 
   this._supply = new PiecewiseFunction();
   Graph._readFunctionData(this._supply, supplyDataString);
+  this._supplyCanvas = document.getElementById("supply-graph");
+  this._supplyCtx = this._supplyCanvas.getContext('2d');
+  Graph._applyContextSettings(this._supplyCanvas, this._supplyCtx);
 
   this._demand = new PiecewiseFunction();
   Graph._readFunctionData(this._demand, demandDataString);
+  this._demandCanvas = document.getElementById("demand-graph");
+  this._demandCtx = this._demandCanvas.getContext('2d');
+  Graph._applyContextSettings(this._demandCanvas, this._demandCtx);
 
-  this._canvas = document.getElementById("graph");
-  this._ctx = this._canvas.getContext('2d');
-
-  // Canvas context settings
-  this._ctx.translate(Graph.OFFSET_X, this._canvas.height - Graph.OFFSET_Y);
-  this._ctx.scale(1 / Graph.MAX_X, -1 / Graph.MAX_Y);
-}
+  this._axesCanvas = document.getElementById("axes-graph");
+  this._axesCtx = this._axesCanvas.getContext('2d');
+  Graph._applyContextSettings(this._axesCanvas, this._axesCtx);
+} // Graph constructor
 
 /**
- * "Static" members for Graph
+ * "Static" variables for Graph
  */
 
 // These say how far the axes are from canvas edges
@@ -38,6 +41,14 @@ Graph.OFFSET_Y = 10;
 Graph.MAX_X = 120;
 Graph.MAX_Y = 1.50;
 
+/**
+ * "Static" methods for Graph
+ */
+
+Graph._applyContextSettings = function(canvas, ctx) {
+  ctx.translate(Graph.OFFSET_X, canvas.height - Graph.OFFSET_Y);
+  ctx.scale(1 / Graph.MAX_X, -1 / Graph.MAX_Y);
+};
 
 /**
  * @param func instance of PiecewiseFunction, but isn't requirement
@@ -90,43 +101,43 @@ Graph.prototype = {
   constructor : Graph,
 
   drawAxes : function() {
-    this._ctx.beginPath();
+    this._axesCtx.beginPath();
 
     // x-axis
-    this._ctx.moveTo(0, 0);
-    this._ctx.lineTo(this._canvas.width * Graph.MAX_X, 0);
+    this._axesCtx.moveTo(0, 0);
+    this._axesCtx.lineTo(this._axesCanvas.width * Graph.MAX_X, 0);
 
     // y-axis
-    this._ctx.moveTo(0, 0);
-    this._ctx.lineTo(0, this._canvas.height * Graph.MAX_Y);
+    this._axesCtx.moveTo(0, 0);
+    this._axesCtx.lineTo(0, this._axesCanvas.height * Graph.MAX_Y);
 
-    this._ctx.stroke();
+    this._axesCtx.stroke();
   },
 
   /**
    * Doesn't clean the canvas before drawing
    * @param points array of instances of Point
    */
-  _drawGraph : function(points) {
+  _drawGraph : function(points, canvas, ctx) {
     // Move to the first point
-    this._ctx.beginPath();
-    this._ctx.moveTo(this._canvas.width * points[0].x,
-      this._canvas.height * points[0].y);
+    ctx.beginPath();
+    ctx.moveTo(canvas.width * points[0].x, canvas.height * points[0].y);
     for (var i in points) {
-      this._ctx.lineTo(this._canvas.width * points[i].x,
-        this._canvas.height * points[i].y);
+      ctx.lineTo(canvas.width * points[i].x, canvas.height * points[i].y);
     }
 
-    this._ctx.stroke();
+    ctx.stroke();
   },
 
   redrawSupply : function() {
-    Graph._clearCanvas(this._canvas, this._ctx);
-    this._drawGraph(this._supply.getPoints());
+    Graph._clearCanvas(this._supplyCanvas, this._supplyCtx);
+    this._drawGraph(this._supply.getPoints(), this._supplyCanvas,
+      this._supplyCtx);
   },
 
   redrawDemand : function() {
-    Graph._clearCanvas(this._canvas, this._ctx);
-    this._drawGraph(this._demand.getPoints());
+    Graph._clearCanvas(this._demandCanvas, this._demandCtx);
+    this._drawGraph(this._demand.getPoints(), this._demandCanvas,
+      this._demandCtx);
   },
 };
