@@ -18,7 +18,9 @@ function Graph(supplyDataString, demandDataString) {
   this._supply = new PiecewiseFunction();
   Graph._readFunctionData(this._supply, supplyDataString);
   this._demand = new PiecewiseFunction();
-  Graph._readFunctionData(this._demand, demandDataString);  
+  Graph._readFunctionData(this._demand, demandDataString);
+  
+  this._highestQuantity = this.calculateHighestQuantity();
   
   // Stuff that involves a webpage and are not needed by unit test
   if (!isUnitTesting()) {
@@ -119,6 +121,26 @@ Graph._clearCanvas = function(canvas, ctx) {
  */
 Graph.prototype = {
   constructor : Graph,
+  
+  /**
+   * @returns the highest quantity that can be used for
+   * calculations (i.e. the minimum of the two quantities of the
+   * highest demand and supply points)
+   */
+  calculateHighestQuantity : function() {
+    // Get last supply point
+    var sPoints = this._supply.getPoints();
+    var sHigh = sPoints[sPoints.length - 1].x;
+    
+    // Get last demand point
+    var dPoints = this._demand.getPoints();
+    var dHigh = dPoints[dPoints.length - 1].x;
+    
+    if (sHigh > dHigh)
+      return dHigh;
+    else
+      return sHigh;
+  }, // calculateHighestQuantity()
   
   _drawXAxis : function() {
     this._axesCtx.beginPath();
