@@ -2,8 +2,7 @@ DON'T FORGET UNIT TESTS AND MULTIPLE BRANCHES
 
 Next:
 -Graph custom type
-  -remove local variables in piecewise's draw method; make part of class
-  -apply context scaling to drawing axes
+  -apply context scaling to drawing axes; apply at beginning
   -clear canvas in redraw methods
 -applying and improving Graph type
   -probably use multiple stack canvases (e.g. one for the axes, one
@@ -34,6 +33,7 @@ Next:
     -read from file, if possible with just JavaScript/jQuery
   -ideas regarding the input itself:
     -perhaps have it be specified there what is being graphed
+    -get the maxes from the inputs
   -ideas regarding input-checking:
     -report error if no semi-colon where expected one
 

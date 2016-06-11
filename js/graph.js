@@ -22,6 +22,11 @@ function Graph(supplyDataString, demandDataString) {
 Graph.OFFSET_X = 10;
 Graph.OFFSET_Y = 10;
 
+// These will hopefully be removed
+Graph.MAX_X = 120;
+Graph.MAX_Y = 1.50;
+
+
 /**
  * @param func instance of PiecewiseFunction, but isn't requirement
  * @param dataString properly formatted string (e.g. "40 0.25; 50 0.30")
@@ -81,10 +86,8 @@ Graph.prototype = {
    * @param points array of instances of Point
    */
   _drawGraph : function(points) {
-    var maxX = 120;
-    var maxY = 1.50;
-
-    this._ctx.scale(1 / maxX, 1 / maxY);
+    this._ctx.save();
+    this._ctx.scale(1 / Graph.MAX_X, 1 / Graph.MAX_Y);
 
     // Move to the first point
     this._ctx.moveTo(this._canvas.width * points[0].x,
@@ -95,7 +98,7 @@ Graph.prototype = {
     }
     this._ctx.stroke();
 
-    this._ctx.scale(maxX, maxY);
+    this._ctx.restore();
   },
 
   redrawSupply : function() {
