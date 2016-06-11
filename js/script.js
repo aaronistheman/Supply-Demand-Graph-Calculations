@@ -17,6 +17,7 @@ function graphAxes() {
 }
 */
 
+/*
 function graphSupply(inputString) {
   var canvas = document.getElementById("graph");
   var ctx = canvas.getContext("2d");
@@ -58,6 +59,7 @@ function graphSupply(inputString) {
   }
   ctx.stroke();
 } // graphSupply()
+*/
 
 $(document).ready(function() {
   if (!isUnitTesting()) {
@@ -65,10 +67,10 @@ $(document).ready(function() {
     var supplyPoints = "40 0.25 ; 50 0.30 ; 90 0.75 ; 110 1.35";
     var demandPoints = "40 1.25 ; 80 0.75 ; 110 0.25";
 
-    var graph = new Graph();
+    var graph = new Graph(supplyPoints, demandPoints);
     graph.drawAxes();
 
-    graphSupply(supplyPoints);
-    graphSupply(demandPoints);
+    // graphSupply(supplyPoints);
+    // graphSupply(demandPoints);
   }
 }); // document ready function

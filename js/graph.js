@@ -1,11 +1,14 @@
 "use strict";
 
-function Graph() {
+function Graph(supplyDataString, demandDataString) {
   if (!(this instanceof Graph))
     return new Graph();
 
-  this._demand = new PiecewiseFunction();
   this._supply = new PiecewiseFunction();
+  Graph._readFunctionData(this._supply, supplyDataString);
+
+  this._demand = new PiecewiseFunction();
+  Graph._readFunctionData(this._demand, demandDataString);
 
   this._canvas = document.getElementById("graph");
   this._ctx = this._canvas.getContext('2d');
@@ -14,8 +17,42 @@ function Graph() {
 /**
  * "Static" members for Graph
  */
+
 Graph.OFFSET_X = 10;
 Graph.OFFSET_Y = 10;
+
+/**
+ * @param func instance of PiecewiseFunction, but isn't requirement
+ * @param dataString properly formatted string (e.g. "40 0.25; 50 0.30")
+ * of ordered pairs (intended for (quantity, price) pairs)
+ */
+Graph._readFunctionData = function(func, dataString) {
+  var q = -1;
+  var p = -1;
+  var qString = "";
+  var pString = "";
+  var qArray = [];
+  var pArray = [];
+  var sin = new StringInput(dataString);
+
+  while (!sin.isAtEnd()) {
+    // get q
+    sin.ignore(' ');
+    qString = sin.getCharsUntil(' ');
+    q = parseFloat(qString);
+
+    // get p
+    sin.ignore(' ');
+    pString = sin.getCharsUntil(' ');
+    p = parseFloat(pString);
+
+    // ignore until semi-colon (or reach end)
+    sin.ignore(' ');
+    sin.ignore(';');
+
+    func.insert(new Point(q, p));
+  }
+} // readFunctionData()
 
 /**
  * Methods for Graph

@@ -2,7 +2,6 @@ DON'T FORGET UNIT TESTS AND MULTIPLE BRANCHES
 
 Next:
 -Graph custom type
-  -parse data for demand and supply
   -draw demand and supply
   -clean up script.js
   -see if can scale the context vertically to flip it
