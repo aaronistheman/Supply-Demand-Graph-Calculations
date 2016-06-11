@@ -61,10 +61,25 @@ Graph.prototype = {
   constructor : Graph,
 
   drawAxes : function() {
+    /*
     this._ctx.moveTo(Graph.OFFSET_X, this._canvas.height - Graph.OFFSET_Y);
     this._ctx.lineTo(this._canvas.width, this._canvas.height - Graph.OFFSET_Y);
     this._ctx.moveTo(Graph.OFFSET_X, this._canvas.height - Graph.OFFSET_Y);
     this._ctx.lineTo(Graph.OFFSET_X, 0);
+    this._ctx.stroke();
+    */
+
+    this._ctx.translate(Graph.OFFSET_X, this._canvas.height - Graph.OFFSET_Y);
+    this._ctx.scale(1, -1);
+
+    // x-axis
+    this._ctx.moveTo(0, 0);
+    this._ctx.lineTo(this._canvas.width, 0);
+
+    // y-axis
+    this._ctx.moveTo(0, 0);
+    this._ctx.lineTo(0, this._canvas.height);
+
     this._ctx.stroke();
   },
 

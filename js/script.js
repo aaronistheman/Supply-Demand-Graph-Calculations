@@ -8,7 +8,7 @@ $(document).ready(function() {
 
     var graph = new Graph(supplyPoints, demandPoints);
     graph.drawAxes();
-    graph.redrawSupply();
-    graph.redrawDemand();
+    // graph.redrawSupply();
+    // graph.redrawDemand();
   }
 }); // document ready function
