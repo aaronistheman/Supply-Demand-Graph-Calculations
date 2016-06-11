@@ -42,9 +42,11 @@ function Graph(supplyDataString, demandDataString) {
 Graph.OFFSET_X = 40;
 Graph.OFFSET_Y = 40;
 
-// These will hopefully be removed
 Graph.MAX_X = 150;
 Graph.MAX_Y = 1.80;
+
+Graph.NUM_TICKS_X = 6;
+Graph.NUM_TICKS_Y = 6;
 
 /**
  * "Static" methods for Graph
@@ -121,10 +123,10 @@ Graph.prototype = {
     this._axesCtx.scale(1, -1);
     this._axesCtx.textAlign = "center";
     this._axesCtx.textBaseline = "middle";
-    for (var i = 1; i < 6; i++) {
-      var label = Math.round(i * Graph.MAX_X / 6);
+    for (var i = 1; i <= Graph.NUM_TICKS_X; i++) {
+      var label = Math.round(i * Graph.MAX_X / (Graph.NUM_TICKS_X + 1));
       this._axesCtx.fillText(label,
-        i * this._axesCanvas.width / 6,
+        i * this._axesCanvas.width / (Graph.NUM_TICKS_X + 1),
         10);
     }
     this._axesCtx.restore();
@@ -142,11 +144,14 @@ Graph.prototype = {
     this._axesCtx.scale(1, -1);
     this._axesCtx.textAlign = "center";
     this._axesCtx.textBaseline = "middle";
-    for (var i = 1; i < 6; i++) {
-      var label = (Math.round(i * Graph.MAX_Y * 100 / 6) / 100).toFixed(2);
+    for (var i = 1; i <= Graph.NUM_TICKS_Y; i++) {
+      // Because y-axis represents money amount
+      var label = (Math.round(i * Graph.MAX_Y * 100 /
+        (Graph.NUM_TICKS_Y + 1)) / 100).toFixed(2);
+        
       this._axesCtx.fillText(label,
         -15,
-        -i * this._axesCanvas.height / 6);
+        -i * this._axesCanvas.height / (Graph.NUM_TICKS_Y + 1));
     }
     this._axesCtx.restore();
 

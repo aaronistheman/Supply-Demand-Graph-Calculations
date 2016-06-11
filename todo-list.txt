@@ -3,7 +3,6 @@ DON'T FORGET UNIT TESTS AND MULTIPLE BRANCHES
 Next:
 -applying and improving Graph type
   -labelled axes
-    -clean up label code
     -x-axis
       -draw tick marks
     -y-axis
