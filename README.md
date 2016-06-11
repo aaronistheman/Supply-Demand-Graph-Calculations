@@ -39,10 +39,12 @@ How to Run Unit Tests
 
 Run test.html on a modern browser.
 
-Acknowledgements
-----------------
+Helpful Resources
+-----------------
 
-To be announced.
+"HTML5 Canvas Cookbook" by Eric Rowell;
+"The Principles of Object-Oriented JavaScript" by Nicholas C. Zakas;
+W3Schools.com;
 
 Author
 ------

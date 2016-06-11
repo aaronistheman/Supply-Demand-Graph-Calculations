@@ -14,12 +14,16 @@
 }
 
 /**
- * The graph
+ * The graph canvases
  */
 
-canvas#graph {
-  background-color: #eee;
+canvas.graph {
   top: 70px;
+}
+
+canvas#axes-graph {
+  /* Because this canvas is behind the others in its stack */
+  background-color: #eee;
 }
 
 /**
