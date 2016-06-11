@@ -17,24 +17,28 @@ function Graph(supplyDataString, demandDataString) {
 
   this._supply = new PiecewiseFunction();
   Graph._readFunctionData(this._supply, supplyDataString);
-  this._supplyCanvas = document.getElementById("supply-graph");
-  this._supplyCtx = this._supplyCanvas.getContext('2d');
-  Graph._applyContextSettings(this._supplyCanvas, this._supplyCtx);
-
   this._demand = new PiecewiseFunction();
-  Graph._readFunctionData(this._demand, demandDataString);
-  this._demandCanvas = document.getElementById("demand-graph");
-  this._demandCtx = this._demandCanvas.getContext('2d');
-  Graph._applyContextSettings(this._demandCanvas, this._demandCtx);
-
-  this._axesCanvas = document.getElementById("axes-graph");
-  this._axesCtx = this._axesCanvas.getContext('2d');
-  this._axesCtx.translate(Graph.EDGE_OFFSET_X,
-    this._axesCanvas.height - Graph.EDGE_OFFSET_Y);
-  this._axesCtx.scale(1, -1);
+  Graph._readFunctionData(this._demand, demandDataString);  
   
-  // set graph title
-  document.getElementById("graph-title").innerHTML = "Glue";
+  // Stuff that involves a webpage and are not needed by unit test
+  if (!isUnitTesting()) {
+    this._supplyCanvas = document.getElementById("supply-graph");
+    this._supplyCtx = this._supplyCanvas.getContext('2d');
+    Graph._applyContextSettings(this._supplyCanvas, this._supplyCtx);
+
+    this._demandCanvas = document.getElementById("demand-graph");
+    this._demandCtx = this._demandCanvas.getContext('2d');
+    Graph._applyContextSettings(this._demandCanvas, this._demandCtx);
+  
+    this._axesCanvas = document.getElementById("axes-graph");
+    this._axesCtx = this._axesCanvas.getContext('2d');
+    this._axesCtx.translate(Graph.EDGE_OFFSET_X,
+      this._axesCanvas.height - Graph.EDGE_OFFSET_Y);
+    this._axesCtx.scale(1, -1);
+  
+    // set graph title
+    document.getElementById("graph-title").innerHTML = "Glue";
+  } // if not unit testing
 } // Graph constructor
 
 /**
@@ -215,7 +219,7 @@ Graph.prototype = {
   
   /**
    * @return a new Point instance representing where the supply and
-   * demand graphs intersect
+   * demand graphs (first) intersect
    */
   getEquilibriumPoint : function() {
     

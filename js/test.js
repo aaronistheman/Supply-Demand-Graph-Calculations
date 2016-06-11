@@ -123,3 +123,16 @@ QUnit.module(currentTestedFile + ", Riemann sum methods");
         "Correct for " + numRectsArray[i] + " rectangles");
     }
   });
+
+currentTestedFile = "graph.js";
+QUnit.module(currentTestedFile + ", getEquilibriumPoint()");
+
+  QUnit.test("correct point found", function(assert) {
+    var supplyPoints = "40 0.25 ; 50 0.30 ; 90 0.75 ; 110 1.35";
+    var demandPoints = "40 1.25 ; 60 0.90 ; 90 0.75 ; 110 0.30";
+    var graph = new Graph(supplyPoints, demandPoints);
+    
+    var eqPoint = graph.getEquilibriumPoint();
+    assert.deepEqual(eqPoint.x, 90);
+    assert.deepEqual(eqPoint.y, 0.75);
+  });
