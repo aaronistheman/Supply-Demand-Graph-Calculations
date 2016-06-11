@@ -32,6 +32,9 @@ function Graph(supplyDataString, demandDataString) {
   this._axesCtx.translate(Graph.EDGE_OFFSET_X,
     this._axesCanvas.height - Graph.EDGE_OFFSET_Y);
   this._axesCtx.scale(1, -1);
+  
+  // set graph title
+  document.getElementById("graph-title").innerHTML = "Glue";
 } // Graph constructor
 
 /**
@@ -45,8 +48,8 @@ Graph.EDGE_OFFSET_Y = 40;
 Graph.MAX_X = 150;
 Graph.MAX_Y = 1.80;
 
-Graph.NUM_TICKS_X = 6;
-Graph.NUM_TICKS_Y = 6;
+Graph.NUM_TICKS_X = 5;
+Graph.NUM_TICKS_Y = 5;
 Graph.NUM_GAPS_X = Graph.NUM_TICKS_X + 1;
 Graph.NUM_GAPS_Y = Graph.NUM_TICKS_Y + 1;
 Graph.TICK_LENGTH = 10;
@@ -208,5 +211,13 @@ Graph.prototype = {
     Graph._clearCanvas(this._demandCanvas, this._demandCtx);
     this._drawGraph(this._demand.getPoints(), this._demandCanvas,
       this._demandCtx);
+  },
+  
+  /**
+   * @return a new Point instance representing where the supply and
+   * demand graphs intersect
+   */
+  getEquilibriumPoint : function() {
+    
   },
 };

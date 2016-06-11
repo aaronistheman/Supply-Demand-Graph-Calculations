@@ -1,5 +1,4 @@
 Next:
--remove "graphical inputs"
 -calculations:
   -general reminders:
     -integration should start at the first given point
