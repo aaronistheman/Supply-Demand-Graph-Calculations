@@ -75,15 +75,13 @@ PiecewiseFunction.prototype = {
   draw : function(canvas, ctx) {
     var maxX = 120;
     var maxY = 1.50;
-    var offsetX = 10;
-    var offsetY = 10;
 
     // Move to the first point
-    ctx.moveTo(canvas.width * this._points[0].x / maxX + offsetX,
-      canvas.height - canvas.height * this._points[0].y / maxY + offsetY);
+    ctx.moveTo(canvas.width * this._points[0].x / maxX,
+      canvas.height * this._points[0].y / maxY);
     for (var i in this._points) {
-      ctx.lineTo(canvas.width * this._points[i].x / maxX + offsetX,
-        canvas.height - canvas.height * this._points[i].y / maxY + offsetY);
+      ctx.lineTo(canvas.width * this._points[i].x / maxX,
+        canvas.height * this._points[i].y / maxY);
     }
     ctx.stroke();
   },
