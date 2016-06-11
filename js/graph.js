@@ -52,7 +52,7 @@ Graph._readFunctionData = function(func, dataString) {
 
     func.insert(new Point(q, p));
   }
-} // readFunctionData()
+}; // readFunctionData()
 
 /**
  * Methods for Graph
@@ -66,5 +66,13 @@ Graph.prototype = {
     this._ctx.moveTo(Graph.OFFSET_X, this._canvas.height - Graph.OFFSET_Y);
     this._ctx.lineTo(Graph.OFFSET_X, 0);
     this._ctx.stroke();
+  },
+
+  redrawSupply : function() {
+    this._supply.draw(this._canvas, this._ctx);
+  },
+
+  redrawDemand : function() {
+    this._demand.draw(this._canvas, this._ctx);
   },
 };

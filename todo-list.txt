@@ -2,10 +2,10 @@ DON'T FORGET UNIT TESTS AND MULTIPLE BRANCHES
 
 Next:
 -Graph custom type
-  -draw demand and supply
-  -clean up script.js
   -see if can scale the context vertically to flip it
   -see if can apply the offsets to the canvas itself
+    -remove local variables in piecewise's draw method
+  -clear canvas in redraw methods
 -applying and improving Graph type
   -probably use multiple stack canvases (e.g. one for the axes, one
   for supply, one for demand, to make it easier to change what's graphed)
