@@ -39,14 +39,6 @@ How to Run Unit Tests
 
 Run test.html on a modern browser.
 
-Use of Git Hooks
-----------------
-
-To prevent trailing whitespace, I've enabled the pre-commit Git hook.
-However, this change can't be saved in the repository. To make this
-change, navigate to the directory .git/hooks, and rename "pre-commit.sample"
-to "pre-commit".
-
 Acknowledgements
 ----------------
 
