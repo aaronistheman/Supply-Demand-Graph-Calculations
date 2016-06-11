@@ -76,11 +76,33 @@ Graph.prototype = {
     this._ctx.stroke();
   },
 
+  /**
+   * Doesn't clean the canvas before drawing
+   * @param points array of instances of Point
+   */
+  _drawGraph : function(points) {
+    var maxX = 120;
+    var maxY = 1.50;
+
+    this._ctx.scale(1 / maxX, 1 / maxY);
+
+    // Move to the first point
+    this._ctx.moveTo(this._canvas.width * points[0].x,
+      this._canvas.height * points[0].y);
+    for (var i in points) {
+      this._ctx.lineTo(this._canvas.width * points[i].x,
+        this._canvas.height * points[i].y);
+    }
+    this._ctx.stroke();
+
+    this._ctx.scale(maxX, maxY);
+  },
+
   redrawSupply : function() {
-    this._supply.draw(this._canvas, this._ctx);
+    this._drawGraph(this._supply.getPoints());
   },
 
   redrawDemand : function() {
-    this._demand.draw(this._canvas, this._ctx);
+    this._drawGraph(this._demand.getPoints());
   },
 };

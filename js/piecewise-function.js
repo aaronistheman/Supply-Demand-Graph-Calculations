@@ -33,6 +33,10 @@ PiecewiseFunction.prototype = {
     this._numRectangles = num;
   },
 
+  getPoints : function() {
+    return this._points;
+  },
+
   getY : function(x) {
     if (x < this._points[0].x
       || x > this._points[this._points.length - 1])
@@ -66,29 +70,6 @@ PiecewiseFunction.prototype = {
       return this._points[this._points.length - 1].y;
     }
   }, // getY()
-
-  /**
-   * Doesn't clean the canvas before drawing
-   * @param canvas
-   * @param ctx context of the canvas
-   */
-  draw : function(canvas, ctx) {
-    var maxX = 120;
-    var maxY = 1.50;
-
-    ctx.scale(1 / maxX, 1 / maxY);
-
-    // Move to the first point
-    ctx.moveTo(canvas.width * this._points[0].x,
-      canvas.height * this._points[0].y);
-    for (var i in this._points) {
-      ctx.lineTo(canvas.width * this._points[i].x,
-        canvas.height * this._points[i].y);
-    }
-    ctx.stroke();
-
-    ctx.scale(maxX, maxY);
-  },
 
   /**
    * @param point instance of Point
