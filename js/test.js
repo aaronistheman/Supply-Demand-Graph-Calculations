@@ -53,6 +53,14 @@ QUnit.module(currentTestedFile + ", StringInput.ignoreUntil()");
     assert.deepEqual(sin.getChar(), 'd');
   });
 
+QUnit.module(currentTestedFile + ", StringInput.isAtEnd()");
+
+  QUnit.test("knows when end's reached", function(assert) {
+    var sin = new StringInput("abc");
+    sin.ignoreUntil('d');
+    assert.ok(sin.isAtEnd());
+  });
+
 currentTestedFile = "piecewise-function.js";
 QUnit.module(currentTestedFile + ", PiecewiseFunction.getY()");
 
@@ -67,8 +75,11 @@ QUnit.module(currentTestedFile + ", PiecewiseFunction.getY()");
 
 QUnit.module(currentTestedFile + ", Riemann sum methods");
 
+  // Note that testing 1,000,000 rectangles makes the tests take
+  // seconds longer
   var numRectsArray = [10, 100, 500, 1000, 5000, 10000,
-    100000, 500000, 1000000];
+    // 100000, 500000, 1000000];
+    100000, 500000];
 
   function setUpRiemannTest(caseNum) {
     switch (caseNum) {
@@ -93,7 +104,7 @@ QUnit.module(currentTestedFile + ", Riemann sum methods");
     for (var i = 0; i < numRectsArray.length; ++i) {
       pf.setNumRectangles(numRectsArray[i]);
       var sum = pf.getLeftRiemannSum(1.00, 1.45);
-      console.log(numRectsArray[i] + " " + sum);
+      // console.log(numRectsArray[i] + " " + sum);
       assert.ok(sum < obj.answer,
         "Correct for " + numRectsArray[i] + " rectangles");
     }
@@ -107,7 +118,7 @@ QUnit.module(currentTestedFile + ", Riemann sum methods");
     for (var i = 0; i < numRectsArray.length; ++i) {
       pf.setNumRectangles(numRectsArray[i]);
       var sum = pf.getRightRiemannSum(1.00, 1.45);
-      console.log(numRectsArray[i] + " " + sum);
+      // console.log(numRectsArray[i] + " " + sum);
       assert.ok(sum > obj.answer,
         "Correct for " + numRectsArray[i] + " rectangles");
     }
