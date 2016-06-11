@@ -121,10 +121,10 @@ Graph.prototype = {
     this._axesCtx.scale(1, -1);
     this._axesCtx.textAlign = "center";
     this._axesCtx.textBaseline = "middle";
-    for (var i = 0; i < 5; i++) {
-      var label = 23.55;
+    for (var i = 1; i < 6; i++) {
+      var label = Math.round(i * Graph.MAX_X / 6);
       this._axesCtx.fillText(label,
-        (i + 1) * this._axesCanvas.width / 5,
+        i * this._axesCanvas.width / 6,
         10);
     }
     this._axesCtx.restore();
@@ -137,7 +137,18 @@ Graph.prototype = {
     this._axesCtx.moveTo(0, 0);
     this._axesCtx.lineTo(0, this._axesCanvas.height);
     
-    
+    // draw labels
+    this._axesCtx.save();
+    this._axesCtx.scale(1, -1);
+    this._axesCtx.textAlign = "center";
+    this._axesCtx.textBaseline = "middle";
+    for (var i = 1; i < 6; i++) {
+      var label = Math.round(i * Graph.MAX_Y / 6);
+      this._axesCtx.fillText(label,
+        -10,
+        -i * this._axesCanvas.height / 6);
+    }
+    this._axesCtx.restore();
 
     this._axesCtx.stroke();
   },
