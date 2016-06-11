@@ -2,7 +2,8 @@ DON'T FORGET UNIT TESTS AND MULTIPLE BRANCHES
 
 Next:
 -Graph custom type
-  -remove local variables in piecewise's draw method
+  -remove local variables in piecewise's draw method; make part of class
+  -apply context scaling to drawing axes
   -clear canvas in redraw methods
 -applying and improving Graph type
   -probably use multiple stack canvases (e.g. one for the axes, one

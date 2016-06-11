@@ -18,6 +18,7 @@ function Graph(supplyDataString, demandDataString) {
  * "Static" members for Graph
  */
 
+// These say how far the axes are from canvas edges
 Graph.OFFSET_X = 10;
 Graph.OFFSET_Y = 10;
 

@@ -76,14 +76,18 @@ PiecewiseFunction.prototype = {
     var maxX = 120;
     var maxY = 1.50;
 
+    ctx.scale(1 / maxX, 1 / maxY);
+
     // Move to the first point
-    ctx.moveTo(canvas.width * this._points[0].x / maxX,
-      canvas.height * this._points[0].y / maxY);
+    ctx.moveTo(canvas.width * this._points[0].x,
+      canvas.height * this._points[0].y);
     for (var i in this._points) {
-      ctx.lineTo(canvas.width * this._points[i].x / maxX,
-        canvas.height * this._points[i].y / maxY);
+      ctx.lineTo(canvas.width * this._points[i].x,
+        canvas.height * this._points[i].y);
     }
     ctx.stroke();
+
+    ctx.scale(maxX, maxY);
   },
 
   /**
