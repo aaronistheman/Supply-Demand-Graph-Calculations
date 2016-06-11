@@ -143,6 +143,24 @@ QUnit.module(currentTestedFile + ", calculateHighestQuantity()");
     assert.deepEqual(graph.calculateHighestQuantity(), 103);
   });
 
+QUnit.module(currentTestedFile + ", calculateLowestQuantity()");
+
+  QUnit.test("returns first demand quantity", function(assert) {
+    var supplyPoints = "40 0.25 ; 50 0.30 ; 90 0.75 ; 110 1.35";
+    var demandPoints = "45 1.25 ; 60 0.90 ; 90 0.75 ; 103 0.30";
+    var graph = new Graph(supplyPoints, demandPoints);
+    
+    assert.deepEqual(graph.calculateLowestQuantity(), 45);
+  });
+
+  QUnit.test("returns first supply quantity", function(assert) {
+    var supplyPoints = "45 0.25 ; 50 0.30 ; 90 0.75 ; 103 1.35";
+    var demandPoints = "40 1.25 ; 60 0.90 ; 90 0.75 ; 110 0.30";
+    var graph = new Graph(supplyPoints, demandPoints);
+    
+    assert.deepEqual(graph.calculateLowestQuantity(), 45);
+  });
+
 QUnit.module(currentTestedFile + ", getEquilibriumPoint()");
 
   QUnit.test("correct point found", function(assert) {

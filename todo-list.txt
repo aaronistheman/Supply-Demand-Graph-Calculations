@@ -24,8 +24,6 @@ Next:
   -if any calculation's integration goes past the final data point
   of the graph whose final data point's x-coordinate is lowest,
   then the graphs don't interact, and this should be said
-  -(if not already) error message if S or D data doesn't have strictly
-  ascending quantity
 -regarding inputs that change S or D
   -if D or S is changed (besides by the addition of a point),
   keep the original D and S, and somehow indicate
