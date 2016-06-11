@@ -17,7 +17,7 @@
  * The graph
  */
 
-canvas#graph {
+canvas.graph {
   background-color: #eee;
   top: 70px;
 }
