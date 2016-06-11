@@ -4,7 +4,7 @@ Next:
 -Graph custom type
   -parse data for demand and supply
   -draw demand and supply
-  -draw axes
+  -clean up script.js
   -see if can scale the context vertically to flip it
   -see if can apply the offsets to the canvas itself
 -applying and improving Graph type
@@ -54,6 +54,7 @@ tutorial I forgot about
   -e.g. thousandths, hundredths
 
 Considerable:
+-can probably afford to lower number of Riemann rectangles
 -option to save applied inputs and apply them later
 -allow the panels to be in more than one column; see how it was done with
 CSS in one of the card games
