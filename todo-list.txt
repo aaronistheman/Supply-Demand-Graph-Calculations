@@ -1,9 +1,7 @@
 DON'T FORGET UNIT TESTS AND MULTIPLE BRANCHES
 
 Next:
--applying and improving Graph type
-  -remove magic constants; clean up draw axes method
-  -can do appropriate calculations (see below stuff)
+-plan how to do the calculations
 -graph warnings/errors
   -if aren't two graphs, say so
   -if any calculation's integration goes past the final data point

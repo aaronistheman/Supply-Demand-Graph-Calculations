@@ -29,8 +29,8 @@ function Graph(supplyDataString, demandDataString) {
 
   this._axesCanvas = document.getElementById("axes-graph");
   this._axesCtx = this._axesCanvas.getContext('2d');
-  this._axesCtx.translate(Graph.OFFSET_X,
-    this._axesCanvas.height - Graph.OFFSET_Y);
+  this._axesCtx.translate(Graph.EDGE_OFFSET_X,
+    this._axesCanvas.height - Graph.EDGE_OFFSET_Y);
   this._axesCtx.scale(1, -1);
 } // Graph constructor
 
@@ -39,24 +39,27 @@ function Graph(supplyDataString, demandDataString) {
  */
 
 // These say how far the axes are from canvas edges
-Graph.OFFSET_X = 40;
-Graph.OFFSET_Y = 40;
-
-// Graph.
+Graph.EDGE_OFFSET_X = 40;
+Graph.EDGE_OFFSET_Y = 40;
 
 Graph.MAX_X = 150;
 Graph.MAX_Y = 1.80;
 
 Graph.NUM_TICKS_X = 6;
 Graph.NUM_TICKS_Y = 6;
+Graph.NUM_GAPS_X = Graph.NUM_TICKS_X + 1;
+Graph.NUM_GAPS_Y = Graph.NUM_TICKS_Y + 1;
+Graph.TICK_LENGTH = 10;
+Graph.HALF_TICK = Graph.TICK_LENGTH / 2;
 
+Graph.LABEL_OFFSET = 20; // how far label is from respective axis
 
 /**
  * "Static" methods for Graph
  */
 
 Graph._applyContextSettings = function(canvas, ctx) {
-  ctx.translate(Graph.OFFSET_X, canvas.height - Graph.OFFSET_Y);
+  ctx.translate(Graph.EDGE_OFFSET_X, canvas.height - Graph.EDGE_OFFSET_Y);
   ctx.scale(1 / Graph.MAX_X, -1 / Graph.MAX_Y);
 };
 
@@ -98,8 +101,8 @@ Graph._readFunctionData = function(func, dataString) {
  */
 Graph._clearCanvas = function(canvas, ctx) {
   ctx.beginPath();
-  ctx.clearRect(-Graph.OFFSET_X * Graph.MAX_X,
-    -Graph.OFFSET_Y * Graph.MAX_Y,
+  ctx.clearRect(-Graph.EDGE_OFFSET_X * Graph.MAX_X,
+    -Graph.EDGE_OFFSET_Y * Graph.MAX_Y,
     canvas.width * Graph.MAX_X,
     canvas.height * Graph.MAX_Y);
 };
@@ -109,14 +112,10 @@ Graph._clearCanvas = function(canvas, ctx) {
  */
 Graph.prototype = {
   constructor : Graph,
-
-  drawAxes : function() {
+  
+  _drawXAxis : function() {
     this._axesCtx.beginPath();
-
-    /**
-     * x-axis
-     */
-
+    
     // the line
     this._axesCtx.moveTo(0, 0);
     this._axesCtx.lineTo(this._axesCanvas.width, 0);
@@ -124,9 +123,9 @@ Graph.prototype = {
     // draw tick marks
     for (var i = 1; i <= Graph.NUM_TICKS_X; i++) {
       this._axesCtx.moveTo(i * this._axesCanvas.width /
-        (Graph.NUM_TICKS_X + 1), -5);
+        Graph.NUM_GAPS_X, -Graph.HALF_TICK);
       this._axesCtx.lineTo(i * this._axesCanvas.width /
-        (Graph.NUM_TICKS_X + 1), -5 + 10);
+        Graph.NUM_GAPS_X, Graph.HALF_TICK);
     }
 
     // draw labels
@@ -135,27 +134,29 @@ Graph.prototype = {
     this._axesCtx.textAlign = "center";
     this._axesCtx.textBaseline = "middle";
     for (var i = 1; i <= Graph.NUM_TICKS_X; i++) {
-      var label = Math.round(i * Graph.MAX_X / (Graph.NUM_TICKS_X + 1));
+      var label = Math.round(i * Graph.MAX_X / Graph.NUM_GAPS_X);
       this._axesCtx.fillText(label,
-        i * this._axesCanvas.width / (Graph.NUM_TICKS_X + 1),
-        20);
+        i * this._axesCanvas.width / Graph.NUM_GAPS_X,
+        Graph.LABEL_OFFSET);
     }
     this._axesCtx.restore();
-
-    /**
-     * y-axis
-     */
-
+    
+    this._axesCtx.stroke();
+  },
+  
+  _drawYAxis : function() {
+    this._axesCtx.beginPath();
+    
     // the line
     this._axesCtx.moveTo(0, 0);
     this._axesCtx.lineTo(0, this._axesCanvas.height);
 
     // draw tick marks
     for (var i = 1; i <= Graph.NUM_TICKS_Y; i++) {
-      this._axesCtx.moveTo(-5, i * this._axesCanvas.height /
-        (Graph.NUM_TICKS_Y + 1));
-      this._axesCtx.lineTo(-5 + 10, i * this._axesCanvas.height /
-        (Graph.NUM_TICKS_Y + 1));
+      this._axesCtx.moveTo(-Graph.HALF_TICK, i * this._axesCanvas.height /
+        Graph.NUM_GAPS_Y);
+      this._axesCtx.lineTo(Graph.HALF_TICK, i * this._axesCanvas.height /
+        Graph.NUM_GAPS_Y);
     }
 
     // draw labels
@@ -166,15 +167,20 @@ Graph.prototype = {
     for (var i = 1; i <= Graph.NUM_TICKS_Y; i++) {
       // Because y-axis represents money amount
       var label = (Math.round(i * Graph.MAX_Y * 100 /
-        (Graph.NUM_TICKS_Y + 1)) / 100).toFixed(2);
+        Graph.NUM_GAPS_Y) / 100).toFixed(2);
 
       this._axesCtx.fillText(label,
-        -20,
-        -i * this._axesCanvas.height / (Graph.NUM_TICKS_Y + 1));
+        -Graph.LABEL_OFFSET,
+        -i * this._axesCanvas.height / Graph.NUM_GAPS_Y);
     }
     this._axesCtx.restore();
-
+    
     this._axesCtx.stroke();
+  },
+
+  drawAxes : function() {
+    this._drawXAxis();
+    this._drawYAxis();
   },
 
   /**
