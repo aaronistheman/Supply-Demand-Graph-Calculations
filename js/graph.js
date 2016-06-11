@@ -42,11 +42,14 @@ function Graph(supplyDataString, demandDataString) {
 Graph.OFFSET_X = 40;
 Graph.OFFSET_Y = 40;
 
+// Graph.
+
 Graph.MAX_X = 150;
 Graph.MAX_Y = 1.80;
 
 Graph.NUM_TICKS_X = 6;
 Graph.NUM_TICKS_Y = 6;
+
 
 /**
  * "Static" methods for Graph
@@ -113,11 +116,11 @@ Graph.prototype = {
     /**
      * x-axis
      */
-    
+
     // the line
     this._axesCtx.moveTo(0, 0);
     this._axesCtx.lineTo(this._axesCanvas.width, 0);
-    
+
     // draw labels
     this._axesCtx.save();
     this._axesCtx.scale(1, -1);
@@ -138,19 +141,32 @@ Graph.prototype = {
     // the line
     this._axesCtx.moveTo(0, 0);
     this._axesCtx.lineTo(0, this._axesCanvas.height);
-    
+
+    // draw tick marks
+    this._axesCtx.save();
+    // this._axesCtx.scale(1, -1); // so that text isn't upside down
+    for (var i = 1; i <= Graph.NUM_TICKS_Y; i++) {
+      // this._axesCtx.beginPath();
+      this._axesCtx.moveTo(-5, i * this._axesCanvas.height /
+        (Graph.NUM_TICKS_Y + 1));
+      this._axesCtx.lineTo(-5 + 10, i * this._axesCanvas.height /
+        (Graph.NUM_TICKS_Y + 1));
+      // this._axesCtx.stroke();
+    }
+    this._axesCtx.restore();
+
     // draw labels
     this._axesCtx.save();
-    this._axesCtx.scale(1, -1);
+    this._axesCtx.scale(1, -1); // so that text isn't upside down
     this._axesCtx.textAlign = "center";
     this._axesCtx.textBaseline = "middle";
     for (var i = 1; i <= Graph.NUM_TICKS_Y; i++) {
       // Because y-axis represents money amount
       var label = (Math.round(i * Graph.MAX_Y * 100 /
         (Graph.NUM_TICKS_Y + 1)) / 100).toFixed(2);
-        
+
       this._axesCtx.fillText(label,
-        -15,
+        -20,
         -i * this._axesCanvas.height / (Graph.NUM_TICKS_Y + 1));
     }
     this._axesCtx.restore();

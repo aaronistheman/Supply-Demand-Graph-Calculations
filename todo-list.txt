@@ -5,8 +5,7 @@ Next:
   -labelled axes
     -x-axis
       -draw tick marks
-    -y-axis
-      -draw tick marks
+  -remove magic constants; clean up draw axes method
   -can do appropriate calculations (see below stuff)
 -graph warnings/errors
   -if aren't two graphs, say so
