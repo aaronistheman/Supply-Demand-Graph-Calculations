@@ -7,6 +7,9 @@
  * Note that the beginPath method of the canvas context is sometimes
  * called seemingly randomly, to clear the canvas' strokes
  * (so clearRect() would do something).
+ *
+ * Much of the code regarding the labelling and "tick-marking" of
+ * the axes is from "HTML5 Canvas Cookbook" by Eric Rowell.
  */
 function Graph(supplyDataString, demandDataString) {
   if (!(this instanceof Graph))
@@ -26,7 +29,9 @@ function Graph(supplyDataString, demandDataString) {
 
   this._axesCanvas = document.getElementById("axes-graph");
   this._axesCtx = this._axesCanvas.getContext('2d');
-  Graph._applyContextSettings(this._axesCanvas, this._axesCtx);
+  this._axesCtx.translate(Graph.OFFSET_X,
+    this._axesCanvas.height - Graph.OFFSET_Y);
+  this._axesCtx.scale(1, -1);
 } // Graph constructor
 
 /**
@@ -34,12 +39,12 @@ function Graph(supplyDataString, demandDataString) {
  */
 
 // These say how far the axes are from canvas edges
-Graph.OFFSET_X = 10;
-Graph.OFFSET_Y = 10;
+Graph.OFFSET_X = 30;
+Graph.OFFSET_Y = 30;
 
 // These will hopefully be removed
-Graph.MAX_X = 120;
-Graph.MAX_Y = 1.50;
+Graph.MAX_X = 150;
+Graph.MAX_Y = 1.80;
 
 /**
  * "Static" methods for Graph
@@ -103,13 +108,36 @@ Graph.prototype = {
   drawAxes : function() {
     this._axesCtx.beginPath();
 
-    // x-axis
+    /**
+     * x-axis
+     */
+    
+    // the line
     this._axesCtx.moveTo(0, 0);
-    this._axesCtx.lineTo(this._axesCanvas.width * Graph.MAX_X, 0);
+    this._axesCtx.lineTo(this._axesCanvas.width, 0);
+    
+    // draw labels
+    this._axesCtx.save();
+    this._axesCtx.scale(1, -1);
+    this._axesCtx.textAlign = "center";
+    this._axesCtx.textBaseline = "middle";
+    for (var i = 0; i < 5; i++) {
+      var label = 23.55;
+      this._axesCtx.fillText(label,
+        (i + 1) * this._axesCanvas.width / 5,
+        10);
+    }
+    this._axesCtx.restore();
 
-    // y-axis
+    /**
+     * y-axis
+     */
+
+    // the line
     this._axesCtx.moveTo(0, 0);
-    this._axesCtx.lineTo(0, this._axesCanvas.height * Graph.MAX_Y);
+    this._axesCtx.lineTo(0, this._axesCanvas.height);
+    
+    
 
     this._axesCtx.stroke();
   },
