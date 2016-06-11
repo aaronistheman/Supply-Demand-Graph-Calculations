@@ -3,12 +3,11 @@ DON'T FORGET UNIT TESTS AND MULTIPLE BRANCHES
 Next:
 -applying and improving Graph type
   -labelled axes
+    -clean up label code
     -x-axis
       -draw tick marks
-      -draw labels
     -y-axis
       -draw tick marks
-      -draw labels
   -can do appropriate calculations (see below stuff)
 -graph warnings/errors
   -if aren't two graphs, say so

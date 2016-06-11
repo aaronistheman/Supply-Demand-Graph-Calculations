@@ -39,8 +39,8 @@ function Graph(supplyDataString, demandDataString) {
  */
 
 // These say how far the axes are from canvas edges
-Graph.OFFSET_X = 30;
-Graph.OFFSET_Y = 30;
+Graph.OFFSET_X = 40;
+Graph.OFFSET_Y = 40;
 
 // These will hopefully be removed
 Graph.MAX_X = 150;
@@ -143,9 +143,9 @@ Graph.prototype = {
     this._axesCtx.textAlign = "center";
     this._axesCtx.textBaseline = "middle";
     for (var i = 1; i < 6; i++) {
-      var label = Math.round(i * Graph.MAX_Y / 6);
+      var label = (Math.round(i * Graph.MAX_Y * 100 / 6) / 100).toFixed(2);
       this._axesCtx.fillText(label,
-        -10,
+        -15,
         -i * this._axesCanvas.height / 6);
     }
     this._axesCtx.restore();
