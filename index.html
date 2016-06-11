@@ -27,27 +27,27 @@
 
     <div class="panel">
       <p><b>Domestic Equilibrium</b></p>
-      <p>Price: <span id="eq-p"></span></p>
+      <p>Price: $<span id="eq-p"></span></p>
       <p>Quantity: <span id="eq-q"></span></p>
     </div>
 
     <div class="panel">
       <p><b>Revenue</b></p>
-      <p>Total: <span id="total-rev"></span></p>
+      <p>Total: $<span id="total-rev"></span></p>
     </div>
 
     <div class="panel">
       <p><b>Welfare</b></p>
-      <p>Total (Economic Surplus): <span id="eco-s"></span></p>
-      <p>Consumer Surplus: <span id="con-s"></span></p>
-      <p>Producer Surplus: <span id="pro-s"></span></p>
+      <p>Total (Economic Surplus): $<span id="eco-s"></span></p>
+      <p>Consumer Surplus: $<span id="con-s"></span></p>
+      <p>Producer Surplus: $<span id="pro-s"></span></p>
     </div>
 
     <div class="panel">
       <p><b>International Matters</b></p>
       <p>Closed economy: <input type="checkbox" data-ng-model="isClosed" /></p>
       <div data-ng-if="!isClosed">
-        <p>World price: <input type="number" name="world-p" /></p>
+        <p>World price: $<input type="number" name="world-p" /></p>
         <p>Number of imports: <span id="imports"></span></p>
       </div>
     </div>
@@ -57,7 +57,7 @@
         </b></p>
       <div data-ng-if="isPublic"> <!-- if considering government -->
 
-        <br /><p>Deadweight Loss (Area): <span id="dwl">0</span></p><br />
+        <br /><p>Deadweight Loss (Area): $<span id="dwl">0</span></p><br />
 
         <div data-ng-if="isClosed"> <!-- if closed, public economy -->
 
@@ -68,9 +68,9 @@
               <option value="supply">Supply</option>
             </select></p>
 
-            <p>How Much: <input type="number"
+            <p>How Much: $<input type="number"
               name="tax-amount" value=0 /></p>
-            <p>Tax Revenue: <span id="tax-revenue"></span></p>
+            <p>Tax Revenue: $<span id="tax-revenue"></span></p>
           </div> <!-- tax info -->
 
           <div> <!-- subsidy info -->
@@ -80,7 +80,7 @@
               <option value="supply">Supply</option>
             </select></p>
 
-            <p>How Much: <input type="number"
+            <p>How Much: $<input type="number"
               name="subsidy-amount" value=0 /></p>
           </div> <!-- subsidy info -->
 
@@ -91,7 +91,7 @@
               <option value="ceiling">Ceiling</option>
             </select></p>
             <div data-ng-if="priceMechanism != 'none'">
-              <p>How Much: <input type="number" name="p-mech" value=0 /></p>
+              <p>How Much: $<input type="number" name="p-mech" value=0 /></p>
             </div>
           </div> <!-- price mechanism info -->
 

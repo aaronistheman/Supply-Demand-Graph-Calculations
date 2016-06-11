@@ -268,7 +268,6 @@ Graph.prototype = {
   getEquilibriumPoint : function() {
     var range = this._highestQuantity - this._lowestQuantity;
     var step = range / 500000;
-    console.log(step);
     var x = this._lowestQuantity;
     var d = this._demand.getY(x);
     var s = this._supply.getY(x);
