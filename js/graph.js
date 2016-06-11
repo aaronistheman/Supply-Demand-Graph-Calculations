@@ -17,21 +17,36 @@ function Graph(supplyDataString, demandDataString) {
 
   this._supply = new PiecewiseFunction();
   Graph._readFunctionData(this._supply, supplyDataString);
-  this._supplyCanvas = document.getElementById("supply-graph");
-  this._supplyCtx = this._supplyCanvas.getContext('2d');
-  Graph._applyContextSettings(this._supplyCanvas, this._supplyCtx);
-
+  
   this._demand = new PiecewiseFunction();
   Graph._readFunctionData(this._demand, demandDataString);
-  this._demandCanvas = document.getElementById("demand-graph");
-  this._demandCtx = this._demandCanvas.getContext('2d');
-  Graph._applyContextSettings(this._demandCanvas, this._demandCtx);
+  
+  // Store references to the point arrays
+  this._sPoints = this._supply.getPoints();
+  this._dPoints = this._demand.getPoints();
+  
+  this._lowestQuantity = this.calculateLowestQuantity();
+  this._highestQuantity = this.calculateHighestQuantity();
+  
+  // Stuff that involves a webpage and are not needed by unit test
+  if (!isUnitTesting()) {
+    this._supplyCanvas = document.getElementById("supply-graph");
+    this._supplyCtx = this._supplyCanvas.getContext('2d');
+    Graph._applyContextSettings(this._supplyCanvas, this._supplyCtx);
 
-  this._axesCanvas = document.getElementById("axes-graph");
-  this._axesCtx = this._axesCanvas.getContext('2d');
-  this._axesCtx.translate(Graph.EDGE_OFFSET_X,
-    this._axesCanvas.height - Graph.EDGE_OFFSET_Y);
-  this._axesCtx.scale(1, -1);
+    this._demandCanvas = document.getElementById("demand-graph");
+    this._demandCtx = this._demandCanvas.getContext('2d');
+    Graph._applyContextSettings(this._demandCanvas, this._demandCtx);
+  
+    this._axesCanvas = document.getElementById("axes-graph");
+    this._axesCtx = this._axesCanvas.getContext('2d');
+    this._axesCtx.translate(Graph.EDGE_OFFSET_X,
+      this._axesCanvas.height - Graph.EDGE_OFFSET_Y);
+    this._axesCtx.scale(1, -1);
+  
+    // set graph title
+    document.getElementById("graph-title").innerHTML = "Glue";
+  } // if not unit testing
 } // Graph constructor
 
 /**
@@ -45,8 +60,8 @@ Graph.EDGE_OFFSET_Y = 40;
 Graph.MAX_X = 150;
 Graph.MAX_Y = 1.80;
 
-Graph.NUM_TICKS_X = 6;
-Graph.NUM_TICKS_Y = 6;
+Graph.NUM_TICKS_X = 5;
+Graph.NUM_TICKS_Y = 5;
 Graph.NUM_GAPS_X = Graph.NUM_TICKS_X + 1;
 Graph.NUM_GAPS_Y = Graph.NUM_TICKS_Y + 1;
 Graph.TICK_LENGTH = 10;
@@ -112,6 +127,42 @@ Graph._clearCanvas = function(canvas, ctx) {
  */
 Graph.prototype = {
   constructor : Graph,
+  
+  /**
+   * @returns the lowest quantity that can be used for calculations
+   * (i.e. the maximum of the two quantities of the lowest
+   * demand and supply points)
+   */
+  calculateLowestQuantity : function() {
+    // Get first supply point quantity
+    var sLow = this._sPoints[0].x;
+    
+    // Get first demand point quantity
+    var dLow = this._dPoints[0].x;
+    
+    if (sLow > dLow)
+      return sLow;
+    else
+      return dLow;
+  }, // calculateLowestQuantity()
+  
+  /**
+   * @returns the highest quantity that can be used for
+   * calculations (i.e. the minimum of the two quantities of the
+   * highest demand and supply points)
+   */
+  calculateHighestQuantity : function() {
+    // Get last supply point quantity
+    var sHigh = this._sPoints[this._sPoints.length - 1].x;
+    
+    // Get last demand point quantity
+    var dHigh = this._dPoints[this._dPoints.length - 1].x;
+    
+    if (sHigh > dHigh)
+      return dHigh;
+    else
+      return sHigh;
+  }, // calculateHighestQuantity()
   
   _drawXAxis : function() {
     this._axesCtx.beginPath();
@@ -208,5 +259,37 @@ Graph.prototype = {
     Graph._clearCanvas(this._demandCanvas, this._demandCtx);
     this._drawGraph(this._demand.getPoints(), this._demandCanvas,
       this._demandCtx);
+  },
+  
+  /**
+   * @return a new Point instance representing where the supply and
+   * demand graphs (first) intersect
+   */
+  getEquilibriumPoint : function() {
+    var range = this._highestQuantity - this._lowestQuantity;
+    var step = range / 500000;
+    console.log(step);
+    var x = this._lowestQuantity;
+    var d = this._demand.getY(x);
+    var s = this._supply.getY(x);
+    var oldD = d;
+    var oldS = s;
+    
+    // find the intersection of D and S graphs
+    while (d > s && x <= this._highestQuantity) {
+      oldD = d;
+      oldS = s;
+      
+      x += step;
+      d = this._demand.getY(x);
+      s = this._supply.getY(x);
+    }
+    
+    if (x > this._highestQuantity)
+      alertAndThrowException("Supply and demand don't intersect");
+    
+    // The equilibrium point should be right before D becomes below S,
+    // although this is highly unlikely to matter
+    return new Point(x, oldD);
   },
 };

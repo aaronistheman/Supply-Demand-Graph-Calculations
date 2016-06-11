@@ -1,27 +1,22 @@
 Next:
--remove "graphical inputs"
 -calculations:
-  -general reminders:
-    -integration should start at the first given point
-    (rounded up to the next
-    tick), not at zero
-      -use the first given point of the graph that starts later;
-      ideas of ways to tell the user:
-        -thus, I should probably always hi lite the regions (and use a legend)
-        -could have dashed line as left boundary (and maybe at
-        equilibrium)
-        -say somewhere that the first point of intersection is used as
-        the equilibrium point
   -closed, private economy; list of calculations:
-    -equilibrium quantity and price
     -total revenue
     -consumer surplus
+      -move Riemann sum code from PiecewiseFunction into Graph? (or
+      remove the 500000 constant in two locations)
     -producer surplus
-    -total welfare:
+    -total welfare
+    -indicate to the user where calculations start; ideas on how:
+      -hi lite the regions (and use a legend)
+      -THIS ONE: could have dashed line as left boundary (and maybe at
+      equilibrium)
+      -say somewhere that the first point of intersection is used as
+      the equilibrium point
   -open, private economy
   -closed, public economy
   -open, public economy
--graph warnings/errors
+-graph/input warnings/errors
   -if any calculation's integration goes past the final data point
   of the graph whose final data point's x-coordinate is lowest,
   then the graphs don't interact, and this should be said

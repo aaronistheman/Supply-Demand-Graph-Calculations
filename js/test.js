@@ -123,3 +123,77 @@ QUnit.module(currentTestedFile + ", Riemann sum methods");
         "Correct for " + numRectsArray[i] + " rectangles");
     }
   });
+
+currentTestedFile = "graph.js";
+QUnit.module(currentTestedFile + ", calculateHighestQuantity()");
+
+  QUnit.test("returns last demand quantity", function(assert) {
+    var supplyPoints = "40 0.25 ; 50 0.30 ; 90 0.75 ; 110 1.35";
+    var demandPoints = "40 1.25 ; 60 0.90 ; 90 0.75 ; 103 0.30";
+    var graph = new Graph(supplyPoints, demandPoints);
+    
+    assert.deepEqual(graph.calculateHighestQuantity(), 103);
+  });
+
+  QUnit.test("returns last supply quantity", function(assert) {
+    var supplyPoints = "40 0.25 ; 50 0.30 ; 90 0.75 ; 103 1.35";
+    var demandPoints = "40 1.25 ; 60 0.90 ; 90 0.75 ; 110 0.30";
+    var graph = new Graph(supplyPoints, demandPoints);
+    
+    assert.deepEqual(graph.calculateHighestQuantity(), 103);
+  });
+
+QUnit.module(currentTestedFile + ", calculateLowestQuantity()");
+
+  QUnit.test("returns first demand quantity", function(assert) {
+    var supplyPoints = "40 0.25 ; 50 0.30 ; 90 0.75 ; 110 1.35";
+    var demandPoints = "45 1.25 ; 60 0.90 ; 90 0.75 ; 103 0.30";
+    var graph = new Graph(supplyPoints, demandPoints);
+    
+    assert.deepEqual(graph.calculateLowestQuantity(), 45);
+  });
+
+  QUnit.test("returns first supply quantity", function(assert) {
+    var supplyPoints = "45 0.25 ; 50 0.30 ; 90 0.75 ; 103 1.35";
+    var demandPoints = "40 1.25 ; 60 0.90 ; 90 0.75 ; 110 0.30";
+    var graph = new Graph(supplyPoints, demandPoints);
+    
+    assert.deepEqual(graph.calculateLowestQuantity(), 45);
+  });
+
+QUnit.module(currentTestedFile + ", getEquilibriumPoint()");
+
+  QUnit.test("correct point found", function(assert) {
+    // In this test, the intersection point is (pretty much
+    // a given point
+    
+    var supplyPoints = "40 0.25 ; 50 0.30 ; 90 0.75 ; 110 1.35";
+    var demandPoints = "40 1.25 ; 60 0.90 ; 90 0.75 ; 110 0.30";
+    var graph = new Graph(supplyPoints, demandPoints);
+    
+    // Get the point and do appropriate rounding to make unit
+    // testing more useful
+    var eqPoint = graph.getEquilibriumPoint();
+    eqPoint.x = Math.round(eqPoint.x);
+    eqPoint.y = Math.round(eqPoint.y * 100) / 100;
+    
+    assert.deepEqual(eqPoint.x, 90);
+    assert.deepEqual(eqPoint.y, 0.75);
+  });
+
+  QUnit.test("correct point found again!", function(assert) {
+    // In this test, the intersection point isn't a given point
+    
+    var supplyPoints = "40 0.25 ; 50 0.30 ; 90 0.70 ; 110 1.35";
+    var demandPoints = "40 1.25 ; 60 0.75 ; 80 0.25 ; 110 0.20";
+    var graph = new Graph(supplyPoints, demandPoints);
+    
+    // Get the point and do appropriate rounding to make unit
+    // testing more useful
+    var eqPoint = graph.getEquilibriumPoint();
+    eqPoint.x = Math.round(eqPoint.x);
+    eqPoint.y = Math.round(eqPoint.y * 100) / 100;
+    
+    assert.deepEqual(eqPoint.x, 70);
+    assert.deepEqual(eqPoint.y, 0.50);
+  });
