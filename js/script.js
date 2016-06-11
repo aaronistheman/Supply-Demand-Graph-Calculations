@@ -10,5 +10,10 @@ $(document).ready(function() {
     graph.drawAxes();
     graph.redrawSupply();
     graph.redrawDemand();
+    
+    var eq = graph.getEquilibriumPoint();
+    document.getElementById("eq-p").innerHTML =
+      Math.round(eq.y * 100) / 100;
+    document.getElementById("eq-q").innerHTML = Math.round(eq.x);
   }
 }); // document ready function
