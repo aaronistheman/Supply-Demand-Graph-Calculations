@@ -13,8 +13,11 @@ Next:
         the equilibrium point
   -closed, private economy; list of calculations:
     -equilibrium quantity and price
+      -display on webpage
     -total revenue
     -consumer surplus
+      -move Riemann sum code from PiecewiseFunction into Graph? (or
+      remove the 500000 constant in two locations)
     -producer surplus
     -total welfare:
   -open, private economy

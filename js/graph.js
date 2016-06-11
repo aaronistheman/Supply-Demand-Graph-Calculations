@@ -266,6 +266,30 @@ Graph.prototype = {
    * demand graphs (first) intersect
    */
   getEquilibriumPoint : function() {
+    var range = this._highestQuantity - this._lowestQuantity;
+    var step = range / 500000;
+    console.log(step);
+    var x = this._lowestQuantity;
+    var d = this._demand.getY(x);
+    var s = this._supply.getY(x);
+    var oldD = d;
+    var oldS = s;
     
+    // find the intersection of D and S graphs
+    while (d > s && x <= this._highestQuantity) {
+      oldD = d;
+      oldS = s;
+      
+      x += step;
+      d = this._demand.getY(x);
+      s = this._supply.getY(x);
+    }
+    
+    if (x > this._highestQuantity)
+      alertAndThrowException("Supply and demand don't intersect");
+    
+    // The equilibrium point should be right before D becomes below S,
+    // although this is highly unlikely to matter
+    return new Point(x, oldD);
   },
 };

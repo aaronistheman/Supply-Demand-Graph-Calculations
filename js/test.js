@@ -168,7 +168,12 @@ QUnit.module(currentTestedFile + ", getEquilibriumPoint()");
     var demandPoints = "40 1.25 ; 60 0.90 ; 90 0.75 ; 110 0.30";
     var graph = new Graph(supplyPoints, demandPoints);
     
+    // Get the point and do appropriate rounding to make unit
+    // testing more useful
     var eqPoint = graph.getEquilibriumPoint();
+    eqPoint.x = Math.round(eqPoint.x);
+    eqPoint.y = Math.round(eqPoint.y * 100) / 100;
+    
     assert.deepEqual(eqPoint.x, 90);
     assert.deepEqual(eqPoint.y, 0.75);
   });
