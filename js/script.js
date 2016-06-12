@@ -13,7 +13,11 @@ $(document).ready(function() {
     
     var eq = graph.getEquilibriumPoint();
     document.getElementById("eq-p").innerHTML =
-      Math.round(eq.y * 100) / 100;
+      (Math.round(eq.y * 100) / 100).toFixed(2);
     document.getElementById("eq-q").innerHTML = Math.round(eq.x);
+    
+    var tr = eq.x * eq.y;
+    document.getElementById("total-rev").innerHTML =
+      (Math.round(tr * 100) / 100).toFixed(2);
   }
 }); // document ready function
