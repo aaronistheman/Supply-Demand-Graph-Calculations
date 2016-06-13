@@ -181,6 +181,10 @@ Graph.prototype = {
       return sHigh;
   }, // calculateHighestQuantity()
   
+  getTotalRevenue : function() {
+    return this._eqPoint.x * this._eqPoint.y;
+  },
+  
   _drawXAxis : function() {
     this._axesCtx.beginPath();
     
@@ -210,7 +214,7 @@ Graph.prototype = {
     this._axesCtx.restore();
     
     this._axesCtx.stroke();
-  },
+  }, // _drawXAxis()
   
   _drawYAxis : function() {
     this._axesCtx.beginPath();
@@ -244,7 +248,7 @@ Graph.prototype = {
     this._axesCtx.restore();
     
     this._axesCtx.stroke();
-  },
+  }, // _drawYAxis()
 
   drawAxes : function() {
     this._drawXAxis();
@@ -307,35 +311,7 @@ Graph.prototype = {
     // The equilibrium point should be right before D becomes below S,
     // although this is highly unlikely to matter
     return new Point(x, oldD);
-  },
-
-  /*
-  getLeftRiemannSum : function(lowerBound, upperBound) {
-    var range = upperBound - lowerBound;
-    var step = range / this._numRectangles;
-    var answer = 0;
-
-    // Execute the summation
-    for (var x = lowerBound, i = 0; i < this._numRectangles;
-      x += step, ++i)
-      answer += this.getY(x) * step;
-
-    return answer;
-  },
-
-  getRightRiemannSum : function(lowerBound, upperBound) {
-    var range = upperBound - lowerBound;
-    var step = range / this._numRectangles;
-    var answer = 0;
-
-    // Execute the summation
-    for (var x = lowerBound + step, i = 0; i < this._numRectangles;
-      x += step, ++i)
-      answer += this.getY(x) * step;
-
-    return answer;
-  },
-  */
+  }, // calculateEquilibriumPoint()
   
   /**
    * Consumer surplus is the integral from lowest quantity

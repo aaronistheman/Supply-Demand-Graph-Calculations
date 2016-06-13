@@ -1,13 +1,11 @@
 Next:
 -calculations:
-  -closed, private economy; list of calculations:
-    -perhaps add totalRevenue() method to Graph
-    -indicate to the user where calculations start; ideas on how:
-      -hi lite the regions (and use a legend)
-      -THIS ONE: could have dashed line as left boundary (and maybe at
-      equilibrium)
-      -say somewhere that the first point of intersection is used as
-      the equilibrium point
+  -indicate to the user where calculations start; ideas on how:
+    -hi lite the regions (and use a legend)
+    -THIS ONE: could have dashed line as left boundary (and maybe at
+    equilibrium)
+    -say somewhere that the first point of intersection is used as
+    the equilibrium point
   -see the section below about inputs that change S or D; plan ahead
   -open, private economy
   -closed, public economy

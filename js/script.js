@@ -16,7 +16,7 @@ $(document).ready(function() {
     document.getElementById("eq-p").innerHTML =
       (Math.round(eq.y * 100) / 100).toFixed(2);
     
-    var tr = eq.x * eq.y;
+    var tr = graph.getTotalRevenue();
     document.getElementById("total-rev").innerHTML =
       (Math.round(tr * 100) / 100).toFixed(2);
       
