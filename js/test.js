@@ -147,9 +147,30 @@ QUnit.module(currentTestedFile + ", getEquilibriumPoint()");
     assert.deepEqual(eqPoint.x, 70);
     assert.deepEqual(eqPoint.y, 0.50);
   });
+  
+QUnit.module(currentTestedFile + ", getConsumerSurplus()")
+
+  QUnit.test("correct value", function(assert) {
+    var graph = new Graph(
+      "20 0.2; 50 0.5; 90 0.9",
+      "20 0.9; 50 0.5 ; 80 0.2");
+    
+    var cs = Math.round(graph.getConsumerSurplus() * 100) / 100;
+    assert.deepEqual(cs, 6); // hand-calculated
+  });
+
+  QUnit.test("correct value again!", function(assert) {
+    var graph = new Graph(
+      "20 0.2; 70 0.6; 110, 0.8",
+      "10 1.50; 20 1.30; 40 1.20; 100 0.60");
+      
+    var cs = Math.round(graph.getConsumerSurplus() * 100) / 100;
+    assert.deepEqual(cs, 23.50); // hand-calculated
+  });
 
 QUnit.module(currentTestedFile + ", Riemann sum methods");
 
+  /*
   // Note that testing 1,000,000 rectangles makes the tests take
   // seconds longer
   var numRectsArray = [10, 100, 500, 1000, 5000, 10000,
@@ -171,7 +192,6 @@ QUnit.module(currentTestedFile + ", Riemann sum methods");
     }
   }
 
-  /*
   QUnit.test("left sum is lower than real for increasing function",
     function(assert) {
     var obj = setUpRiemannTest(1);

@@ -2,8 +2,7 @@ Next:
 -calculations:
   -closed, private economy; list of calculations:
     -consumer surplus
-      -make test for the method
-      -implement the method
+      -display on webpage
     -producer surplus
     -total welfare
     -store equilibrium point in Graph instance; adjust the welfare

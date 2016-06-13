@@ -14,6 +14,11 @@
  *
  * Much of the code regarding the labelling and "tick-marking" of
  * the axes is from "HTML5 Canvas Cookbook" by Eric Rowell.
+ *
+ * @param supplyDataString should have following format:
+ * "quantity price ; quantity price ; quantity price", with
+ * increasing quantities; (see unit tests for examples)
+ * @param demandDataString see immediately above
  */
 function Graph(supplyDataString, demandDataString) {
   if (!(this instanceof Graph))
@@ -325,4 +330,26 @@ Graph.prototype = {
     return answer;
   },
   */
+  
+  /**
+   * Consumer surplus is the integral from lowest quantity
+   * to the equilibrium
+   * quantity of the difference between demand and the equilibrium
+   * price.
+   */
+  getConsumerSurplus : function() {
+    var eqPoint = this.getEquilibriumPoint();
+    var range = eqPoint.x - this._lowestQuantity;
+    var step = range / Graph.NUM_RECTANGLES;
+    var answer = 0;
+    
+    // Execute the summation
+    for (var x = this._lowestQuantity + step, i = 0;
+      i < Graph.NUM_RECTANGLES; x += step, ++i)
+    {
+      answer += (this._demand.getY(x) - eqPoint.y) * step;
+    }
+    
+    return answer;
+  },
 };
