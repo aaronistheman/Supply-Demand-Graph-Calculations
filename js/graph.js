@@ -373,4 +373,8 @@ Graph.prototype = {
     
     return answer;
   },
+  
+  getEconomicSurplus : function() {
+    return this.getConsumerSurplus() + this.getProducerSurplus();
+  },
 };

@@ -27,5 +27,9 @@ $(document).ready(function() {
     var ps = graph.getProducerSurplus();
     document.getElementById("pro-s").innerHTML =
       (Math.round(ps * 100) / 100).toFixed(2);
+    
+    var es = cs + ps;
+    document.getElementById("eco-s").innerHTML =
+      (Math.round(es * 100) / 100).toFixed(2);
   } // if not unit testing
 }); // document ready function
