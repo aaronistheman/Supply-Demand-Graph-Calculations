@@ -1,12 +1,13 @@
 Next:
--calculations:
-  -indicate to the user where calculations start; ideas on how:
-    -hi lite the regions (and use a legend)
-    -THIS ONE: could have dashed line as left boundary (and maybe at
-    equilibrium)
+-indicate to the user where calculations occur; ideas on how:
+  -to say start: have dashed line as left boundary (and maybe at
+  equilibrium)
+  -to say end; ideas:
     -say somewhere that the first point of intersection is used as
     the equilibrium point
-  -see the section below about inputs that change S or D; plan ahead
+    -emphasize first equilibrium point with big dot
+-see the section below about inputs that change S or D; plan ahead
+-remaining calculations:
   -open, private economy
   -closed, public economy
   -open, public economy
