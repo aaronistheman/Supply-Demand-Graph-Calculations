@@ -18,9 +18,6 @@ function PiecewiseFunction() {
     return new PiecewiseFunction();
 
   this._points = []; // array of instances of Point
-
-  // For Riemann sums
-  this._numRectangles = 500000;
 }
 
 /**
@@ -83,31 +80,5 @@ PiecewiseFunction.prototype = {
 
     // made it past error-checking
     this._points.push(point);
-  },
-
-  getLeftRiemannSum : function(lowerBound, upperBound) {
-    var range = upperBound - lowerBound;
-    var step = range / this._numRectangles;
-    var answer = 0;
-
-    // Execute the summation
-    for (var x = lowerBound, i = 0; i < this._numRectangles;
-      x += step, ++i)
-      answer += this.getY(x) * step;
-
-    return answer;
-  },
-
-  getRightRiemannSum : function(lowerBound, upperBound) {
-    var range = upperBound - lowerBound;
-    var step = range / this._numRectangles;
-    var answer = 0;
-
-    // Execute the summation
-    for (var x = lowerBound + step, i = 0; i < this._numRectangles;
-      x += step, ++i)
-      answer += this.getY(x) * step;
-
-    return answer;
   },
 };

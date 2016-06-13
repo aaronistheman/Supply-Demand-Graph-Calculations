@@ -8,8 +8,17 @@
  * called seemingly randomly, to clear the canvas' strokes
  * (so clearRect() would do something).
  *
+ * Regarding the methods that use Riemann sums: the number of rectangles
+ * and the use of rounding, in my opinion, make which Riemann sum
+ * (e.g. right, left, midpoint) I use unimportant.
+ *
  * Much of the code regarding the labelling and "tick-marking" of
  * the axes is from "HTML5 Canvas Cookbook" by Eric Rowell.
+ *
+ * @param supplyDataString should have following format:
+ * "quantity price ; quantity price ; quantity price", with
+ * increasing quantities; (see unit tests for examples)
+ * @param demandDataString see immediately above
  */
 function Graph(supplyDataString, demandDataString) {
   if (!(this instanceof Graph))
@@ -27,6 +36,8 @@ function Graph(supplyDataString, demandDataString) {
   
   this._lowestQuantity = this.calculateLowestQuantity();
   this._highestQuantity = this.calculateHighestQuantity();
+  
+  this._eqPoint = this.calculateEquilibriumPoint();
   
   // Stuff that involves a webpage and are not needed by unit test
   if (!isUnitTesting()) {
@@ -68,6 +79,8 @@ Graph.TICK_LENGTH = 10;
 Graph.HALF_TICK = Graph.TICK_LENGTH / 2;
 
 Graph.LABEL_OFFSET = 20; // how far label is from respective axis
+
+Graph.NUM_RECTANGLES = 100000; // usually for Riemann sums
 
 /**
  * "Static" methods for Graph
@@ -128,6 +141,10 @@ Graph._clearCanvas = function(canvas, ctx) {
 Graph.prototype = {
   constructor : Graph,
   
+  getEquilibriumPoint : function() {
+    return this._eqPoint;
+  },
+  
   /**
    * @returns the lowest quantity that can be used for calculations
    * (i.e. the maximum of the two quantities of the lowest
@@ -164,6 +181,10 @@ Graph.prototype = {
       return sHigh;
   }, // calculateHighestQuantity()
   
+  getTotalRevenue : function() {
+    return this._eqPoint.x * this._eqPoint.y;
+  },
+  
   _drawXAxis : function() {
     this._axesCtx.beginPath();
     
@@ -193,7 +214,7 @@ Graph.prototype = {
     this._axesCtx.restore();
     
     this._axesCtx.stroke();
-  },
+  }, // _drawXAxis()
   
   _drawYAxis : function() {
     this._axesCtx.beginPath();
@@ -227,7 +248,7 @@ Graph.prototype = {
     this._axesCtx.restore();
     
     this._axesCtx.stroke();
-  },
+  }, // _drawYAxis()
 
   drawAxes : function() {
     this._drawXAxis();
@@ -265,9 +286,9 @@ Graph.prototype = {
    * @return a new Point instance representing where the supply and
    * demand graphs (first) intersect
    */
-  getEquilibriumPoint : function() {
+  calculateEquilibriumPoint : function() {
     var range = this._highestQuantity - this._lowestQuantity;
-    var step = range / 500000;
+    var step = range / Graph.NUM_RECTANGLES;
     var x = this._lowestQuantity;
     var d = this._demand.getY(x);
     var s = this._supply.getY(x);
@@ -290,5 +311,50 @@ Graph.prototype = {
     // The equilibrium point should be right before D becomes below S,
     // although this is highly unlikely to matter
     return new Point(x, oldD);
+  }, // calculateEquilibriumPoint()
+  
+  /**
+   * Consumer surplus is the integral from lowest quantity
+   * to the equilibrium
+   * quantity of the difference between demand and the equilibrium
+   * price.
+   */
+  getConsumerSurplus : function() {
+    var range = this._eqPoint.x - this._lowestQuantity;
+    var step = range / Graph.NUM_RECTANGLES;
+    var answer = 0;
+    
+    // Execute the summation
+    for (var x = this._lowestQuantity + step, i = 0;
+      i < Graph.NUM_RECTANGLES; x += step, ++i)
+    {
+      answer += (this._demand.getY(x) - this._eqPoint.y) * step;
+    }
+    
+    return answer;
+  },
+  
+  /**
+   * Producer surplus is the integral from lowest quantity
+   * to the equilibrium quantity of the difference between
+   * the equilibrium price and supply.
+   */
+  getProducerSurplus : function() {
+    var range = this._eqPoint.x - this._lowestQuantity;
+    var step = range / Graph.NUM_RECTANGLES;
+    var answer = 0;
+    
+    // Execute the summation
+    for (var x = this._lowestQuantity + step, i = 0;
+      i < Graph.NUM_RECTANGLES; x += step, ++i)
+    {
+      answer += (this._eqPoint.y - this._supply.getY(x)) * step;
+    }
+    
+    return answer;
+  },
+  
+  getEconomicSurplus : function() {
+    return this.getConsumerSurplus() + this.getProducerSurplus();
   },
 };

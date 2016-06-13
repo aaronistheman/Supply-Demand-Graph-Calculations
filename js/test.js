@@ -73,57 +73,6 @@ QUnit.module(currentTestedFile + ", PiecewiseFunction.getY()");
     assert.deepEqual(pf.getY(8), 14);
   });
 
-QUnit.module(currentTestedFile + ", Riemann sum methods");
-
-  // Note that testing 1,000,000 rectangles makes the tests take
-  // seconds longer
-  var numRectsArray = [10, 100, 500, 1000, 5000, 10000,
-    // 100000, 500000, 1000000];
-    100000, 500000];
-
-  function setUpRiemannTest(caseNum) {
-    switch (caseNum) {
-    case 1:
-      var pf = new PiecewiseFunction();
-      pf.insert(new Point(1.00, 10));
-      pf.insert(new Point(1.25, 20));
-      pf.insert(new Point(1.45, 40));
-
-      var returnObj = {};
-      returnObj.pf = pf;
-      returnObj.answer = 9.75; // hand calculated
-      return returnObj;
-    }
-  }
-
-  QUnit.test("left sum is lower than real for increasing function",
-    function(assert) {
-    var obj = setUpRiemannTest(1);
-    var pf = obj.pf;
-
-    for (var i = 0; i < numRectsArray.length; ++i) {
-      pf.setNumRectangles(numRectsArray[i]);
-      var sum = pf.getLeftRiemannSum(1.00, 1.45);
-      // console.log(numRectsArray[i] + " " + sum);
-      assert.ok(sum < obj.answer,
-        "Correct for " + numRectsArray[i] + " rectangles");
-    }
-  });
-
-  QUnit.test("right sum is higher than real for increasing function",
-    function(assert) {
-    var obj = setUpRiemannTest(1);
-    var pf = obj.pf;
-
-    for (var i = 0; i < numRectsArray.length; ++i) {
-      pf.setNumRectangles(numRectsArray[i]);
-      var sum = pf.getRightRiemannSum(1.00, 1.45);
-      // console.log(numRectsArray[i] + " " + sum);
-      assert.ok(sum > obj.answer,
-        "Correct for " + numRectsArray[i] + " rectangles");
-    }
-  });
-
 currentTestedFile = "graph.js";
 QUnit.module(currentTestedFile + ", calculateHighestQuantity()");
 
@@ -161,7 +110,7 @@ QUnit.module(currentTestedFile + ", calculateLowestQuantity()");
     assert.deepEqual(graph.calculateLowestQuantity(), 45);
   });
 
-QUnit.module(currentTestedFile + ", getEquilibriumPoint()");
+QUnit.module(currentTestedFile + ", calculateEquilibriumPoint()");
 
   QUnit.test("correct point found", function(assert) {
     // In this test, the intersection point is (pretty much
@@ -173,7 +122,8 @@ QUnit.module(currentTestedFile + ", getEquilibriumPoint()");
     
     // Get the point and do appropriate rounding to make unit
     // testing more useful
-    var eqPoint = graph.getEquilibriumPoint();
+    var eqPoint = graph.calculateEquilibriumPoint();
+    // console.log("eqPoint x=" + eqPoint.x + " eqPoint y=" + eqPoint.y);
     eqPoint.x = Math.round(eqPoint.x);
     eqPoint.y = Math.round(eqPoint.y * 100) / 100;
     
@@ -190,10 +140,50 @@ QUnit.module(currentTestedFile + ", getEquilibriumPoint()");
     
     // Get the point and do appropriate rounding to make unit
     // testing more useful
-    var eqPoint = graph.getEquilibriumPoint();
+    var eqPoint = graph.calculateEquilibriumPoint();
     eqPoint.x = Math.round(eqPoint.x);
     eqPoint.y = Math.round(eqPoint.y * 100) / 100;
     
     assert.deepEqual(eqPoint.x, 70);
     assert.deepEqual(eqPoint.y, 0.50);
+  });
+  
+QUnit.module(currentTestedFile + ", getConsumerSurplus()")
+
+  QUnit.test("correct value", function(assert) {
+    var graph = new Graph(
+      "20 0.2; 50 0.5; 90 0.9",
+      "20 0.9; 50 0.5 ; 80 0.2");
+    
+    var cs = Math.round(graph.getConsumerSurplus() * 100) / 100;
+    assert.deepEqual(cs, 6); // hand-calculated
+  });
+
+  QUnit.test("correct value again!", function(assert) {
+    var graph = new Graph(
+      "20 0.2; 70 0.6; 110, 0.8",
+      "10 1.50; 20 1.30; 40 1.20; 100 0.60");
+      
+    var cs = Math.round(graph.getConsumerSurplus() * 100) / 100;
+    assert.deepEqual(cs, 23.50); // hand-calculated
+  });
+
+QUnit.module(currentTestedFile + ", getProducerSurplus()")
+
+  QUnit.test("correct value", function(assert) {
+    var graph = new Graph(
+      "20 0.2; 50 0.5; 90 0.9",
+      "20 0.9; 50 0.5 ; 80 0.2");
+    
+    var ps = Math.round(graph.getProducerSurplus() * 100) / 100;
+    assert.deepEqual(ps, 4.50); // hand-calculated
+  });
+
+  QUnit.test("correct value again!", function(assert) {
+    var graph = new Graph(
+      "20 0.2; 70 0.6; 110, 0.8",
+      "10 1.50; 20 1.30; 40 1.20; 100 0.60");
+      
+    var ps = Math.round(graph.getProducerSurplus() * 100) / 100;
+    assert.deepEqual(ps, 16.00); // hand-calculated
   });

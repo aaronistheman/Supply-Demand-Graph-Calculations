@@ -12,12 +12,24 @@ $(document).ready(function() {
     graph.redrawDemand();
     
     var eq = graph.getEquilibriumPoint();
+    document.getElementById("eq-q").innerHTML = Math.round(eq.x);
     document.getElementById("eq-p").innerHTML =
       (Math.round(eq.y * 100) / 100).toFixed(2);
-    document.getElementById("eq-q").innerHTML = Math.round(eq.x);
     
-    var tr = eq.x * eq.y;
+    var tr = graph.getTotalRevenue();
     document.getElementById("total-rev").innerHTML =
       (Math.round(tr * 100) / 100).toFixed(2);
-  }
+      
+    var cs = graph.getConsumerSurplus();
+    document.getElementById("con-s").innerHTML =
+      (Math.round(cs * 100) / 100).toFixed(2);
+    
+    var ps = graph.getProducerSurplus();
+    document.getElementById("pro-s").innerHTML =
+      (Math.round(ps * 100) / 100).toFixed(2);
+    
+    var es = cs + ps;
+    document.getElementById("eco-s").innerHTML =
+      (Math.round(es * 100) / 100).toFixed(2);
+  } // if not unit testing
 }); // document ready function
