@@ -291,4 +291,32 @@ Graph.prototype = {
     // although this is highly unlikely to matter
     return new Point(x, oldD);
   },
+
+  /*
+  getLeftRiemannSum : function(lowerBound, upperBound) {
+    var range = upperBound - lowerBound;
+    var step = range / this._numRectangles;
+    var answer = 0;
+
+    // Execute the summation
+    for (var x = lowerBound, i = 0; i < this._numRectangles;
+      x += step, ++i)
+      answer += this.getY(x) * step;
+
+    return answer;
+  },
+
+  getRightRiemannSum : function(lowerBound, upperBound) {
+    var range = upperBound - lowerBound;
+    var step = range / this._numRectangles;
+    var answer = 0;
+
+    // Execute the summation
+    for (var x = lowerBound + step, i = 0; i < this._numRectangles;
+      x += step, ++i)
+      answer += this.getY(x) * step;
+
+    return answer;
+  },
+  */
 };

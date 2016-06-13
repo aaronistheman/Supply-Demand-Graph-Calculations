@@ -73,57 +73,6 @@ QUnit.module(currentTestedFile + ", PiecewiseFunction.getY()");
     assert.deepEqual(pf.getY(8), 14);
   });
 
-QUnit.module(currentTestedFile + ", Riemann sum methods");
-
-  // Note that testing 1,000,000 rectangles makes the tests take
-  // seconds longer
-  var numRectsArray = [10, 100, 500, 1000, 5000, 10000,
-    // 100000, 500000, 1000000];
-    100000, 500000];
-
-  function setUpRiemannTest(caseNum) {
-    switch (caseNum) {
-    case 1:
-      var pf = new PiecewiseFunction();
-      pf.insert(new Point(1.00, 10));
-      pf.insert(new Point(1.25, 20));
-      pf.insert(new Point(1.45, 40));
-
-      var returnObj = {};
-      returnObj.pf = pf;
-      returnObj.answer = 9.75; // hand calculated
-      return returnObj;
-    }
-  }
-
-  QUnit.test("left sum is lower than real for increasing function",
-    function(assert) {
-    var obj = setUpRiemannTest(1);
-    var pf = obj.pf;
-
-    for (var i = 0; i < numRectsArray.length; ++i) {
-      pf.setNumRectangles(numRectsArray[i]);
-      var sum = pf.getLeftRiemannSum(1.00, 1.45);
-      // console.log(numRectsArray[i] + " " + sum);
-      assert.ok(sum < obj.answer,
-        "Correct for " + numRectsArray[i] + " rectangles");
-    }
-  });
-
-  QUnit.test("right sum is higher than real for increasing function",
-    function(assert) {
-    var obj = setUpRiemannTest(1);
-    var pf = obj.pf;
-
-    for (var i = 0; i < numRectsArray.length; ++i) {
-      pf.setNumRectangles(numRectsArray[i]);
-      var sum = pf.getRightRiemannSum(1.00, 1.45);
-      // console.log(numRectsArray[i] + " " + sum);
-      assert.ok(sum > obj.answer,
-        "Correct for " + numRectsArray[i] + " rectangles");
-    }
-  });
-
 currentTestedFile = "graph.js";
 QUnit.module(currentTestedFile + ", calculateHighestQuantity()");
 
@@ -197,3 +146,56 @@ QUnit.module(currentTestedFile + ", getEquilibriumPoint()");
     assert.deepEqual(eqPoint.x, 70);
     assert.deepEqual(eqPoint.y, 0.50);
   });
+
+QUnit.module(currentTestedFile + ", Riemann sum methods");
+
+  // Note that testing 1,000,000 rectangles makes the tests take
+  // seconds longer
+  var numRectsArray = [10, 100, 500, 1000, 5000, 10000,
+    // 100000, 500000, 1000000];
+    100000, 500000];
+
+  function setUpRiemannTest(caseNum) {
+    switch (caseNum) {
+    case 1:
+      var pf = new PiecewiseFunction();
+      pf.insert(new Point(1.00, 10));
+      pf.insert(new Point(1.25, 20));
+      pf.insert(new Point(1.45, 40));
+
+      var returnObj = {};
+      returnObj.pf = pf;
+      returnObj.answer = 9.75; // hand calculated
+      return returnObj;
+    }
+  }
+
+  /*
+  QUnit.test("left sum is lower than real for increasing function",
+    function(assert) {
+    var obj = setUpRiemannTest(1);
+    var pf = obj.pf;
+
+    for (var i = 0; i < numRectsArray.length; ++i) {
+      pf.setNumRectangles(numRectsArray[i]);
+      var sum = pf.getLeftRiemannSum(1.00, 1.45);
+      // console.log(numRectsArray[i] + " " + sum);
+      assert.ok(sum < obj.answer,
+        "Correct for " + numRectsArray[i] + " rectangles");
+    }
+  });
+
+  QUnit.test("right sum is higher than real for increasing function",
+    function(assert) {
+    var obj = setUpRiemannTest(1);
+    var pf = obj.pf;
+
+    for (var i = 0; i < numRectsArray.length; ++i) {
+      pf.setNumRectangles(numRectsArray[i]);
+      var sum = pf.getRightRiemannSum(1.00, 1.45);
+      // console.log(numRectsArray[i] + " " + sum);
+      assert.ok(sum > obj.answer,
+        "Correct for " + numRectsArray[i] + " rectangles");
+    }
+  });
+  */

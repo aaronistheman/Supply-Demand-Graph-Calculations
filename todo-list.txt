@@ -4,6 +4,7 @@ Next:
     -consumer surplus
       -move Riemann sum code from PiecewiseFunction into Graph? (or
       remove the 500000 constant in two locations)
+      -move unit tests
     -producer surplus
     -total welfare
     -indicate to the user where calculations start; ideas on how:
