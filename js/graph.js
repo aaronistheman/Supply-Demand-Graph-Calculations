@@ -37,6 +37,8 @@ function Graph(supplyDataString, demandDataString) {
   this._lowestQuantity = this.calculateLowestQuantity();
   this._highestQuantity = this.calculateHighestQuantity();
   
+  this._eqPoint = this.calculateEquilibriumPoint();
+  
   // Stuff that involves a webpage and are not needed by unit test
   if (!isUnitTesting()) {
     this._supplyCanvas = document.getElementById("supply-graph");
@@ -138,6 +140,10 @@ Graph._clearCanvas = function(canvas, ctx) {
  */
 Graph.prototype = {
   constructor : Graph,
+  
+  getEquilibriumPoint : function() {
+    return this._eqPoint;
+  },
   
   /**
    * @returns the lowest quantity that can be used for calculations
@@ -276,7 +282,7 @@ Graph.prototype = {
    * @return a new Point instance representing where the supply and
    * demand graphs (first) intersect
    */
-  getEquilibriumPoint : function() {
+  calculateEquilibriumPoint : function() {
     var range = this._highestQuantity - this._lowestQuantity;
     var step = range / Graph.NUM_RECTANGLES;
     var x = this._lowestQuantity;
@@ -338,8 +344,7 @@ Graph.prototype = {
    * price.
    */
   getConsumerSurplus : function() {
-    var eqPoint = this.getEquilibriumPoint();
-    var range = eqPoint.x - this._lowestQuantity;
+    var range = this._eqPoint.x - this._lowestQuantity;
     var step = range / Graph.NUM_RECTANGLES;
     var answer = 0;
     
@@ -347,7 +352,7 @@ Graph.prototype = {
     for (var x = this._lowestQuantity + step, i = 0;
       i < Graph.NUM_RECTANGLES; x += step, ++i)
     {
-      answer += (this._demand.getY(x) - eqPoint.y) * step;
+      answer += (this._demand.getY(x) - this._eqPoint.y) * step;
     }
     
     return answer;
@@ -359,8 +364,7 @@ Graph.prototype = {
    * the equilibrium price and supply.
    */
   getProducerSurplus : function() {
-    var eqPoint = this.getEquilibriumPoint();
-    var range = eqPoint.x - this._lowestQuantity;
+    var range = this._eqPoint.x - this._lowestQuantity;
     var step = range / Graph.NUM_RECTANGLES;
     var answer = 0;
     
@@ -368,7 +372,7 @@ Graph.prototype = {
     for (var x = this._lowestQuantity + step, i = 0;
       i < Graph.NUM_RECTANGLES; x += step, ++i)
     {
-      answer += (eqPoint.y - this._supply.getY(x)) * step;
+      answer += (this._eqPoint.y - this._supply.getY(x)) * step;
     }
     
     return answer;

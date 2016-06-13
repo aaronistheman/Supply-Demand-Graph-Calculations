@@ -110,7 +110,7 @@ QUnit.module(currentTestedFile + ", calculateLowestQuantity()");
     assert.deepEqual(graph.calculateLowestQuantity(), 45);
   });
 
-QUnit.module(currentTestedFile + ", getEquilibriumPoint()");
+QUnit.module(currentTestedFile + ", calculateEquilibriumPoint()");
 
   QUnit.test("correct point found", function(assert) {
     // In this test, the intersection point is (pretty much
@@ -122,7 +122,7 @@ QUnit.module(currentTestedFile + ", getEquilibriumPoint()");
     
     // Get the point and do appropriate rounding to make unit
     // testing more useful
-    var eqPoint = graph.getEquilibriumPoint();
+    var eqPoint = graph.calculateEquilibriumPoint();
     // console.log("eqPoint x=" + eqPoint.x + " eqPoint y=" + eqPoint.y);
     eqPoint.x = Math.round(eqPoint.x);
     eqPoint.y = Math.round(eqPoint.y * 100) / 100;
@@ -140,7 +140,7 @@ QUnit.module(currentTestedFile + ", getEquilibriumPoint()");
     
     // Get the point and do appropriate rounding to make unit
     // testing more useful
-    var eqPoint = graph.getEquilibriumPoint();
+    var eqPoint = graph.calculateEquilibriumPoint();
     eqPoint.x = Math.round(eqPoint.x);
     eqPoint.y = Math.round(eqPoint.y * 100) / 100;
     

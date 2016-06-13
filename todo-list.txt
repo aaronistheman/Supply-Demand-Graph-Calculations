@@ -1,9 +1,7 @@
 Next:
 -calculations:
   -closed, private economy; list of calculations:
-    -store equilibrium point in Graph instance; adjust the welfare
-    methods appropriately
-      -perhaps add totalRevenue() method to Graph
+    -perhaps add totalRevenue() method to Graph
     -indicate to the user where calculations start; ideas on how:
       -hi lite the regions (and use a legend)
       -THIS ONE: could have dashed line as left boundary (and maybe at
