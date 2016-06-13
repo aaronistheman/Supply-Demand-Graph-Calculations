@@ -23,5 +23,9 @@ $(document).ready(function() {
     var cs = graph.getConsumerSurplus();
     document.getElementById("con-s").innerHTML =
       (Math.round(cs * 100) / 100).toFixed(2);
-  }
+    
+    var ps = graph.getProducerSurplus();
+    document.getElementById("pro-s").innerHTML =
+      (Math.round(ps * 100) / 100).toFixed(2);
+  } // if not unit testing
 }); // document ready function
