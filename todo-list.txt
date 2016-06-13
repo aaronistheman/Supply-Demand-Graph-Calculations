@@ -50,6 +50,8 @@ tutorial I forgot about
   -e.g. thousandths, hundredths
 
 Considerable:
+-when hover over some measurement (e.g. producer surplus), hi lite
+(on a separate canvas in the stack) the regarded region
 -can probably afford to lower number of Riemann rectangles
 -option to save applied inputs and apply them later
 -allow the panels to be in more than one column; see how it was done with

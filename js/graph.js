@@ -352,4 +352,25 @@ Graph.prototype = {
     
     return answer;
   },
+  
+  /**
+   * Producer surplus is the integral from lowest quantity
+   * to the equilibrium quantity of the difference between
+   * the equilibrium price and supply.
+   */
+  getProducerSurplus : function() {
+    var eqPoint = this.getEquilibriumPoint();
+    var range = eqPoint.x - this._lowestQuantity;
+    var step = range / Graph.NUM_RECTANGLES;
+    var answer = 0;
+    
+    // Execute the summation
+    for (var x = this._lowestQuantity + step, i = 0;
+      i < Graph.NUM_RECTANGLES; x += step, ++i)
+    {
+      answer += (eqPoint.y - this._supply.getY(x)) * step;
+    }
+    
+    return answer;
+  },
 };
