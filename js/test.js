@@ -123,6 +123,7 @@ QUnit.module(currentTestedFile + ", getEquilibriumPoint()");
     // Get the point and do appropriate rounding to make unit
     // testing more useful
     var eqPoint = graph.getEquilibriumPoint();
+    // console.log("eqPoint x=" + eqPoint.x + " eqPoint y=" + eqPoint.y);
     eqPoint.x = Math.round(eqPoint.x);
     eqPoint.y = Math.round(eqPoint.y * 100) / 100;
     

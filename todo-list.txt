@@ -2,11 +2,12 @@ Next:
 -calculations:
   -closed, private economy; list of calculations:
     -consumer surplus
-      -move Riemann sum code from PiecewiseFunction into Graph? (or
-      remove the 500000 constant in two locations)
-      -move unit tests
+      -make test for the method
+      -implement the method
     -producer surplus
     -total welfare
+    -store equilibrium point in Graph instance; adjust the welfare
+    methods appropriately
     -indicate to the user where calculations start; ideas on how:
       -hi lite the regions (and use a legend)
       -THIS ONE: could have dashed line as left boundary (and maybe at

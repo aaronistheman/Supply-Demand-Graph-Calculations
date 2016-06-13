@@ -8,6 +8,10 @@
  * called seemingly randomly, to clear the canvas' strokes
  * (so clearRect() would do something).
  *
+ * Regarding the methods that use Riemann sums: the number of rectangles
+ * and the use of rounding, in my opinion, make which Riemann sum
+ * (e.g. right, left, midpoint) I use unimportant.
+ *
  * Much of the code regarding the labelling and "tick-marking" of
  * the axes is from "HTML5 Canvas Cookbook" by Eric Rowell.
  */
@@ -68,6 +72,8 @@ Graph.TICK_LENGTH = 10;
 Graph.HALF_TICK = Graph.TICK_LENGTH / 2;
 
 Graph.LABEL_OFFSET = 20; // how far label is from respective axis
+
+Graph.NUM_RECTANGLES = 100000; // usually for Riemann sums
 
 /**
  * "Static" methods for Graph
@@ -267,7 +273,7 @@ Graph.prototype = {
    */
   getEquilibriumPoint : function() {
     var range = this._highestQuantity - this._lowestQuantity;
-    var step = range / 500000;
+    var step = range / Graph.NUM_RECTANGLES;
     var x = this._lowestQuantity;
     var d = this._demand.getY(x);
     var s = this._supply.getY(x);

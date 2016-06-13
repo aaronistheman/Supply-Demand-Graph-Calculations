@@ -18,9 +18,6 @@ function PiecewiseFunction() {
     return new PiecewiseFunction();
 
   this._points = []; // array of instances of Point
-
-  // For Riemann sums
-  this._numRectangles = 500000;
 }
 
 /**
