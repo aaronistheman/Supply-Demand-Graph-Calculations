@@ -1,8 +1,6 @@
 Next:
 -calculations:
   -closed, private economy; list of calculations:
-    -consumer surplus
-      -display on webpage
     -producer surplus
     -total welfare
     -store equilibrium point in Graph instance; adjust the welfare
@@ -13,6 +11,7 @@ Next:
       equilibrium)
       -say somewhere that the first point of intersection is used as
       the equilibrium point
+  -see the section below about inputs that change S or D; plan ahead
   -open, private economy
   -closed, public economy
   -open, public economy
