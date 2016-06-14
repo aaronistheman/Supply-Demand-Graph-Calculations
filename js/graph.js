@@ -54,9 +54,15 @@ function Graph(supplyDataString, demandDataString) {
     this._axesCtx.translate(Graph.EDGE_OFFSET_X,
       this._axesCanvas.height - Graph.EDGE_OFFSET_Y);
     this._axesCtx.scale(1, -1);
+    
+    this._indicatorCanvas = document.getElementById("graph-indicators");
+    this._indicatorCtx = this._indicatorCanvas.getContext('2d');
+    Graph._applyContextSettings(this._indicatorCanvas, this._indicatorCtx);
   
     // set graph title
     document.getElementById("graph-title").innerHTML = "Glue";
+    
+    this.emphasizeLowestQuantity();
   } // if not unit testing
 } // Graph constructor
 
@@ -77,6 +83,8 @@ Graph.NUM_GAPS_X = Graph.NUM_TICKS_X + 1;
 Graph.NUM_GAPS_Y = Graph.NUM_TICKS_Y + 1;
 Graph.TICK_LENGTH = 10;
 Graph.HALF_TICK = Graph.TICK_LENGTH / 2;
+
+Graph.DASH_LENGTH = 10;
 
 Graph.LABEL_OFFSET = 20; // how far label is from respective axis
 
@@ -180,6 +188,32 @@ Graph.prototype = {
     else
       return sHigh;
   }, // calculateHighestQuantity()
+  
+  /**
+   * Emphasizes where the lowest quantity used for calculations
+   * is on the canvas (with a dashed line).
+   */
+  emphasizeLowestQuantity : function() {
+    this._indicatorCtx.moveTo(this._lowestQuantity *
+      this._indicatorCanvas.width, 0);
+    var isDrawingDash = true;
+    
+    for (var y = 0; y < this._indicatorCanvas.height;
+      y += Graph.DASH_LENGTH) {
+      if (isDrawingDash) {
+        this._indicatorCtx.lineTo(this._lowestQuantity *
+          this._indicatorCanvas.width, Graph.MAX_Y * y);
+      }
+      else { // not drawing dash
+        this._indicatorCtx.moveTo(this._lowestQuantity *
+          this._indicatorCanvas.width, Graph.MAX_Y * y);
+      }
+      
+      isDrawingDash = !isDrawingDash;
+    }
+      
+    this._indicatorCtx.stroke();
+  }, // emphasizeLowestQuantity()
   
   getTotalRevenue : function() {
     return this._eqPoint.x * this._eqPoint.y;

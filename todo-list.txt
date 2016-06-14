@@ -1,11 +1,10 @@
 Next:
 -indicate to the user where calculations occur; ideas on how:
-  -to say start: have dashed line as left boundary (and maybe at
-  equilibrium)
   -to say end; ideas:
     -say somewhere that the first point of intersection is used as
     the equilibrium point
     -emphasize first equilibrium point with big dot
+    -emphasize 1st equilibrium with dashed line
 -see the section below about inputs that change S or D; plan ahead
 -remaining calculations:
   -open, private economy
