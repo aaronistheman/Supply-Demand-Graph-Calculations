@@ -1,19 +1,68 @@
 Next:
--see the section below about inputs that change S or D; plan ahead
--remaining calculations:
+-perhaps add QD and QS (under a Quantities panel) and a part that
+says "Shortage or Surplus?"; (update the below actions that affect these)
+-remaining calculations/actions:
   -open, private economy
+    -based on world price:
+      -number of imports
+      -location of "active supply"
   -closed, public economy
+    -(excise) tax or subsidy on supply:
+      -location of "active supply"
+      -recalculate:
+        -equilibrium
+        -total revenue
+        -welfare
+      -calculate
+        -tax revenue
+        -deadweight loss
+    -(excise) tax or subsidy on demand:
+      -location of "active demand"
+      -recalculate:
+        -equilibrium
+        -welfare
+      -calculate
+        -tax revenue
+        -deadweight loss
+    -price mechanism:
+      -dashed line for where mechanism is
+      -floor or ceiling:
+        -recalculate (if equilibrium isn't reached):
+          -mark that equilibrium isn't reached
+          -total revenue
+          -welfare
+        -calculate
+          -deadweight loss
   -open, public economy
+    -tariff
+      -recalculate:
+        -welfare
+      -calculate:
+        -deadweight loss (in an unexpected area)
+        -number of imports
+        -tariff revenue
+    -import quota
+      -recalculate:
+        -welfare
+      -calculate:
+        -deadweight loss (in an unexpected area)
+        -number of imports (given)
+        -tariff revenue N/A
+-regarding inputs that change S or D
+  -if D or S is changed (besides by the addition of a point),
+  keep the original D and S, and somehow indicate
+  the new D or new S; ideas on how:
+    -different colors
+  -change total revenue to use quantity demanded, not just equilibrium
+  quantity
+  -ideas regarding how to get the magnitude of the user's changes:
+    -have a submit/update button
+    -have a popup
+    -have the user put it in the data read from file
 -graph/input warnings/errors
   -if any calculation's integration goes past the final data point
   of the graph whose final data point's x-coordinate is lowest,
   then the graphs don't interact, and this should be said
--regarding inputs that change S or D
-  -if D or S is changed (besides by the addition of a point),
-  keep the original D and S, and somehow indicate
-  the new D or new S
-  -change total revenue to use quantity demanded, not just equilibrium
-  quantity
 -pick a way to get user's input to make the graph;
   -ideas regarding how to get the input:
     -have user paste them in certain format in text field
@@ -25,20 +74,15 @@ Next:
     -report error if no semi-colon where expected one
 
 Eventually:
+-use AngularJS to note errorneous text field inputs
+  -e.g .price floor or ceiling has to matter
+
+Considerable:
+-look into AJAX, just in case it can help somehow
 -allow graphing of firm or aggregate
   -could use AngularJS if possible
   -could change the fields shown (in response to what the user wants
   to graph) (perhaps with AJAX or PHP or ASP or something)
--use AngularJS to note errorneous text field inputs
-  -e.g .price floor or ceiling has to matter
--option to hi-lite deadweight loss (and maybe even each surplus) on graph
--look into AJAX, just in case it can help somehow
--think of where can apply CSS, filters, and other features from AngularJS
-tutorial I forgot about
--have "enumerators" for number of "ticks" (i.e. precision?)
-  -e.g. thousandths, hundredths
-
-Considerable:
 -when hover over some measurement (e.g. producer surplus), hi lite
 (on a separate canvas in the stack) the regarded region
 -can probably afford to lower number of Riemann rectangles
