@@ -44,15 +44,10 @@ $(document).ready(function() {
       $("#qd").html(Math.round(eq.x));
       $("#qs").html(Math.round(eq.x));
     }
+    
+    $("#b-world-p").click(function() {
+      var newWp = $("#world-p").val();
+      alert(newWp);
+    });
   } // if not unit testing
 }); // document ready function
-
-function updateWorldPrice() {
-  var newWp = $("#world-p").val();
-  alert(newWp);
-  
-  // Some pseudocode:
-  // find the associated text field, perhaps as a parameter
-  // update the appropriate values
-  // perform the appropriate recalculations
-}
