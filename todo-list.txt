@@ -1,13 +1,37 @@
 Next:
--probably apply more jQuery
+-determine how to get the magnitude of the user's changes; ideas:
+  -THIS: have a submit/update (JavaScript-coded) button by each text field
+    -for now, use alerts to show the data was read
+  -have a popup
+  -have the user put it in the data read from file
+-remaining calculations; see Note #1
+  -perhaps have an EconomicData object
+  -probably apply more jQuery
+  -change total revenue to use quantity demanded, not just equilibrium
+  quantity
+
+Note #1:
 -remaining calculations/actions:
   -open, private economy
     -based on world price:
+      -draw dashed line where world price is
+      -recalculate:
+        -if world price is below equilibrium price:
+          -qd; ideas on how:
+            -with some number of ticks, start at equilibrium point,
+            and go forward until become lower than world price, at which
+            point the method would stop and return the current quantity
+          -qs; ideas on how:
+            -opposite of qd, but go back from equilibrium point
+        -else:
+          -I never learned what's supposed to happen, so do nothing
+          and note this on the readme
       -number of imports
-      -location of "active supply"
   -closed, public economy
     -(excise) tax or subsidy on supply:
       -location of "active supply"
+        -somehow indicate the new D or new S; ideas on how:
+          -different colors
       -recalculate:
         -equilibrium
         -total revenue
@@ -47,34 +71,25 @@ Next:
         -deadweight loss (in an unexpected area)
         -number of imports (given)
         -tariff revenue N/A
--regarding inputs that change S or D
-  -if D or S is changed (besides by the addition of a point),
-  keep the original D and S, and somehow indicate
-  the new D or new S; ideas on how:
-    -different colors
-  -change total revenue to use quantity demanded, not just equilibrium
-  quantity
-  -ideas regarding how to get the magnitude of the user's changes:
-    -have a submit/update button
-    -have a popup
-    -have the user put it in the data read from file
--graph/input warnings/errors
-  -if any calculation's integration goes past the final data point
-  of the graph whose final data point's x-coordinate is lowest,
-  then the graphs don't interact, and this should be said
--pick a way to get user's input to make the graph;
-  -ideas regarding how to get the input:
-    -have user paste them in certain format in text field
-    -read from file, if possible with just JavaScript/jQuery
-  -ideas regarding the input itself:
-    -perhaps have it be specified there what is being graphed
-    -get the maxes from the inputs
-  -ideas regarding input-checking:
-    -report error if no semi-colon where expected one
 
 Eventually:
+-graph input
+  -pick a way to get user's input to make the graph;
+    -ideas regarding how to get the input:
+      -have user paste them in certain format in text field
+      -read from file, if possible with just JavaScript/jQuery
+    -ideas regarding the input itself:
+      -perhaps have it be specified there what is being graphed
+      -get the maxes from the inputs
+  -graph/input warnings/errors
+    -if any calculation's integration goes past the final data point
+    of the graph whose final data point's x-coordinate is lowest,
+    then the graphs don't interact, and this should be said
+    -report error if no semi-colon where expected one
 -use AngularJS to note errorneous text field inputs
-  -e.g .price floor or ceiling has to matter
+  -e.g. price floor or ceiling has to matter
+-(if not done yet) clean up script.js
+-mention the format of the input strings in readme
 
 Considerable:
 -look into AJAX, just in case it can help somehow
