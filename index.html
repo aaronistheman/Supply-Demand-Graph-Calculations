@@ -57,7 +57,7 @@
       <p>Closed economy: <input type="checkbox" data-ng-model="isClosed" /></p>
       <div data-ng-if="!isClosed">
         <p>World price: $<input type="number" name="world-p" />
-          <input type="button" value="Update" />
+          <input type="button" value="Update" onclick="update('worldPrice')" />
           </p>
         <p>Number of imports: <span id="imports"></span></p>
       </div>

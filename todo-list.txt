@@ -1,9 +1,4 @@
 Next:
--determine how to get the magnitude of the user's changes; ideas:
-  -have a submit/update (JavaScript-coded) button by each text field
-    -use form-less HTML button, with onclick method
-      -for now, use alerts to show the data was read
-    -fix controller default
 -remaining calculations; see Note #1
   -perhaps have an EconomicData object
   -probably apply more jQuery
