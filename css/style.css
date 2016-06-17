@@ -4,9 +4,6 @@
 
 #wrapper {
   position: relative;
-  /* width: 1000px; */
-  /* height: 2000px; */
-  /* overflow: hidden; */
 }
 
 #wrapper > * {
@@ -45,7 +42,3 @@ canvas#axes-graph {
 .panel p {
   margin: 0px;
 }
-
-/*.panel p:first-child {
-  font-weight: bold;
-}*/

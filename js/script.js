@@ -46,3 +46,13 @@ $(document).ready(function() {
     }
   } // if not unit testing
 }); // document ready function
+
+function update(message) {
+  // Will eventually be implemented in a more appropriate way
+  alert(message);
+  
+  // Some pseudocode:
+  // find the associated text field, perhaps as a parameter
+  // update the appropriate values
+  // perform the appropriate recalculations
+}
