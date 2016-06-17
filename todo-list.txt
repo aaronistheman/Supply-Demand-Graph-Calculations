@@ -1,6 +1,5 @@
 Next:
--perhaps add QD and QS (under a Quantities panel) and a part that
-says "Shortage or Surplus?"; (update the below actions that affect these)
+-probably apply more jQuery
 -remaining calculations/actions:
   -open, private economy
     -based on world price:

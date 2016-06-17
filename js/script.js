@@ -1,5 +1,11 @@
 "use strict";
 
+var STATE = {
+  EQUILIBRIUM : "Equilibrium",
+  SHORTAGE : "Shortage",
+  SURPLUS : "Surplus",
+};
+
 $(document).ready(function() {
   if (!isUnitTesting()) {
     // Hardcoded data; eventually read from file
@@ -31,5 +37,12 @@ $(document).ready(function() {
     var es = cs + ps;
     document.getElementById("eco-s").innerHTML =
       (Math.round(es * 100) / 100).toFixed(2);
+    
+    var state = STATE.EQUILIBRIUM;
+    $("#state").html(state);
+    if (state == STATE.EQUILIBRIUM) {
+      $("#qd").html(Math.round(eq.x));
+      $("#qs").html(Math.round(eq.x));
+    }
   } // if not unit testing
 }); // document ready function
