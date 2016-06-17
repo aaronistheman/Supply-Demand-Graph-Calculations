@@ -1,5 +1,6 @@
 Next:
--remaining calculations; see Note #1
+-remaining calculations; see Note #1; One thing I overlooked is that
+each value may have to be recalculated if previous settings are overridden
   -perhaps have an EconomicData object
   -probably apply more jQuery
   -change total revenue to use quantity demanded, not just equilibrium
@@ -18,6 +19,7 @@ Note #1:
             point the method would stop and return the current quantity
           -qs; ideas on how:
             -opposite of qd, but go back from equilibrium point
+          -state isn't equilibrium
         -else:
           -I never learned what's supposed to happen, so do nothing
           and note this on the readme
@@ -34,7 +36,7 @@ Note #1:
       -calculate
         -tax revenue
         -deadweight loss
-    -(excise) tax or subsidy on demand:
+    -(sales?) tax or subsidy on demand:
       -location of "active demand"
       -recalculate:
         -equilibrium

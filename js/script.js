@@ -47,9 +47,9 @@ $(document).ready(function() {
   } // if not unit testing
 }); // document ready function
 
-function update(message) {
-  // Will eventually be implemented in a more appropriate way
-  alert(message);
+function updateWorldPrice() {
+  var newWp = $("#world-p").val();
+  alert(newWp);
   
   // Some pseudocode:
   // find the associated text field, perhaps as a parameter
