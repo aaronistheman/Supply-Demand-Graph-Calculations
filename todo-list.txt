@@ -1,7 +1,6 @@
 Next:
 -remaining calculations; see Note #1; One thing I overlooked is that
 each value may have to be recalculated if previous settings are overridden
-  -perhaps have an EconomicData object
   -change total revenue to use quantity demanded, not just equilibrium
   quantity
 
@@ -9,7 +8,6 @@ Note #1:
 -remaining calculations/actions:
   -open, private economy
     -based on world price:
-      -draw dashed line where world price is
       -recalculate:
         -if world price is below equilibrium price:
           -qd; ideas on how:

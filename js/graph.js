@@ -39,28 +39,14 @@ function Graph(supplyDataString, demandDataString) {
   
   this._eqPoint = this.calculateEquilibriumPoint();
   
+  this._wp = undefined;
+  
   // Stuff that involves a webpage and are not needed by unit test
   if (!isUnitTesting()) {
-    this._supplyCanvas = document.getElementById("supply-graph");
-    this._supplyCtx = this._supplyCanvas.getContext('2d');
-    Graph._applyContextSettings(this._supplyCanvas, this._supplyCtx);
-
-    this._demandCanvas = document.getElementById("demand-graph");
-    this._demandCtx = this._demandCanvas.getContext('2d');
-    Graph._applyContextSettings(this._demandCanvas, this._demandCtx);
-  
-    this._axesCanvas = document.getElementById("axes-graph");
-    this._axesCtx = this._axesCanvas.getContext('2d');
-    this._axesCtx.translate(Graph.EDGE_OFFSET_X,
-      this._axesCanvas.height - Graph.EDGE_OFFSET_Y);
-    this._axesCtx.scale(1, -1);
-    
-    this._indicatorCanvas = document.getElementById("graph-indicators");
-    this._indicatorCtx = this._indicatorCanvas.getContext('2d');
-    Graph._applyContextSettings(this._indicatorCanvas, this._indicatorCtx);
+    this._setUpCanvases();
   
     // set graph title
-    document.getElementById("graph-title").innerHTML = "Glue";
+    $("#graph-title").html("Glue");
     
     this.emphasizeLowestQuantity();
     this.emphasizeEquilibriumQuantity();
@@ -134,7 +120,8 @@ Graph._readFunctionData = function(func, dataString) {
 }; // readFunctionData()
 
 /**
- * This method is needed because of the context offset
+ * This method is needed because of the context offset.
+ * @pre the cleared canvas has been set up with Graph._applyContextSettings()
  */
 Graph._clearCanvas = function(canvas, ctx) {
   ctx.beginPath();
@@ -153,6 +140,44 @@ Graph.prototype = {
   getEquilibriumPoint : function() {
     return this._eqPoint;
   },
+  
+  setWp : function(newWp) {
+    this._wp = newWp;
+  },
+  
+  redrawWorldPriceLine : function() {
+    Graph._clearCanvas(this._wpCanvas, this._wpCtx);
+    
+    var ctx = this._wpCtx;
+    var y = this._wp * this._wpCanvas.height;
+    ctx.moveTo(0, y);
+    ctx.lineTo(Graph.MAX_X * this._wpCanvas.width, y);
+    ctx.stroke();
+  },
+  
+  _setUpCanvases : function() {
+    this._supplyCanvas = $("#supply-graph")[0];
+    this._supplyCtx = this._supplyCanvas.getContext('2d');
+    Graph._applyContextSettings(this._supplyCanvas, this._supplyCtx);
+
+    this._demandCanvas = $("#demand-graph")[0];
+    this._demandCtx = this._demandCanvas.getContext('2d');
+    Graph._applyContextSettings(this._demandCanvas, this._demandCtx);
+  
+    this._axesCanvas = $("#axes-graph")[0];
+    this._axesCtx = this._axesCanvas.getContext('2d');
+    this._axesCtx.translate(Graph.EDGE_OFFSET_X,
+      this._axesCanvas.height - Graph.EDGE_OFFSET_Y);
+    this._axesCtx.scale(1, -1);
+    
+    this._indicatorCanvas = $("#graph-indicators")[0];
+    this._indicatorCtx = this._indicatorCanvas.getContext('2d');
+    Graph._applyContextSettings(this._indicatorCanvas, this._indicatorCtx);
+    
+    this._wpCanvas = $("#wp-canvas")[0];
+    this._wpCtx = this._wpCanvas.getContext('2d');
+    Graph._applyContextSettings(this._wpCanvas, this._wpCtx);
+  }, // setUpCanvases()
   
   /**
    * @returns the lowest quantity that can be used for calculations

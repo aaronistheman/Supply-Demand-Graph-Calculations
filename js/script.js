@@ -41,8 +41,27 @@ $(document).ready(function() {
     }
     
     $("#b-world-p").click(function() {
-      var newWp = $("#world-p").val();
-      alert(newWp);
+      alert("redrawing");
+      
+      graph.setWp($("#world-p").val());
+      
+      // redraw line
+      graph.redrawWorldPriceLine();
+      
+      // qd
+      
+      
+      // qs
+      
+      
+      // state
+      
+      
+      // number of imports
+      
+      
+      // probably save the new wp somehow
+      
     });
   } // if not unit testing
 }); // document ready function
