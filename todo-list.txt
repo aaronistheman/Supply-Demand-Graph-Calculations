@@ -1,9 +1,9 @@
 Next:
 -determine how to get the magnitude of the user's changes; ideas:
-  -THIS: have a submit/update (JavaScript-coded) button by each text field
+  -have a submit/update (JavaScript-coded) button by each text field
     -for now, use alerts to show the data was read
-  -have a popup
-  -have the user put it in the data read from file
+    -perhaps override the HTML button, so user can tab to it
+    -fix controller default
 -remaining calculations; see Note #1
   -perhaps have an EconomicData object
   -probably apply more jQuery
@@ -108,3 +108,5 @@ CSS in one of the card games
   -could use JavaScript/jQuery and, when ng-if creates an element,
   somehow react to the change to give the appropriate input fields
   their former values
+-limit each text field's size
+  -or would this require too much assuming about the data
