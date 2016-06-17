@@ -2,7 +2,6 @@ Next:
 -remaining calculations; see Note #1; One thing I overlooked is that
 each value may have to be recalculated if previous settings are overridden
   -perhaps have an EconomicData object
-  -probably apply more jQuery
   -change total revenue to use quantity demanded, not just equilibrium
   quantity
 
