@@ -166,14 +166,29 @@ Graph.prototype = {
    * Other methods
    */
 
+  /**
+   * @return the quantity demanded at the current world price
+   */
   determineWorldQD : function() {
-    /*
-    -with some number of ticks, start at equilibrium point,
-            and go forward until become lower than world price, at which
-            point the method would stop and return the current quantity
-    */
+    if (this._wp < this._dPoints[this._dPoints.length - 1].y)
+      alertAndThrowException("World price causes extrapolation " +
+        "on demand data")
 
+    var range = this._highestQuantity - this._eqPoint.x;
+    var step = range / Graph.NUM_RECTANGLES;
+    var x = this._eqPoint.x;
+    var price = this._demand.getY(x);
     
+    // Go forward from equilibrium point until price would become
+    // lower than world price (or end is reached),
+    // at which point the method would stop and return the current quantity
+    while (price > this._wp) {
+      // advance
+      x += step;
+      price = this._demand.getY(x);
+    }
+    
+    return x;
   },
 
   determineWorldQS : function() {

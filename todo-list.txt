@@ -2,6 +2,7 @@ Next:
 -determineWorldQD()
   -write test
   -implement
+  -draw dashed line at highest quantity
 -determineWorldQS()
   -write test
   -implement
@@ -87,6 +88,7 @@ Eventually:
     of the graph whose final data point's x-coordinate is lowest,
     then the graphs don't interact, and this should be said
     -report error if no semi-colon where expected one
+    -if world price causes a quantity to go beyond lowest or highest
 -use AngularJS to note errorneous text field inputs
   -e.g. price floor or ceiling has to matter
 -(if not done yet) clean up script.js
