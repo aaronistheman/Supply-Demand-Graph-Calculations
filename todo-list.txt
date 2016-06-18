@@ -1,11 +1,4 @@
 Next:
--determineWorldQD()
-  -write test
-  -implement
-  -draw dashed line at highest quantity
--determineWorldQS()
-  -write test
-  -implement
 -remaining calculations; see Note #1
   -One thing I overlooked is that
   each value may have to be recalculated if previous settings are overridden
@@ -20,14 +13,13 @@ Note #1:
     -based on world price:
       -recalculate:
         -if world price is below equilibrium price:
-          -qd; ideas on how:
-            -with some number of ticks, start at equilibrium point,
-            and go forward until become lower than world price, at which
-            point the method would stop and return the current quantity
-          -qs; ideas on how:
-            -opposite of qd, but go back from equilibrium point
-          -state isn't equilibrium
-      -number of imports
+          -update webpage:
+            -qd
+            -qs
+            -state isn't equilibrium
+            -number of imports
+        -else:
+          -some notification (that directs the user to the readme)
   -closed, public economy
     -(excise) tax or subsidy on supply:
       -location of "active supply"
@@ -113,3 +105,5 @@ CSS in one of the card games
   their former values
 -limit each text field's size
   -or would this require too much assuming about the data
+-have workarounds for calculations that reach the boundaries of the
+supply or demand points
