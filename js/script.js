@@ -40,17 +40,14 @@ $(document).ready(function() {
       $("#qs").html(Math.round(eq.x));
     }
     
-    $("#b-world-p").click(function() {
-      alert("redrawing");
-      
+    $("#b-world-p").click(function() { // if changing world price
       var wp = $("#world-p").val();
-      graph.setWp(wp);
-      
-      // redraw line
-      graph.redrawWorldPriceLine();
       
       if (wp < eq.y) {
-        alert("wp < eq.y");
+        graph.setWp(wp);
+        
+        // redraw line
+        graph.redrawWorldPriceLine();
         
         var qd = Math.round(graph.getQd());
         $("#qd").html(qd);
@@ -63,6 +60,13 @@ $(document).ready(function() {
         // number of imports
         $("#imports").html(qd - qs);
       }
-    });
+      else {
+        alert("Because the developer wasn't particularly " +
+          "knowledgeable about economics, a set world " +
+          "price must be below the equilibrium price. His apologies.");
+      }
+    }); // if changing world price
+    
+    
   } // if not unit testing
 }); // document ready function

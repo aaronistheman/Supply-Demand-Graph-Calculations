@@ -10,12 +10,6 @@ Next:
 Note #1:
 -remaining calculations/actions:
   -open, private economy
-    -based on world price:
-      -recalculate:
-        -if world price is below equilibrium price:
-          -just did this
-        -else:
-          -some notification (that directs the user to the readme)
     -disabling should set qd and qs to domestic equilibrium quantity
     and perhaps world price to undefined
   -closed, public economy
