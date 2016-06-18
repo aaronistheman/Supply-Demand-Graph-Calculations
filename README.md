@@ -3,16 +3,26 @@
 About
 -----
 
-This web-based personal project will allow the user to graph supply and
+This web-based personal project allos the user to graph supply and
 demand
-for the products of a firm, an industry, or a country. The user will also
+for the products of an industry. The user will also
 be able to apply settings (e.g. an excise tax) and to see calculations
 (e.g. consumer surplus, deadweight loss).
-
 I am working on it during the March and (after a delay) June of 2016,
 towards the end of my first year at UC Davis.
 
 I will make it with HTML, CSS, JavaScript, jQuery, AngularJS, and QUnit.
+
+All that I currently know about economics is from two AP Economics classes
+I took a year ago in high school. Thus, there are certain situations in
+which I suspect I did not do the right thing. (e.g. Setting the world
+price above the domestic equilibrium price does nothing in the program.
+However, regarding real life, I suspect that
+doing so could increase domestic supply, but this scenario was not
+covered in the AP curriculum.)
+
+Admittedly, the code is a little messy, mainly because I let the Graph
+custom type become too big.
 
 Features
 --------

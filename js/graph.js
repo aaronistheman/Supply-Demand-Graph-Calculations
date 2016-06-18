@@ -38,8 +38,10 @@ function Graph(supplyDataString, demandDataString) {
   this._highestQuantity = this.calculateHighestQuantity();
   
   this._eqPoint = this.calculateEquilibriumPoint();
+  this._qd = this._eqPoint.x;
+  this._qs = this._eqPoint.x;
   
-  this._wp = undefined;
+  this._wp = undefined; // world price
   
   // Stuff that involves a webpage and are not needed by unit test
   if (!isUnitTesting()) {
@@ -137,12 +139,50 @@ Graph._clearCanvas = function(canvas, ctx) {
 Graph.prototype = {
   constructor : Graph,
   
+  /**
+   * Accessors and mutators
+   */
+  
   getEquilibriumPoint : function() {
     return this._eqPoint;
   },
   
   setWp : function(newWp) {
     this._wp = newWp;
+    
+    if (!isUnitTesting())
+      this._updateWorldQuantities();
+  },
+  
+  getQd : function() {
+    return this._qd;
+  },
+  
+  getQs : function() {
+    return this._qs;
+  },
+  
+  /**
+   * Other methods
+   */
+
+  determineWorldQD : function() {
+    /*
+    -with some number of ticks, start at equilibrium point,
+            and go forward until become lower than world price, at which
+            point the method would stop and return the current quantity
+    */
+
+    
+  },
+
+  determineWorldQS : function() {
+
+  },
+  
+  _updateWorldQuantities : function() {
+    // this._qd = this.determineWorldQD();
+    // this._qs = this.determineWorldQS();
   },
   
   redrawWorldPriceLine : function() {

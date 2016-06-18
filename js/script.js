@@ -43,25 +43,28 @@ $(document).ready(function() {
     $("#b-world-p").click(function() {
       alert("redrawing");
       
-      graph.setWp($("#world-p").val());
+      var wp = $("#world-p").val();
+      graph.setWp(wp);
       
       // redraw line
       graph.redrawWorldPriceLine();
       
-      // qd
-      
-      
-      // qs
-      
-      
-      // state
-      
-      
-      // number of imports
-      
-      
-      // probably save the new wp somehow
-      
+      if (wp < eq.y) {
+        alert("wp < eq.y");
+        
+        // qd
+        
+        
+        // qs
+        
+        
+        // state
+        
+        
+        // number of imports
+        
+        
+      }
     });
   } // if not unit testing
 }); // document ready function

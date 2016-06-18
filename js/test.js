@@ -168,7 +168,7 @@ QUnit.module(currentTestedFile + ", getConsumerSurplus()")
     assert.deepEqual(cs, 23.50); // hand-calculated
   });
 
-QUnit.module(currentTestedFile + ", getProducerSurplus()")
+QUnit.module(currentTestedFile + ", getProducerSurplus()");
 
   QUnit.test("correct value", function(assert) {
     var graph = new Graph(
@@ -186,4 +186,26 @@ QUnit.module(currentTestedFile + ", getProducerSurplus()")
       
     var ps = Math.round(graph.getProducerSurplus() * 100) / 100;
     assert.deepEqual(ps, 16.00); // hand-calculated
+  });
+
+QUnit.module(currentTestedFile + ", determineWorldQD()");
+
+  QUnit.test("correct value is a given quantity", function(assert) {
+    var graph = new Graph(
+      "8 80; 10 100; 12 120; 13 130",
+      "8 120; 10 100; 12 80; 13 70");
+    
+    graph.setWp(80);
+    var result = Math.round(graph.determineWorldQD());
+    assert.deepEqual(result, 12); // correct value is from a point on the graph
+  });
+
+  QUnit.test("correct value isn't a given quantity", function(assert) {
+    var graph = new Graph(
+      "40 1; 60 1.50;",
+      "40 1.50; 60 1.00; 100 0.50");
+    
+    graph.setWp(0.75);
+    var result = Math.round(graph.determineWorldQD());
+    assert.deepEqual(result, 80); // correct value isn't from a point
   });
