@@ -38,29 +38,17 @@ function Graph(supplyDataString, demandDataString) {
   this._highestQuantity = this.calculateHighestQuantity();
   
   this._eqPoint = this.calculateEquilibriumPoint();
+  this._qd = this._eqPoint.x;
+  this._qs = this._eqPoint.x;
+  
+  this._wp = undefined; // world price
   
   // Stuff that involves a webpage and are not needed by unit test
   if (!isUnitTesting()) {
-    this._supplyCanvas = document.getElementById("supply-graph");
-    this._supplyCtx = this._supplyCanvas.getContext('2d');
-    Graph._applyContextSettings(this._supplyCanvas, this._supplyCtx);
-
-    this._demandCanvas = document.getElementById("demand-graph");
-    this._demandCtx = this._demandCanvas.getContext('2d');
-    Graph._applyContextSettings(this._demandCanvas, this._demandCtx);
-  
-    this._axesCanvas = document.getElementById("axes-graph");
-    this._axesCtx = this._axesCanvas.getContext('2d');
-    this._axesCtx.translate(Graph.EDGE_OFFSET_X,
-      this._axesCanvas.height - Graph.EDGE_OFFSET_Y);
-    this._axesCtx.scale(1, -1);
-    
-    this._indicatorCanvas = document.getElementById("graph-indicators");
-    this._indicatorCtx = this._indicatorCanvas.getContext('2d');
-    Graph._applyContextSettings(this._indicatorCanvas, this._indicatorCtx);
+    this._setUpCanvases();
   
     // set graph title
-    document.getElementById("graph-title").innerHTML = "Glue";
+    $("#graph-title").html("Glue");
     
     this.emphasizeLowestQuantity();
     this.emphasizeEquilibriumQuantity();
@@ -134,7 +122,8 @@ Graph._readFunctionData = function(func, dataString) {
 }; // readFunctionData()
 
 /**
- * This method is needed because of the context offset
+ * This method is needed because of the context offset.
+ * @pre the cleared canvas has been set up with Graph._applyContextSettings()
  */
 Graph._clearCanvas = function(canvas, ctx) {
   ctx.beginPath();
@@ -150,9 +139,135 @@ Graph._clearCanvas = function(canvas, ctx) {
 Graph.prototype = {
   constructor : Graph,
   
+  /**
+   * Accessors and mutators
+   */
+  
   getEquilibriumPoint : function() {
     return this._eqPoint;
   },
+  
+  /**
+   * Sets world price, but also updates quantities.
+   */
+  setWp : function(newWp) {
+    this._wp = newWp;
+    
+    if (!isUnitTesting()) {
+      if (this._wp !== undefined)
+        this._updateWorldQuantities();
+      else {
+        this._eqPoint = this.calculateEquilibriumPoint();
+        this._qd = this._qs = this._eqPoint.x;
+      }
+    }
+  },
+  
+  getQd : function() {
+    return this._qd;
+  },
+  
+  getQs : function() {
+    return this._qs;
+  },
+  
+  /**
+   * Other methods
+   */
+
+  /**
+   * @return the quantity demanded at the current world price
+   */
+  determineWorldQD : function() {
+    if (this._wp < this._dPoints[this._dPoints.length - 1].y)
+      alertAndThrowException("World price causes extrapolation " +
+        "on demand data")
+
+    var range = this._dPoints[this._dPoints.length - 1].x - this._eqPoint.x;
+    var step = range / Graph.NUM_RECTANGLES;
+    var x = this._eqPoint.x;
+    var price = this._demand.getY(x);
+    
+    // Go forward from equilibrium point until price would become
+    // lower than world price,
+    // at which point the method would stop and return the current quantity
+    while (price > this._wp) {
+      // advance
+      x += step;
+      price = this._demand.getY(x);
+    }
+    
+    return x;
+  },
+
+  /**
+   * @return the quantity supplied at the current world price
+   */
+  determineWorldQS : function() {
+    if (this._wp < this._sPoints[0].y)
+      alertAndThrowException("World price causes extrapolation " +
+        "on supply data")
+
+    var range = this._eqPoint.x - this._sPoints[0].x;
+    var step = range / Graph.NUM_RECTANGLES;
+    var x = this._eqPoint.x;
+    var price = this._supply.getY(x);
+    
+    // Go backward from equilibrium point until price would become
+    // lower than world price,
+    // at which point the method would stop and return the current quantity
+    while (price > this._wp) {
+      // advance
+      x -= step;
+      price = this._supply.getY(x);
+    }
+    
+    return x;
+  },
+  
+  _updateWorldQuantities : function() {
+    this._qd = this.determineWorldQD();
+    this._qs = this.determineWorldQS();
+  },
+  
+  /**
+   * Server as eraser method if world price is undefined
+   */
+  redrawWorldPriceLine : function() {
+    Graph._clearCanvas(this._wpCanvas, this._wpCtx);
+  
+    if (this._wp !== undefined) {
+      var ctx = this._wpCtx;
+      var y = this._wp * this._wpCanvas.height;
+      ctx.moveTo(0, y);
+      ctx.lineTo(Graph.MAX_X * this._wpCanvas.width, y);
+      ctx.stroke();
+    }
+  },
+  
+  _setUpCanvases : function() {
+    this._supplyCanvas = $("#supply-graph")[0];
+    this._supplyCtx = this._supplyCanvas.getContext('2d');
+    Graph._applyContextSettings(this._supplyCanvas, this._supplyCtx);
+
+    this._demandCanvas = $("#demand-graph")[0];
+    this._demandCtx = this._demandCanvas.getContext('2d');
+    Graph._applyContextSettings(this._demandCanvas, this._demandCtx);
+  
+    this._axesCanvas = $("#axes-graph")[0];
+    this._axesCtx = this._axesCanvas.getContext('2d');
+    this._axesCtx.translate(Graph.EDGE_OFFSET_X,
+      this._axesCanvas.height - Graph.EDGE_OFFSET_Y);
+    this._axesCtx.scale(1, -1);
+    
+    this._indicatorCanvas = $("#graph-indicators")[0];
+    this._indicatorCtx = this._indicatorCanvas.getContext('2d');
+    Graph._applyContextSettings(this._indicatorCanvas, this._indicatorCtx);
+    
+    this._wpCanvas = $("#wp-canvas")[0];
+    this._wpCtx = this._wpCanvas.getContext('2d');
+    Graph._applyContextSettings(this._wpCanvas, this._wpCtx);
+  }, // setUpCanvases()
   
   /**
    * @returns the lowest quantity that can be used for calculations

@@ -18,25 +18,20 @@ $(document).ready(function() {
     graph.redrawDemand();
     
     var eq = graph.getEquilibriumPoint();
-    document.getElementById("eq-q").innerHTML = Math.round(eq.x);
-    document.getElementById("eq-p").innerHTML =
-      (Math.round(eq.y * 100) / 100).toFixed(2);
+    $("#eq-q").html(Math.round(eq.x));
+    $("#eq-p").html((Math.round(eq.y * 100) / 100).toFixed(2));
     
     var tr = graph.getTotalRevenue();
-    document.getElementById("total-rev").innerHTML =
-      (Math.round(tr * 100) / 100).toFixed(2);
+    $("#total-rev").html((Math.round(tr * 100) / 100).toFixed(2));
       
     var cs = graph.getConsumerSurplus();
-    document.getElementById("con-s").innerHTML =
-      (Math.round(cs * 100) / 100).toFixed(2);
+    $("#con-s").html((Math.round(cs * 100) / 100).toFixed(2));
     
     var ps = graph.getProducerSurplus();
-    document.getElementById("pro-s").innerHTML =
-      (Math.round(ps * 100) / 100).toFixed(2);
+    $("#pro-s").html((Math.round(ps * 100) / 100).toFixed(2));
     
     var es = cs + ps;
-    document.getElementById("eco-s").innerHTML =
-      (Math.round(es * 100) / 100).toFixed(2);
+    $("#eco-s").html((Math.round(es * 100) / 100).toFixed(2));
     
     var state = STATE.EQUILIBRIUM;
     $("#state").html(state);
@@ -44,15 +39,47 @@ $(document).ready(function() {
       $("#qd").html(Math.round(eq.x));
       $("#qs").html(Math.round(eq.x));
     }
+    
+    $("#b-world-p").click(function() { // if changing world price
+      var wp = $("#world-p").val();
+      
+      if (wp < eq.y) {
+        graph.setWp(wp);
+        graph.redrawWorldPriceLine();
+        
+        var qd = Math.round(graph.getQd());
+        $("#qd").html(qd);
+        var qs = Math.round(graph.getQs());
+        $("#qs").html(qs);
+        
+        state = STATE.SHORTAGE;
+        $("#state").html(state);
+        
+        // number of imports
+        $("#imports").html(qd - qs);
+      }
+      else {
+        alert("Because the developer wasn't particularly " +
+          "knowledgeable about economics, a set world " +
+          "price must be below the equilibrium price. His apologies.");
+      }
+    }); // if changing world price
+    
+    $("#closed-open-checkbox").change(function() { // if toggling checkbox
+      if (this.checked) { // if closing economy
+        graph.setWp(undefined);
+        graph.redrawWorldPriceLine();
+        
+        var qd = Math.round(graph.getQd());
+        $("#qd").html(qd);
+        var qs = Math.round(graph.getQs());
+        $("#qs").html(qs);
+        
+        state = STATE.EQUILIBRIUM;
+        $("#state").html(state);
+        $("#imports").html(0);
+      }
+    }); // if toggling closed/open checkbox
+    
   } // if not unit testing
 }); // document ready function
-
-function update(message) {
-  // Will eventually be implemented in a more appropriate way
-  alert(message);
-  
-  // Some pseudocode:
-  // find the associated text field, perhaps as a parameter
-  // update the appropriate values
-  // perform the appropriate recalculations
-}

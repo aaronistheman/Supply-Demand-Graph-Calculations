@@ -1,32 +1,23 @@
 Next:
+-STOP AND PLAN; DON'T RUSH; consider reorganizing the project
 -remaining calculations; see Note #1
-  -perhaps have an EconomicData object
-  -probably apply more jQuery
+  -One thing I overlooked is that
+  each value may have to be recalculated if previous settings are overridden
+  (e.g. Closed Economy checkbox is turned on)
   -change total revenue to use quantity demanded, not just equilibrium
   quantity
+-perhaps organize the methods by separating with comment blocks
 
 Note #1:
 -remaining calculations/actions:
-  -open, private economy
-    -based on world price:
-      -draw dashed line where world price is
-      -recalculate:
-        -if world price is below equilibrium price:
-          -qd; ideas on how:
-            -with some number of ticks, start at equilibrium point,
-            and go forward until become lower than world price, at which
-            point the method would stop and return the current quantity
-          -qs; ideas on how:
-            -opposite of qd, but go back from equilibrium point
-        -else:
-          -I never learned what's supposed to happen, so do nothing
-          and note this on the readme
-      -number of imports
+  -open, private economy (again)
+    -I forgot that I need to change welfare
   -closed, public economy
     -(excise) tax or subsidy on supply:
       -location of "active supply"
         -somehow indicate the new D or new S; ideas on how:
           -different colors
+        -make sure total revenue uses quantity demanded
       -recalculate:
         -equilibrium
         -total revenue
@@ -34,7 +25,7 @@ Note #1:
       -calculate
         -tax revenue
         -deadweight loss
-    -(excise) tax or subsidy on demand:
+    -(sales?) tax or subsidy on demand:
       -location of "active demand"
       -recalculate:
         -equilibrium
@@ -81,6 +72,7 @@ Eventually:
     of the graph whose final data point's x-coordinate is lowest,
     then the graphs don't interact, and this should be said
     -report error if no semi-colon where expected one
+    -if world price causes a quantity to go beyond lowest or highest
 -use AngularJS to note errorneous text field inputs
   -e.g. price floor or ceiling has to matter
 -(if not done yet) clean up script.js
@@ -105,3 +97,5 @@ CSS in one of the card games
   their former values
 -limit each text field's size
   -or would this require too much assuming about the data
+-have workarounds for calculations that reach the boundaries of the
+supply or demand points
