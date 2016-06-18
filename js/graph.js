@@ -153,8 +153,14 @@ Graph.prototype = {
   setWp : function(newWp) {
     this._wp = newWp;
     
-    if (!isUnitTesting())
-      this._updateWorldQuantities();
+    if (!isUnitTesting()) {
+      if (this._wp !== undefined)
+        this._updateWorldQuantities();
+      else {
+        this._eqPoint = this.calculateEquilibriumPoint();
+        this._qd = this._qs = this._eqPoint.x;
+      }
+    }
   },
   
   getQd : function() {
@@ -224,14 +230,19 @@ Graph.prototype = {
     this._qs = this.determineWorldQS();
   },
   
+  /**
+   * Server as eraser method if world price is undefined
+   */
   redrawWorldPriceLine : function() {
     Graph._clearCanvas(this._wpCanvas, this._wpCtx);
-    
-    var ctx = this._wpCtx;
-    var y = this._wp * this._wpCanvas.height;
-    ctx.moveTo(0, y);
-    ctx.lineTo(Graph.MAX_X * this._wpCanvas.width, y);
-    ctx.stroke();
+  
+    if (this._wp !== undefined) {
+      var ctx = this._wpCtx;
+      var y = this._wp * this._wpCanvas.height;
+      ctx.moveTo(0, y);
+      ctx.lineTo(Graph.MAX_X * this._wpCanvas.width, y);
+      ctx.stroke();
+    }
   },
   
   _setUpCanvases : function() {

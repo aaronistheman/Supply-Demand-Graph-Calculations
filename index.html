@@ -55,12 +55,13 @@
 
     <div class="panel">
       <p><b>International Matters</b></p>
-      <p>Closed economy: <input type="checkbox" data-ng-model="isClosed" /></p>
+      <p>Closed economy: <input id="closed-open-checkbox"
+        type="checkbox" data-ng-model="isClosed" /></p>
       <div data-ng-if="!isClosed">
         <p>World price: $<input type="number" id="world-p" />
           <input type="button" value="Update" id="b-world-p" />
           </p>
-        <p>Number of imports: <span id="imports"></span></p>
+        <p>Number of imports: <span id="imports">0</span></p>
       </div>
     </div>
 

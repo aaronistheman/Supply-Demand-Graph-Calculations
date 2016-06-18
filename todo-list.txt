@@ -1,4 +1,5 @@
 Next:
+-STOP AND PLAN; DON'T RUSH; consider reorganizing the project
 -remaining calculations; see Note #1
   -One thing I overlooked is that
   each value may have to be recalculated if previous settings are overridden
@@ -9,9 +10,8 @@ Next:
 
 Note #1:
 -remaining calculations/actions:
-  -open, private economy
-    -disabling should set qd and qs to domestic equilibrium quantity
-    and perhaps world price to undefined
+  -open, private economy (again)
+    -I forgot that I need to change welfare
   -closed, public economy
     -(excise) tax or subsidy on supply:
       -location of "active supply"
