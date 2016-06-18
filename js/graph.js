@@ -147,6 +147,9 @@ Graph.prototype = {
     return this._eqPoint;
   },
   
+  /**
+   * Sets world price, but also updates quantities.
+   */
   setWp : function(newWp) {
     this._wp = newWp;
     
@@ -217,8 +220,8 @@ Graph.prototype = {
   },
   
   _updateWorldQuantities : function() {
-    // this._qd = this.determineWorldQD();
-    // this._qs = this.determineWorldQS();
+    this._qd = this.determineWorldQD();
+    this._qs = this.determineWorldQS();
   },
   
   redrawWorldPriceLine : function() {

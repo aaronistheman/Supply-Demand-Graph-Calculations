@@ -22,7 +22,7 @@ doing so could increase domestic supply, but this scenario was not
 covered in the AP curriculum.)
 
 Admittedly, the code is a little messy, mainly because I let the Graph
-custom type become too big.
+custom type become too big and because I didn't plan too well ahead.
 
 Features
 --------

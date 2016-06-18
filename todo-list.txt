@@ -13,13 +13,11 @@ Note #1:
     -based on world price:
       -recalculate:
         -if world price is below equilibrium price:
-          -update webpage:
-            -qd
-            -qs
-            -state isn't equilibrium
-            -number of imports
+          -just did this
         -else:
           -some notification (that directs the user to the readme)
+    -disabling should set qd and qs to domestic equilibrium quantity
+    and perhaps world price to undefined
   -closed, public economy
     -(excise) tax or subsidy on supply:
       -location of "active supply"

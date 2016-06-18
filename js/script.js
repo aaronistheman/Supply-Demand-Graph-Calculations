@@ -52,18 +52,16 @@ $(document).ready(function() {
       if (wp < eq.y) {
         alert("wp < eq.y");
         
-        // qd
+        var qd = Math.round(graph.getQd());
+        $("#qd").html(qd);
+        var qs = Math.round(graph.getQs());
+        $("#qs").html(qs);
         
-        
-        // qs
-        
-        
-        // state
-        
+        state = STATE.SHORTAGE;
+        $("#state").html(state);
         
         // number of imports
-        
-        
+        $("#imports").html(qd - qs);
       }
     });
   } // if not unit testing
