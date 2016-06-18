@@ -192,7 +192,7 @@ Graph.prototype = {
   },
 
   determineWorldQS : function() {
-
+    
   },
   
   _updateWorldQuantities : function() {

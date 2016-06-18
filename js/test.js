@@ -209,3 +209,25 @@ QUnit.module(currentTestedFile + ", determineWorldQD()");
     var result = Math.round(graph.determineWorldQD());
     assert.deepEqual(result, 80); // correct value isn't from a point
   });
+
+QUnit.module(currentTestedFile + ", determineWorldQS()");
+
+  QUnit.test("correct value is a given quantity", function(assert) {
+    var graph = new Graph(
+      "8 80; 10 100; 12 120; 13 130",
+      "8 120; 10 100; 12 80; 13 70");
+    
+    graph.setWp(80);
+    var result = Math.round(graph.determineWorldQS());
+    assert.deepEqual(result, 8); // correct value is from a point on the graph
+  });
+  
+  QUnit.test("correct value isn't a given quantity", function(assert) {
+    var graph = new Graph(
+      "40 0.50; 80 1.00; 90 1.25",
+      "80 1.50; 100 1.00");
+    
+    graph.setWp(0.75);
+    var result = Math.round(graph.determineWorldQS());
+    assert.deepEqual(result, 60); // correct value isn't a point
+  });
