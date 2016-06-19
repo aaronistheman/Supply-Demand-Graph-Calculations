@@ -2,7 +2,7 @@ start Notepad++ index.html
 start Notepad++ README.md
 start Notepad++ todo-list.txt
 start Notepad++ js/script.js
-start Notepad++ js/string-input.js
+start Notepad++ js/model/string-input.js
 start Notepad++ test.html
 start Notepad++ js/tests/test.js
 REM start Notepad++ js/controller.js

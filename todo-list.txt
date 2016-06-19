@@ -7,7 +7,9 @@ Contents:
 Next:
 -restructure project:
   -model type
-    -constructor that reads input data; move unit test
+    -appropriate HTML includes
+    -restructure PiecewiseFunction to use the new Point type while
+    still passing its tests
     -implement methods
   -view type
     -constructor that stores the canvases
@@ -23,6 +25,9 @@ Next:
       -else
         -alert
   -finish restructuring tests
+  -remove Graph custom type and usage of it
+  -make sure everything is put in correct folder
+    -adjust tests if needed
   -describe the use of MVC in the readme
 
 Note #1:

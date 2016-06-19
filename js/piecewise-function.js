@@ -1,14 +1,5 @@
 "use strict";
 
-
-function Point(x, y) {
-  if (!(this instanceof Point)) // if user forgot "new"
-    return new Point(x, y);
-
-  this.x = x;
-  this.y = y;
-}
-
 /**
  * General piecewise function custom type that also facilitates
  * integral approximations (via Riemann sums)

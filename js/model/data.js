@@ -1,5 +1,9 @@
 "use strict";
 
+/**
+ * Constants
+ */
+
 var States = {
   Equilibrium : "Equilibrium",
   Shortage : "Shortage",
@@ -7,8 +11,14 @@ var States = {
 };
 
 var Graph = {
-  Demand : "Demand",
   Supply : "Supply",
+  Demand : "Demand",
+  None : "None",
+};
+
+var Mechanism = {
+  Floor : "Floor",
+  Ceiling : "Ceiling",
   None : "None",
 };
 
@@ -18,7 +28,10 @@ var Graph = {
  *
  * Private members have an 'm' prefix (e.g. mDoSomethingPrivate())
  */
-function Data(supplyDataPoints, demandDataPoints) {
+function Data(supplyDataString, demandDataString) {
+  if (!(this instanceof Data))
+    alertAndThrowException("Forgot 'new' before Data constructor");
+  
   this.eq; // equilibrium quantity
   this.ep; // equilibrium price
   this.qd; // quantity demanded
@@ -30,6 +43,16 @@ function Data(supplyDataPoints, demandDataPoints) {
   this.whatSubsidized;
   this.priceMechanism;
   this.pmAmount;
+  
+  this.mNumRectangles = 100000; // usually for Riemann sums
+  
+  this.mSPoints = [];
+  this.mSupply = new PiecewiseFunction();
+  this.mReadFunctionData(this.mSupply, supplyDataString);
+  
+  this.mDPoints = [];
+  this.mDemand = new PiecewiseFunction();
+  this.mReadFunctionData(this.mDemand, demandDataString);
   
 } // custom type Data
 
@@ -99,5 +122,36 @@ Data.prototype = {
     
   },
   
-  
+  /**
+   * @param func instance of PiecewiseFunction
+   * @param dataString properly formatted string (e.g. "40 0.25; 50 0.30")
+   * of ordered pairs (intended for (quantity, price) pairs)
+   */
+  mReadFunctionData : function(func, dataString) {
+    var q = -1;
+    var p = -1;
+    var qString = "";
+    var pString = "";
+    var qArray = [];
+    var pArray = [];
+    var sin = new StringInput(dataString);
+
+    while (!sin.isAtEnd()) {
+      // get q
+      sin.ignore(' ');
+      qString = sin.getCharsUntil(' ');
+      q = parseFloat(qString);
+
+      // get p
+      sin.ignore(' ');
+      pString = sin.getCharsUntil(' ');
+      p = parseFloat(pString);
+
+      // ignore until semi-colon (or reach end)
+      sin.ignore(' ');
+      sin.ignore(';');
+
+      func.insert(new Point(Quantity(q), Price(p)));
+    }
+  }, // mReadFunctionData()
 };
