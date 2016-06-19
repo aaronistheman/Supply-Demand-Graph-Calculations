@@ -4,6 +4,9 @@
  * Wrapper type so I don't have to keep manually rounding the quantity
  */
 function Quantity(val) {
+  if (!(this instanceof Quantity))
+    alertAndThrowException("Forgot 'new' before Quantity constructor");
+  
   this.mVal = val;
 }
 

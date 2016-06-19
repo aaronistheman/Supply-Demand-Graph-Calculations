@@ -4,6 +4,9 @@
  * Wrapper type so I don't have to keep manually rounding the price
  */
 function Price(val) {
+  if (!(this instanceof Price))
+    alertAndThrowException("Forgot 'new' before Price constructor");
+  
   this.mVal = val;
 }
 
