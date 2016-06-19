@@ -7,7 +7,6 @@ Contents:
 Next:
 -restructure project:
   -model type
-    -appropriate HTML includes
     -restructure PiecewiseFunction to use the new Point type while
     still passing its tests
     -implement methods

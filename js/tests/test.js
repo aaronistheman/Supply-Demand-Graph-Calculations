@@ -73,6 +73,7 @@ QUnit.module(currentTestedFile + ", PiecewiseFunction.getY()");
     assert.deepEqual(pf.getY(8), 14);
   });
 
+/*
 currentTestedFile = "graph.js";
 QUnit.module(currentTestedFile + ", calculateHighestQuantity()");
 
@@ -231,3 +232,4 @@ QUnit.module(currentTestedFile + ", determineWorldQS()");
     var result = Math.round(graph.determineWorldQS());
     assert.deepEqual(result, 60); // correct value isn't a point
   });
+*/
