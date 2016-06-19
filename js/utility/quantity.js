@@ -17,6 +17,10 @@ Quantity.prototype = {
    * Gets the quantity, but rounded as a quantity would be
    */
   get : function() {
-    return Math.round(val);
+    return Math.round(this.mVal);
   },
+  
+  getUnrounded : function() {
+    return this.mVal;
+  }
 };

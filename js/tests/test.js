@@ -1,7 +1,30 @@
 "use strict";
 
-var currentTestedFile = "model/string-input.js";
+/**
+ * Note: In many of the QUnit module's names, I didn't use "prototype"
+ * where I maybe should've (e.g. "StringInput.getChar()" really means
+ * "StringInput.prototype.getChar()"). However, this might've been
+ * a good way to accidentally save space.
+ */
 
+var currentTestedFile = undefined;
+
+currentTestedFile = "utility/quantity.js";
+QUnit.module(currentTestedFile + ", Quantity.get()");
+
+  QUnit.test("correct return", function(assert) {
+    var q = new Quantity(3.63);
+    assert.deepEqual(q.get(), 4);
+  });
+
+QUnit.module(currentTestedFile + ", Quantity.getUnrounded()");
+
+  QUnit.test("correct return", function(assert) {
+    var q = new Quantity(3.63);
+    assert.deepEqual(q.getUnrounded(), 3.63);
+  });
+
+currentTestedFile = "model/string-input.js";
 QUnit.module(currentTestedFile + ", StringInput.getChar()");
 
   QUnit.test("correct return", function(assert) {
@@ -74,7 +97,7 @@ QUnit.module(currentTestedFile + ", PiecewiseFunction.getY()");
     assert.deepEqual(pf.getY(8).q(), 14);
   });
   */
-  
+  /*
 QUnit.module(currentTestedFile + ", PiecewiseFunction.insert()");
 
   QUnit.test("error-checking works", function(assert) {
@@ -89,7 +112,7 @@ QUnit.module(currentTestedFile + ", PiecewiseFunction.insert()");
     }
     assert.ok(caughtError, "Successfully caught error");
   });
-
+*/
 /*
 currentTestedFile = "graph.js";
 QUnit.module(currentTestedFile + ", calculateHighestQuantity()");

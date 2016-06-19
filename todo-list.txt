@@ -8,11 +8,13 @@ Next:
 -restructure project:
   -model type
     -test fixing
+      -tests for Price and Quantity
       -restructure PiecewiseFunction to use the new Point type while
       still passing its tests
+        -uncomment out tests
         -change name of getY()
         -restructure tests
-        -resturcture methods
+        -restructure methods
     -implement methods
   -other
     -remove uses of Math.round(), except in graph.js
