@@ -1,6 +1,6 @@
 "use strict";
 
-var currentTestedFile = "string-input.js";
+var currentTestedFile = "model/string-input.js";
 
 QUnit.module(currentTestedFile + ", StringInput.getChar()");
 
@@ -61,16 +61,33 @@ QUnit.module(currentTestedFile + ", StringInput.isAtEnd()");
     assert.ok(sin.isAtEnd());
   });
 
-currentTestedFile = "piecewise-function.js";
+currentTestedFile = "model/piecewise-function.js";
 QUnit.module(currentTestedFile + ", PiecewiseFunction.getY()");
 
+  /*
   QUnit.test("returns correct y-value", function(assert) {
     // I'll use an integer slope to make things easier to check
     var pf = new PiecewiseFunction();
     pf.insert(new Point(5, 8));
     pf.insert(new Point(9, 16));
 
-    assert.deepEqual(pf.getY(8), 14);
+    assert.deepEqual(pf.getY(8).q(), 14);
+  });
+  */
+  
+QUnit.module(currentTestedFile + ", PiecewiseFunction.insert()");
+
+  QUnit.test("error-checking works", function(assert) {
+    var caughtError = false;
+    var pf = new PiecewiseFunction();
+    pf.insert(new Point(5, 8));
+    try {
+      pf.insert(new Point(4, 9));
+    }
+    catch (err) {
+      caughtError = true;
+    }
+    assert.ok(caughtError, "Successfully caught error");
   });
 
 /*

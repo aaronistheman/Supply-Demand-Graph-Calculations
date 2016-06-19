@@ -25,6 +25,7 @@ PiecewiseFunction.prototype = {
     return this._points;
   },
 
+  /*
   getY : function(x) {
     if (x < this._points[0].x
       || x > this._points[this._points.length - 1])
@@ -54,18 +55,20 @@ PiecewiseFunction.prototype = {
        * here make a fix regarding the possibility of Riemann sums
        * going a little bit outside of range
        */
-
+/*
       return this._points[this._points.length - 1].y;
     }
   }, // getY()
+  */
 
   /**
    * @param point instance of Point
    */
   insert : function(point) {
-    if (this._points.length > 0) { // error-checking
+    // error-checking
+    if (this._points.length > 0) {
       var lastPoint = this._points[this._points.length - 1];
-      if (point.x < lastPoint.x) // if point would make array unsorted
+      if (point.q() < lastPoint.q()) // if point would make array unsorted
         alertAndThrowException("tried inserting point that'd break sort");
     }
 

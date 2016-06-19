@@ -7,10 +7,16 @@ Contents:
 Next:
 -restructure project:
   -model type
-    -restructure PiecewiseFunction to use the new Point type while
-    still passing its tests
-    -remove uses of Math.round(), except in graph.js
+    -test fixing
+      -restructure PiecewiseFunction to use the new Point type while
+      still passing its tests
+        -change name of getY()
+        -restructure tests
+        -resturcture methods
     -implement methods
+  -other
+    -remove uses of Math.round(), except in graph.js
+    -replace "new" fixing with error
   -view type
     -constructor that stores the canvases
     -have some context wrapper custom type so I don't have to keep
