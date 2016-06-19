@@ -7,11 +7,12 @@ Contents:
 Next:
 -restructure project:
   -model type
-    -stored values
-    -getters/setters
-    -update()
+    -constructor that reads input data; move unit test
+    -implement methods
   -view type
     -constructor that stores the canvases
+    -have some context wrapper custom type so I don't have to keep
+    putting the width and height in
     -a method for each possible canvas edit
     -update()
   -controller type

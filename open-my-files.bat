@@ -8,4 +8,5 @@ start Notepad++ js/tests/test.js
 REM start Notepad++ js/controller.js
 start Notepad++ js/piecewise-function.js
 start Notepad++ js/graph.js
+start Notepad++ js/model/data.js
 exit
