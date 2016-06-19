@@ -24,6 +24,21 @@ QUnit.module(currentTestedFile + ", Quantity.getUnrounded()");
     assert.deepEqual(q.getUnrounded(), 3.63);
   });
 
+currentTestedFile = "utility/price.js";
+QUnit.module(currentTestedFile + ", Price.get()");
+
+  QUnit.test("correct return", function(assert) {
+    var p = new Price(5.789222);
+    assert.deepEqual(p.get(), 5.79);
+  });
+
+QUnit.module(currentTestedFile + ", Price.getUnrounded()");
+
+  QUnit.test("correct return", function(assert) {
+    var p = new Price(5.789222);
+    assert.deepEqual(p.getUnrounded(), 5.789222);
+  });
+
 currentTestedFile = "model/string-input.js";
 QUnit.module(currentTestedFile + ", StringInput.getChar()");
 

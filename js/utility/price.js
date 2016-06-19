@@ -18,6 +18,10 @@ Price.prototype = {
    * hundreth)
    */
   get : function() {
-    return Math.round(val * 100) / 100;
+    return Math.round(this.mVal * 100) / 100;
+  },
+  
+  getUnrounded : function() {
+    return this.mVal;
   },
 };
