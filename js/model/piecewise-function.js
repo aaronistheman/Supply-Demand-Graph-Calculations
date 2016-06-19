@@ -1,12 +1,12 @@
 "use strict";
 
 /**
- * General piecewise function custom type that also facilitates
- * integral approximations (via Riemann sums)
+ * Custom type that allows the obtaining of points not explicitly
+ * specified by the user
  */
 function PiecewiseFunction() {
   if (!(this instanceof PiecewiseFunction)) // if user forgot "new"
-    return new PiecewiseFunction();
+    alertAndThrowException("Forgot 'new'");
 
   this._points = []; // array of instances of Point
 }

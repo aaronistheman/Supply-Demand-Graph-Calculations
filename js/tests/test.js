@@ -112,7 +112,7 @@ QUnit.module(currentTestedFile + ", PiecewiseFunction.getY()");
     assert.deepEqual(pf.getY(8).q(), 14);
   });
   */
-  /*
+
 QUnit.module(currentTestedFile + ", PiecewiseFunction.insert()");
 
   QUnit.test("error-checking works", function(assert) {
@@ -127,7 +127,7 @@ QUnit.module(currentTestedFile + ", PiecewiseFunction.insert()");
     }
     assert.ok(caughtError, "Successfully caught error");
   });
-*/
+
 /*
 currentTestedFile = "graph.js";
 QUnit.module(currentTestedFile + ", calculateHighestQuantity()");
