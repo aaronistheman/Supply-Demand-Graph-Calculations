@@ -6,10 +6,23 @@ Contents:
 
 Next:
 -restructure project:
-  -
-  -
-  -
+  -model type
+    -stored values
+    -getters/setters
+    -update()
+  -view type
+    -constructor that stores the canvases
+    -a method for each possible canvas edit
+    -update()
+  -controller type
+    -sets up event handlers
+      -if valid input
+        -each calls model.update() with appropriate parameters
+        -each probably calls view.update()
+      -else
+        -alert
   -finish restructuring tests
+  -describe the use of MVC in the readme
 
 Note #1:
 -remaining calculations/actions:
