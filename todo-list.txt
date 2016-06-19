@@ -6,7 +6,6 @@ Contents:
 
 Next:
 -restructure project:
-  -price and quantity type
   -
   -
   -
