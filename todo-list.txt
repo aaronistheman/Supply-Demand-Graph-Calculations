@@ -10,13 +10,16 @@ Next:
     -test fixing
       -restructure PiecewiseFunction to use the new Point type while
       still passing its tests
-        -change name of getY()
-        -restructure tests
+        -write getP() (translate getY(), keeping Point custom type in mind);
+        should pass test
+        -restructure tests (what other tests?)
         -restructure methods
+        -erase getY()
     -implement methods
   -other
     -remove uses of Math.round(), except in graph.js
     -replace "new" fixing with error
+    -why are Quantity and Price in the utility folder?
   -view type
     -constructor that stores the canvases
     -have some context wrapper custom type so I don't have to keep

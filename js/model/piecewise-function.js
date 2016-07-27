@@ -60,6 +60,13 @@ PiecewiseFunction.prototype = {
     }
   }, // getY()
   */
+  
+  /**
+   * @param q 
+   */
+  getP : function(q) {
+    
+  },
 
   /**
    * @param point instance of Point

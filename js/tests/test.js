@@ -100,18 +100,27 @@ QUnit.module(currentTestedFile + ", StringInput.isAtEnd()");
   });
 
 currentTestedFile = "model/piecewise-function.js";
-QUnit.module(currentTestedFile + ", PiecewiseFunction.getY()");
+QUnit.module(currentTestedFile + ", PiecewiseFunction.getP()");
 
-  /*
-  QUnit.test("returns correct y-value", function(assert) {
-    // I'll use an integer slope to make things easier to check
+  QUnit.test("returns correct price", function(assert) {
     var pf = new PiecewiseFunction();
     pf.insert(new Point(5, 8));
     pf.insert(new Point(9, 16));
-
-    assert.deepEqual(pf.getY(8).q(), 14);
+    
+    var price = pf.getP(8);
+    assert.deepEqual(price, 14);
   });
-  */
+  
+  QUnit.test("returns correct price #2", function(assert) {
+    var pf = new PiecewiseFunction();
+    pf.insert(new Point(1, 7));
+    pf.insert(new Point(5, 6));
+    pf.insert(new Point(7, 4));
+    pf.insert(new Point(9, 3));
+    
+    var price = pf.getP(8);
+    assert.deepEqual(price, 3.50);
+  });
 
 QUnit.module(currentTestedFile + ", PiecewiseFunction.insert()");
 
