@@ -118,7 +118,42 @@ Data.prototype = {
    * demand graphs (first) intersect
    */
   calculateEquilibriumPoint : function() {
-    return new Point(-1, -2.00);
+    // Calculate step magnitude
+    var range = this.mHighestQuantity - this.mLowestQuantity;
+    var step = range / this.mNumRectangles;
+    
+    // Determine starting points
+    var qVal = this.mLowestQuantity;
+    var dVal = this.mDemand.getP(qVal);
+    var sVal = this.mSupply.getP(qVal);
+    
+    var oldD = dVal;
+    // var oldS = sVal;
+    
+    /**
+     * Find the intersection of the S and D graphs.
+     * Imagine sliding a ruler vertically along the graphs,
+     * stopping the moment that the demand point on the ruler
+     * isn't greater than the supply point.
+     */
+    while (dVal > sVal && qVal <= this.mHighestQuantity) {
+      oldD = dVal;
+      // oldS = sVal;
+      
+      // Advance one step
+      qVal += step;
+      dVal = this.mDemand.getP(qVal);
+      sVal = this.mSupply.getP(qVal);
+    }
+    
+    if (qVal > this._highestQuantity)
+      alertAndThrowException("Supply and demand don't intersect");
+    
+    // The equilibrium point should be right before D becomes below S
+    // (rather than right after),
+    // although this is highly unlikely to matter, due to the small
+    // step value.
+    return new Point(qVal, oldD);
   }, // calculateEquilibriumPoint()
   
   /**
