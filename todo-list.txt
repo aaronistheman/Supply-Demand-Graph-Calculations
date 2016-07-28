@@ -16,7 +16,6 @@ Next:
       move the commented out graph.js tests to data.js
         -updateEquilibriumPoint()
           -calculateEquilibriumPoint()
-            -calculate lowest and highest quantities
         -getTotalRevenue()
         -getConsumerSurplus()
         -getProducerSurplus()

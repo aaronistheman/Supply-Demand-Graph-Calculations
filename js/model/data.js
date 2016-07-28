@@ -24,15 +24,19 @@ function Data(supplyDataString, demandDataString) {
   
   this.mNumRectangles = 100000; // usually for Riemann sums
   
-  this.mSPoints = [];
   this.mSupply = new PiecewiseFunction();
   this.mReadFunctionData(this.mSupply, supplyDataString);
   
-  this.mDPoints = [];
   this.mDemand = new PiecewiseFunction();
   this.mReadFunctionData(this.mDemand, demandDataString);
   
+  // Store references to the Point arrays
+  this.mSPoints = this.mSupply.getPoints();
+  this.mDPoints = this.mDemand.getPoints();
   
+  // Must happen after reading function data
+  this.mLowestQuantity = this.calculateLowestQuantity();
+  this.mHighestQuantity = this.calculateHighestQuantity();
 } // custom type Data
 
 Data.prototype = {
@@ -117,12 +121,40 @@ Data.prototype = {
     return new Point(-1, -2.00);
   }, // calculateEquilibriumPoint()
   
+  /**
+   * @returns the lowest quantity (value) that can be used for calculations
+   * (i.e. the maximum of the two quantities of the lowest
+   * demand and supply points)
+   */
   calculateLowestQuantity : function() {
-    return -3;
+    // Get first supply point quantity
+    var sLow = this.mSPoints[0].q();
+    
+    // Get first demand point quantity
+    var dLow = this.mDPoints[0].q();
+    
+    if (sLow > dLow)
+      return sLow;
+    else
+      return dLow;
   }, // calculateLowestQuantity()
   
+  /**
+   * @returns the highest quantity (value) that can be used for
+   * calculations (i.e. the minimum of the two quantities of the
+   * highest demand and supply points)
+   */
   calculateHighestQuantity : function() {
-    return -3;
+    // Get last supply point quantity
+    var sHigh = this.mSPoints[this.mSPoints.length - 1].q();
+    
+    // Get last demand point quantity
+    var dHigh = this.mDPoints[this.mDPoints.length - 1].q();
+    
+    if (sHigh > dHigh)
+      return dHigh;
+    else
+      return sHigh;
   }, // calculateHighestQuantity()
   
   /**
