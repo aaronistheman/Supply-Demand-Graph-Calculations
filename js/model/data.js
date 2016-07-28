@@ -14,13 +14,13 @@ function Data(supplyDataString, demandDataString) {
   this.ep; // equilibrium price
   this.qd; // quantity demanded
   this.qs; // quantity supplied
-  this.wp;
+  this.wp; // world price
   this.taxAmount;
-  this.whatTaxed;
+  this.whatTaxed; // should have a Graph constant value
   this.subsidyAmount;
-  this.whatSubsidized;
+  this.whatSubsidized; // should have a Graph constant value
   this.priceMechanism;
-  this.pmAmount;
+  this.pmAmount; // price mechanism's amount
   
   this.mNumRectangles = 100000; // usually for Riemann sums
   

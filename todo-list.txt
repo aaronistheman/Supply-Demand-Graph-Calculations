@@ -6,16 +6,21 @@ Contents:
 
 Next:
 -restructure project:
-  -really figure out how to do everything and how everything fits
+  (-really figure out how to do everything and how everything fits
   together again; maybe create a prototype repository
-  that uses the MVC custom types
+  that uses the MVC custom types)
   -model type
-    -test fixing
-      -restructure PiecewiseFunction to use the new Point type while
-      still passing its tests
-        -restructure tests (what other tests?)
-        -restructure methods
+    -idea that may not work well but also could work well
+      -comment out graph parts in main.js so index works
+      -gradually implement the Model methods to re-add the
+      initial display of the inital text box values; should
+      move the commented out graph.js tests to data.js
+      -perhaps have some brief code-to-delete to make the graph
+      be drawn
     -implement methods
+    -WHAT FINISHING MIGHT LOOK LIKE:
+      -the model type works with the to-be-deleted graph.js (although
+      I won't be able to see it, I guess)
   -other
     -remove uses of Math.round(), except in graph.js
     -replace "new" fixing with error
