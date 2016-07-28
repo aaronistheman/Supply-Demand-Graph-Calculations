@@ -10,4 +10,5 @@ start Notepad++ js/model/piecewise-function.js
 start Notepad++ js/graph.js
 start Notepad++ js/model/data.js
 start Notepad++ js/model/constants.js
+start Notepad++ js/model/point.js
 exit

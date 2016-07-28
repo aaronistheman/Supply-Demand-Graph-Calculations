@@ -15,11 +15,23 @@ function Point(q, p) {
 Point.prototype = {
   constructor : Point,
   
+  // returns Quantity value
   q : function() {
     return this.mQ.get();
   },
   
+  // returns price value
   p : function() {
     return this.mP.get();
+  },
+  
+  // returns Quantity instance
+  quantity : function() {
+    return this.mQ;
+  },
+  
+  // returns Price instance
+  price : function() {
+    return this.mP;
   },
 };
