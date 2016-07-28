@@ -14,11 +14,24 @@ Next:
       -gradually implement the Model methods to re-add the
       initial display of the inital text box values; should
       move the commented out graph.js tests to data.js
+        -updateEquilibriumPoint()
+          -calculateEquilibriumPoint()
+            -calculate lowest and highest quantities
+        -getTotalRevenue()
+        -getConsumerSurplus()
+        -getProducerSurplus()
+        -getTotalWelfare() or getEconomicSurplus()
+        -I don't think I set up these ones yet
+          -getNumberImports()
+          -getDeadweightLoss()
+          -getTaxRevenue()
       -perhaps have some brief code-to-delete to make the graph
       be drawn
     -when finished:
       -the model type works with the to-be-deleted graph.js (although
       I won't be able to see it, I guess)
+      -should be no more commented out tests, since only the model
+      stuff can (at least easily) be tested
   -other
     -remove uses of Math.round(), except in graph.js
     -replace "new" fixing with error

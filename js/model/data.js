@@ -117,6 +117,14 @@ Data.prototype = {
     return new Point(-1, -2.00);
   }, // calculateEquilibriumPoint()
   
+  calculateLowestQuantity : function() {
+    return -3;
+  }, // calculateLowestQuantity()
+  
+  calculateHighestQuantity : function() {
+    return -3;
+  }, // calculateHighestQuantity()
+  
   /**
    * "Private" methods
    */
