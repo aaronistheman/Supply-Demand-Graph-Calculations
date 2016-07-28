@@ -270,42 +270,6 @@ Graph.prototype = {
   }, // setUpCanvases()
   
   /**
-   * @returns the lowest quantity that can be used for calculations
-   * (i.e. the maximum of the two quantities of the lowest
-   * demand and supply points)
-   */
-  calculateLowestQuantity : function() {
-    // Get first supply point quantity
-    var sLow = this._sPoints[0].x;
-    
-    // Get first demand point quantity
-    var dLow = this._dPoints[0].x;
-    
-    if (sLow > dLow)
-      return sLow;
-    else
-      return dLow;
-  }, // calculateLowestQuantity()
-  
-  /**
-   * @returns the highest quantity that can be used for
-   * calculations (i.e. the minimum of the two quantities of the
-   * highest demand and supply points)
-   */
-  calculateHighestQuantity : function() {
-    // Get last supply point quantity
-    var sHigh = this._sPoints[this._sPoints.length - 1].x;
-    
-    // Get last demand point quantity
-    var dHigh = this._dPoints[this._dPoints.length - 1].x;
-    
-    if (sHigh > dHigh)
-      return dHigh;
-    else
-      return sHigh;
-  }, // calculateHighestQuantity()
-  
-  /**
    * Emphasizes where the lowest quantity used for calculations
    * is on the canvas (with a dashed line).
    */
@@ -352,10 +316,6 @@ Graph.prototype = {
       
     this._indicatorCtx.stroke();
   }, // emphasizeHighestQuantity()
-  
-  getTotalRevenue : function() {
-    return this._eqPoint.x * this._eqPoint.y;
-  },
   
   _drawXAxis : function() {
     this._axesCtx.beginPath();
@@ -452,81 +412,5 @@ Graph.prototype = {
     Graph._clearCanvas(this._demandCanvas, this._demandCtx);
     this._drawGraph(this._demand.getPoints(), this._demandCanvas,
       this._demandCtx);
-  },
-  
-  /**
-   * @return a new Point instance representing where the supply and
-   * demand graphs (first) intersect
-   */
-  calculateEquilibriumPoint : function() {
-    var range = this._highestQuantity - this._lowestQuantity;
-    var step = range / Graph.NUM_RECTANGLES;
-    var x = this._lowestQuantity;
-    var d = this._demand.getY(x);
-    var s = this._supply.getY(x);
-    var oldD = d;
-    var oldS = s;
-    
-    // find the intersection of D and S graphs
-    while (d > s && x <= this._highestQuantity) {
-      oldD = d;
-      oldS = s;
-      
-      x += step;
-      d = this._demand.getY(x);
-      s = this._supply.getY(x);
-    }
-    
-    if (x > this._highestQuantity)
-      alertAndThrowException("Supply and demand don't intersect");
-    
-    // The equilibrium point should be right before D becomes below S,
-    // although this is highly unlikely to matter
-    return new Point(x, oldD);
-  }, // calculateEquilibriumPoint()
-  
-  /**
-   * Consumer surplus is the integral from lowest quantity
-   * to the equilibrium
-   * quantity of the difference between demand and the equilibrium
-   * price.
-   */
-  getConsumerSurplus : function() {
-    var range = this._eqPoint.x - this._lowestQuantity;
-    var step = range / Graph.NUM_RECTANGLES;
-    var answer = 0;
-    
-    // Execute the summation
-    for (var x = this._lowestQuantity + step, i = 0;
-      i < Graph.NUM_RECTANGLES; x += step, ++i)
-    {
-      answer += (this._demand.getY(x) - this._eqPoint.y) * step;
-    }
-    
-    return answer;
-  },
-  
-  /**
-   * Producer surplus is the integral from lowest quantity
-   * to the equilibrium quantity of the difference between
-   * the equilibrium price and supply.
-   */
-  getProducerSurplus : function() {
-    var range = this._eqPoint.x - this._lowestQuantity;
-    var step = range / Graph.NUM_RECTANGLES;
-    var answer = 0;
-    
-    // Execute the summation
-    for (var x = this._lowestQuantity + step, i = 0;
-      i < Graph.NUM_RECTANGLES; x += step, ++i)
-    {
-      answer += (this._eqPoint.y - this._supply.getY(x)) * step;
-    }
-    
-    return answer;
-  },
-  
-  getEconomicSurplus : function() {
-    return this.getConsumerSurplus() + this.getProducerSurplus();
   },
 };
