@@ -32,10 +32,15 @@ function Data(supplyDataString, demandDataString) {
   this.mDemand = new PiecewiseFunction();
   this.mReadFunctionData(this.mDemand, demandDataString);
   
+  
 } // custom type Data
 
 Data.prototype = {
   constructor : Data,
+  
+  /**
+   * Accessors
+   */
   
   getState : function() {
     if (this.qd.get() === this.qs.get())
@@ -93,12 +98,28 @@ Data.prototype = {
   },
   
   /**
+   * Non-accessor, non-mutator, public methods
+   */
+  
+  /**
    * @param changedSettings object that maps each changed setting
    * (e.g. world price) to its new value
    */
   update : function(changedSettings) {
     
   },
+  
+  /**
+   * @return a new Point instance representing where the supply and
+   * demand graphs (first) intersect
+   */
+  calculateEquilibriumPoint : function() {
+    return new Point(-1, -2.00);
+  }, // calculateEquilibriumPoint()
+  
+  /**
+   * "Private" methods
+   */
   
   /**
    * @param func instance of PiecewiseFunction
@@ -129,7 +150,15 @@ Data.prototype = {
       sin.ignore(' ');
       sin.ignore(';');
 
-      func.insert(new Point(Quantity(q), Price(p)));
+      func.insert(new Point(new Quantity(q), new Price(p)));
     }
   }, // mReadFunctionData()
+  
+  /**
+   * Recalculates the equilibrium quantity and equilibrium price
+   * and stores them.
+   */
+  mUpdateEquilibriumPoint : function() {
+    
+  }, // mUpdateEquilibriumPoint()
 };

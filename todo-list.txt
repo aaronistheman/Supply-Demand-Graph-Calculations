@@ -11,14 +11,12 @@ Next:
   that uses the MVC custom types)
   -model type
     -idea that may not work well but also could work well
-      -comment out graph parts in main.js so index works
       -gradually implement the Model methods to re-add the
       initial display of the inital text box values; should
       move the commented out graph.js tests to data.js
       -perhaps have some brief code-to-delete to make the graph
       be drawn
-    -implement methods
-    -WHAT FINISHING MIGHT LOOK LIKE:
+    -when finished:
       -the model type works with the to-be-deleted graph.js (although
       I won't be able to see it, I guess)
   -other
@@ -26,6 +24,9 @@ Next:
     -replace "new" fixing with error
     -why are Quantity and Price in the utility folder?
   -view type
+    -should be responsible for both canvases and DOM (maybe two
+    different view types, since they do represent two different
+    views of the same data)
     -constructor that stores the canvases
     -have some context wrapper custom type so I don't have to keep
     putting the width and height in

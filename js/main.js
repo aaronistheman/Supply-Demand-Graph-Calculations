@@ -8,6 +8,7 @@ var STATE = {
 
 $(document).ready(function() {
   if (!isUnitTesting()) {
+    /*
     // Hardcoded data; eventually read from file
     var supplyPoints = "40 0.25 ; 50 0.30 ; 90 0.75 ; 110 1.35";
     var demandPoints = "30 1.25 ; 90 0.75 ; 110 0.30";
@@ -16,12 +17,14 @@ $(document).ready(function() {
     graph.drawAxes();
     graph.redrawSupply();
     graph.redrawDemand();
+    */
     
     /**
      * Fill out certain text boxes. Should be simplified
      * by the view and model types.
      */
     
+    /*
     var eq = graph.getEquilibriumPoint();
     $("#eq-q").html(Math.round(eq.x));
     $("#eq-p").html((Math.round(eq.y * 100) / 100).toFixed(2));
@@ -44,12 +47,14 @@ $(document).ready(function() {
       $("#qd").html(Math.round(eq.x));
       $("#qs").html(Math.round(eq.x));
     }
+    */
     
     /**
      * Set up event handlers. Should be simplified by the
      * controller type(s).
      */
     
+    /*
     $("#b-world-p").click(function() { // if changing world price
       var wp = $("#world-p").val();
       
@@ -90,6 +95,7 @@ $(document).ready(function() {
         $("#imports").html(0);
       }
     }); // if toggling closed/open checkbox
+    */
     
   } // if not unit testing
 }); // document ready function

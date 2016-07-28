@@ -39,6 +39,32 @@ QUnit.module(currentTestedFile + ", Price.getUnrounded()");
     assert.deepEqual(p.getUnrounded(), 5.789222);
   });
 
+currentTestedFile = "model/data.js";
+QUnit.module(currentTestedFile + ", Data.calculateEquilibriumPoint()");
+
+  // In this test, the intersection point is (by intention)
+  // a given point
+  QUnit.test("correct point found", function(assert) {    
+    var supplyPoints = "40 0.25 ; 50 0.30 ; 90 0.75 ; 110 1.35";
+    var demandPoints = "40 1.25 ; 60 0.90 ; 90 0.75 ; 110 0.30";
+    var data = new Data(supplyPoints, demandPoints);
+    var eqPoint = data.calculateEquilibriumPoint();
+    
+    assert.deepEqual(eqPoint.q(), 90);
+    assert.deepEqual(eqPoint.p(), 0.75);
+  });
+
+  // In this test, the intersection point isn't a given point
+  QUnit.test("correct point found again!", function(assert) {  
+    var supplyPoints = "40 0.25 ; 50 0.30 ; 90 0.70 ; 110 1.35";
+    var demandPoints = "40 1.25 ; 60 0.75 ; 80 0.25 ; 110 0.20";
+    var data = new Data(supplyPoints, demandPoints);
+    var eqPoint = data.calculateEquilibriumPoint()
+    
+    assert.deepEqual(eqPoint.q(), 70);
+    assert.deepEqual(eqPoint.p(), 0.50);
+  });
+
 currentTestedFile = "model/string-input.js";
 QUnit.module(currentTestedFile + ", StringInput.getChar()");
 
@@ -173,44 +199,6 @@ QUnit.module(currentTestedFile + ", calculateLowestQuantity()");
     var graph = new Graph(supplyPoints, demandPoints);
     
     assert.deepEqual(graph.calculateLowestQuantity(), 45);
-  });
-
-QUnit.module(currentTestedFile + ", calculateEquilibriumPoint()");
-
-  QUnit.test("correct point found", function(assert) {
-    // In this test, the intersection point is (pretty much
-    // a given point
-    
-    var supplyPoints = "40 0.25 ; 50 0.30 ; 90 0.75 ; 110 1.35";
-    var demandPoints = "40 1.25 ; 60 0.90 ; 90 0.75 ; 110 0.30";
-    var graph = new Graph(supplyPoints, demandPoints);
-    
-    // Get the point and do appropriate rounding to make unit
-    // testing more useful
-    var eqPoint = graph.calculateEquilibriumPoint();
-    // console.log("eqPoint x=" + eqPoint.x + " eqPoint y=" + eqPoint.y);
-    eqPoint.x = Math.round(eqPoint.x);
-    eqPoint.y = Math.round(eqPoint.y * 100) / 100;
-    
-    assert.deepEqual(eqPoint.x, 90);
-    assert.deepEqual(eqPoint.y, 0.75);
-  });
-
-  QUnit.test("correct point found again!", function(assert) {
-    // In this test, the intersection point isn't a given point
-    
-    var supplyPoints = "40 0.25 ; 50 0.30 ; 90 0.70 ; 110 1.35";
-    var demandPoints = "40 1.25 ; 60 0.75 ; 80 0.25 ; 110 0.20";
-    var graph = new Graph(supplyPoints, demandPoints);
-    
-    // Get the point and do appropriate rounding to make unit
-    // testing more useful
-    var eqPoint = graph.calculateEquilibriumPoint();
-    eqPoint.x = Math.round(eqPoint.x);
-    eqPoint.y = Math.round(eqPoint.y * 100) / 100;
-    
-    assert.deepEqual(eqPoint.x, 70);
-    assert.deepEqual(eqPoint.y, 0.50);
   });
   
 QUnit.module(currentTestedFile + ", getConsumerSurplus()")
