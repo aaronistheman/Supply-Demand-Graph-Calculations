@@ -81,14 +81,31 @@ Data.prototype = {
       answer += (this.mDemand.getP(q) - this.ep) * step;
     }
     
+    // use the wrapper to round the value
     return (new Price(answer)).get();
   },
   
   /**
+   * Producer surplus is the integral from lowest quantity
+   * to the equilibrium quantity of the difference between
+   * the equilibrium price and supply.
+   *
    * @return a Price value, since producer surplus is in dollars
    */
   getProducerSurplus : function() {
-    return -6;
+    var range = this.eq - this.mLowestQuantity;
+    var step = range / this.mNumRectangles;
+    var answer = 0;
+    
+    // Execute the summation
+    for (var q = this.mLowestQuantity + step, i = 0;
+      i < this.mNumRectangles; q += step, ++i)
+    {
+      answer += (this.ep - this.mSupply.getP(q)) * step;
+    }
+    
+    // use the wrapper to round the value
+    return (new Price(answer)).get();
   },
   
   /**

@@ -14,9 +14,10 @@ Next:
       -gradually implement the Model methods to re-add the
       initial display of the inital text box values; should
       move the commented out graph.js tests to data.js
-        -getProducerSurplus()
-          -move tests
         -getTotalWelfare() or getEconomicSurplus()
+        -should I do these yet?
+          -getWorldQD()
+          -getWorldQS()
         -I don't think I set up these ones yet
           -getNumberImports()
           -getDeadweightLoss()
