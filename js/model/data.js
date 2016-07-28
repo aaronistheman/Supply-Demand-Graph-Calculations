@@ -10,8 +10,8 @@ function Data(supplyDataString, demandDataString) {
   if (!(this instanceof Data))
     alertAndThrowException("Forgot 'new' before Data constructor");
   
-  this.eq; // equilibrium quantity
-  this.ep; // equilibrium price
+  this.eq; // equilibrium quantity value
+  this.ep; // equilibrium price value
   this.qd; // quantity demanded
   this.qs; // quantity supplied
   this.wp; // world price
@@ -234,6 +234,8 @@ Data.prototype = {
    * and stores them.
    */
   mUpdateEquilibriumPoint : function() {
-    
+    var eqPoint = this.calculateEquilibriumPoint();
+    this.eq = eqPoint.q();
+    this.ep = eqPoint.p();
   }, // mUpdateEquilibriumPoint()
 };

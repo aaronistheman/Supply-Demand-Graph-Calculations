@@ -14,7 +14,6 @@ Next:
       -gradually implement the Model methods to re-add the
       initial display of the inital text box values; should
       move the commented out graph.js tests to data.js
-        -updateEquilibriumPoint()
         -getTotalRevenue()
         -getConsumerSurplus()
         -getProducerSurplus()
