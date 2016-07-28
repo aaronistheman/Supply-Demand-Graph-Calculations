@@ -10,8 +10,6 @@ Next:
     -test fixing
       -restructure PiecewiseFunction to use the new Point type while
       still passing its tests
-        -write getP() (translate getY(), keeping Point custom type in mind);
-        should pass test
         -restructure tests (what other tests?)
         -restructure methods
         -erase getY()
