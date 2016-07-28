@@ -158,7 +158,7 @@ Data.prototype = {
       sin.ignore(' ');
       sin.ignore(';');
 
-      func.insert(new Point(new Quantity(q), new Price(p)));
+      func.insert(new Point(q, p));
     }
   }, // mReadFunctionData()
   
