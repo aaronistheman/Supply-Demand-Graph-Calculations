@@ -6,13 +6,15 @@ Contents:
 
 Next:
 -restructure project:
+  -really figure out how to do everything and how everything fits
+  together again; maybe create a prototype repository
+  that uses the MVC custom types
   -model type
     -test fixing
       -restructure PiecewiseFunction to use the new Point type while
       still passing its tests
         -restructure tests (what other tests?)
         -restructure methods
-        -erase getY()
     -implement methods
   -other
     -remove uses of Math.round(), except in graph.js
