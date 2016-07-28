@@ -34,9 +34,9 @@ function Data(supplyDataString, demandDataString) {
   this.mSPoints = this.mSupply.getPoints();
   this.mDPoints = this.mDemand.getPoints();
   
-  // Must happen after reading function data
   this.mLowestQuantity = this.calculateLowestQuantity();
   this.mHighestQuantity = this.calculateHighestQuantity();
+  this.mUpdateEquilibriumPoint();
 } // custom type Data
 
 Data.prototype = {
@@ -62,17 +62,33 @@ Data.prototype = {
   },
   
   /**
-   * @return a Price object, since consumer surplus is in dollars
+   * Consumer surplus is the integral from lowest quantity
+   * to the equilibrium
+   * quantity of the difference between demand and the equilibrium
+   * price.
+   *
+   * @return a Price value, since consumer surplus is in dollars
    */
   getConsumerSurplus : function() {
+    var range = this.eq - this.mLowestQuantity;
+    var step = range / this.mNumRectangles;
+    var answer = 0;
     
+    // Execute the summation
+    for (var q = this.mLowestQuantity + step, i = 0;
+      i < this.mNumRectangles; q += step, ++i)
+    {
+      answer += (this.mDemand.getP(q) - this.ep) * step;
+    }
+    
+    return (new Price(answer)).get();
   },
   
   /**
-   * @return a Price object, since producer surplus is in dollars
+   * @return a Price value, since producer surplus is in dollars
    */
   getProducerSurplus : function() {
-    
+    return -6;
   },
   
   /**
