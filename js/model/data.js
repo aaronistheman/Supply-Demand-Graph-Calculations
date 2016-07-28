@@ -109,15 +109,18 @@ Data.prototype = {
   },
   
   /**
-   * @param cs consumer surplus; specify to avoid recalculation
-   * @param ps producer surplus; specify to avoid recalculation
-   * @return a Price object
+   * Specify both parameters to avoid recalculation.
+   * @param cs consumer surplus; rounded price value
+   * @param ps producer surplus; rounded price value
+   * @return a Price value
    */
-  getTotalSurplus : function(cs, ps) {
+  getEconomicSurplus : function(cs, ps) {
     if (arguments.length == 2)
-      return new Price(cs + ps);
+      return (cs + ps);
     else {
       ; // calculate total surplus
+      
+      alertAndThrowException("getEconomicSurplus() not fully implemented");
     }
   },
   

@@ -413,8 +413,4 @@ Graph.prototype = {
     this._drawGraph(this._demand.getPoints(), this._demandCanvas,
       this._demandCtx);
   },
-  
-  getEconomicSurplus : function() {
-    return this.getConsumerSurplus() + this.getProducerSurplus();
-  },
 };
