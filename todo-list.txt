@@ -1,12 +1,64 @@
+Contents:
+-Next
+-Note #1
+-Eventually
+-Considerable
+
 Next:
--STOP AND PLAN; DON'T RUSH; consider reorganizing the project
--remaining calculations; see Note #1
-  -One thing I overlooked is that
-  each value may have to be recalculated if previous settings are overridden
-  (e.g. Closed Economy checkbox is turned on)
-  -change total revenue to use quantity demanded, not just equilibrium
-  quantity
--perhaps organize the methods by separating with comment blocks
+-restructure project:
+  -basic setups
+    -view type #1: DOM
+      -cut functionality out of main.js or graph.js
+      -store the DOM elements in variables?
+      -update()
+    -view type #2: Canvases
+      -cut functionality out of main.js or graph.js
+      -constructor that stores the canvases
+      -have some context wrapper custom type so I don't have to keep
+      putting the width and height in
+      -a method for each possible canvas edit
+      -update()
+    -controller type
+      -cut functionality out of main.js or graph.js
+      -sets up event handlers
+        -if valid input
+          -each (event handler) calls model.update() with appropriate
+          parameters
+          -each probably calls view.update()
+        -else
+          -alert
+  -CAN CONTINUE IMPLEMENTING FEATURES
+  -model type, named Data
+    -idea that may not work well but also could work well
+      -gradually implement the Model methods to re-add the
+      initial display of the inital text box values; should
+      move the commented out graph.js tests to data.js
+        -should I do these yet?
+          -getWorldQD()
+          -getWorldQS()
+        -I don't think I set up these ones yet
+          -getNumberImports()
+          -getDeadweightLoss()
+          -getTaxRevenue()
+      -perhaps have some brief code-to-delete to make the graph
+      be drawn
+    -when finished:
+      -should be no more commented out tests, since only the model
+      stuff can (at least easily) be tested
+  -other
+    -at some point, getTotalRevenue() MUST be
+    changed, since total revenue = price x QD
+  -finish restructuring tests
+  -clean-up to finish off the restructuring
+    -why are Quantity and Price in the utility folder?
+    -when (if ever) to implement the other part of getEconomicSurplus()?
+      -erase alert in it at some point
+    -remove uses of Math.round(), except in graph.js
+    -remove Graph custom type and usage of it
+    -replace "new" fixing with error
+    -make sure everything is put in correct folder
+      -adjust tests if needed
+    -describe the use of MVC in the readme
 
 Note #1:
 -remaining calculations/actions:
