@@ -56,7 +56,9 @@ Data.prototype = {
   },
   
   getTotalRevenue : function() {
-    
+    // I know this isn't right and will eventually
+    // fix it; TR = price x QD
+    return this.eq * this.ep;
   },
   
   /**

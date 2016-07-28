@@ -14,7 +14,6 @@ Next:
       -gradually implement the Model methods to re-add the
       initial display of the inital text box values; should
       move the commented out graph.js tests to data.js
-        -getTotalRevenue()
         -getConsumerSurplus()
         -getProducerSurplus()
         -getTotalWelfare() or getEconomicSurplus()
@@ -30,6 +29,8 @@ Next:
       -should be no more commented out tests, since only the model
       stuff can (at least easily) be tested
   -other
+    -MUST note that at some point, getTotalRevenue() should be
+    changed, since total revenue = price x QD
     -remove uses of Math.round(), except in graph.js
     -replace "new" fixing with error
     -why are Quantity and Price in the utility folder?
