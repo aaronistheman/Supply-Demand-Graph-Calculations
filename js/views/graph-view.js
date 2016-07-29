@@ -21,24 +21,65 @@ GraphView.prototype = {
   mStoreElements : function() {
     this.mSupplyCanvas = $("#supply-graph")[0];
     this.mSupplyCtx = this.mSupplyCanvas.getContext('2d');
-    // Graph.mApplyContextSettings(this.mSupplyCanvas, this.mSupplyCtx);
+    Graph.applyGraphContextSettings(this.mSupplyCanvas, this.mSupplyCtx);
 
     this.mDemandCanvas = $("#demand-graph")[0];
     this.mDemandCtx = this.mDemandCanvas.getContext('2d');
-    // Graph.mApplyContextSettings(this.mDemandCanvas, this.mDemandCtx);
+    Graph.applyGraphContextSettings(this.mDemandCanvas, this.mDemandCtx);
   
     this.mAxesCanvas = $("#axes-graph")[0];
     this.mAxesCtx = this.mAxesCanvas.getContext('2d');
-    // this.mAxesCtx.translate(Graph.EDGE_OFFSET_X,
-      // this.mAxesCanvas.height - Graph.EDGE_OFFSET_Y);
-    // this.mAxesCtx.scale(1, -1);
+    Graph.applyAxesContextSettings(this.mAxesCanvas, this.mAxesCtx);
     
     this.mIndicatorCanvas = $("#graph-indicators")[0];
     this.mIndicatorCtx = this.mIndicatorCanvas.getContext('2d');
-    // Graph.mApplyContextSettings(this.mIndicatorCanvas, this.mIndicatorCtx);
+    Graph.applyGraphContextSettings(this.mIndicatorCanvas, this.mIndicatorCtx);
     
     this.mWpCanvas = $("#wp-canvas")[0];
     this.mWpCtx = this.mWpCanvas.getContext('2d');
-    // Graph.mApplyContextSettings(this.mWpCanvas, this.mWpCtx);
+    Graph.applyGraphContextSettings(this.mWpCanvas, this.mWpCtx);
   },
+};
+
+/**
+ * "Static" variables for GraphView
+ */
+
+// These say how far the axes are from canvas edges
+Graph.edgeOffsetX = 40;
+Graph.edgeOffsetY = 40;
+
+// Max values that can be seen on each axis
+Graph.maxX = 150;
+Graph.maxY = 1.80;
+
+
+
+/**
+ * "Static" methods for GraphView
+ */
+  
+/**
+ * Applies to ctx the adjustments appropriate for drawing
+ * some sort of graph (e.g. demand, supply, some line for
+ * clarification), but NOT the axes.
+ * 
+ * @param canvas
+ * @param ctx the canvas' context
+ */
+Graph.applyGraphContextSettings = function(canvas, ctx) {
+  ctx.translate(Graph.edgeOffsetX, canvas.height - Graph.edgeOffsetY);
+  ctx.scale(1 / Graph.maxX, -1 / Graph.maxY);
+};
+
+/**
+ * Applies to ctx the adjustments appropriate for drawing the
+ * graph axes.
+ *
+ * @param canvas
+ * @param ctx the canvas' context
+ */
+Graph.applyAxesContextSettings = function(canvas, ctx) {
+  ctx.translate(Graph.edgeOffsetX, canvas.height - Graph.edgeOffsetY);
+  ctx.scale(1, -1);
 };

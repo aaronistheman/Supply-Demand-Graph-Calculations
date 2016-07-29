@@ -9,8 +9,10 @@ Next:
   -basic setups
     -view type #2: Canvases; called GraphsView
       -cut functionality out of main.js or graph.js
-      -a method for each possible canvas edit
-      -update()
+        -drawAxes
+        -redrawDemand
+        -redrawSupply
+      -update() <-- figure out how/where/why
       -when finished:
         -should be able to see the graphs drawn on the canvases
         -graph.js and main.js should probably be pretty much empty
@@ -48,6 +50,7 @@ Next:
     changed, since total revenue = price x QD
     -figure out if where I initially set up qd and qs is best
     -make sure correct state is shown if disequilibrium
+    -should constants.js be in utility?
   -finish restructuring tests
   -clean-up to finish off the restructuring
     -should there be a version of update() that only updates

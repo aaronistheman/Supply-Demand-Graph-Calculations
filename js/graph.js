@@ -43,12 +43,7 @@ function Graph(supplyDataString, demandDataString) {
  * "Static" variables for Graph
  */
 
-// These say how far the axes are from canvas edges
-Graph.EDGE_OFFSET_X = 40;
-Graph.EDGE_OFFSET_Y = 40;
 
-Graph.MAX_X = 150;
-Graph.MAX_Y = 1.80;
 
 Graph.NUM_TICKS_X = 5;
 Graph.NUM_TICKS_Y = 5;
@@ -67,10 +62,6 @@ Graph.NUM_RECTANGLES = 100000; // usually for Riemann sums
  * "Static" methods for Graph
  */
 
-Graph._applyContextSettings = function(canvas, ctx) {
-  ctx.translate(Graph.EDGE_OFFSET_X, canvas.height - Graph.EDGE_OFFSET_Y);
-  ctx.scale(1 / Graph.MAX_X, -1 / Graph.MAX_Y);
-};
 
 
 /**
