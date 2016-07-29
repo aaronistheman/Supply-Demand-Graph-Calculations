@@ -88,38 +88,6 @@ Graph._applyContextSettings = function(canvas, ctx) {
   ctx.scale(1 / Graph.MAX_X, -1 / Graph.MAX_Y);
 };
 
-/**
- * @param func instance of PiecewiseFunction, but isn't requirement
- * @param dataString properly formatted string (e.g. "40 0.25; 50 0.30")
- * of ordered pairs (intended for (quantity, price) pairs)
- */
-Graph._readFunctionData = function(func, dataString) {
-  var q = -1;
-  var p = -1;
-  var qString = "";
-  var pString = "";
-  var qArray = [];
-  var pArray = [];
-  var sin = new StringInput(dataString);
-
-  while (!sin.isAtEnd()) {
-    // get q
-    sin.ignore(' ');
-    qString = sin.getCharsUntil(' ');
-    q = parseFloat(qString);
-
-    // get p
-    sin.ignore(' ');
-    pString = sin.getCharsUntil(' ');
-    p = parseFloat(pString);
-
-    // ignore until semi-colon (or reach end)
-    sin.ignore(' ');
-    sin.ignore(';');
-
-    func.insert(new Point(q, p));
-  }
-}; // readFunctionData()
 
 /**
  * This method is needed because of the context offset.
@@ -143,9 +111,6 @@ Graph.prototype = {
    * Accessors and mutators
    */
   
-  getEquilibriumPoint : function() {
-    return this._eqPoint;
-  },
   
   /**
    * Sets world price, but also updates quantities.

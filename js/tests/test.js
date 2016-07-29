@@ -39,6 +39,18 @@ QUnit.module(currentTestedFile + ", Price.getUnrounded()");
     assert.deepEqual(p.getUnrounded(), 5.789222);
   });
 
+QUnit.module(currentTestedFile + ", Price.forDisplay()");
+
+  QUnit.test("correct return", function(assert) {
+    var p = new Price(5.7);
+    assert.deepEqual(p.forDisplay(), "5.70");
+  });
+
+  QUnit.test("correct return", function(assert) {
+    var p = new Price(5.789222);
+    assert.deepEqual(p.forDisplay(), "5.79");
+  });
+
 currentTestedFile = "model/data.js";
 QUnit.module(currentTestedFile + ", Data.calculateEquilibriumPoint()");
 
@@ -108,7 +120,8 @@ QUnit.module(currentTestedFile + ", Data.getConsumerSurplus()")
       "20 0.2; 50 0.5; 90 0.9",
       "20 0.9; 50 0.5 ; 80 0.2");
     
-    assert.deepEqual(data.getConsumerSurplus(), 6.00); // hand-calculated
+    assert.deepEqual(data.getConsumerSurplus().get(),
+      6.00); // hand-calculated
   });
 
   QUnit.test("correct value again!", function(assert) {
@@ -116,7 +129,8 @@ QUnit.module(currentTestedFile + ", Data.getConsumerSurplus()")
       "20 0.2; 70 0.6; 110, 0.8",
       "10 1.50; 20 1.30; 40 1.20; 100 0.60");
       
-    assert.deepEqual(data.getConsumerSurplus(), 23.50); // hand-calculated
+    assert.deepEqual(data.getConsumerSurplus().get(),
+      23.50); // hand-calculated
   });
 
 QUnit.module(currentTestedFile + ", Data.getProducerSurplus()");
@@ -126,7 +140,8 @@ QUnit.module(currentTestedFile + ", Data.getProducerSurplus()");
       "20 0.2; 50 0.5; 90 0.9",
       "20 0.9; 50 0.5 ; 80 0.2");
     
-    assert.deepEqual(data.getProducerSurplus(), 4.50); // hand-calculated
+    assert.deepEqual(data.getProducerSurplus().get(),
+      4.50); // hand-calculated
   });
 
   QUnit.test("correct value again!", function(assert) {
@@ -134,7 +149,19 @@ QUnit.module(currentTestedFile + ", Data.getProducerSurplus()");
       "20 0.2; 70 0.6; 110, 0.8",
       "10 1.50; 20 1.30; 40 1.20; 100 0.60");
       
-    assert.deepEqual(data.getProducerSurplus(), 16.00); // hand-calculated
+    assert.deepEqual(data.getProducerSurplus().get(),
+      16.00); // hand-calculated
+  });
+
+QUnit.module(currentTestedFile + ", Data.getState()");
+
+  QUnit.test("correctly detected equilibrium", function(assert) {
+    var data = new Data(
+      "20 0.2; 70 0.6; 110, 0.8",
+      "10 1.50; 20 1.30; 40 1.20; 100 0.60");
+    
+    // nothing special has happened, so should be equilibrium
+    assert.deepEqual(data.getState(), States.Equilibrium);
   });
 
 currentTestedFile = "model/string-input.js";

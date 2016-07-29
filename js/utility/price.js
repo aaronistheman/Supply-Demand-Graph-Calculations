@@ -24,4 +24,12 @@ Price.prototype = {
   getUnrounded : function() {
     return this.mVal;
   },
+  
+  /**
+   * Gets the price, but rounded and padded with zeroes (where needed),
+   * as a string.
+   */
+  forDisplay : function() {
+    return this.mVal.toFixed(2);
+  },
 };
