@@ -30,11 +30,17 @@ TextView.prototype = {
     if (!(data instanceof Data))
       alertAndThrowException("data parameter is of wrong type");
     
+    // equilibrium
     this.$eq.html(data.eq);
     this.$ep.html(data.ep);
     
+    // domestic quantity breakdown
+    var state = data.getState();
+    this.$state.html(state);
+    
     this.$tr.html(data.getTotalRevenue().forDisplay());
     
+    // welfare measurements
     var cs = data.getConsumerSurplus();
     this.$cs.html(cs.forDisplay());
     var ps = data.getProducerSurplus();
@@ -42,6 +48,9 @@ TextView.prototype = {
     var es = data.getEconomicSurplus(cs, ps);
     this.$es.html(es.forDisplay());
     
-    
+    if (state == States.Equilibrium) {
+      this.$qd.html(data.qd);
+      this.$qs.html(data.qs);
+    }
   },
 };

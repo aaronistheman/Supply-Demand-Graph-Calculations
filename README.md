@@ -3,7 +3,7 @@
 About
 -----
 
-This web-based personal project allos the user to graph supply and
+This web-based personal project allows the user to graph supply and
 demand
 for the products of an industry. The user will also
 be able to apply settings (e.g. an excise tax) and to see calculations

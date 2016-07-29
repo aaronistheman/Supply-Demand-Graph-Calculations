@@ -22,29 +22,6 @@ $(document).ready(function() {
     textView.updateAll(data);
     
     /**
-     * Fill out certain text boxes. Should be simplified
-     * by the view and model types.
-     */
-    
-    /*
-    var eq = graph.getEquilibriumPoint();
-    $("#eq-q").html(Math.round(eq.x));
-    $("#eq-p").html((Math.round(eq.y * 100) / 100).toFixed(2));
-    
-    var tr = graph.getTotalRevenue();
-    $("#total-rev").html((Math.round(tr * 100) / 100).toFixed(2));
-      
-    
-    
-    var state = STATE.EQUILIBRIUM;
-    $("#state").html(state);
-    if (state == STATE.EQUILIBRIUM) {
-      $("#qd").html(Math.round(eq.x));
-      $("#qs").html(Math.round(eq.x));
-    }
-    */
-    
-    /**
      * Set up event handlers. Should be simplified by the
      * controller type(s).
      */

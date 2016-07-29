@@ -12,8 +12,8 @@ function Data(supplyDataString, demandDataString) {
   
   this.eq; // equilibrium quantity value
   this.ep; // equilibrium price value
-  this.qd; // quantity demanded
-  this.qs; // quantity supplied
+  this.qd; // quantity demanded value
+  this.qs; // quantity supplied value
   this.wp; // world price
   this.taxAmount;
   this.whatTaxed; // should have a Graph constant value
@@ -37,6 +37,9 @@ function Data(supplyDataString, demandDataString) {
   this.mLowestQuantity = this.calculateLowestQuantity();
   this.mHighestQuantity = this.calculateHighestQuantity();
   this.mUpdateEquilibriumPoint();
+  
+  // By default, economy is in equilibrium
+  this.qd = this.qs = this.eq;
 } // custom type Data
 
 Data.prototype = {
@@ -47,9 +50,9 @@ Data.prototype = {
    */
   
   getState : function() {
-    if (this.qd.get() === this.qs.get())
+    if (this.qd === this.qs)
       return States.Equilibrium;
-    else if (this.qd.get() < this.qs.get())
+    else if (this.qd < this.qs)
       return States.Surplus;
     else // qd > qs
       return States.Shortage;
