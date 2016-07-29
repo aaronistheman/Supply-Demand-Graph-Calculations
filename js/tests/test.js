@@ -39,16 +39,16 @@ QUnit.module(currentTestedFile + ", Price.getUnrounded()");
     assert.deepEqual(p.getUnrounded(), 5.789222);
   });
 
-QUnit.module(currentTestedFile + ", Price.getDisplayFriendly()");
+QUnit.module(currentTestedFile + ", Price.forDisplay()");
 
   QUnit.test("correct return", function(assert) {
     var p = new Price(5.7);
-    assert.deepEqual(p.getDisplayFriendly(), "5.70");
+    assert.deepEqual(p.forDisplay(), "5.70");
   });
 
   QUnit.test("correct return", function(assert) {
     var p = new Price(5.789222);
-    assert.deepEqual(p.getDisplayFriendly(), "5.79");
+    assert.deepEqual(p.forDisplay(), "5.79");
   });
 
 currentTestedFile = "model/data.js";

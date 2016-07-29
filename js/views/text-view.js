@@ -33,14 +33,14 @@ TextView.prototype = {
     this.$eq.html(data.eq);
     this.$ep.html(data.ep);
     
-    this.$tr.html(data.getTotalRevenue().getDisplayFriendly());
+    this.$tr.html(data.getTotalRevenue().forDisplay());
     
     var cs = data.getConsumerSurplus();
-    this.$cs.html(cs.getDisplayFriendly());
+    this.$cs.html(cs.forDisplay());
     var ps = data.getProducerSurplus();
-    this.$ps.html(ps.getDisplayFriendly());
+    this.$ps.html(ps.forDisplay());
     var es = data.getEconomicSurplus(cs, ps);
-    this.$es.html(es.getDisplayFriendly());
+    this.$es.html(es.forDisplay());
     
     
   },

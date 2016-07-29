@@ -29,7 +29,7 @@ Price.prototype = {
    * Gets the price, but rounded and padded with zeroes (where needed),
    * as a string.
    */
-  getDisplayFriendly : function() {
+  forDisplay : function() {
     return this.mVal.toFixed(2);
   },
 };
