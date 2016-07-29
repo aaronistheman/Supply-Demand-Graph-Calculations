@@ -7,17 +7,22 @@ Contents:
 Next:
 -restructure project:
   -basic setups
-    -view type #1: DOM
+    -view type #1: DOM; called TextView
       -cut functionality out of main.js or graph.js
-      -store the DOM elements in variables?
-      -update()
-    -view type #2: Canvases
+        -get the initial setup in main.js; make it work
+          -figure out nice way to incorporate toFixed(2)
+          -need to update the state at some point
+      -when finished:
+        -should be able to see the unchanged data in the panels
+    -view type #2: Canvases; called GraphsView
       -cut functionality out of main.js or graph.js
       -constructor that stores the canvases
       -have some context wrapper custom type so I don't have to keep
       putting the width and height in
       -a method for each possible canvas edit
       -update()
+      -when finished:
+        -should be able to see the graphs drawn on the canvases
     -controller type
       -cut functionality out of main.js or graph.js
       -sets up event handlers
@@ -50,6 +55,9 @@ Next:
     changed, since total revenue = price x QD
   -finish restructuring tests
   -clean-up to finish off the restructuring
+    -should there be a version of update() that only updates
+    specific fields, or would the time saved be too insignificant
+    compared to the time to make it work
     -why are Quantity and Price in the utility folder?
     -when (if ever) to implement the other part of getEconomicSurplus()?
       -erase alert in it at some point
