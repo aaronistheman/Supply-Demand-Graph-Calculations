@@ -9,13 +9,13 @@ Next:
   -basic setups
     -view type #2: Canvases; called GraphsView
       -cut functionality out of main.js or graph.js
-      -constructor that stores the canvases
-      -have some context wrapper custom type so I don't have to keep
-      putting the width and height in
       -a method for each possible canvas edit
       -update()
       -when finished:
         -should be able to see the graphs drawn on the canvases
+        -graph.js and main.js should probably be pretty much empty
+      -have some context wrapper custom type so I don't have to keep
+      putting the width and height in
     -controller type
       -cut functionality out of main.js or graph.js
       -sets up event handlers

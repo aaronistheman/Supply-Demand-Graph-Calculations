@@ -18,8 +18,11 @@ $(document).ready(function() {
     var supplyPoints = "40 0.25 ; 50 0.30 ; 90 0.75 ; 110 1.35";
     var demandPoints = "30 1.25 ; 90 0.75 ; 110 0.30";
     var data = new Data(supplyPoints, demandPoints);
+    
     var textView = new TextView();
     textView.updateAll(data);
+    
+    var graphView = new GraphView();
     
     /**
      * Set up event handlers. Should be simplified by the

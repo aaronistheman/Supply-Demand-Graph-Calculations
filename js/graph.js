@@ -24,22 +24,6 @@ function Graph(supplyDataString, demandDataString) {
   if (!(this instanceof Graph))
     return new Graph();
 
-  this._supply = new PiecewiseFunction();
-  Graph._readFunctionData(this._supply, supplyDataString);
-  
-  this._demand = new PiecewiseFunction();
-  Graph._readFunctionData(this._demand, demandDataString);
-  
-  // Store references to the point arrays
-  this._sPoints = this._supply.getPoints();
-  this._dPoints = this._demand.getPoints();
-  
-  this._lowestQuantity = this.calculateLowestQuantity();
-  this._highestQuantity = this.calculateHighestQuantity();
-  
-  this._eqPoint = this.calculateEquilibriumPoint();
-  this._qd = this._eqPoint.x;
-  this._qs = this._eqPoint.x;
   
   this._wp = undefined; // world price
   
@@ -128,14 +112,6 @@ Graph.prototype = {
     }
   },
   
-  getQd : function() {
-    return this._qd;
-  },
-  
-  getQs : function() {
-    return this._qs;
-  },
-  
   /**
    * Other methods
    */
@@ -209,30 +185,6 @@ Graph.prototype = {
       ctx.stroke();
     }
   },
-  
-  _setUpCanvases : function() {
-    this._supplyCanvas = $("#supply-graph")[0];
-    this._supplyCtx = this._supplyCanvas.getContext('2d');
-    Graph._applyContextSettings(this._supplyCanvas, this._supplyCtx);
-
-    this._demandCanvas = $("#demand-graph")[0];
-    this._demandCtx = this._demandCanvas.getContext('2d');
-    Graph._applyContextSettings(this._demandCanvas, this._demandCtx);
-  
-    this._axesCanvas = $("#axes-graph")[0];
-    this._axesCtx = this._axesCanvas.getContext('2d');
-    this._axesCtx.translate(Graph.EDGE_OFFSET_X,
-      this._axesCanvas.height - Graph.EDGE_OFFSET_Y);
-    this._axesCtx.scale(1, -1);
-    
-    this._indicatorCanvas = $("#graph-indicators")[0];
-    this._indicatorCtx = this._indicatorCanvas.getContext('2d');
-    Graph._applyContextSettings(this._indicatorCanvas, this._indicatorCtx);
-    
-    this._wpCanvas = $("#wp-canvas")[0];
-    this._wpCtx = this._wpCanvas.getContext('2d');
-    Graph._applyContextSettings(this._wpCanvas, this._wpCtx);
-  }, // setUpCanvases()
   
   /**
    * Emphasizes where the lowest quantity used for calculations
