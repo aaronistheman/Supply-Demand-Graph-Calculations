@@ -39,6 +39,18 @@ QUnit.module(currentTestedFile + ", Price.getUnrounded()");
     assert.deepEqual(p.getUnrounded(), 5.789222);
   });
 
+QUnit.module(currentTestedFile + ", Price.getDisplayFriendly()");
+
+  QUnit.test("correct return", function(assert) {
+    var p = new Price(5.7);
+    assert.deepEqual(p.getDisplayFriendly(), "5.70");
+  });
+
+  QUnit.test("correct return", function(assert) {
+    var p = new Price(5.789222);
+    assert.deepEqual(p.getDisplayFriendly(), "5.79");
+  });
+
 currentTestedFile = "model/data.js";
 QUnit.module(currentTestedFile + ", Data.calculateEquilibriumPoint()");
 
