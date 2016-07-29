@@ -67,7 +67,7 @@ Data.prototype = {
    * quantity of the difference between demand and the equilibrium
    * price.
    *
-   * @return a Price value, since consumer surplus is in dollars
+   * @return a Price object, since consumer surplus is in dollars
    */
   getConsumerSurplus : function() {
     var range = this.eq - this.mLowestQuantity;
@@ -82,7 +82,7 @@ Data.prototype = {
     }
     
     // use the wrapper to round the value
-    return (new Price(answer)).get();
+    return (new Price(answer));
   },
   
   /**
@@ -90,7 +90,7 @@ Data.prototype = {
    * to the equilibrium quantity of the difference between
    * the equilibrium price and supply.
    *
-   * @return a Price value, since producer surplus is in dollars
+   * @return a Price object, since producer surplus is in dollars
    */
   getProducerSurplus : function() {
     var range = this.eq - this.mLowestQuantity;
@@ -105,18 +105,18 @@ Data.prototype = {
     }
     
     // use the wrapper to round the value
-    return (new Price(answer)).get();
+    return (new Price(answer));
   },
   
   /**
    * Specify both parameters to avoid recalculation.
-   * @param cs consumer surplus; rounded price value
-   * @param ps producer surplus; rounded price value
-   * @return a Price value
+   * @param cs consumer surplus; Price object
+   * @param ps producer surplus; Price object
+   * @return a Price object
    */
   getEconomicSurplus : function(cs, ps) {
     if (arguments.length == 2)
-      return (cs + ps);
+      return new Price(cs.getUnrounded() + ps.getUnrounded());
     else {
       ; // calculate total surplus
       

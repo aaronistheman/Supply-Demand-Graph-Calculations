@@ -34,14 +34,7 @@ $(document).ready(function() {
     var tr = graph.getTotalRevenue();
     $("#total-rev").html((Math.round(tr * 100) / 100).toFixed(2));
       
-    var cs = graph.getConsumerSurplus();
-    $("#con-s").html((Math.round(cs * 100) / 100).toFixed(2));
     
-    var ps = graph.getProducerSurplus();
-    $("#pro-s").html((Math.round(ps * 100) / 100).toFixed(2));
-    
-    var es = cs + ps;
-    $("#eco-s").html((Math.round(es * 100) / 100).toFixed(2));
     
     var state = STATE.EQUILIBRIUM;
     $("#state").html(state);
