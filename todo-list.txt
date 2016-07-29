@@ -10,8 +10,6 @@ Next:
     -view type #1: DOM; called TextView
       -cut functionality out of main.js or graph.js
         -get the initial setup in main.js; make it work
-          -figure out nice way to incorporate toFixed(2)
-            -change those data methods to return Price objects
           -need to update the state at some point
       -when finished:
         -should be able to see the unchanged data in the panels
