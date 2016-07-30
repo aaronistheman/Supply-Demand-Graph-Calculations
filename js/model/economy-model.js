@@ -185,10 +185,13 @@ EconomyModel.prototype = {
   },
   
   /**
-   * @return a Quantity object
+   * @return a quantity value
    */
   getNumberImports : function() {
-    
+    if (this.qd > this.qs) // if importing makes sense
+      return this.qd - this.qs;
+    else // if are exports (or no trade)
+      return 0;
   },
   
   getDeadweightLoss : function() {

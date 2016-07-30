@@ -31,8 +31,6 @@ $(document).ready(function() {
         graph.redrawWorldPriceLine();
         
         
-        // number of imports
-        $("#imports").html(qd - qs);
       }
       else {
         

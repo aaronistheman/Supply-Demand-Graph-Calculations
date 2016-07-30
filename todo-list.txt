@@ -11,7 +11,6 @@ Next:
       -transfer the modifications from graph.js and main.js
         -set new world price
           -modify welfare (or just modify everything to avoid mistakes)
-          -number of imports
         -eliminated world price
           -clear graph.js's setWp
   -can't set world price that would cause "x out of range"
