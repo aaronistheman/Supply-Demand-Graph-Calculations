@@ -4,12 +4,18 @@
  * View custom type in charge of the display of the data
  * in the stacked canvases of the webpage. Only involves canvas
  * drawing (sometimes of text).
+ *
+ * Much of the code regarding the labelling and "tick-marking" of
+ * the axes is from "HTML5 Canvas Cookbook" by Eric Rowell.
  */
 function GraphView() {
   if (!(this instanceof GraphView))
     alertAndThrowException("Forgot 'new' before GraphView constructor");
   
   this.mStoreElements();
+  this.drawAxes();
+  // this.redrawDemand();
+  // this.redrawSupply();
 } // GraphView
 
 GraphView.prototype = {
@@ -38,6 +44,76 @@ GraphView.prototype = {
     this.mWpCanvas = $("#wp-canvas")[0];
     this.mWpCtx = this.mWpCanvas.getContext('2d');
     Graph.applyGraphContextSettings(this.mWpCanvas, this.mWpCtx);
+  },
+  
+  drawAxes : function() {
+    this.mDrawXAxis();
+    this.mDrawYAxis();
+  },
+  
+  mDrawXAxis : function() {
+    this.mAxesCtx.beginPath();
+    
+    // the x-axis line
+    this.mAxesCtx.moveTo(0, 0);
+    this.mAxesCtx.lineTo(this.mAxesCanvas.width, 0);
+    
+    // draw tick marks
+    for (var i = 1; i <= Graph.numTicksX; i++) {
+      this.mAxesCtx.moveTo(i * this.mAxesCanvas.width /
+        Graph.numGapsX, -1 * Graph.halfTick);
+      this.mAxesCtx.lineTo(i * this.mAxesCanvas.width /
+        Graph.numGapsX, Graph.halfTick);
+    }
+
+    // draw labels
+    this.mAxesCtx.save();
+    this.mAxesCtx.scale(1, -1);
+    this.mAxesCtx.textAlign = "center";
+    this.mAxesCtx.textBaseline = "middle";
+    for (var i = 1; i <= Graph.numTicksX; i++) {
+      var label = Math.round(i * Graph.maxX / Graph.numGapsX);
+      this.mAxesCtx.fillText(label,
+        i * this.mAxesCanvas.width / Graph.numGapsX,
+        Graph.labelOffset);
+    }
+    this.mAxesCtx.restore();
+    
+    this.mAxesCtx.stroke();
+  },
+  
+  mDrawYAxis : function() {
+    this.mAxesCtx.beginPath();
+    
+    // the line
+    this.mAxesCtx.moveTo(0, 0);
+    this.mAxesCtx.lineTo(0, this.mAxesCanvas.height);
+
+    // draw tick marks
+    for (var i = 1; i <= Graph.numTicksY; i++) {
+      this.mAxesCtx.moveTo(-1 * Graph.halfTick, i * this.mAxesCanvas.height /
+        Graph.numGapsY);
+      this.mAxesCtx.lineTo(Graph.halfTick, i * this.mAxesCanvas.height /
+        Graph.numGapsY);
+    }
+
+    // draw labels
+    this.mAxesCtx.save();
+    this.mAxesCtx.scale(1, -1); // so that text isn't upside down
+    this.mAxesCtx.textAlign = "center";
+    this.mAxesCtx.textBaseline = "middle";
+    for (var i = 1; i <= Graph.numTicksY; i++) {
+      // Because y-axis represents money amount
+      var label = (Math.round(i * Graph.maxY * 100 /
+        Graph.numGapsY) / 100).toFixed(2);
+
+      this.mAxesCtx.fillText(label,
+        -Graph.labelOffset,
+        -i * this.mAxesCanvas.height / Graph.numGapsY);
+    }
+    this.mAxesCtx.restore();
+    
+    this.mAxesCtx.stroke();
   },
 };
 

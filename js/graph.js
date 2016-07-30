@@ -1,24 +1,9 @@
 "use strict";
 
 /**
- * Graph custom type that's specifically for this project but
- * perhaps has general use.
- *
  * Note that the beginPath method of the canvas context is sometimes
  * called seemingly randomly, to clear the canvas' strokes
  * (so clearRect() would do something).
- *
- * Regarding the methods that use Riemann sums: the number of rectangles
- * and the use of rounding, in my opinion, make which Riemann sum
- * (e.g. right, left, midpoint) I use unimportant.
- *
- * Much of the code regarding the labelling and "tick-marking" of
- * the axes is from "HTML5 Canvas Cookbook" by Eric Rowell.
- *
- * @param supplyDataString should have following format:
- * "quantity price ; quantity price ; quantity price", with
- * increasing quantities; (see unit tests for examples)
- * @param demandDataString see immediately above
  */
 function Graph(supplyDataString, demandDataString) {
   if (!(this instanceof Graph))
@@ -198,76 +183,6 @@ Graph.prototype = {
       
     this._indicatorCtx.stroke();
   }, // emphasizeHighestQuantity()
-  
-  _drawXAxis : function() {
-    this._axesCtx.beginPath();
-    
-    // the line
-    this._axesCtx.moveTo(0, 0);
-    this._axesCtx.lineTo(this._axesCanvas.width, 0);
-    
-    // draw tick marks
-    for (var i = 1; i <= Graph.NUM_TICKS_X; i++) {
-      this._axesCtx.moveTo(i * this._axesCanvas.width /
-        Graph.NUM_GAPS_X, -Graph.HALF_TICK);
-      this._axesCtx.lineTo(i * this._axesCanvas.width /
-        Graph.NUM_GAPS_X, Graph.HALF_TICK);
-    }
-
-    // draw labels
-    this._axesCtx.save();
-    this._axesCtx.scale(1, -1);
-    this._axesCtx.textAlign = "center";
-    this._axesCtx.textBaseline = "middle";
-    for (var i = 1; i <= Graph.NUM_TICKS_X; i++) {
-      var label = Math.round(i * Graph.MAX_X / Graph.NUM_GAPS_X);
-      this._axesCtx.fillText(label,
-        i * this._axesCanvas.width / Graph.NUM_GAPS_X,
-        Graph.LABEL_OFFSET);
-    }
-    this._axesCtx.restore();
-    
-    this._axesCtx.stroke();
-  }, // _drawXAxis()
-  
-  _drawYAxis : function() {
-    this._axesCtx.beginPath();
-    
-    // the line
-    this._axesCtx.moveTo(0, 0);
-    this._axesCtx.lineTo(0, this._axesCanvas.height);
-
-    // draw tick marks
-    for (var i = 1; i <= Graph.NUM_TICKS_Y; i++) {
-      this._axesCtx.moveTo(-Graph.HALF_TICK, i * this._axesCanvas.height /
-        Graph.NUM_GAPS_Y);
-      this._axesCtx.lineTo(Graph.HALF_TICK, i * this._axesCanvas.height /
-        Graph.NUM_GAPS_Y);
-    }
-
-    // draw labels
-    this._axesCtx.save();
-    this._axesCtx.scale(1, -1); // so that text isn't upside down
-    this._axesCtx.textAlign = "center";
-    this._axesCtx.textBaseline = "middle";
-    for (var i = 1; i <= Graph.NUM_TICKS_Y; i++) {
-      // Because y-axis represents money amount
-      var label = (Math.round(i * Graph.MAX_Y * 100 /
-        Graph.NUM_GAPS_Y) / 100).toFixed(2);
-
-      this._axesCtx.fillText(label,
-        -Graph.LABEL_OFFSET,
-        -i * this._axesCanvas.height / Graph.NUM_GAPS_Y);
-    }
-    this._axesCtx.restore();
-    
-    this._axesCtx.stroke();
-  }, // _drawYAxis()
-
-  drawAxes : function() {
-    this._drawXAxis();
-    this._drawYAxis();
-  },
 
   /**
    * Doesn't clean the canvas before drawing

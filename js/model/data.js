@@ -5,6 +5,15 @@
  * and the settings given by the user.
  *
  * Private members have an 'm' prefix (e.g. mDoSomethingPrivate())
+ *
+ * Regarding the methods that use Riemann sums: the number of rectangles
+ * and the use of rounding, in my opinion, make which Riemann sum
+ * (e.g. right, left, midpoint) I use unimportant.
+ *
+ * @param supplyDataString should have following format:
+ * "quantity price ; quantity price ; quantity price", with
+ * increasing quantities; (see unit tests for examples)
+ * @param demandDataString see immediately above
  */
 function Data(supplyDataString, demandDataString) {
   if (!(this instanceof Data))
@@ -80,7 +89,7 @@ Data.prototype = {
     var step = range / this.mNumRectangles;
     var answer = 0;
     
-    // Execute the summation
+    // Execute the Riemann summation
     for (var q = this.mLowestQuantity + step, i = 0;
       i < this.mNumRectangles; q += step, ++i)
     {
@@ -103,7 +112,7 @@ Data.prototype = {
     var step = range / this.mNumRectangles;
     var answer = 0;
     
-    // Execute the summation
+    // Execute the Riemann summation
     for (var q = this.mLowestQuantity + step, i = 0;
       i < this.mNumRectangles; q += step, ++i)
     {

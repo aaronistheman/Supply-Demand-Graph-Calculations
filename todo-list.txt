@@ -9,7 +9,6 @@ Next:
   -basic setups
     -view type #2: Canvases; called GraphsView
       -cut functionality out of main.js or graph.js
-        -drawAxes
         -redrawDemand
         -redrawSupply
       -update() <-- figure out how/where/why
@@ -51,6 +50,8 @@ Next:
     -figure out if where I initially set up qd and qs is best
     -make sure correct state is shown if disequilibrium
     -should constants.js be in utility?
+    -the maxes seem a little deceptive, since they are not visible
+    due to the label offset
   -finish restructuring tests
   -clean-up to finish off the restructuring
     -should there be a version of update() that only updates
