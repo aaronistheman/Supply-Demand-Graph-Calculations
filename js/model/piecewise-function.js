@@ -6,7 +6,8 @@
  */
 function PiecewiseFunction() {
   if (!(this instanceof PiecewiseFunction)) // if user forgot "new"
-    alertAndThrowException("Forgot 'new'");
+    alertAndThrowException(
+      "Forgot 'new' before PiecewiseFunction constructor");
 
   this._points = []; // array of instances of Point
 }
