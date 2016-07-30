@@ -12,6 +12,7 @@ $(document).ready(function() {
     textView.updateAll(data);
     
     var graphView = new GraphView();
+    graphView.updateAll(data);
     
     /**
      * Set up event handlers. Should be simplified by the

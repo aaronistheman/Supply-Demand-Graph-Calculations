@@ -67,6 +67,18 @@ Data.prototype = {
       return States.Shortage;
   },
   
+  getDemand : function() {
+    return this.mDemand;
+  },
+  
+  getSupply : function() {
+    return this.mSupply;
+  },
+  
+  /**
+   * Non-accessor, non-mutator, public methods
+   */
+  
   /**
    * @return instance of Price
    */
@@ -153,10 +165,6 @@ Data.prototype = {
   getTaxRevenue : function() {
     
   },
-  
-  /**
-   * Non-accessor, non-mutator, public methods
-   */
   
   /**
    * @param changedSettings object that maps each changed setting

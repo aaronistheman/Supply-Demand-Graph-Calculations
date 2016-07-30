@@ -7,17 +7,6 @@ Contents:
 Next:
 -restructure project:
   -basic setups
-    -view type #2: Canvases; called GraphsView
-      -cut functionality out of main.js or graph.js
-        -mDrawGraph
-        -redrawDemand
-        -redrawSupply
-      -update() <-- figure out how/where/why
-      -when finished:
-        -should be able to see the graphs drawn on the canvases
-        -graph.js and main.js should probably be pretty much empty
-      -have some context wrapper custom type so I don't have to keep
-      putting the width and height in
     -controller type
       -cut functionality out of main.js or graph.js
       -sets up event handlers
@@ -53,6 +42,8 @@ Next:
     -should constants.js be in utility?
     -the maxes seem a little deceptive, since they are not visible
     due to the label offset
+    -have some context wrapper custom type so I don't have to keep
+    putting the width and height in
   -finish restructuring tests
   -clean-up to finish off the restructuring
     -should there be a version of update() that only updates

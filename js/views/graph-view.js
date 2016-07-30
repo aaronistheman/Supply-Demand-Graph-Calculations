@@ -13,9 +13,7 @@ function GraphView() {
     alertAndThrowException("Forgot 'new' before GraphView constructor");
   
   this.mStoreElements();
-  this.drawAxes();
-  this.redrawDemand();
-  this.redrawSupply();
+  this.drawAxes(); // should only be done once
 } // GraphView
 
 GraphView.prototype = {
@@ -44,6 +42,17 @@ GraphView.prototype = {
     this.mWpCanvas = $("#wp-canvas")[0];
     this.mWpCtx = this.mWpCanvas.getContext('2d');
     Graph.applyGraphContextSettings(this.mWpCanvas, this.mWpCtx);
+  }, // mStoreElements()
+  
+  /**
+   * @param data instance of Data
+   */
+  updateAll : function(data) {
+    if (!(data instanceof Data))
+      alertAndThrowException("data parameter is of wrong type");
+    
+    this.redrawDemand(data.getDemand());
+    this.redrawSupply(data.getSupply());
   },
 
   /**
@@ -53,23 +62,29 @@ GraphView.prototype = {
   mDrawGraph : function(points, canvas, ctx) {
     // Move to the first point
     ctx.beginPath();
-    ctx.moveTo(canvas.width * points[0].q, canvas.height * points[0].p);
+    ctx.moveTo(canvas.width * points[0].q(), canvas.height * points[0].p());
     for (var i in points) {
-      ctx.lineTo(canvas.width * points[i].q, canvas.height * points[i].p);
+      ctx.lineTo(canvas.width * points[i].q(), canvas.height * points[i].p());
     }
 
     ctx.stroke();
   },
-  
-  redrawSupply : function() {
+
+  /**
+   * @param supply instance of PiecewiseFunction
+   */
+  redrawSupply : function(supply) {
     Graph.clearCanvas(this.mSupplyCanvas, this.mSupplyCtx);
-    this.mDrawGraph(this.mSupply.getPoints(), this.mSupplyCanvas,
+    this.mDrawGraph(supply.getPoints(), this.mSupplyCanvas,
       this.mSupplyCtx);
   },
 
-  redrawDemand : function() {
+  /**
+   * @param demand instance of PiecewiseFunction
+   */
+  redrawDemand : function(demand) {
     Graph.clearCanvas(this.mDemandCanvas, this.mDemandCtx);
-    this.mDrawGraph(this.mDemand.getPoints(), this.mDemandCanvas,
+    this.mDrawGraph(demand.getPoints(), this.mDemandCanvas,
       this.mDemandCtx);
   },
   
