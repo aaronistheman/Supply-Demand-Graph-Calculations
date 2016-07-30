@@ -38,16 +38,11 @@ Graph.prototype = {
    * Sets world price, but also updates quantities.
    */
   setWp : function(newWp) {
-    this._wp = newWp;
-    
-    if (!isUnitTesting()) {
-      if (this._wp !== undefined)
-        this._updateWorldQuantities();
-      else {
-        this._eqPoint = this.calculateEquilibriumPoint();
-        this._qd = this._qs = this._eqPoint.x;
-      }
-    }
+      // else {
+        // // this._eqPoint = this.calculateEquilibriumPoint();
+        // // this._qd = this._qs = this._eqPoint.x;
+      // }
+    // }
   },
   
   /**
@@ -55,10 +50,6 @@ Graph.prototype = {
    */
 
   
-  _updateWorldQuantities : function() {
-    this._qd = this.determineWorldQD();
-    this._qs = this.determineWorldQS();
-  },
   
   /**
    * Server as eraser method if world price is undefined

@@ -35,7 +35,7 @@ SettingsController.worldPriceHandler =
   var newWp = parseFloat($("#world-p").val());
   
   if (!newWp || newWp < economyModel.ep) { // if valid input that I can handle
-    // economyModel.setWp(newWp);
+    economyModel.setWp(newWp);
     textView.updateAll(economyModel);
     graphView.updateAll(economyModel);
   }

@@ -48,9 +48,7 @@ TextView.prototype = {
     var es = data.getEconomicSurplus(cs, ps);
     this.$es.html(es.forDisplay());
     
-    if (state == States.Equilibrium) {
-      this.$qd.html(data.qd);
-      this.$qs.html(data.qs);
-    }
+    this.$qd.html(data.qd);
+    this.$qs.html(data.qs);
   },
 };

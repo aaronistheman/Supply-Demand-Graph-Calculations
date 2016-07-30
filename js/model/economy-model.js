@@ -80,20 +80,32 @@ EconomyModel.prototype = {
    */
   
   /**
+   * Although this mutator isn't needed (this.wp is "public"),
+   * it conveniently lumps together the operations associated
+   * with changing the world price.
+   *
    * @param newWp (not necessarily rounded) price value;
    * newWp < this.ep
    */
   setWp : function(newWp) {
-    var newWpRounded = Price.get(newWp);
+    if (newWp) { // if user set new world price
+      var newWpRounded = Price.get(newWp);
+      
+      // error-checking
+      if (newWpRounded >= this.ep)
+        alertAndThrowException(
+          "setWp was given world price higher than equilibrium price");
     
-    // error-checking
-    if (newWpRounded >= this.ep)
-      alertAndThrowException(
-        "setWp was given world price higher than equilibrium price");
-    
-    this.wp = newWpRounded;
-    
-    
+      this.wp = newWpRounded;
+      
+      this.qd = this.calculateWorldQd();
+      this.qs = this.calculateWorldQs();
+    }
+    else { // if user eliminated world price
+      this.wp = undefined;
+      
+      
+    }
   }, // setWp()
   
   /**
