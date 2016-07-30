@@ -53,7 +53,18 @@ Graph.edgeOffsetY = 40;
 Graph.maxX = 150;
 Graph.maxY = 1.80;
 
+// For drawing axes
+Graph.numTicksX = 5; // a tick is a little line perpendicular to axis
+Graph.numTicksY = 5;
+Graph.numGapsX = Graph.numTicksX + 1;
+Graph.numGapsY = Graph.numTicksY + 1;
+Graph.tickLength = 10;
+Graph.halfTick = Graph.tickLength / 2;
 
+Graph.dashLength = 10;
+
+// each tick usually has a label near it (e.g. 1.20)
+Graph.labelOffset = 20; // how far label is from respective axis
 
 /**
  * "Static" methods for GraphView

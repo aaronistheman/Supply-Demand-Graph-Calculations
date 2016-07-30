@@ -29,7 +29,6 @@ function Graph(supplyDataString, demandDataString) {
   
   // Stuff that involves a webpage and are not needed by unit test
   if (!isUnitTesting()) {
-    this._setUpCanvases();
   
     // set graph title
     $("#graph-title").html("Glue");
@@ -38,31 +37,6 @@ function Graph(supplyDataString, demandDataString) {
     this.emphasizeEquilibriumQuantity();
   } // if not unit testing
 } // Graph constructor
-
-/**
- * "Static" variables for Graph
- */
-
-
-
-Graph.NUM_TICKS_X = 5;
-Graph.NUM_TICKS_Y = 5;
-Graph.NUM_GAPS_X = Graph.NUM_TICKS_X + 1;
-Graph.NUM_GAPS_Y = Graph.NUM_TICKS_Y + 1;
-Graph.TICK_LENGTH = 10;
-Graph.HALF_TICK = Graph.TICK_LENGTH / 2;
-
-Graph.DASH_LENGTH = 10;
-
-Graph.LABEL_OFFSET = 20; // how far label is from respective axis
-
-Graph.NUM_RECTANGLES = 100000; // usually for Riemann sums
-
-/**
- * "Static" methods for Graph
- */
-
-
 
 /**
  * This method is needed because of the context offset.
