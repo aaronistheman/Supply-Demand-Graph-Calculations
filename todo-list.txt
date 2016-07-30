@@ -7,15 +7,13 @@ Contents:
 Next:
 -restructure project:
   -basic setups
-    -controller type
+    -controller type(s)
       -cut functionality out of main.js or graph.js
-      -sets up event handlers
-        -if valid input
-          -each (event handler) calls model.update() with appropriate
-          parameters
-          -each probably calls view.update()
-        -else
-          -alert
+        -perhaps make two different files for the controllers that
+        deal with settings and the ones that deal with hi-liting
+        -sets up event handlers
+          -world price (the first) handler; new branch?
+          -the second handler
   -CAN CONTINUE IMPLEMENTING FEATURES
   -model type, named Data
     -idea that may not work well but also could work well

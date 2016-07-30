@@ -14,6 +14,9 @@ $(document).ready(function() {
     var graphView = new GraphView();
     graphView.updateAll(data);
     
+    var eventHandlers = new EventHandlers();
+    eventHandlers.setUpAllHandlers(data);
+    
     /**
      * Set up event handlers. Should be simplified by the
      * controller type(s).
@@ -39,9 +42,7 @@ $(document).ready(function() {
         $("#imports").html(qd - qs);
       }
       else {
-        alert("Because the developer wasn't particularly " +
-          "knowledgeable about economics, a set world " +
-          "price must be below the equilibrium price. His apologies.");
+        
       }
     }); // if changing world price
     
