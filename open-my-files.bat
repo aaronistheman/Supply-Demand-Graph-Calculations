@@ -13,5 +13,6 @@ start Notepad++ js/model/constants.js
 start Notepad++ js/model/point.js
 start Notepad++ js/views/text-view.js
 start Notepad++ js/views/graph-view.js
-start Notepad++ js/controllers/event-handlers.js
+start Notepad++ js/controllers/settings-controller.js
+REM start Notepad++ js/controllers/emphasis-controller.js
 exit

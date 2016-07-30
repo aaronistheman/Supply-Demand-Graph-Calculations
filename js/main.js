@@ -14,8 +14,8 @@ $(document).ready(function() {
     var graphView = new GraphView();
     graphView.updateAll(data);
     
-    var eventHandlers = new EventHandlers();
-    eventHandlers.setUpAllHandlers(data);
+    var settingsController = new SettingsController();
+    settingsController.setUpAllHandlers(data);
     
     /**
      * Set up event handlers. Should be simplified by the

@@ -1,24 +1,29 @@
 "use strict";
 
-function EventHandlers() {
-  if (!(this instanceof EventHandlers))
-    alertAndThrowException("Forgot 'new' before EventHandlers constructor");
-} // EventHandlers()
+/**
+ * Deals with the event handlers that allow the user to change
+ * the economic model.
+ */
+function SettingsController() {
+  if (!(this instanceof SettingsController))
+    alertAndThrowException(
+      "Forgot 'new' before SettingsController constructor");
+} // SettingsController()
 
-EventHandlers.prototype = {
-  constructor : EventHandlers,
+SettingsController.prototype = {
+  constructor : SettingsController,
   
   /**
    * @param data instance of Data
    */
   setUpAllHandlers : function(data) {
     $("#b-world-p").click(function() {
-      EventHandlers.worldPriceHandler(data);
+      SettingsController.worldPriceHandler(data);
     });
   },
 };
 
-EventHandlers.worldPriceHandler = function(data) {
+SettingsController.worldPriceHandler = function(data) {
   var newWp = parseFloat($("#world-p").val());
   
   if (isNaN(newWp)) { // if numbern not given

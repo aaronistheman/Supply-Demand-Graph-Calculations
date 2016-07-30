@@ -5,7 +5,7 @@ Contents:
 -Considerable
 
 Next:
--two different controllers: one for settings and one for hi-liting (just stub)
+-change Data to EconomyModel
 -finish moving world price handler
   -getWorldQD()
   -getWorldQS()
