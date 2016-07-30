@@ -34,11 +34,7 @@ SettingsController.worldPriceHandler =
   function(economyModel, textView, graphView) {
   var newWp = parseFloat($("#world-p").val());
   
-  if (isNaN(newWp)) { // if numbern not given
-    alert("Error: world price must be numerical value");
-  }
-  else if (newWp < economyModel.ep) { // if valid input that I can handle
-    alert("Valid world price");
+  if (!newWp || newWp < economyModel.ep) { // if valid input that I can handle
     // economyModel.setWp(newWp);
     textView.updateAll(economyModel);
     graphView.updateAll(economyModel);
