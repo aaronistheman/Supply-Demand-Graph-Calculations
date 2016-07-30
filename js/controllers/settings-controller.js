@@ -14,27 +14,34 @@ SettingsController.prototype = {
   constructor : SettingsController,
   
   /**
-   * @param data instance of Data
+   * @param economyModel instance of EconomyModel
+   * @param textView instance of TextView
+   * @param graphView instance of GraphView
    */
-  setUpAllHandlers : function(data) {
+  setUpAllHandlers : function(economyModel, textView, graphView) {
     $("#b-world-p").click(function() {
-      SettingsController.worldPriceHandler(data);
+      SettingsController.worldPriceHandler(economyModel, textView, graphView);
     });
   },
 };
 
-SettingsController.worldPriceHandler = function(data) {
+/**
+ * @param economyModel instance of EconomyModel
+ * @param textView instance of TextView
+ * @param graphView instance of GraphView
+ */
+SettingsController.worldPriceHandler =
+  function(economyModel, textView, graphView) {
   var newWp = parseFloat($("#world-p").val());
   
   if (isNaN(newWp)) { // if numbern not given
     alert("Error: world price must be numerical value");
   }
-  else if (newWp < data.ep) { // if valid input that I can handle
-    // update model
-    
-
-    // update view here? or should model do it?
-    
+  else if (newWp < economyModel.ep) { // if valid input that I can handle
+    alert("Valid world price");
+    // economyModel.setWp(newWp);
+    textView.updateAll(economyModel);
+    graphView.updateAll(economyModel);
   }
   else { // if valid input that I can't handle
     alert("Error: because the developer wasn't particularly " +

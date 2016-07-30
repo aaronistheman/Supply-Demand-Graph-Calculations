@@ -80,11 +80,21 @@ EconomyModel.prototype = {
    */
   
   /**
-   * @param newWp (not necessarily rounded) price value
+   * @param newWp (not necessarily rounded) price value;
+   * newWp < this.ep
    */
   setWp : function(newWp) {
-    this.wp = Price.get(newWp);
-  },
+    var newWpRounded = Price.get(newWp);
+    
+    // error-checking
+    if (newWpRounded >= this.ep)
+      alertAndThrowException(
+        "setWp was given world price higher than equilibrium price");
+    
+    this.wp = newWpRounded;
+    
+    
+  }, // setWp()
   
   /**
    * Non-accessor, non-mutator, public methods

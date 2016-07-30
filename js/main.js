@@ -15,7 +15,7 @@ $(document).ready(function() {
     graphView.updateAll(data);
     
     var settingsController = new SettingsController();
-    settingsController.setUpAllHandlers(data);
+    settingsController.setUpAllHandlers(data, textView, graphView);
     
     /**
      * Set up event handlers. Should be simplified by the

@@ -7,8 +7,10 @@ Contents:
 Next:
 -finish moving world price handler
   -transfer setWp
-    -probably pass a view to it from the controller
-    -modify welfare
+    -modify the model, then pass it to view's updateAll() (for now)
+      -transfer the modifications from graph.js and main.js
+      -modify welfare (or just modify everything to avoid mistakes)
+-replace "data" variable name with "economyModel"?
 -tests: indicate non-static-ness correctly (i.e. with "prototype")
 -closing economy handler
 -settings
@@ -37,6 +39,8 @@ Next:
   -should there be a version of update() that only updates
   specific fields, or would the time saved be too insignificant
   compared to the time to make it work
+    -ideas
+      -"update filters"
   -when (if ever) to implement the other part of getEconomicSurplus()?
     -erase alert in it at some point
   -remove Graph custom type and usage of it
