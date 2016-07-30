@@ -19,10 +19,10 @@ function EconomyModel(supplyDataString, demandDataString) {
   if (!(this instanceof EconomyModel))
     alertAndThrowException("Forgot 'new' before EconomyModel constructor");
   
-  this.eq; // equilibrium quantity value
-  this.ep; // equilibrium price value
-  this.qd; // quantity demanded value
-  this.qs; // quantity supplied value
+  this.eq; // domestic equilibrium quantity value
+  this.ep; // domestic equilibrium price value
+  this.qd; // quantity demanded (by domestic demanders) value
+  this.qs; // quantity supplied (by domestic suppliers) value
   this.wp; // world price
   this.taxAmount;
   this.whatTaxed; // should have a Graph constant value
@@ -54,10 +54,6 @@ function EconomyModel(supplyDataString, demandDataString) {
 EconomyModel.prototype = {
   constructor : EconomyModel,
   
-  /**
-   * Accessors
-   */
-  
   getState : function() {
     if (this.qd === this.qs)
       return States.Equilibrium;
@@ -74,10 +70,6 @@ EconomyModel.prototype = {
   getSupply : function() {
     return this.mSupply;
   },
-  
-  /**
-   * Mutators
-   */
   
   /**
    * Although this mutator isn't needed (this.wp is "public"),
@@ -107,10 +99,6 @@ EconomyModel.prototype = {
       
     }
   }, // setWp()
-  
-  /**
-   * Non-accessor, non-mutator, public methods
-   */
   
   /**
    * @return instance of Price
@@ -199,14 +187,6 @@ EconomyModel.prototype = {
   },
   
   getTaxRevenue : function() {
-    
-  },
-  
-  /**
-   * @param changedSettings object that maps each changed setting
-   * (e.g. world price) to its new value
-   */
-  update : function(changedSettings) {
     
   },
   
@@ -340,10 +320,6 @@ EconomyModel.prototype = {
   }, // calculateWorldQs()
   
   /**
-   * "Private" methods
-   */
-  
-  /**
    * @param func instance of PiecewiseFunction
    * @param dataString properly formatted string (e.g. "40 0.25; 50 0.30")
    * of ordered pairs (intended for (quantity, price) pairs)
@@ -385,4 +361,15 @@ EconomyModel.prototype = {
     this.eq = eqPoint.q();
     this.ep = eqPoint.p();
   }, // mUpdateEquilibriumPoint()
+  
+  /**
+   * @return the quantity value that should be used for welfare
+   * measurements
+   */
+  mGetEffectiveWelfareQuantity : function() {
+    if (this.wp)
+      return this.wp
+    else
+      return this.ep
+  }, // mGetEffectiveWelfareQuantity()
 };

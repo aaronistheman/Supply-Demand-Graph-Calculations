@@ -27,7 +27,6 @@ $(document).ready(function() {
       var wp = $("#world-p").val();
       
       if (wp < eq.y) {
-        graph.setWp(wp);
         graph.redrawWorldPriceLine();
         
         
