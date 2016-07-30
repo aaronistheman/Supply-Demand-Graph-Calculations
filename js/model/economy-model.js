@@ -15,9 +15,9 @@
  * increasing quantities; (see unit tests for examples)
  * @param demandDataString see immediately above
  */
-function Data(supplyDataString, demandDataString) {
-  if (!(this instanceof Data))
-    alertAndThrowException("Forgot 'new' before Data constructor");
+function EconomyModel(supplyDataString, demandDataString) {
+  if (!(this instanceof EconomyModel))
+    alertAndThrowException("Forgot 'new' before EconomyModel constructor");
   
   this.eq; // equilibrium quantity value
   this.ep; // equilibrium price value
@@ -49,10 +49,10 @@ function Data(supplyDataString, demandDataString) {
   
   // By default, economy is in equilibrium
   this.qd = this.qs = this.eq;
-} // custom type Data
+} // custom type EconomyModel
 
-Data.prototype = {
-  constructor : Data,
+EconomyModel.prototype = {
+  constructor : EconomyModel,
   
   /**
    * Accessors
