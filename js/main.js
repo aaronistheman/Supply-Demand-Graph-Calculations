@@ -42,9 +42,7 @@ $(document).ready(function() {
         $("#imports").html(qd - qs);
       }
       else {
-        alert("Because the developer wasn't particularly " +
-          "knowledgeable about economics, a set world " +
-          "price must be below the equilibrium price. His apologies.");
+        
       }
     }); // if changing world price
     
