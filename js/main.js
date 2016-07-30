@@ -15,6 +15,7 @@ $(document).ready(function() {
     graphView.updateAll(data);
     
     var eventHandlers = new EventHandlers();
+    eventHandlers.setUpAllHandlers(data);
     
     /**
      * Set up event handlers. Should be simplified by the

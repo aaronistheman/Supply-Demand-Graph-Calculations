@@ -1,17 +1,23 @@
 "use strict";
 
 function EventHandlers() {
-  this.setUpAllHandlers();
+  if (!(this instanceof EventHandlers))
+    alertAndThrowException("Forgot 'new' before EventHandlers constructor");
 } // EventHandlers()
 
 EventHandlers.prototype = {
   constructor : EventHandlers,
   
-  setUpAllHandlers : function() {
-    $("#b-world-p").click(EventHandlers.worldPriceHandler);
+  /**
+   * @param data instance of Data
+   */
+  setUpAllHandlers : function(data) {
+    $("#b-world-p").click(function() {
+      EventHandlers.worldPriceHandler(data);
+    });
   },
 };
 
-EventHandlers.worldPriceHandler = function() {
-  alert("Changing world price");
+EventHandlers.worldPriceHandler = function(data) {
+  alert(data.qd);
 };
