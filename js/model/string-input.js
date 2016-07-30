@@ -6,7 +6,7 @@
  */
 function StringInput(theString) { // constructor
   if (!(this instanceof StringInput)) // if caller forgot "new"
-    return new StringInput(theString);
+    alertAndThrowException("Forgot 'new' before StringInput constructor");
 
   this._stream = theString;
 }

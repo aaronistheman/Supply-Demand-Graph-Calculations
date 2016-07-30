@@ -5,62 +5,48 @@ Contents:
 -Considerable
 
 Next:
--restructure project:
-  -basic setups
-    -controller type(s)
-      -cut functionality out of main.js or graph.js
-        -perhaps make two different files for the controllers that
-        deal with settings and the ones that deal with hi-liting
-        -sets up event handlers
-          -world price (the first) handler; new branch?
-          -the second handler
-  -CAN CONTINUE IMPLEMENTING FEATURES
-  -model type, named Data
-    -idea that may not work well but also could work well
-      -gradually implement the Model methods to re-add the
-      initial display of the inital text box values; should
-      move the commented out graph.js tests to data.js
-        -should I do these yet?
-          -getWorldQD()
-          -getWorldQS()
-        -I don't think I set up these ones yet
-          -getNumberImports()
-          -getDeadweightLoss()
-          -getTaxRevenue()
-      -perhaps have some brief code-to-delete to make the graph
-      be drawn
-    -when finished:
-      -should be no more commented out tests, since only the model
-      stuff can (at least easily) be tested
-  -other
-    -at some point, getTotalRevenue() MUST be
-    changed, since total revenue = price x QD
-    -figure out if where I initially set up qd and qs is best
-    -make sure correct state is shown if disequilibrium
+-two different controllers: one for settings and one for hi-liting (just stub)
+-finish moving world price handler
+  -getWorldQD()
+  -getWorldQS()
+  -modify welfare
+-closing economy handler
+-settings
+  -see Note #1
+-hi-liting controller
+  -point value is highlighted (e.g. quantity demanded): perhaps show
+  with a line on the canvas
+  -area value is highlighted (e.g. deadweight loss): color the area
+-end
+  -make sure these are done
+    -getNumberImports()
+    -getDeadweightLoss()
+    -getTaxRevenue()
+  -should be no more commented out tests, since only the model
+  stuff can (at least easily) be tested
+  -at some point, getTotalRevenue() MUST be
+  changed, since total revenue = price x QD
+  -figure out if where I initially set up qd and qs is best
+  -make sure correct state is shown if disequilibrium
+  -make sure everything is put in correct folder
     -should constants.js be in utility?
-    -the maxes seem a little deceptive, since they are not visible
-    due to the label offset
-    -have some context wrapper custom type so I don't have to keep
-    putting the width and height in
-  -finish restructuring tests
-  -clean-up to finish off the restructuring
-    -should there be a version of update() that only updates
-    specific fields, or would the time saved be too insignificant
-    compared to the time to make it work
     -why are Quantity and Price in the utility folder?
-    -when (if ever) to implement the other part of getEconomicSurplus()?
-      -erase alert in it at some point
-    -remove uses of Math.round(), except in graph.js
-    -remove Graph custom type and usage of it
-    -replace "new" fixing with error
-    -make sure everything is put in correct folder
-      -adjust tests if needed
-    -describe the use of MVC in the readme
+    -adjust tests if needed
+  -the maxes seem a little deceptive, since they are not visible
+  due to the label offset
+  -have some context wrapper custom type so I don't have to keep
+  putting the width and height in
+  -should there be a version of update() that only updates
+  specific fields, or would the time saved be too insignificant
+  compared to the time to make it work
+  -when (if ever) to implement the other part of getEconomicSurplus()?
+    -erase alert in it at some point
+  -remove Graph custom type and usage of it
+  -describe the use of MVC in the readme
 
 Note #1:
 -remaining calculations/actions:
-  -open, private economy (again)
-    -I forgot that I need to change welfare
+  -open, private economy
   -closed, public economy
     -(excise) tax or subsidy on supply:
       -location of "active supply"
@@ -146,5 +132,5 @@ CSS in one of the card games
   -could use JavaScript/jQuery and, when ng-if creates an element,
   somehow react to the change to give the appropriate input fields
   their former values
--limit each text field's size
-  -or would this require too much assuming about the data
+-limit each text field's size?
+  -or would this require too much assuming about the data?
