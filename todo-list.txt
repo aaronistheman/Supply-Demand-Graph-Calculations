@@ -6,11 +6,9 @@ Contents:
 
 Next:
 -finish moving world price handler
-  -getWorldQD()
-  -getWorldQS()
-  -modify welfare
-    -figure out where to update view: pass view(s) to setWp()
-    -transfer setWp
+  -transfer setWp
+    -probably pass a view to it from the controller
+    -modify welfare
 -tests: indicate non-static-ness correctly (i.e. with "prototype")
 -closing economy handler
 -settings

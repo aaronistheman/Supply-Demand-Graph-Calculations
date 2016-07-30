@@ -76,6 +76,17 @@ EconomyModel.prototype = {
   },
   
   /**
+   * Mutators
+   */
+  
+  /**
+   * @param newWp (not necessarily rounded) price value
+   */
+  setWp : function(newWp) {
+    this.wp = Price.get(newWp);
+  },
+  
+  /**
    * Non-accessor, non-mutator, public methods
    */
   
@@ -257,14 +268,50 @@ EconomyModel.prototype = {
    * @return the quantity demanded at the current world price
    */
   calculateWorldQd : function() {
+    if (this.wp < this.mDPoints[this.mDPoints.length - 1].p())
+      alertAndThrowException("World price causes extrapolation " +
+        "on demand data")
+
+    var range = this.mDPoints[this.mDPoints.length - 1].q() - this.eq;
+    var step = range / this.mNumRectangles;
+    var q = this.eq;
+    var price = this.mDemand.getP(q);
     
+    // Go forward from equilibrium point until price would become
+    // lower than world price,
+    // at which point the method would stop and return the current quantity
+    while (price > this.wp) {
+      // advance
+      q += step;
+      price = this.mDemand.getP(q);
+    }
+    
+    return q;
   }, // calculateWorldQd()
   
   /**
    * @return the quantity supplied at the current world price
    */
   calculateWorldQs : function() {
+    if (this.wp < this.mSPoints[0].p())
+      alertAndThrowException("World price causes extrapolation " +
+        "on supply data")
+
+    var range = this.eq - this.mSPoints[0].q();
+    var step = range / this.mNumRectangles;
+    var q = this.eq;
+    var price = this.mSupply.getP(q);
     
+    // Go backward from equilibrium point until price would become
+    // lower than world price,
+    // at which point the method would stop and return the current quantity
+    while (price > this.wp) {
+      // advance
+      q -= step;
+      price = this.mSupply.getP(q);
+    }
+    
+    return q;
   }, // calculateWorldQs()
   
   /**

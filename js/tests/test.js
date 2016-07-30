@@ -170,7 +170,7 @@ QUnit.module(currentTestedFile + ", EconomyModel.getState()");
     assert.deepEqual(data.getState(), States.Equilibrium);
   });
 
-QUnit.module(currentTestedFile + ", determineWorldQd()");
+QUnit.module(currentTestedFile + ", calculateWorldQd()");
 
   QUnit.test("correct value is a given quantity", function(assert) {
     var data = new EconomyModel(
@@ -178,7 +178,7 @@ QUnit.module(currentTestedFile + ", determineWorldQd()");
       "8 120; 10 100; 12 80; 13 70");
     
     data.setWp(80);
-    var result = Math.round(data.determineWorldQd());
+    var result = Math.round(data.calculateWorldQd());
     assert.deepEqual(result, 12); // correct value is from a point on the graph
   });
 
@@ -188,29 +188,29 @@ QUnit.module(currentTestedFile + ", determineWorldQd()");
       "40 1.50; 60 1.00; 100 0.50");
     
     data.setWp(0.75);
-    var result = Math.round(data.determineWorldQd());
+    var result = Math.round(data.calculateWorldQd());
     assert.deepEqual(result, 80); // correct value isn't from a point
   });
 
-QUnit.module(currentTestedFile + ", determineWorldQs()");
+QUnit.module(currentTestedFile + ", calculateWorldQs()");
 
   QUnit.test("correct value is a given quantity", function(assert) {
-    var data = new Data(
+    var data = new EconomyModel(
       "7 65; 8 80; 10 100; 12 120; 13 130",
       "8 120; 10 100; 12 80; 13 70");
     
     data.setWp(80);
-    var result = Math.round(data.determineWorldQs());
+    var result = Math.round(data.calculateWorldQs());
     assert.deepEqual(result, 8); // correct value is from a point on the graph
   });
   
   QUnit.test("correct value isn't a given quantity", function(assert) {
-    var data = new Data(
+    var data = new EconomyModel(
       "40 0.50; 80 1.00; 100 1.50",
       "80 1.50; 100 1.00");
     
     data.setWp(0.75);
-    var result = Math.round(data.determineWorldQs());
+    var result = Math.round(data.calculateWorldQs());
     assert.deepEqual(result, 60); // correct value isn't a point
   });
 

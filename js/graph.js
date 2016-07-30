@@ -55,51 +55,6 @@ Graph.prototype = {
    */
 
   
-  determineWorldQD : function() {
-    if (this._wp < this._dPoints[this._dPoints.length - 1].y)
-      alertAndThrowException("World price causes extrapolation " +
-        "on demand data")
-
-    var range = this._dPoints[this._dPoints.length - 1].x - this._eqPoint.x;
-    var step = range / Graph.NUM_RECTANGLES;
-    var x = this._eqPoint.x;
-    var price = this._demand.getY(x);
-    
-    // Go forward from equilibrium point until price would become
-    // lower than world price,
-    // at which point the method would stop and return the current quantity
-    while (price > this._wp) {
-      // advance
-      x += step;
-      price = this._demand.getY(x);
-    }
-    
-    return x;
-  },
-
-  
-  determineWorldQS : function() {
-    if (this._wp < this._sPoints[0].y)
-      alertAndThrowException("World price causes extrapolation " +
-        "on supply data")
-
-    var range = this._eqPoint.x - this._sPoints[0].x;
-    var step = range / Graph.NUM_RECTANGLES;
-    var x = this._eqPoint.x;
-    var price = this._supply.getY(x);
-    
-    // Go backward from equilibrium point until price would become
-    // lower than world price,
-    // at which point the method would stop and return the current quantity
-    while (price > this._wp) {
-      // advance
-      x -= step;
-      price = this._supply.getY(x);
-    }
-    
-    return x;
-  },
-  
   _updateWorldQuantities : function() {
     this._qd = this.determineWorldQD();
     this._qs = this.determineWorldQS();
