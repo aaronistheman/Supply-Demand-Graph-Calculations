@@ -25,23 +25,23 @@ GraphView.prototype = {
   mStoreElements : function() {
     this.mSupplyCanvas = $("#supply-graph")[0];
     this.mSupplyCtx = this.mSupplyCanvas.getContext('2d');
-    Graph.applyGraphContextSettings(this.mSupplyCanvas, this.mSupplyCtx);
+    GraphView.applyGraphContextSettings(this.mSupplyCanvas, this.mSupplyCtx);
 
     this.mDemandCanvas = $("#demand-graph")[0];
     this.mDemandCtx = this.mDemandCanvas.getContext('2d');
-    Graph.applyGraphContextSettings(this.mDemandCanvas, this.mDemandCtx);
+    GraphView.applyGraphContextSettings(this.mDemandCanvas, this.mDemandCtx);
   
     this.mAxesCanvas = $("#axes-graph")[0];
     this.mAxesCtx = this.mAxesCanvas.getContext('2d');
-    Graph.applyAxesContextSettings(this.mAxesCanvas, this.mAxesCtx);
+    GraphView.applyAxesContextSettings(this.mAxesCanvas, this.mAxesCtx);
     
     this.mIndicatorCanvas = $("#graph-indicators")[0];
     this.mIndicatorCtx = this.mIndicatorCanvas.getContext('2d');
-    Graph.applyGraphContextSettings(this.mIndicatorCanvas, this.mIndicatorCtx);
+    GraphView.applyGraphContextSettings(this.mIndicatorCanvas, this.mIndicatorCtx);
     
     this.mWpCanvas = $("#wp-canvas")[0];
     this.mWpCtx = this.mWpCanvas.getContext('2d');
-    Graph.applyGraphContextSettings(this.mWpCanvas, this.mWpCtx);
+    GraphView.applyGraphContextSettings(this.mWpCanvas, this.mWpCtx);
   }, // mStoreElements()
   
   /**
@@ -74,7 +74,7 @@ GraphView.prototype = {
    * @param supply instance of PiecewiseFunction
    */
   redrawSupply : function(supply) {
-    Graph.clearCanvas(this.mSupplyCanvas, this.mSupplyCtx);
+    GraphView.clearCanvas(this.mSupplyCanvas, this.mSupplyCtx);
     this.mDrawGraph(supply.getPoints(), this.mSupplyCanvas,
       this.mSupplyCtx);
   },
@@ -83,7 +83,7 @@ GraphView.prototype = {
    * @param demand instance of PiecewiseFunction
    */
   redrawDemand : function(demand) {
-    Graph.clearCanvas(this.mDemandCanvas, this.mDemandCtx);
+    GraphView.clearCanvas(this.mDemandCanvas, this.mDemandCtx);
     this.mDrawGraph(demand.getPoints(), this.mDemandCanvas,
       this.mDemandCtx);
   },
@@ -101,11 +101,11 @@ GraphView.prototype = {
     this.mAxesCtx.lineTo(this.mAxesCanvas.width, 0);
     
     // draw tick marks
-    for (var i = 1; i <= Graph.numTicksX; i++) {
+    for (var i = 1; i <= GraphView.numTicksX; i++) {
       this.mAxesCtx.moveTo(i * this.mAxesCanvas.width /
-        Graph.numGapsX, -1 * Graph.halfTick);
+        GraphView.numGapsX, -1 * GraphView.halfTick);
       this.mAxesCtx.lineTo(i * this.mAxesCanvas.width /
-        Graph.numGapsX, Graph.halfTick);
+        GraphView.numGapsX, GraphView.halfTick);
     }
 
     // draw labels
@@ -113,30 +113,30 @@ GraphView.prototype = {
     this.mAxesCtx.scale(1, -1);
     this.mAxesCtx.textAlign = "center";
     this.mAxesCtx.textBaseline = "middle";
-    for (var i = 1; i <= Graph.numTicksX; i++) {
-      var label = Math.round(i * Graph.maxX / Graph.numGapsX);
+    for (var i = 1; i <= GraphView.numTicksX; i++) {
+      var label = Math.round(i * GraphView.maxX / GraphView.numGapsX);
       this.mAxesCtx.fillText(label,
-        i * this.mAxesCanvas.width / Graph.numGapsX,
-        Graph.labelOffset);
+        i * this.mAxesCanvas.width / GraphView.numGapsX,
+        GraphView.labelOffset);
     }
     this.mAxesCtx.restore();
     
     this.mAxesCtx.stroke();
-  },
+  }, // mDrawXAxis()
   
   mDrawYAxis : function() {
     this.mAxesCtx.beginPath();
     
-    // the line
+    // the y-axis line
     this.mAxesCtx.moveTo(0, 0);
     this.mAxesCtx.lineTo(0, this.mAxesCanvas.height);
 
     // draw tick marks
-    for (var i = 1; i <= Graph.numTicksY; i++) {
-      this.mAxesCtx.moveTo(-1 * Graph.halfTick, i * this.mAxesCanvas.height /
-        Graph.numGapsY);
-      this.mAxesCtx.lineTo(Graph.halfTick, i * this.mAxesCanvas.height /
-        Graph.numGapsY);
+    for (var i = 1; i <= GraphView.numTicksY; i++) {
+      this.mAxesCtx.moveTo(-1 * GraphView.halfTick, i *
+        this.mAxesCanvas.height / GraphView.numGapsY);
+      this.mAxesCtx.lineTo(GraphView.halfTick, i * this.mAxesCanvas.height /
+        GraphView.numGapsY);
     }
 
     // draw labels
@@ -144,19 +144,19 @@ GraphView.prototype = {
     this.mAxesCtx.scale(1, -1); // so that text isn't upside down
     this.mAxesCtx.textAlign = "center";
     this.mAxesCtx.textBaseline = "middle";
-    for (var i = 1; i <= Graph.numTicksY; i++) {
+    for (var i = 1; i <= GraphView.numTicksY; i++) {
       // Because y-axis represents money amount
-      var label = (Math.round(i * Graph.maxY * 100 /
-        Graph.numGapsY) / 100).toFixed(2);
+      var label = (Math.round(i * GraphView.maxY * 100 /
+        GraphView.numGapsY) / 100).toFixed(2);
 
       this.mAxesCtx.fillText(label,
-        -Graph.labelOffset,
-        -i * this.mAxesCanvas.height / Graph.numGapsY);
+        -GraphView.labelOffset,
+        -i * this.mAxesCanvas.height / GraphView.numGapsY);
     }
     this.mAxesCtx.restore();
     
     this.mAxesCtx.stroke();
-  },
+  }, // mDrawYAxis()
 };
 
 /**
@@ -164,25 +164,25 @@ GraphView.prototype = {
  */
 
 // These say how far the axes are from canvas edges
-Graph.edgeOffsetX = 40;
-Graph.edgeOffsetY = 40;
+GraphView.edgeOffsetX = 40;
+GraphView.edgeOffsetY = 40;
 
 // Max values that can be seen on each axis
-Graph.maxX = 150;
-Graph.maxY = 1.80;
+GraphView.maxX = 150;
+GraphView.maxY = 1.80;
 
 // For drawing axes
-Graph.numTicksX = 5; // a tick is a little line perpendicular to axis
-Graph.numTicksY = 5;
-Graph.numGapsX = Graph.numTicksX + 1;
-Graph.numGapsY = Graph.numTicksY + 1;
-Graph.tickLength = 10;
-Graph.halfTick = Graph.tickLength / 2;
+GraphView.numTicksX = 5; // a tick is a little line perpendicular to axis
+GraphView.numTicksY = 5;
+GraphView.numGapsX = GraphView.numTicksX + 1;
+GraphView.numGapsY = GraphView.numTicksY + 1;
+GraphView.tickLength = 10;
+GraphView.halfTick = GraphView.tickLength / 2;
 
-Graph.dashLength = 10;
+GraphView.dashLength = 10;
 
 // each tick usually has a label near it (e.g. 1.20)
-Graph.labelOffset = 20; // how far label is from respective axis
+GraphView.labelOffset = 20; // how far label is from respective axis
 
 /**
  * "Static" methods for GraphView
@@ -196,9 +196,9 @@ Graph.labelOffset = 20; // how far label is from respective axis
  * @param canvas
  * @param ctx the canvas' context
  */
-Graph.applyGraphContextSettings = function(canvas, ctx) {
-  ctx.translate(Graph.edgeOffsetX, canvas.height - Graph.edgeOffsetY);
-  ctx.scale(1 / Graph.maxX, -1 / Graph.maxY);
+GraphView.applyGraphContextSettings = function(canvas, ctx) {
+  ctx.translate(GraphView.edgeOffsetX, canvas.height - GraphView.edgeOffsetY);
+  ctx.scale(1 / GraphView.maxX, -1 / GraphView.maxY);
 };
 
 /**
@@ -208,19 +208,19 @@ Graph.applyGraphContextSettings = function(canvas, ctx) {
  * @param canvas
  * @param ctx the canvas' context
  */
-Graph.applyAxesContextSettings = function(canvas, ctx) {
-  ctx.translate(Graph.edgeOffsetX, canvas.height - Graph.edgeOffsetY);
+GraphView.applyAxesContextSettings = function(canvas, ctx) {
+  ctx.translate(GraphView.edgeOffsetX, canvas.height - GraphView.edgeOffsetY);
   ctx.scale(1, -1);
 };
 
 /**
  * This method is needed because of the context offset.
- * @pre the cleared canvas has been set up with Graph._applyContextSettings()
+ * @pre the cleared canvas' context has been set up
  */
-Graph.clearCanvas = function(canvas, ctx) {
+GraphView.clearCanvas = function(canvas, ctx) {
   ctx.beginPath();
-  ctx.clearRect(-1 * Graph.edgeOffsetX * Graph.maxX,
-    -1 * Graph.edgeOffsetY * Graph.maxY,
-    canvas.width * Graph.maxX,
-    canvas.height * Graph.maxY);
+  ctx.clearRect(-1 * GraphView.edgeOffsetX * GraphView.maxX,
+    -1 * GraphView.edgeOffsetY * GraphView.maxY,
+    canvas.width * GraphView.maxX,
+    canvas.height * GraphView.maxY);
 };
