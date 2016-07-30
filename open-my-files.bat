@@ -12,4 +12,5 @@ start Notepad++ js/model/data.js
 start Notepad++ js/model/constants.js
 start Notepad++ js/model/point.js
 start Notepad++ js/views/text-view.js
+start Notepad++ js/views/graph-view.js
 exit

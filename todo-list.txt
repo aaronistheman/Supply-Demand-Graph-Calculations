@@ -7,15 +7,6 @@ Contents:
 Next:
 -restructure project:
   -basic setups
-    -view type #2: Canvases; called GraphsView
-      -cut functionality out of main.js or graph.js
-      -constructor that stores the canvases
-      -have some context wrapper custom type so I don't have to keep
-      putting the width and height in
-      -a method for each possible canvas edit
-      -update()
-      -when finished:
-        -should be able to see the graphs drawn on the canvases
     -controller type
       -cut functionality out of main.js or graph.js
       -sets up event handlers
@@ -48,6 +39,11 @@ Next:
     changed, since total revenue = price x QD
     -figure out if where I initially set up qd and qs is best
     -make sure correct state is shown if disequilibrium
+    -should constants.js be in utility?
+    -the maxes seem a little deceptive, since they are not visible
+    due to the label offset
+    -have some context wrapper custom type so I don't have to keep
+    putting the width and height in
   -finish restructuring tests
   -clean-up to finish off the restructuring
     -should there be a version of update() that only updates
