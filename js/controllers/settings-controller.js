@@ -1,24 +1,25 @@
 "use strict";
 
-function EventHandlers() {
-  if (!(this instanceof EventHandlers))
-    alertAndThrowException("Forgot 'new' before EventHandlers constructor");
-} // EventHandlers()
+function SettingsController() {
+  if (!(this instanceof SettingsController))
+    alertAndThrowException(
+      "Forgot 'new' before SettingsController constructor");
+} // SettingsController()
 
-EventHandlers.prototype = {
-  constructor : EventHandlers,
+SettingsController.prototype = {
+  constructor : SettingsController,
   
   /**
    * @param data instance of Data
    */
   setUpAllHandlers : function(data) {
     $("#b-world-p").click(function() {
-      EventHandlers.worldPriceHandler(data);
+      SettingsController.worldPriceHandler(data);
     });
   },
 };
 
-EventHandlers.worldPriceHandler = function(data) {
+SettingsController.worldPriceHandler = function(data) {
   var newWp = parseFloat($("#world-p").val());
   
   if (isNaN(newWp)) { // if numbern not given
