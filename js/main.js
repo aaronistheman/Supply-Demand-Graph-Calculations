@@ -5,7 +5,7 @@ $(document).ready(function() {
   if (!isUnitTesting()) {
     // Hardcoded data; eventually read from file
     var supplyPoints = "40 0.25 ; 50 0.30 ; 90 0.75 ; 110 1.35";
-    var demandPoints = "30 1.25 ; 90 0.75 ; 110 0.30";
+    var demandPoints = "30 1.25 ; 90 0.75 ; 110 0.30 ; 120 0.15";
     var data = new EconomyModel(supplyPoints, demandPoints);
     
     var textView = new TextView();
@@ -30,13 +30,6 @@ $(document).ready(function() {
         graph.setWp(wp);
         graph.redrawWorldPriceLine();
         
-        var qd = Math.round(graph.getQd());
-        $("#qd").html(qd);
-        var qs = Math.round(graph.getQs());
-        $("#qs").html(qs);
-        
-        state = STATE.SHORTAGE;
-        $("#state").html(state);
         
         // number of imports
         $("#imports").html(qd - qs);

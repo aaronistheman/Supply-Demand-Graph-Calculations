@@ -98,8 +98,8 @@ EconomyModel.prototype = {
     
       this.wp = newWpRounded;
       
-      this.qd = this.calculateWorldQd();
-      this.qs = this.calculateWorldQs();
+      this.qd = Quantity.get(this.calculateWorldQd());
+      this.qs = Quantity.get(this.calculateWorldQs());
     }
     else { // if user eliminated world price
       this.wp = undefined;
@@ -117,8 +117,8 @@ EconomyModel.prototype = {
    */
   getTotalRevenue : function() {
     // I know this isn't right and will eventually
-    // fix it; TR = price x QD
-    return new Price(this.eq * this.ep);
+    // fix it; TR = price x min(qd, qs) (what's "price"?)
+    return new Price(Math.min(this.qs, this.qd) * this.ep);
   },
   
   /**
