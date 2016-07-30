@@ -185,7 +185,7 @@ QUnit.module(currentTestedFile + ", calculateWorldQd()");
       "8 120; 10 100; 12 80; 13 70");
     
     data.wp = 80;
-    var result = Math.round(data.calculateWorldQd());
+    var result = Quantity.get(data.calculateWorldQd());
     assert.deepEqual(result, 12); // correct value is from a point on the graph
   });
 
@@ -195,7 +195,7 @@ QUnit.module(currentTestedFile + ", calculateWorldQd()");
       "40 1.50; 60 1.00; 100 0.50");
     
     data.wp = 0.75;
-    var result = Math.round(data.calculateWorldQd());
+    var result = Quantity.get(data.calculateWorldQd());
     assert.deepEqual(result, 80); // correct value isn't from a point
   });
 
@@ -207,7 +207,7 @@ QUnit.module(currentTestedFile + ", calculateWorldQs()");
       "8 120; 10 100; 12 80; 13 70");
     
     data.wp = 80;
-    var result = Math.round(data.calculateWorldQs());
+    var result = Quantity.get(data.calculateWorldQs());
     assert.deepEqual(result, 8); // correct value is from a point on the graph
   });
   
@@ -217,7 +217,7 @@ QUnit.module(currentTestedFile + ", calculateWorldQs()");
       "80 1.50; 100 1.00");
     
     data.wp = 0.75;
-    var result = Math.round(data.calculateWorldQs());
+    var result = Quantity.get(data.calculateWorldQs());
     assert.deepEqual(result, 60); // correct value isn't a point
   });
 
