@@ -24,18 +24,6 @@ function Graph(supplyDataString, demandDataString) {
 } // Graph constructor
 
 /**
- * This method is needed because of the context offset.
- * @pre the cleared canvas has been set up with Graph._applyContextSettings()
- */
-Graph._clearCanvas = function(canvas, ctx) {
-  ctx.beginPath();
-  ctx.clearRect(-Graph.EDGE_OFFSET_X * Graph.MAX_X,
-    -Graph.EDGE_OFFSET_Y * Graph.MAX_Y,
-    canvas.width * Graph.MAX_X,
-    canvas.height * Graph.MAX_Y);
-};
-
-/**
  * Methods for Graph
  */
 Graph.prototype = {
@@ -184,30 +172,5 @@ Graph.prototype = {
     this._indicatorCtx.stroke();
   }, // emphasizeHighestQuantity()
 
-  /**
-   * Doesn't clean the canvas before drawing
-   * @param points array of instances of Point
-   */
-  _drawGraph : function(points, canvas, ctx) {
-    // Move to the first point
-    ctx.beginPath();
-    ctx.moveTo(canvas.width * points[0].x, canvas.height * points[0].y);
-    for (var i in points) {
-      ctx.lineTo(canvas.width * points[i].x, canvas.height * points[i].y);
-    }
-
-    ctx.stroke();
-  },
-
-  redrawSupply : function() {
-    Graph._clearCanvas(this._supplyCanvas, this._supplyCtx);
-    this._drawGraph(this._supply.getPoints(), this._supplyCanvas,
-      this._supplyCtx);
-  },
-
-  redrawDemand : function() {
-    Graph._clearCanvas(this._demandCanvas, this._demandCtx);
-    this._drawGraph(this._demand.getPoints(), this._demandCanvas,
-      this._demandCtx);
-  },
+  
 };

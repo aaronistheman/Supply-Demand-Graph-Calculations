@@ -170,3 +170,15 @@ Graph.applyAxesContextSettings = function(canvas, ctx) {
   ctx.translate(Graph.edgeOffsetX, canvas.height - Graph.edgeOffsetY);
   ctx.scale(1, -1);
 };
+
+/**
+ * This method is needed because of the context offset.
+ * @pre the cleared canvas has been set up with Graph._applyContextSettings()
+ */
+Graph.clearCanvas = function(canvas, ctx) {
+  ctx.beginPath();
+  ctx.clearRect(-1 * Graph.edgeOffsetX * Graph.maxX,
+    -1 * Graph.edgeOffsetY * Graph.maxY,
+    canvas.width * Graph.maxX,
+    canvas.height * Graph.maxY);
+};

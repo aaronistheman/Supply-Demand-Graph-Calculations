@@ -9,6 +9,7 @@ Next:
   -basic setups
     -view type #2: Canvases; called GraphsView
       -cut functionality out of main.js or graph.js
+        -mDrawGraph
         -redrawDemand
         -redrawSupply
       -update() <-- figure out how/where/why
