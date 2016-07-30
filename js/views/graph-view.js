@@ -14,8 +14,8 @@ function GraphView() {
   
   this.mStoreElements();
   this.drawAxes();
-  // this.redrawDemand();
-  // this.redrawSupply();
+  this.redrawDemand();
+  this.redrawSupply();
 } // GraphView
 
 GraphView.prototype = {
@@ -44,6 +44,33 @@ GraphView.prototype = {
     this.mWpCanvas = $("#wp-canvas")[0];
     this.mWpCtx = this.mWpCanvas.getContext('2d');
     Graph.applyGraphContextSettings(this.mWpCanvas, this.mWpCtx);
+  },
+
+  /**
+   * Doesn't clean the canvas before drawing
+   * @param points array of instances of Point
+   */
+  mDrawGraph : function(points, canvas, ctx) {
+    // Move to the first point
+    ctx.beginPath();
+    ctx.moveTo(canvas.width * points[0].q, canvas.height * points[0].p);
+    for (var i in points) {
+      ctx.lineTo(canvas.width * points[i].q, canvas.height * points[i].p);
+    }
+
+    ctx.stroke();
+  },
+  
+  redrawSupply : function() {
+    Graph.clearCanvas(this.mSupplyCanvas, this.mSupplyCtx);
+    this.mDrawGraph(this.mSupply.getPoints(), this.mSupplyCanvas,
+      this.mSupplyCtx);
+  },
+
+  redrawDemand : function() {
+    Graph.clearCanvas(this.mDemandCanvas, this.mDemandCtx);
+    this.mDrawGraph(this.mDemand.getPoints(), this.mDemandCanvas,
+      this.mDemandCtx);
   },
   
   drawAxes : function() {
