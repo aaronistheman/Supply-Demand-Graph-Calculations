@@ -52,14 +52,14 @@ QUnit.module(currentTestedFile + ", Price.forDisplay()");
   });
 
 currentTestedFile = "model/data.js";
-QUnit.module(currentTestedFile + ", Data.calculateEquilibriumPoint()");
+QUnit.module(currentTestedFile + ", EconomyModel.calculateEquilibriumPoint()");
 
   // In this test, the intersection point is (by intention)
   // a given point
   QUnit.test("correct point found", function(assert) {    
     var supplyPoints = "40 0.25 ; 50 0.30 ; 90 0.75 ; 110 1.35";
     var demandPoints = "40 1.25 ; 60 0.90 ; 90 0.75 ; 110 0.30";
-    var data = new Data(supplyPoints, demandPoints);
+    var data = new EconomyModel(supplyPoints, demandPoints);
     var eqPoint = data.calculateEquilibriumPoint();
     
     assert.deepEqual(eqPoint.q(), 90);
@@ -70,19 +70,19 @@ QUnit.module(currentTestedFile + ", Data.calculateEquilibriumPoint()");
   QUnit.test("correct point found again!", function(assert) {  
     var supplyPoints = "40 0.25 ; 50 0.30 ; 90 0.70 ; 110 1.35";
     var demandPoints = "40 1.25 ; 60 0.75 ; 80 0.25 ; 110 0.20";
-    var data = new Data(supplyPoints, demandPoints);
+    var data = new EconomyModel(supplyPoints, demandPoints);
     var eqPoint = data.calculateEquilibriumPoint()
     
     assert.deepEqual(eqPoint.q(), 70);
     assert.deepEqual(eqPoint.p(), 0.50);
   });
 
-QUnit.module(currentTestedFile + ", Data.calculateHighestQuantity()");
+QUnit.module(currentTestedFile + ", EconomyModel.calculateHighestQuantity()");
 
   QUnit.test("returns last demand quantity", function(assert) {
     var supplyPoints = "40 0.25 ; 50 0.30 ; 90 0.75 ; 110 1.35";
     var demandPoints = "40 1.25 ; 60 0.90 ; 90 0.75 ; 103 0.30";
-    var data = new Data(supplyPoints, demandPoints);
+    var data = new EconomyModel(supplyPoints, demandPoints);
     
     assert.deepEqual(data.calculateHighestQuantity(), 103);
   });
@@ -90,17 +90,17 @@ QUnit.module(currentTestedFile + ", Data.calculateHighestQuantity()");
   QUnit.test("returns last supply quantity", function(assert) {
     var supplyPoints = "40 0.25 ; 50 0.30 ; 90 0.75 ; 103 1.35";
     var demandPoints = "40 1.25 ; 60 0.90 ; 90 0.75 ; 110 0.30";
-    var data = new Data(supplyPoints, demandPoints);
+    var data = new EconomyModel(supplyPoints, demandPoints);
     
     assert.deepEqual(data.calculateHighestQuantity(), 103);
   });
 
-QUnit.module(currentTestedFile + ", Data.calculateLowestQuantity()");
+QUnit.module(currentTestedFile + ", EconomyModel.calculateLowestQuantity()");
 
   QUnit.test("returns first demand quantity", function(assert) {
     var supplyPoints = "40 0.25 ; 50 0.30 ; 90 0.75 ; 110 1.35";
     var demandPoints = "45 1.25 ; 60 0.90 ; 90 0.75 ; 103 0.30";
-    var data = new Data(supplyPoints, demandPoints);
+    var data = new EconomyModel(supplyPoints, demandPoints);
     
     assert.deepEqual(data.calculateLowestQuantity(), 45);
   });
@@ -108,15 +108,15 @@ QUnit.module(currentTestedFile + ", Data.calculateLowestQuantity()");
   QUnit.test("returns first supply quantity", function(assert) {
     var supplyPoints = "45 0.25 ; 50 0.30 ; 90 0.75 ; 103 1.35";
     var demandPoints = "40 1.25 ; 60 0.90 ; 90 0.75 ; 110 0.30";
-    var data = new Data(supplyPoints, demandPoints);
+    var data = new EconomyModel(supplyPoints, demandPoints);
     
     assert.deepEqual(data.calculateLowestQuantity(), 45);
   });
   
-QUnit.module(currentTestedFile + ", Data.getConsumerSurplus()")
+QUnit.module(currentTestedFile + ", EconomyModel.getConsumerSurplus()")
 
   QUnit.test("correct value", function(assert) {
-    var data = new Data(
+    var data = new EconomyModel(
       "20 0.2; 50 0.5; 90 0.9",
       "20 0.9; 50 0.5 ; 80 0.2");
     
@@ -125,7 +125,7 @@ QUnit.module(currentTestedFile + ", Data.getConsumerSurplus()")
   });
 
   QUnit.test("correct value again!", function(assert) {
-    var data = new Data(
+    var data = new EconomyModel(
       "20 0.2; 70 0.6; 110, 0.8",
       "10 1.50; 20 1.30; 40 1.20; 100 0.60");
       
@@ -133,10 +133,10 @@ QUnit.module(currentTestedFile + ", Data.getConsumerSurplus()")
       23.50); // hand-calculated
   });
 
-QUnit.module(currentTestedFile + ", Data.getProducerSurplus()");
+QUnit.module(currentTestedFile + ", EconomyModel.getProducerSurplus()");
 
   QUnit.test("correct value", function(assert) {
-    var data = new Data(
+    var data = new EconomyModel(
       "20 0.2; 50 0.5; 90 0.9",
       "20 0.9; 50 0.5 ; 80 0.2");
     
@@ -145,7 +145,7 @@ QUnit.module(currentTestedFile + ", Data.getProducerSurplus()");
   });
 
   QUnit.test("correct value again!", function(assert) {
-    var data = new Data(
+    var data = new EconomyModel(
       "20 0.2; 70 0.6; 110, 0.8",
       "10 1.50; 20 1.30; 40 1.20; 100 0.60");
       
@@ -153,10 +153,10 @@ QUnit.module(currentTestedFile + ", Data.getProducerSurplus()");
       16.00); // hand-calculated
   });
 
-QUnit.module(currentTestedFile + ", Data.getState()");
+QUnit.module(currentTestedFile + ", EconomyModel.getState()");
 
   QUnit.test("correctly detected equilibrium", function(assert) {
-    var data = new Data(
+    var data = new EconomyModel(
       "20 0.2; 70 0.6; 110, 0.8",
       "10 1.50; 20 1.30; 40 1.20; 100 0.60");
     

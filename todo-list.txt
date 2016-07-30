@@ -5,7 +5,6 @@ Contents:
 -Considerable
 
 Next:
--change Data to EconomyModel
 -finish moving world price handler
   -getWorldQD()
   -getWorldQS()

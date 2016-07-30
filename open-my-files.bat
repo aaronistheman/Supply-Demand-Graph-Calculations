@@ -8,7 +8,7 @@ start Notepad++ js/tests/test.js
 REM start Notepad++ js/controller.js
 REM start Notepad++ js/model/piecewise-function.js
 start Notepad++ js/graph.js
-start Notepad++ js/model/data.js
+start Notepad++ js/model/economy-model.js
 start Notepad++ js/model/constants.js
 start Notepad++ js/model/point.js
 start Notepad++ js/views/text-view.js

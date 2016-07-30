@@ -24,10 +24,10 @@ TextView.prototype = {
   constructor : TextView,
   
   /**
-   * @param data instance of Data
+   * @param data instance of EconomyModel
    */
   updateAll : function(data) {
-    if (!(data instanceof Data))
+    if (!(data instanceof EconomyModel))
       alertAndThrowException("data parameter is of wrong type");
     
     // equilibrium

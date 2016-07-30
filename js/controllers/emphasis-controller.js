@@ -15,7 +15,7 @@ EmphasisController.prototype = {
   constructor : EmphasisController,
   
   /**
-   * @param data instance of Data
+   * @param data instance of EconomyModel
    */
   setUpAllHandlers : function(data) {
     
