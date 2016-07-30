@@ -1,5 +1,9 @@
 "use strict";
 
+/**
+ * Deals with the event handlers that allow the user to change
+ * the economic model.
+ */
 function SettingsController() {
   if (!(this instanceof SettingsController))
     alertAndThrowException(
