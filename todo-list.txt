@@ -9,13 +9,16 @@ Next:
   -basic setups
     -controller type
       -cut functionality out of main.js or graph.js
-      -sets up event handlers
-        -if valid input
-          -each (event handler) calls model.update() with appropriate
-          parameters
-          -each probably calls view.update()
-        -else
-          -alert
+        -sets up event handlers
+          -general format
+            -if valid input
+              -each (event handler) calls model.update() with appropriate
+              parameters
+              -each probably calls view.update()
+            -else
+              -alert
+          -world price (the first) handler
+          -the second handler
   -CAN CONTINUE IMPLEMENTING FEATURES
   -model type, named Data
     -idea that may not work well but also could work well
