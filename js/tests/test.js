@@ -22,6 +22,13 @@ QUnit.module(currentTestedFile + ", Quantity.getUnrounded()");
     var q = new Quantity(3.63);
     assert.deepEqual(q.getUnrounded(), 3.63);
   });
+  
+QUnit.module(currentTestedFile + ", static Quantity.get()");
+
+  QUnit.test("correct return", function(assert) {
+    var q = Quantity.get(3.634529);
+    assert.deepEqual(q, 4);
+  });
 
 currentTestedFile = "utility/price.js";
 QUnit.module(currentTestedFile + ", Price.get()");
