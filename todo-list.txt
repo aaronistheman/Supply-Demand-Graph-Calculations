@@ -9,8 +9,9 @@ Next:
   -getWorldQD()
   -getWorldQS()
   -modify welfare
-    -figure out where to update view
+    -figure out where to update view: pass view(s) to setWp()
     -transfer setWp
+-tests: indicate non-static-ness correctly (i.e. with "prototype")
 -closing economy handler
 -settings
   -see Note #1
