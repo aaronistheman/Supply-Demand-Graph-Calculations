@@ -54,9 +54,7 @@ Graph.prototype = {
    * Other methods
    */
 
-  /**
-   * @return the quantity demanded at the current world price
-   */
+  
   determineWorldQD : function() {
     if (this._wp < this._dPoints[this._dPoints.length - 1].y)
       alertAndThrowException("World price causes extrapolation " +
@@ -79,9 +77,7 @@ Graph.prototype = {
     return x;
   },
 
-  /**
-   * @return the quantity supplied at the current world price
-   */
+  
   determineWorldQS : function() {
     if (this._wp < this._sPoints[0].y)
       alertAndThrowException("World price causes extrapolation " +

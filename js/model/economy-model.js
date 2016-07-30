@@ -254,6 +254,20 @@ EconomyModel.prototype = {
   }, // calculateHighestQuantity()
   
   /**
+   * @return the quantity demanded at the current world price
+   */
+  calculateWorldQd : function() {
+    
+  }, // calculateWorldQd()
+  
+  /**
+   * @return the quantity supplied at the current world price
+   */
+  calculateWorldQs : function() {
+    
+  }, // calculateWorldQs()
+  
+  /**
    * "Private" methods
    */
   

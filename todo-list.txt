@@ -9,6 +9,8 @@ Next:
   -getWorldQD()
   -getWorldQS()
   -modify welfare
+    -figure out where to update view
+    -transfer setWp
 -closing economy handler
 -settings
   -see Note #1
@@ -21,8 +23,6 @@ Next:
     -getNumberImports()
     -getDeadweightLoss()
     -getTaxRevenue()
-  -should be no more commented out tests, since only the model
-  stuff can (at least easily) be tested
   -at some point, getTotalRevenue() MUST be
   changed, since total revenue = price x QD
   -figure out if where I initially set up qd and qs is best
