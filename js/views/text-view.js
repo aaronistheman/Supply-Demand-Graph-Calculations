@@ -12,6 +12,7 @@ function TextView() {
   this.$eq = $("#eq-q"); // equilibrium quantity display
   this.$ep = $("#eq-p"); // equilibrium price display
   this.$tr = $("#total-rev");
+  this.$wp = $("#world-p"); // world price
   this.$cs = $("#con-s"); // consumer surplus
   this.$ps = $("#pro-s"); // producer surplus
   this.$es = $("#eco-s"); // economic surplus
@@ -50,6 +51,11 @@ TextView.prototype = {
     this.$ps.html(ps.forDisplay());
     var es = data.getEconomicSurplus(cs, ps);
     this.$es.html(es.forDisplay());
+    
+    if (data.wp)
+      this.$wp.html("$" + data.wp);
+    else
+      this.$wp.html("None");
     
     this.$imports.html(data.getNumberImports());
   },

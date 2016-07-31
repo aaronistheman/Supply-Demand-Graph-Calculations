@@ -32,15 +32,28 @@ SettingsController.prototype = {
  */
 SettingsController.worldPriceHandler =
   function(economyModel, textView, graphView) {
-  var newWp = parseFloat($("#world-p").val());
+  var newWp = parseFloat($("#new-wp").val());
   
   if (!newWp || newWp < economyModel.ep) { // if valid input that I can handle
-    economyModel.setWp(newWp);
-    textView.updateAll(economyModel);
-    graphView.updateAll(economyModel);
+    try {
+      economyModel.setWp(newWp);
+      
+      textView.updateAll(economyModel);
+      graphView.updateAll(economyModel);
+    }
+    catch(err) {
+      if (err == "demand extrapolation")
+        alert("User Error: World price causes extrapolation " +
+          "on demand data, so no changes made.")
+      else if (err == "supply extrapolation")
+        alert("User Error: World price causes extrapolation " +
+          "on supply data, so no changes made.")
+      else
+        throw err;
+    }
   }
   else { // if valid input that I can't handle
-    alert("Error: because the developer wasn't particularly " +
+    alert("User Error: Because the developer wasn't particularly " +
           "knowledgeable about economics, a set world " +
           "price must be below the equilibrium price. His apologies.");
   }

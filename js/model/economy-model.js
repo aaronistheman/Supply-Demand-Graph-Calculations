@@ -43,8 +43,14 @@ function EconomyModel(supplyDataString, demandDataString) {
   this.mSPoints = this.mSupply.getPoints();
   this.mDPoints = this.mDemand.getPoints();
   
+  // Here, by "lowest" and "highest", I mean the lowest and highest
+  // quantities/price that can be used without causing extrapolation
+  // (i.e. the lowest and highest quantities/price that BOTH supply
+  // and demand have in common)
   this.mLowestQuantity = this.calculateLowestQuantity();
   this.mHighestQuantity = this.calculateHighestQuantity();
+  // this.mLowestPrice = this.calculateLowestEffectivePrice();
+  
   this.mUpdateEquilibriumPoint();
   
   // By default, economy is in equilibrium
@@ -71,6 +77,12 @@ EconomyModel.prototype = {
     return this.mSupply;
   },
   
+  /*
+  getLowestEffectivePrice : function() {
+    return this.mLowestPrice;
+  },
+  */
+  
   /**
    * Although this mutator isn't needed (this.wp is "public"),
    * it conveniently lumps together the operations associated
@@ -78,9 +90,16 @@ EconomyModel.prototype = {
    *
    * @param newWp (not necessarily rounded) price value;
    * newWp < this.ep
+   * @throws exception (that should be caught) if user gave
+   * world price that causes extrapolation
    */
   setWp : function(newWp) {
     if (newWp) { // if user set new world price
+      // In case need to reverse changes
+      var oldWp = this.wp;
+      var oldQd = this.qd;
+      var oldQs = this.qs;
+    
       var newWpRounded = Price.get(newWp);
       
       // error-checking
@@ -89,9 +108,26 @@ EconomyModel.prototype = {
           "setWp was given world price higher than equilibrium price");
     
       this.wp = newWpRounded;
-      
-      this.qd = Quantity.get(this.calculateWorldQd());
-      this.qs = Quantity.get(this.calculateWorldQs());
+
+      try {
+        this.qd = Quantity.get(this.calculateWorldQd());
+      }
+      catch(err) {
+        // undo changes
+        this.wp = oldWp;
+
+        throw "demand extrapolation";
+      }
+      try {
+        this.qs = Quantity.get(this.calculateWorldQs());
+      }
+      catch(err) {
+        // undo changes
+        this.wp = oldWp;
+        this.qd = oldQd;
+
+        throw "supply extrapolation";
+      }
     }
     else { // if user eliminated world price
       this.wp = undefined;
@@ -268,12 +304,30 @@ EconomyModel.prototype = {
   }, // calculateHighestQuantity()
   
   /**
+   * This method is flawed in assuming that supply is always
+   * increasing and demand is always decreasing.
+   * @pre mLowestQuantity and mHighestQuantity have been set
+   * @returns (rounded) the lowest price that both graphs have in common
+   */
+  /*
+  calculateLowestEffectivePrice : function() {
+    if (!this.mLowestQuantity || !this.mHighestQuantity)
+      alertAndThrowException(
+        "Precondition violated, calculateLowestEffectivePrice");
+    
+    return Price.get(Math.max(
+      this.mSupply.getP(this.mLowestQuantity),
+      this.mDemand.getP(this.mHighestQuantity)));
+  },
+  */
+  
+  /**
    * @return the quantity demanded at the current world price
    */
   calculateWorldQd : function() {
-    if (this.wp < this.mDPoints[this.mDPoints.length - 1].p())
-      alertAndThrowException("World price causes extrapolation " +
-        "on demand data")
+    if (this.wp < this.mDPoints[this.mDPoints.length - 1].p()) {
+      throw "fail";
+    }
 
     var range = this.mDPoints[this.mDPoints.length - 1].q() - this.eq;
     var step = range / this.mNumRectangles;
@@ -296,9 +350,9 @@ EconomyModel.prototype = {
    * @return the quantity supplied at the current world price
    */
   calculateWorldQs : function() {
-    if (this.wp < this.mSPoints[0].p())
-      alertAndThrowException("World price causes extrapolation " +
-        "on supply data")
+    if (this.wp < this.mSPoints[0].p()) {
+      throw "fail";
+    }
 
     var range = this.eq - this.mSPoints[0].q();
     var step = range / this.mNumRectangles;

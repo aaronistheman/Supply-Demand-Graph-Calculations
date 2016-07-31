@@ -5,9 +5,8 @@ Contents:
 -Considerable
 
 Next:
--finish moving world price handler
-  -can't set world price that would cause "x out of range"
 -static Price.forDisplay() for display ep
+  -should incorporate the dollar sign?
 -replace "data" variable name with "economyModel"?
 -tests: indicate non-static-ness correctly (i.e. with "prototype")
 -closing economy handler
@@ -19,6 +18,8 @@ Next:
   with a line on the canvas
   -area value is highlighted (e.g. deadweight loss): color the area
 -end
+  -robustly test with variety of supply and demand data, including
+  ones that make non-monotonic graphs
   -where to say what industry it is?
   -make sure these are done
     -getNumberImports()
@@ -127,6 +128,7 @@ Considerable:
   to graph) (perhaps with AJAX or PHP or ASP or something)
 -can probably afford to lower number of Riemann rectangles
 -option to save applied inputs and apply them later
+  -could use MongoDB and Node.js for this
 -allow the panels to be in more than one column; see how it was done with
 CSS in one of the card games
 -using tables to more neatly present the calculated data

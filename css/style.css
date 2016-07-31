@@ -42,3 +42,11 @@ canvas#axes-graph {
 .panel p {
   margin: 0px;
 }
+
+/**
+ * Particular stylings
+ */
+
+#new-wp-wrapper {
+  margin-left: 1em;
+}
