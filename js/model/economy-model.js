@@ -93,6 +93,11 @@ EconomyModel.prototype = {
    */
   setWp : function(newWp) {
     if (newWp) { // if user set new world price
+      // In case need to reverse changes
+      var oldWp = this.wp;
+      var oldQd = this.qd;
+      var oldQs = this.qs;
+      
       var newWpRounded = Price.get(newWp);
       
       // error-checking
@@ -102,8 +107,18 @@ EconomyModel.prototype = {
     
       this.wp = newWpRounded;
       
-      this.qd = Quantity.get(this.calculateWorldQd());
-      this.qs = Quantity.get(this.calculateWorldQs());
+      try {
+        this.qd = Quantity.get(this.calculateWorldQd());
+        this.qs = Quantity.get(this.calculateWorldQs());
+      }
+      catch(err) {
+        // The error message of calculateWorldQd() or
+        // calculateWorldQs() suffices(), so just reverse changes.
+        
+        this.wp = oldWp;
+        this.qd = oldQd;
+        this.qs = oldQs;
+      }
     }
     else { // if user eliminated world price
       this.wp = undefined;
@@ -301,9 +316,11 @@ EconomyModel.prototype = {
    * @return the quantity demanded at the current world price
    */
   calculateWorldQd : function() {
-    if (this.wp < this.mDPoints[this.mDPoints.length - 1].p())
-      alertAndThrowException("World price causes extrapolation " +
-        "on demand data")
+    if (this.wp < this.mDPoints[this.mDPoints.length - 1].p()) {
+      alert("User error: World price causes extrapolation " +
+        "on demand data, so no changes made.")
+      throw "fail";
+    }
 
     var range = this.mDPoints[this.mDPoints.length - 1].q() - this.eq;
     var step = range / this.mNumRectangles;
@@ -326,9 +343,11 @@ EconomyModel.prototype = {
    * @return the quantity supplied at the current world price
    */
   calculateWorldQs : function() {
-    if (this.wp < this.mSPoints[0].p())
-      alertAndThrowException("World price causes extrapolation " +
-        "on supply data")
+    if (this.wp < this.mSPoints[0].p()) {
+      alert("User error: World price causes extrapolation " +
+        "on supply data, so no changes made.")
+      throw "fail";
+    }
 
     var range = this.eq - this.mSPoints[0].q();
     var step = range / this.mNumRectangles;
