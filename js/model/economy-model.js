@@ -95,8 +95,7 @@ EconomyModel.prototype = {
     }
     else { // if user eliminated world price
       this.wp = undefined;
-      
-      
+      this.qd = this.qs = this.eq;
     }
   }, // setWp()
   

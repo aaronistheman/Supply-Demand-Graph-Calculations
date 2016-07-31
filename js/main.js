@@ -23,21 +23,7 @@ $(document).ready(function() {
      * Set up event handlers. Should be simplified by the
      * controller type(s).
      */
-    
     /*
-    $("#b-world-p").click(function() { // if changing world price
-      var wp = $("#world-p").val();
-      
-      if (wp < eq.y) {
-        graph.redrawWorldPriceLine();
-        
-        
-      }
-      else {
-        
-      }
-    }); // if changing world price
-    
     $("#closed-open-checkbox").change(function() { // if toggling checkbox
       if (this.checked) { // if closing economy
         graph.setWp(undefined);
