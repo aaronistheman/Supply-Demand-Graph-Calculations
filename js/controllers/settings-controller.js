@@ -32,7 +32,7 @@ SettingsController.prototype = {
  */
 SettingsController.worldPriceHandler =
   function(economyModel, textView, graphView) {
-  var newWp = parseFloat($("#world-p").val());
+  var newWp = parseFloat($("#new-wp").val());
   
   if (!newWp || newWp < economyModel.ep) { // if valid input that I can handle
     try {
@@ -43,10 +43,10 @@ SettingsController.worldPriceHandler =
     }
     catch(err) {
       if (err == "demand extrapolation")
-        alert("User error: World price causes extrapolation " +
+        alert("User Error: World price causes extrapolation " +
           "on demand data, so no changes made.")
       else if (err == "supply extrapolation")
-        alert("User error: World price causes extrapolation " +
+        alert("User Error: World price causes extrapolation " +
           "on supply data, so no changes made.")
       else
         throw err;
