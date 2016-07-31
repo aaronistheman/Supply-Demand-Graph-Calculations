@@ -33,3 +33,11 @@ Price.prototype = {
     return this.mVal.toFixed(2);
   },
 };
+
+/**
+ * @return value of unroundedPriceValue rounded in the way a price would
+ * be
+ */
+Price.get = function(unroundedPriceValue) {
+  return Math.round(unroundedPriceValue * 100) / 100;
+};

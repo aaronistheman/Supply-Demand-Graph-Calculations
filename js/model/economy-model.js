@@ -19,10 +19,10 @@ function EconomyModel(supplyDataString, demandDataString) {
   if (!(this instanceof EconomyModel))
     alertAndThrowException("Forgot 'new' before EconomyModel constructor");
   
-  this.eq; // equilibrium quantity value
-  this.ep; // equilibrium price value
-  this.qd; // quantity demanded value
-  this.qs; // quantity supplied value
+  this.eq; // domestic equilibrium quantity value
+  this.ep; // domestic equilibrium price value
+  this.qd; // quantity demanded (by domestic demanders) value
+  this.qs; // quantity supplied (by domestic suppliers) value
   this.wp; // world price
   this.taxAmount;
   this.whatTaxed; // should have a Graph constant value
@@ -54,10 +54,6 @@ function EconomyModel(supplyDataString, demandDataString) {
 EconomyModel.prototype = {
   constructor : EconomyModel,
   
-  /**
-   * Accessors
-   */
-  
   getState : function() {
     if (this.qd === this.qs)
       return States.Equilibrium;
@@ -76,62 +72,86 @@ EconomyModel.prototype = {
   },
   
   /**
-   * Non-accessor, non-mutator, public methods
+   * Although this mutator isn't needed (this.wp is "public"),
+   * it conveniently lumps together the operations associated
+   * with changing the world price.
+   *
+   * @param newWp (not necessarily rounded) price value;
+   * newWp < this.ep
    */
+  setWp : function(newWp) {
+    if (newWp) { // if user set new world price
+      var newWpRounded = Price.get(newWp);
+      
+      // error-checking
+      if (newWpRounded >= this.ep)
+        alertAndThrowException(
+          "setWp was given world price higher than equilibrium price");
+    
+      this.wp = newWpRounded;
+      
+      this.qd = Quantity.get(this.calculateWorldQd());
+      this.qs = Quantity.get(this.calculateWorldQs());
+    }
+    else { // if user eliminated world price
+      this.wp = undefined;
+      
+      
+    }
+  }, // setWp()
   
   /**
    * @return instance of Price
    */
   getTotalRevenue : function() {
     // I know this isn't right and will eventually
-    // fix it; TR = price x QD
-    return new Price(this.eq * this.ep);
+    // fix it; TR = price x min(qd, qs) (what's "price"?)
+    return new Price(Math.min(this.qs, this.qd) * this.ep);
   },
   
   /**
    * Consumer surplus is the integral from lowest quantity
-   * to the equilibrium
-   * quantity of the difference between demand and the equilibrium
-   * price.
+   * to the quantity demanded
+   * of the difference between demand and the effective price.
    *
    * @return a Price object, since consumer surplus is in dollars
    */
   getConsumerSurplus : function() {
-    var range = this.eq - this.mLowestQuantity;
+    var range = this.qd - this.mLowestQuantity;
     var step = range / this.mNumRectangles;
     var answer = 0;
+    var effectivePrice = this.mGetEffectiveWelfareQuantity();
     
     // Execute the Riemann summation
     for (var q = this.mLowestQuantity + step, i = 0;
       i < this.mNumRectangles; q += step, ++i)
     {
-      answer += (this.mDemand.getP(q) - this.ep) * step;
+      answer += (this.mDemand.getP(q) - effectivePrice) * step;
     }
     
-    // use the wrapper to round the value
     return (new Price(answer));
   },
   
   /**
    * Producer surplus is the integral from lowest quantity
-   * to the equilibrium quantity of the difference between
-   * the equilibrium price and supply.
+   * to the quantity supplied of the difference between
+   * the effective price and supply.
    *
    * @return a Price object, since producer surplus is in dollars
    */
   getProducerSurplus : function() {
-    var range = this.eq - this.mLowestQuantity;
+    var range = this.qs - this.mLowestQuantity;
     var step = range / this.mNumRectangles;
     var answer = 0;
+    var effectivePrice = this.mGetEffectiveWelfareQuantity();
     
     // Execute the Riemann summation
     for (var q = this.mLowestQuantity + step, i = 0;
       i < this.mNumRectangles; q += step, ++i)
     {
-      answer += (this.ep - this.mSupply.getP(q)) * step;
+      answer += (effectivePrice - this.mSupply.getP(q)) * step;
     }
     
-    // use the wrapper to round the value
     return (new Price(answer));
   },
   
@@ -152,10 +172,13 @@ EconomyModel.prototype = {
   },
   
   /**
-   * @return a Quantity object
+   * @return a quantity value
    */
   getNumberImports : function() {
-    
+    if (this.qd > this.qs) // if importing makes sense
+      return this.qd - this.qs;
+    else // if are exports (or no trade)
+      return 0;
   },
   
   getDeadweightLoss : function() {
@@ -163,14 +186,6 @@ EconomyModel.prototype = {
   },
   
   getTaxRevenue : function() {
-    
-  },
-  
-  /**
-   * @param changedSettings object that maps each changed setting
-   * (e.g. world price) to its new value
-   */
-  update : function(changedSettings) {
     
   },
   
@@ -254,8 +269,54 @@ EconomyModel.prototype = {
   }, // calculateHighestQuantity()
   
   /**
-   * "Private" methods
+   * @return the quantity demanded at the current world price
    */
+  calculateWorldQd : function() {
+    if (this.wp < this.mDPoints[this.mDPoints.length - 1].p())
+      alertAndThrowException("World price causes extrapolation " +
+        "on demand data")
+
+    var range = this.mDPoints[this.mDPoints.length - 1].q() - this.eq;
+    var step = range / this.mNumRectangles;
+    var q = this.eq;
+    var price = this.mDemand.getP(q);
+    
+    // Go forward from equilibrium point until price would become
+    // lower than world price,
+    // at which point the method would stop and return the current quantity
+    while (price > this.wp) {
+      // advance
+      q += step;
+      price = this.mDemand.getP(q);
+    }
+    
+    return q;
+  }, // calculateWorldQd()
+  
+  /**
+   * @return the quantity supplied at the current world price
+   */
+  calculateWorldQs : function() {
+    if (this.wp < this.mSPoints[0].p())
+      alertAndThrowException("World price causes extrapolation " +
+        "on supply data")
+
+    var range = this.eq - this.mSPoints[0].q();
+    var step = range / this.mNumRectangles;
+    var q = this.eq;
+    var price = this.mSupply.getP(q);
+    
+    // Go backward from equilibrium point until price would become
+    // lower than world price,
+    // at which point the method would stop and return the current quantity
+    while (price > this.wp) {
+      // advance
+      q -= step;
+      price = this.mSupply.getP(q);
+    }
+    
+    return q;
+  }, // calculateWorldQs()
   
   /**
    * @param func instance of PiecewiseFunction
@@ -299,4 +360,15 @@ EconomyModel.prototype = {
     this.eq = eqPoint.q();
     this.ep = eqPoint.p();
   }, // mUpdateEquilibriumPoint()
+  
+  /**
+   * @return the quantity value that should be used for welfare
+   * measurements
+   */
+  mGetEffectiveWelfareQuantity : function() {
+    if (this.wp)
+      return this.wp
+    else
+      return this.ep
+  }, // mGetEffectiveWelfareQuantity()
 };

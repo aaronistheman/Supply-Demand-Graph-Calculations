@@ -24,3 +24,11 @@ Quantity.prototype = {
     return this.mVal;
   }
 };
+
+/**
+ * @return value of unroundedQuantityValue rounded in the way
+ * a quantity would be
+ */
+Quantity.get = function(unroundedQuantityValue) {
+  return Math.round(unroundedQuantityValue);
+};

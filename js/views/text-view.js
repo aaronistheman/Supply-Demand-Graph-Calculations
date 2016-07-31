@@ -18,6 +18,7 @@ function TextView() {
   this.$state = $("#state");
   this.$qd = $("#qd"); // quantity demanded
   this.$qs = $("#qs"); // quantity supply
+  this.$imports = $("#imports"); // number of imports
 } // TextView
 
 TextView.prototype = {
@@ -35,6 +36,8 @@ TextView.prototype = {
     this.$ep.html(data.ep);
     
     // domestic quantity breakdown
+    this.$qd.html(data.qd);
+    this.$qs.html(data.qs);
     var state = data.getState();
     this.$state.html(state);
     
@@ -48,9 +51,6 @@ TextView.prototype = {
     var es = data.getEconomicSurplus(cs, ps);
     this.$es.html(es.forDisplay());
     
-    if (state == States.Equilibrium) {
-      this.$qd.html(data.qd);
-      this.$qs.html(data.qs);
-    }
+    this.$imports.html(data.getNumberImports());
   },
 };
