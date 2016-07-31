@@ -30,30 +30,6 @@ Graph.prototype = {
   constructor : Graph,
   
   /**
-   * Accessors and mutators
-   */
-  
-  
-  /**
-   * Sets world price, but also updates quantities.
-   */
-  setWp : function(newWp) {
-      // else {
-        // // this._eqPoint = this.calculateEquilibriumPoint();
-        // // this._qd = this._qs = this._eqPoint.x;
-      // }
-    // }
-  },
-  
-  /**
-   * Other methods
-   */
-
-  
-  
-  
-  
-  /**
    * Emphasizes where the lowest quantity used for calculations
    * is on the canvas (with a dashed line).
    */
