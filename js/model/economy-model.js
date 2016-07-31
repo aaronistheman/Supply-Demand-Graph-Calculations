@@ -268,10 +268,17 @@ EconomyModel.prototype = {
   }, // calculateHighestQuantity()
   
   /**
+   * @pre mLowestQuantity and mHighestQuantity have been set
    * @returns (rounded) the lowest price that both graphs have in common
    */
   calculateLowestEffectivePrice : function() {
-    return -6;
+    if (!this.mLowestQuantity || !this.mHighestQuantity)
+      alertAndThrowException(
+        "Precondition violated, calculateLowestEffectivePrice");
+    
+    return Price.get(Math.max(
+      this.mSupply.getP(this.mLowestQuantity),
+      this.mDemand.getP(this.mHighestQuantity)));
   },
   
   /**
