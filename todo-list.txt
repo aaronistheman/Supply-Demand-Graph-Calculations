@@ -5,10 +5,6 @@ Contents:
 -Considerable
 
 Next:
--view handles dollar signs
-  -make sure TextView.updateAll() applies padding and dollar sign
-  (probably through Price.forDisplay()) to all dollar values
--replace "data" variable name with "economyModel"?
 -tests: indicate non-static-ness correctly (i.e. with "prototype")
 -closing economy handler
 -transfer any remains of (old) main.js and graph.js
@@ -143,3 +139,4 @@ CSS in one of the card games
   -or would this require too much assuming about the data?
 -when change is made, hi lite the fields that changed, and have
 a button to clear the hi lites
+-replace "data" variable name with "economyModel"

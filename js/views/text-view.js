@@ -34,7 +34,7 @@ TextView.prototype = {
     
     // equilibrium
     this.$eq.html(data.eq);
-    this.$ep.html(data.ep);
+    this.$ep.html(Price.forDisplay(data.ep));
     
     // domestic quantity breakdown
     this.$qd.html(data.qd);
@@ -53,7 +53,7 @@ TextView.prototype = {
     this.$es.html(es.forDisplay());
     
     if (data.wp)
-      this.$wp.html("$" + data.wp);
+      this.$wp.html(Price.forDisplay(data.wp));
     else
       this.$wp.html("None");
     
