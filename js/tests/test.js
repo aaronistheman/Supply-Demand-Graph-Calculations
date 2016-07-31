@@ -49,12 +49,12 @@ QUnit.module(currentTestedFile + ", Price.forDisplay()");
 
   QUnit.test("correct return", function(assert) {
     var p = new Price(5.7);
-    assert.deepEqual(p.forDisplay(), "5.70");
+    assert.deepEqual(p.forDisplay(), "$5.70");
   });
 
   QUnit.test("correct return", function(assert) {
     var p = new Price(5.789222);
-    assert.deepEqual(p.forDisplay(), "5.79");
+    assert.deepEqual(p.forDisplay(), "$5.79");
   });
 
 QUnit.module(currentTestedFile + ", static Price.get()");
@@ -62,6 +62,18 @@ QUnit.module(currentTestedFile + ", static Price.get()");
   QUnit.test("correct return", function(assert) {
     var p = Price.get(5.789222);
     assert.deepEqual(p, 5.79);
+  });
+
+QUnit.module(currentTestedFile + ", static Price.forDisplay()");
+
+  QUnit.test("correct return", function(assert) {
+    var p = Price.forDisplay(2.8351);
+    assert.deepEqual(p, "$2.84");
+  });
+
+  QUnit.test("correct return #2", function(assert) {
+    var p = Price.forDisplay(5.7);
+    assert.deepEqual(p, "$5.70");
   });
 
 currentTestedFile = "model/economy-model.js";

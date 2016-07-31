@@ -5,9 +5,6 @@ Contents:
 -Considerable
 
 Next:
--static Price.forDisplay() for display ep
-  -should incorporate the dollar sign?
--replace "data" variable name with "economyModel"?
 -tests: indicate non-static-ness correctly (i.e. with "prototype")
 -closing economy handler
 -transfer any remains of (old) main.js and graph.js
@@ -18,6 +15,8 @@ Next:
   with a line on the canvas
   -area value is highlighted (e.g. deadweight loss): color the area
 -end
+  -see if any parts of the program (that could be done more than
+  once) take too long
   -robustly test with variety of supply and demand data, including
   ones that make non-monotonic graphs
   -where to say what industry it is?
@@ -140,3 +139,4 @@ CSS in one of the card games
   -or would this require too much assuming about the data?
 -when change is made, hi lite the fields that changed, and have
 a button to clear the hi lites
+-replace "data" variable name with "economyModel"
