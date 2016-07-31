@@ -5,8 +5,11 @@ Contents:
 -Considerable
 
 Next:
--static Price.forDisplay() for display ep
-  -should incorporate the dollar sign?
+-view handles dollar signs
+  -static Price.forDisplay() for display ep
+  -should incorporate the dollar sign
+    -remove use of dollar sign in index.html
+    -change forDisplay (both versions)
 -replace "data" variable name with "economyModel"?
 -tests: indicate non-static-ness correctly (i.e. with "prototype")
 -closing economy handler

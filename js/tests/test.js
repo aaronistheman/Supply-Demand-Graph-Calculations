@@ -64,6 +64,18 @@ QUnit.module(currentTestedFile + ", static Price.get()");
     assert.deepEqual(p, 5.79);
   });
 
+QUnit.module(currentTestedFile + ", static Price.forDisplay()");
+
+  QUnit.test("correct return", function(assert) {
+    var p = Price.forDisplay(2.8351);
+    assert.deepEqual(p, "$2.84");
+  });
+
+  QUnit.test("correct return #2", function(assert) {
+    var p = Price.forDisplay(5.7);
+    assert.deepEqual(p, "$5.70");
+  });
+
 currentTestedFile = "model/economy-model.js";
 QUnit.module(currentTestedFile + ", EconomyModel.calculateEquilibriumPoint()");
 

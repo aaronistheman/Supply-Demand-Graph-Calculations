@@ -41,3 +41,10 @@ Price.prototype = {
 Price.get = function(unroundedPriceValue) {
   return Math.round(unroundedPriceValue * 100) / 100;
 };
+
+/**
+ * @return unroundedPriceValue as a string in view-friendly way
+ */
+Price.forDisplay = function(unroundedPriceValue) {
+  return "$" + unroundedPriceValue.toFixed(2);
+};
