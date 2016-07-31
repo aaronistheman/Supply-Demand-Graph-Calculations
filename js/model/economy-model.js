@@ -111,48 +111,47 @@ EconomyModel.prototype = {
   
   /**
    * Consumer surplus is the integral from lowest quantity
-   * to the equilibrium
-   * quantity of the difference between demand and the equilibrium
-   * price.
+   * to the quantity demanded
+   * of the difference between demand and the effective price.
    *
    * @return a Price object, since consumer surplus is in dollars
    */
   getConsumerSurplus : function() {
-    var range = this.eq - this.mLowestQuantity;
+    var range = this.qd - this.mLowestQuantity;
     var step = range / this.mNumRectangles;
     var answer = 0;
+    var effectivePrice = this.mGetEffectiveWelfareQuantity();
     
     // Execute the Riemann summation
     for (var q = this.mLowestQuantity + step, i = 0;
       i < this.mNumRectangles; q += step, ++i)
     {
-      answer += (this.mDemand.getP(q) - this.ep) * step;
+      answer += (this.mDemand.getP(q) - effectivePrice) * step;
     }
     
-    // use the wrapper to round the value
     return (new Price(answer));
   },
   
   /**
    * Producer surplus is the integral from lowest quantity
-   * to the equilibrium quantity of the difference between
-   * the equilibrium price and supply.
+   * to the quantity supplied of the difference between
+   * the effective price and supply.
    *
    * @return a Price object, since producer surplus is in dollars
    */
   getProducerSurplus : function() {
-    var range = this.eq - this.mLowestQuantity;
+    var range = this.qs - this.mLowestQuantity;
     var step = range / this.mNumRectangles;
     var answer = 0;
+    var effectivePrice = this.mGetEffectiveWelfareQuantity();
     
     // Execute the Riemann summation
     for (var q = this.mLowestQuantity + step, i = 0;
       i < this.mNumRectangles; q += step, ++i)
     {
-      answer += (this.ep - this.mSupply.getP(q)) * step;
+      answer += (effectivePrice - this.mSupply.getP(q)) * step;
     }
     
-    // use the wrapper to round the value
     return (new Price(answer));
   },
   

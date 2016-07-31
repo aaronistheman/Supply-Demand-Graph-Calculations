@@ -6,18 +6,11 @@ Contents:
 
 Next:
 -finish moving world price handler
-  -set new world price
-    -the welfare methods must be changed to use right quantity
-      -consumer surplus: quantity demanded and world price
-      -producer surplus: quantity supplied and world price
-    -how to pick right quantity
-      -distinguish between domestic and world equilibrium?
-        -change this.eq, this.ep, this.qd, and this.qs
-        -have a method that grabs the correct equilibrium
   -eliminated world price
     -clear graph.js's setWp
   -can't set world price that would cause "x out of range"
   -draw world price line
+-static Price.forDisplay() for display ep
 -replace "data" variable name with "economyModel"?
 -tests: indicate non-static-ness correctly (i.e. with "prototype")
 -closing economy handler
