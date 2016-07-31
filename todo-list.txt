@@ -5,8 +5,6 @@ Contents:
 -Considerable
 
 Next:
--closing economy handler
-  -update button stops working after close and reopen checkbox
 -transfer any remains of (old) main.js and graph.js
 -settings
   -see Note #1
@@ -17,6 +15,9 @@ Next:
 -end
   -see if any parts of the program (that could be done more than
   once) take too long
+    -ideas for improving speed:
+      -replace ng-show/hide with ng-if, and just reapply event handlers
+      when appropriate
   -robustly test with variety of supply and demand data, including
   ones that make non-monotonic graphs
   -where to say what industry it is?
@@ -109,7 +110,6 @@ Eventually:
     of the graph whose final data point's x-coordinate is lowest,
     then the graphs don't interact, and this should be said
     -report error if no semi-colon where expected one
-    -if world price causes a quantity to go beyond lowest or highest
 -use AngularJS to note errorneous text field inputs
   -e.g. price floor or ceiling has to matter
 -(if not done yet) clean up script.js
@@ -131,10 +131,6 @@ Considerable:
 -allow the panels to be in more than one column; see how it was done with
 CSS in one of the card games
 -using tables to more neatly present the calculated data
--see if is way to keep data in elements removed by ng-if
-  -could use JavaScript/jQuery and, when ng-if creates an element,
-  somehow react to the change to give the appropriate input fields
-  their former values
 -limit each text field's size?
   -or would this require too much assuming about the data?
 -when change is made, hi lite the fields that changed, and have
