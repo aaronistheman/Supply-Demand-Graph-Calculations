@@ -5,7 +5,6 @@ Contents:
 -Considerable
 
 Next:
--tests: indicate non-static-ness correctly (i.e. with "prototype")
 -closing economy handler
 -transfer any remains of (old) main.js and graph.js
 -settings
