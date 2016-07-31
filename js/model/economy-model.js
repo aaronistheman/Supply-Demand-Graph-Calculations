@@ -268,6 +268,13 @@ EconomyModel.prototype = {
   }, // calculateHighestQuantity()
   
   /**
+   * @returns (rounded) the lowest price that both graphs have in common
+   */
+  calculateLowestEffectivePrice : function() {
+    return -6;
+  },
+  
+  /**
    * @return the quantity demanded at the current world price
    */
   calculateWorldQd : function() {

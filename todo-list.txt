@@ -6,8 +6,9 @@ Contents:
 
 Next:
 -finish moving world price handler
-  -can't set world price that would cause "x out of range"
-    -range check should show "user error"
+  -"user error" message if user gives world price that would cause
+  extrapolation of at least one curve
+    -store lowest price in the model
 -static Price.forDisplay() for display ep
 -replace "data" variable name with "economyModel"?
 -tests: indicate non-static-ness correctly (i.e. with "prototype")

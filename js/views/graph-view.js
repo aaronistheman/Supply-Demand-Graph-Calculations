@@ -12,7 +12,7 @@ function GraphView() {
   if (!(this instanceof GraphView))
     alertAndThrowException("Forgot 'new' before GraphView constructor");
   
-  this.mStoreElements();
+  this.mStoreElements(); // <-- list of members in this method
   this.drawAxes(); // should only be done once
 } // GraphView
 
