@@ -8,8 +8,6 @@ Next:
 -finish moving world price handler
   -"user error" message if user gives world price that would cause
   extrapolation of at least one curve
-    -the error messages should be in the controller, but the
-    restoration should be in the model
     -perhaps make this clearer by displaying the current world price
     somewhere: display it before the "update" text box
 -static Price.forDisplay() for display ep

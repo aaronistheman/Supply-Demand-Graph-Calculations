@@ -35,11 +35,6 @@ SettingsController.worldPriceHandler =
   var newWp = parseFloat($("#world-p").val());
   
   if (!newWp || newWp < economyModel.ep) { // if valid input that I can handle
-    // In case need to reverse changes
-    var oldWp = this.wp;
-    var oldQd = this.qd;
-    var oldQs = this.qs;
-      
     try {
       economyModel.setWp(newWp);
       
@@ -47,12 +42,14 @@ SettingsController.worldPriceHandler =
       graphView.updateAll(economyModel);
     }
     catch(err) {
-      // The error message of calculateWorldQd() or
-      // calculateWorldQs() suffices(), so just reverse changes.
-      
-      this.wp = oldWp;
-      this.qd = oldQd;
-      this.qs = oldQs;
+      if (err == "demand extrapolation")
+        alert("User error: World price causes extrapolation " +
+          "on demand data, so no changes made.")
+      else if (err == "supply extrapolation")
+        alert("User error: World price causes extrapolation " +
+          "on supply data, so no changes made.")
+      else
+        throw err;
     }
   }
   else { // if valid input that I can't handle

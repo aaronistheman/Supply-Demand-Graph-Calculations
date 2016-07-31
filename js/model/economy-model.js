@@ -95,6 +95,11 @@ EconomyModel.prototype = {
    */
   setWp : function(newWp) {
     if (newWp) { // if user set new world price
+      // In case need to reverse changes
+      var oldWp = this.wp;
+      var oldQd = this.qd;
+      var oldQs = this.qs;
+    
       var newWpRounded = Price.get(newWp);
       
       // error-checking
@@ -104,10 +109,25 @@ EconomyModel.prototype = {
     
       this.wp = newWpRounded;
 
-      // Each of the following will throw an exception if user
-      // gave too low world price
-      this.qd = Quantity.get(this.calculateWorldQd());
-      this.qs = Quantity.get(this.calculateWorldQs());
+      try {
+        this.qd = Quantity.get(this.calculateWorldQd());
+      }
+      catch(err) {
+        // undo changes
+        this.wp = oldWp;
+
+        throw "demand extrapolation";
+      }
+      try {
+        this.qs = Quantity.get(this.calculateWorldQs());
+      }
+      catch(err) {
+        // undo changes
+        this.wp = oldWp;
+        this.qd = oldQd;
+
+        throw "supply extrapolation";
+      }
     }
     else { // if user eliminated world price
       this.wp = undefined;
@@ -306,8 +326,6 @@ EconomyModel.prototype = {
    */
   calculateWorldQd : function() {
     if (this.wp < this.mDPoints[this.mDPoints.length - 1].p()) {
-      alert("User error: World price causes extrapolation " +
-        "on demand data, so no changes made.")
       throw "fail";
     }
 
@@ -333,8 +351,6 @@ EconomyModel.prototype = {
    */
   calculateWorldQs : function() {
     if (this.wp < this.mSPoints[0].p()) {
-      alert("User error: World price causes extrapolation " +
-        "on supply data, so no changes made.")
       throw "fail";
     }
 
