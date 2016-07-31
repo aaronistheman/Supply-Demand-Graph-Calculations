@@ -43,8 +43,14 @@ function EconomyModel(supplyDataString, demandDataString) {
   this.mSPoints = this.mSupply.getPoints();
   this.mDPoints = this.mDemand.getPoints();
   
+  // Here, by "lowest" and "highest", I mean the lowest and highest
+  // quantities/price that can be used without causing extrapolation
+  // (i.e. the lowest and highest quantities/price that BOTH supply
+  // and demand have in common)
   this.mLowestQuantity = this.calculateLowestQuantity();
   this.mHighestQuantity = this.calculateHighestQuantity();
+  // this.mLowestPrice = this.calculateLowestEffectivePrice();
+  
   this.mUpdateEquilibriumPoint();
   
   // By default, economy is in equilibrium
@@ -70,6 +76,12 @@ EconomyModel.prototype = {
   getSupply : function() {
     return this.mSupply;
   },
+  
+  /*
+  getLowestEffectivePrice : function() {
+    return this.mLowestPrice;
+  },
+  */
   
   /**
    * Although this mutator isn't needed (this.wp is "public"),
@@ -268,9 +280,12 @@ EconomyModel.prototype = {
   }, // calculateHighestQuantity()
   
   /**
+   * This method is flawed in assuming that supply is always
+   * increasing and demand is always decreasing.
    * @pre mLowestQuantity and mHighestQuantity have been set
    * @returns (rounded) the lowest price that both graphs have in common
    */
+  /*
   calculateLowestEffectivePrice : function() {
     if (!this.mLowestQuantity || !this.mHighestQuantity)
       alertAndThrowException(
@@ -280,6 +295,7 @@ EconomyModel.prototype = {
       this.mSupply.getP(this.mLowestQuantity),
       this.mDemand.getP(this.mHighestQuantity)));
   },
+  */
   
   /**
    * @return the quantity demanded at the current world price

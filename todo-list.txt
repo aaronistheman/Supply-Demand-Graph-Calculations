@@ -8,6 +8,7 @@ Next:
 -finish moving world price handler
   -"user error" message if user gives world price that would cause
   extrapolation of at least one curve
+    -use the error-checking of getP().
 -static Price.forDisplay() for display ep
 -replace "data" variable name with "economyModel"?
 -tests: indicate non-static-ness correctly (i.e. with "prototype")
