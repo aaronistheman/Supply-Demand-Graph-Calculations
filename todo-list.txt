@@ -6,10 +6,11 @@ Contents:
 
 Next:
 -view handles dollar signs
-  -static Price.forDisplay() for display ep
   -should incorporate the dollar sign
-    -remove use of dollar sign in index.html
     -change forDisplay (both versions)
+    -remove the id wrapper
+  -make sure TextView.updateAll() applies padding and dollar sign
+  (probably through Price.forDisplay()) to all dollar values
 -replace "data" variable name with "economyModel"?
 -tests: indicate non-static-ness correctly (i.e. with "prototype")
 -closing economy handler
