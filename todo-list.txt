@@ -9,7 +9,6 @@ Next:
   -eliminated world price
     -clear graph.js's setWp
   -can't set world price that would cause "x out of range"
-  -draw world price line
 -static Price.forDisplay() for display ep
 -replace "data" variable name with "economyModel"?
 -tests: indicate non-static-ness correctly (i.e. with "prototype")
@@ -21,6 +20,7 @@ Next:
   with a line on the canvas
   -area value is highlighted (e.g. deadweight loss): color the area
 -end
+  -where to say what industry it is?
   -make sure these are done
     -getNumberImports()
     -getDeadweightLoss()

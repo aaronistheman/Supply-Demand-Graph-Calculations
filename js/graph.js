@@ -51,20 +51,7 @@ Graph.prototype = {
 
   
   
-  /**
-   * Server as eraser method if world price is undefined
-   */
-  redrawWorldPriceLine : function() {
-    Graph._clearCanvas(this._wpCanvas, this._wpCtx);
   
-    if (this._wp !== undefined) {
-      var ctx = this._wpCtx;
-      var y = this._wp * this._wpCanvas.height;
-      ctx.moveTo(0, y);
-      ctx.lineTo(Graph.MAX_X * this._wpCanvas.width, y);
-      ctx.stroke();
-    }
-  },
   
   /**
    * Emphasizes where the lowest quantity used for calculations

@@ -53,6 +53,7 @@ GraphView.prototype = {
     
     this.redrawDemand(data.getDemand());
     this.redrawSupply(data.getSupply());
+    this.redrawWorldPriceLine(data.wp);
   },
 
   /**
@@ -86,6 +87,22 @@ GraphView.prototype = {
     GraphView.clearCanvas(this.mDemandCanvas, this.mDemandCtx);
     this.mDrawGraph(demand.getPoints(), this.mDemandCanvas,
       this.mDemandCtx);
+  },
+  
+  /**
+   * Serves as eraser method if world price is undefined
+   * @param worldPrice value of the world price
+   */
+  redrawWorldPriceLine : function(worldPrice) {
+    GraphView.clearCanvas(this.mWpCanvas, this.mWpCtx);
+  
+    if (worldPrice) {
+      var ctx = this.mWpCtx;
+      var y = worldPrice * this.mWpCanvas.height;
+      ctx.moveTo(0, y);
+      ctx.lineTo(GraphView.maxX * this.mWpCanvas.width, y);
+      ctx.stroke();
+    }
   },
   
   drawAxes : function() {
