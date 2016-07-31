@@ -1,29 +1,23 @@
 "use strict";
 
-/**
- * Note: In many of the QUnit module's names, I didn't use "prototype"
- * where I maybe should've (e.g. "StringInput.getChar()" really means
- * "StringInput.prototype.getChar()").
- */
-
 var currentTestedFile = undefined;
 
 currentTestedFile = "utility/quantity.js";
-QUnit.module(currentTestedFile + ", Quantity.get()");
+QUnit.module(currentTestedFile + ", Quantity.prototype.get()");
 
   QUnit.test("correct return", function(assert) {
     var q = new Quantity(3.63);
     assert.deepEqual(q.get(), 4);
   });
 
-QUnit.module(currentTestedFile + ", Quantity.getUnrounded()");
+QUnit.module(currentTestedFile + ", Quantity.prototype.getUnrounded()");
 
   QUnit.test("correct return", function(assert) {
     var q = new Quantity(3.63);
     assert.deepEqual(q.getUnrounded(), 3.63);
   });
   
-QUnit.module(currentTestedFile + ", static Quantity.get()");
+QUnit.module(currentTestedFile + ", Quantity.get()");
 
   QUnit.test("correct return", function(assert) {
     var q = Quantity.get(3.634529);
@@ -31,21 +25,21 @@ QUnit.module(currentTestedFile + ", static Quantity.get()");
   });
 
 currentTestedFile = "utility/price.js";
-QUnit.module(currentTestedFile + ", Price.get()");
+QUnit.module(currentTestedFile + ", Price.prototype.get()");
 
   QUnit.test("correct return", function(assert) {
     var p = new Price(5.789222);
     assert.deepEqual(p.get(), 5.79);
   });
 
-QUnit.module(currentTestedFile + ", Price.getUnrounded()");
+QUnit.module(currentTestedFile + ", Price.prototype.getUnrounded()");
 
   QUnit.test("correct return", function(assert) {
     var p = new Price(5.789222);
     assert.deepEqual(p.getUnrounded(), 5.789222);
   });
 
-QUnit.module(currentTestedFile + ", Price.forDisplay()");
+QUnit.module(currentTestedFile + ", Price.prototype.forDisplay()");
 
   QUnit.test("correct return", function(assert) {
     var p = new Price(5.7);
@@ -57,14 +51,14 @@ QUnit.module(currentTestedFile + ", Price.forDisplay()");
     assert.deepEqual(p.forDisplay(), "$5.79");
   });
 
-QUnit.module(currentTestedFile + ", static Price.get()");
+QUnit.module(currentTestedFile + ", Price.get()");
 
   QUnit.test("correct return", function(assert) {
     var p = Price.get(5.789222);
     assert.deepEqual(p, 5.79);
   });
 
-QUnit.module(currentTestedFile + ", static Price.forDisplay()");
+QUnit.module(currentTestedFile + ", Price.forDisplay()");
 
   QUnit.test("correct return", function(assert) {
     var p = Price.forDisplay(2.8351);
@@ -77,7 +71,8 @@ QUnit.module(currentTestedFile + ", static Price.forDisplay()");
   });
 
 currentTestedFile = "model/economy-model.js";
-QUnit.module(currentTestedFile + ", EconomyModel.calculateEquilibriumPoint()");
+QUnit.module(currentTestedFile +
+ ", EconomyModel.prototype.calculateEquilibriumPoint()");
 
   // In this test, the intersection point is (by intention)
   // a given point
@@ -102,7 +97,8 @@ QUnit.module(currentTestedFile + ", EconomyModel.calculateEquilibriumPoint()");
     assert.deepEqual(eqPoint.p(), 0.50);
   });
 
-QUnit.module(currentTestedFile + ", EconomyModel.calculateHighestQuantity()");
+QUnit.module(currentTestedFile +
+  ", EconomyModel.prototype.calculateHighestQuantity()");
 
   QUnit.test("returns last demand quantity", function(assert) {
     var supplyPoints = "40 0.25 ; 50 0.30 ; 90 0.75 ; 110 1.35";
@@ -120,7 +116,8 @@ QUnit.module(currentTestedFile + ", EconomyModel.calculateHighestQuantity()");
     assert.deepEqual(data.calculateHighestQuantity(), 103);
   });
 
-QUnit.module(currentTestedFile + ", EconomyModel.calculateLowestQuantity()");
+QUnit.module(currentTestedFile +
+  ", EconomyModel.prototype.calculateLowestQuantity()");
 
   QUnit.test("returns first demand quantity", function(assert) {
     var supplyPoints = "40 0.25 ; 50 0.30 ; 90 0.75 ; 110 1.35";
@@ -140,7 +137,7 @@ QUnit.module(currentTestedFile + ", EconomyModel.calculateLowestQuantity()");
 
 /*
 QUnit.module(currentTestedFile +
-  ", EconomyModel.calculateLowestEffectivePrice()");
+  ", EconomyModel.prototype.calculateLowestEffectivePrice()");
 
   QUnit.test("returns first supply price", function(assert) {
     var supplyPoints = "45 0.26 ; 50 0.30 ; 90 0.75 ; 110 1.35";
@@ -169,7 +166,8 @@ QUnit.module(currentTestedFile +
   });
 */
 
-QUnit.module(currentTestedFile + ", EconomyModel.getConsumerSurplus()");
+QUnit.module(currentTestedFile +
+  ", EconomyModel.prototype.getConsumerSurplus()");
 
   QUnit.test("correct value", function(assert) {
     var data = new EconomyModel(
@@ -189,7 +187,8 @@ QUnit.module(currentTestedFile + ", EconomyModel.getConsumerSurplus()");
       23.50); // hand-calculated
   });
 
-QUnit.module(currentTestedFile + ", EconomyModel.getProducerSurplus()");
+QUnit.module(currentTestedFile +
+  ", EconomyModel.prototype.getProducerSurplus()");
 
   QUnit.test("correct value", function(assert) {
     var data = new EconomyModel(
@@ -209,7 +208,7 @@ QUnit.module(currentTestedFile + ", EconomyModel.getProducerSurplus()");
       16.00); // hand-calculated
   });
 
-QUnit.module(currentTestedFile + ", EconomyModel.getState()");
+QUnit.module(currentTestedFile + ", EconomyModel.prototype.getState()");
 
   QUnit.test("correctly detected equilibrium", function(assert) {
     var data = new EconomyModel(
@@ -220,7 +219,8 @@ QUnit.module(currentTestedFile + ", EconomyModel.getState()");
     assert.deepEqual(data.getState(), States.Equilibrium);
   });
 
-QUnit.module(currentTestedFile + ", calculateWorldQd()");
+QUnit.module(currentTestedFile +
+  ", EconomyModel.prototype.calculateWorldQd()");
 
   QUnit.test("correct value is a given quantity", function(assert) {
     var data = new EconomyModel(
@@ -242,7 +242,8 @@ QUnit.module(currentTestedFile + ", calculateWorldQd()");
     assert.deepEqual(result, 80); // correct value isn't from a point
   });
 
-QUnit.module(currentTestedFile + ", calculateWorldQs()");
+QUnit.module(currentTestedFile +
+  ", EconomyModel.prototype.calculateWorldQs()");
 
   QUnit.test("correct value is a given quantity", function(assert) {
     var data = new EconomyModel(
@@ -265,7 +266,7 @@ QUnit.module(currentTestedFile + ", calculateWorldQs()");
   });
 
 currentTestedFile = "model/string-input.js";
-QUnit.module(currentTestedFile + ", StringInput.getChar()");
+QUnit.module(currentTestedFile + ", StringInput.prototype.getChar()");
 
   QUnit.test("correct return", function(assert) {
     var sin = new StringInput("abcd");
@@ -285,7 +286,8 @@ QUnit.module(currentTestedFile + ", StringInput.getChar()");
     assert.deepEqual(sin.getChar(), '');
   });
 
-QUnit.module(currentTestedFile + ", StringInput.getCharsUntil()");
+QUnit.module(currentTestedFile +
+  ", StringInput.prototype.getCharsUntil()");
 
   QUnit.test("gets chars until reaches stopper", function(assert) {
     var sin = new StringInput("abcdefgh");
@@ -294,7 +296,8 @@ QUnit.module(currentTestedFile + ", StringInput.getCharsUntil()");
     assert.deepEqual(sin.getChar(), 'e', "Advanced appropriately");
   });
 
-QUnit.module(currentTestedFile + ", StringInput.ignore()");
+QUnit.module(currentTestedFile +
+  ", StringInput.prototype.ignore()");
 
   QUnit.test("ignores appropriate chars", function(assert) {
     var sin = new StringInput("aaaabaacd");
@@ -308,7 +311,7 @@ QUnit.module(currentTestedFile + ", StringInput.ignore()");
     assert.deepEqual(sin.getChar(), 'a');
   });
 
-QUnit.module(currentTestedFile + ", StringInput.ignoreUntil()");
+QUnit.module(currentTestedFile + ", StringInput.prototype.ignoreUntil()");
 
   QUnit.test("ignores until appropriate char", function(assert) {
     var sin = new StringInput("abcdef");
@@ -316,7 +319,7 @@ QUnit.module(currentTestedFile + ", StringInput.ignoreUntil()");
     assert.deepEqual(sin.getChar(), 'd');
   });
 
-QUnit.module(currentTestedFile + ", StringInput.isAtEnd()");
+QUnit.module(currentTestedFile + ", StringInput.prototype.isAtEnd()");
 
   QUnit.test("knows when end's reached", function(assert) {
     var sin = new StringInput("abc");
@@ -325,7 +328,8 @@ QUnit.module(currentTestedFile + ", StringInput.isAtEnd()");
   });
 
 currentTestedFile = "model/piecewise-function.js";
-QUnit.module(currentTestedFile + ", PiecewiseFunction.getP()");
+QUnit.module(currentTestedFile +
+  ", PiecewiseFunction.prototype.getP()");
 
   QUnit.test("returns correct price", function(assert) {
     var pf = new PiecewiseFunction();
@@ -347,7 +351,8 @@ QUnit.module(currentTestedFile + ", PiecewiseFunction.getP()");
     assert.deepEqual(price, 3.50);
   });
 
-QUnit.module(currentTestedFile + ", PiecewiseFunction.insert()");
+QUnit.module(currentTestedFile +
+  ", PiecewiseFunction.prototype.insert()");
 
   QUnit.test("error-checking works", function(assert) {
     var caughtError = false;
