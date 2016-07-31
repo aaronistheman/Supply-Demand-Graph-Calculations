@@ -90,14 +90,11 @@ EconomyModel.prototype = {
    *
    * @param newWp (not necessarily rounded) price value;
    * newWp < this.ep
+   * @throws exception (that should be caught) if user gave
+   * world price that causes extrapolation
    */
   setWp : function(newWp) {
     if (newWp) { // if user set new world price
-      // In case need to reverse changes
-      var oldWp = this.wp;
-      var oldQd = this.qd;
-      var oldQs = this.qs;
-      
       var newWpRounded = Price.get(newWp);
       
       // error-checking
@@ -106,19 +103,11 @@ EconomyModel.prototype = {
           "setWp was given world price higher than equilibrium price");
     
       this.wp = newWpRounded;
-      
-      try {
-        this.qd = Quantity.get(this.calculateWorldQd());
-        this.qs = Quantity.get(this.calculateWorldQs());
-      }
-      catch(err) {
-        // The error message of calculateWorldQd() or
-        // calculateWorldQs() suffices(), so just reverse changes.
-        
-        this.wp = oldWp;
-        this.qd = oldQd;
-        this.qs = oldQs;
-      }
+
+      // Each of the following will throw an exception if user
+      // gave too low world price
+      this.qd = Quantity.get(this.calculateWorldQd());
+      this.qs = Quantity.get(this.calculateWorldQs());
     }
     else { // if user eliminated world price
       this.wp = undefined;

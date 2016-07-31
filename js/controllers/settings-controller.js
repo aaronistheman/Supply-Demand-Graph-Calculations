@@ -35,9 +35,25 @@ SettingsController.worldPriceHandler =
   var newWp = parseFloat($("#world-p").val());
   
   if (!newWp || newWp < economyModel.ep) { // if valid input that I can handle
-    economyModel.setWp(newWp);
-    textView.updateAll(economyModel);
-    graphView.updateAll(economyModel);
+    // In case need to reverse changes
+    var oldWp = this.wp;
+    var oldQd = this.qd;
+    var oldQs = this.qs;
+      
+    try {
+      economyModel.setWp(newWp);
+      
+      textView.updateAll(economyModel);
+      graphView.updateAll(economyModel);
+    }
+    catch(err) {
+      // The error message of calculateWorldQd() or
+      // calculateWorldQs() suffices(), so just reverse changes.
+      
+      this.wp = oldWp;
+      this.qd = oldQd;
+      this.qs = oldQs;
+    }
   }
   else { // if valid input that I can't handle
     alert("User Error: Because the developer wasn't particularly " +
