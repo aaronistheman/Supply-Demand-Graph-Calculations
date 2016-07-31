@@ -6,6 +6,7 @@ Contents:
 
 Next:
 -closing economy handler
+  -update button stops working after close and reopen checkbox
 -transfer any remains of (old) main.js and graph.js
 -settings
   -see Note #1

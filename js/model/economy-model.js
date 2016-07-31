@@ -89,7 +89,8 @@ EconomyModel.prototype = {
    * with changing the world price.
    *
    * @param newWp (not necessarily rounded) price value;
-   * newWp < this.ep
+   * newWp < this.ep; use undefined (or some false value) to eliminate
+   * world price
    * @throws exception (that should be caught) if user gave
    * world price that causes extrapolation
    */
