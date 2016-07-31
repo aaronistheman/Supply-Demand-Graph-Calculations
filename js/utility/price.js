@@ -30,7 +30,7 @@ Price.prototype = {
    * as a string.
    */
   forDisplay : function() {
-    return this.mVal.toFixed(2);
+    return "$" + this.mVal.toFixed(2);
   },
 };
 

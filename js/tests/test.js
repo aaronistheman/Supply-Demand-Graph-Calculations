@@ -49,12 +49,12 @@ QUnit.module(currentTestedFile + ", Price.forDisplay()");
 
   QUnit.test("correct return", function(assert) {
     var p = new Price(5.7);
-    assert.deepEqual(p.forDisplay(), "5.70");
+    assert.deepEqual(p.forDisplay(), "$5.70");
   });
 
   QUnit.test("correct return", function(assert) {
     var p = new Price(5.789222);
-    assert.deepEqual(p.forDisplay(), "5.79");
+    assert.deepEqual(p.forDisplay(), "$5.79");
   });
 
 QUnit.module(currentTestedFile + ", static Price.get()");

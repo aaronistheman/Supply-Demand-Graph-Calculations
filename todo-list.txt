@@ -6,9 +6,6 @@ Contents:
 
 Next:
 -view handles dollar signs
-  -should incorporate the dollar sign
-    -change forDisplay (both versions)
-    -remove the id wrapper
   -make sure TextView.updateAll() applies padding and dollar sign
   (probably through Price.forDisplay()) to all dollar values
 -replace "data" variable name with "economyModel"?
@@ -22,6 +19,8 @@ Next:
   with a line on the canvas
   -area value is highlighted (e.g. deadweight loss): color the area
 -end
+  -see if any parts of the program (that could be done more than
+  once) take too long
   -robustly test with variety of supply and demand data, including
   ones that make non-monotonic graphs
   -where to say what industry it is?
