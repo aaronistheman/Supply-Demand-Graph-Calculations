@@ -30,10 +30,6 @@ PiecewiseFunction.prototype = {
    * @param q just the quantity value (NOT instance of Quantity)
    */
   getP : function(q) {
-    if (q < this._points[0].q()
-      || q > this._points[this._points.length - 1].q())
-      alertAndThrowException("x out of range");
-
     // find the first point below x and first point above it
     var before = null;
     var after = null;

@@ -40,7 +40,7 @@ SettingsController.worldPriceHandler =
     graphView.updateAll(economyModel);
   }
   else { // if valid input that I can't handle
-    alert("Error: because the developer wasn't particularly " +
+    alert("User Error: Because the developer wasn't particularly " +
           "knowledgeable about economics, a set world " +
           "price must be below the equilibrium price. His apologies.");
   }
