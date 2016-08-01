@@ -20,7 +20,12 @@ SettingsController.prototype = {
    */
   setUpAllHandlers : function(economyModel, textView, graphView) {
     $("#b-world-p").click(function() {
-      SettingsController.worldPriceHandler(economyModel, textView, graphView);
+      SettingsController.newWorldPriceHandler(
+        economyModel, textView, graphView);
+    });
+    $("#closed-open-checkbox").change(function() {
+      SettingsController.closingEconomyHandler(
+        economyModel, textView, graphView, this);
     });
   },
 };
@@ -30,7 +35,7 @@ SettingsController.prototype = {
  * @param textView instance of TextView
  * @param graphView instance of GraphView
  */
-SettingsController.worldPriceHandler =
+SettingsController.newWorldPriceHandler =
   function(economyModel, textView, graphView) {
   var newWp = parseFloat($("#new-wp").val());
   
@@ -57,4 +62,19 @@ SettingsController.worldPriceHandler =
           "knowledgeable about economics, a set world " +
           "price must be below the equilibrium price. His apologies.");
   }
-};
+}; // newWorldPriceHandler()
+
+/**
+ * @param economyModel instance of EconomyModel
+ * @param textView instance of TextView
+ * @param graphView instance of GraphView
+ * @param checkbox the HTML checkbox element that was acted on
+ */
+SettingsController.closingEconomyHandler =
+  function(economyModel, textView, graphView, checkbox) {
+  if (checkbox.checked) { // if checked the box to close economy
+    economyModel.setWp(undefined);
+    textView.updateAll(economyModel);
+    graphView.updateAll(economyModel);
+  }
+}; // closingEconomyHandler()

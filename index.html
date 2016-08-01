@@ -57,7 +57,7 @@
       <p><b>International Matters</b></p>
       <p>Closed economy: <input id="closed-open-checkbox"
         type="checkbox" data-ng-model="isClosed" /></p>
-      <div data-ng-if="!isClosed">
+      <div data-ng-show="!isClosed">
         <p>World price: 
           <span id="world-p"></span>
           
@@ -72,11 +72,11 @@
     <div class="panel">
       <p><b>Government: <input type="checkbox" data-ng-model="isPublic" />
         </b></p>
-      <div data-ng-if="isPublic"> <!-- if considering government -->
+      <div data-ng-show="isPublic"> <!-- if considering government -->
 
         <br /><p>Deadweight Loss (Area): <span id="dwl">0</span></p><br />
 
-        <div data-ng-if="isClosed"> <!-- if closed, public economy -->
+        <div data-ng-show="isClosed"> <!-- if closed, public economy -->
 
           <div> <!-- tax info -->
             <!-- figure out what the user wants taxed -->
@@ -107,13 +107,13 @@
               <option value="floor">Floor</option>
               <option value="ceiling">Ceiling</option>
             </select></p>
-            <div data-ng-if="priceMechanism != 'none'">
+            <div data-ng-show="priceMechanism != 'none'">
               <p>How Much: <input type="number" name="p-mech" value=0 /></p>
             </div>
           </div> <!-- price mechanism info -->
 
         </div> <!-- if closed, public economy -->
-        <div data-ng-if="!isClosed"> <!-- if open, public economy -->
+        <div data-ng-show="!isClosed"> <!-- if open, public economy -->
 
           <div> <!-- trade info -->
             <br><p>Trade Factor: <select data-ng-model="tradeFactor">
@@ -121,7 +121,7 @@
               <option value="tariff">Tariff</option>
               <option value="quota">Quota</option>
             </select></p>
-            <div data-ng-if="tradeFactor != 'none'">
+            <div data-ng-show="tradeFactor != 'none'">
               <p>How Much: <input type="number" name="trade-factor"
                 value=0 /></p>
             </div>
