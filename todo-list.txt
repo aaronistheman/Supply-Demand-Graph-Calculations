@@ -5,8 +5,6 @@ Contents:
 -Considerable
 
 Next:
--transfer any remains of (old) graph.js
-  -remove graph.js and traces of it
 -settings
   -see Note #1
 -hi-liting controller
