@@ -4,9 +4,12 @@
  * View custom type in charge of the display of the data
  * in the "panels" of the webpage. Involves no drawing.
  */
-function TextView() {
+function TextView(industryName) {
   if (!(this instanceof TextView))
     alertAndThrowException("Forgot 'new' before TextView constructor");
+  
+  this.$title = $("#graph-title");
+  this.$title.html(industryName);
   
   // store the display-related HTML elements
   this.$eq = $("#eq-q"); // equilibrium quantity display

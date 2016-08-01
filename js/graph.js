@@ -6,17 +6,9 @@
  * (so clearRect() would do something).
  */
 function Graph(supplyDataString, demandDataString) {
-  if (!(this instanceof Graph))
-    return new Graph();
-
-  
-  this._wp = undefined; // world price
   
   // Stuff that involves a webpage and are not needed by unit test
   if (!isUnitTesting()) {
-  
-    // set graph title
-    $("#graph-title").html("Glue");
     
     this.emphasizeLowestQuantity();
     this.emphasizeEquilibriumQuantity();
