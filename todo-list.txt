@@ -8,11 +8,7 @@ Next:
   -open, private economy: DONE
   -closed, public economy
     -(excise) tax or subsidy on supply:
-      -show both; how to distinguish? ideas:
-        -different colors
-          -make demand thick black and supply thick red and
-          "active supply" thick blue
-        -have text labels at top right of each graph
+      -to test, draw a trivial graph offset from the supply one
       -how to find location of "active supply":
         -add or subtract from supply, but when? ideas:
           -when the change is realized, go through all supply points
