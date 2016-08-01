@@ -52,9 +52,14 @@ GraphView.prototype = {
       alertAndThrowException("data parameter is of wrong type");
     
     this.redrawDemand(data.getDemand());
-    this.redrawSupply(data.getSupply());
+    this.redrawSupply(data.getSupply())
+    
+    // Emphasize certain values with solid line
     this.redrawWorldPriceLine(data.wp);
+    
+    // Emphasize certain values with dashed line
     this.mEmphasizeQuantityDashedLine(data.getLowestEffectiveQuantity());
+    this.mEmphasizeQuantityDashedLine(data.eq);
   },
 
   /**
@@ -177,7 +182,8 @@ GraphView.prototype = {
   }, // mDrawYAxis()
   
   /**
-   * Emphasizes the given quantity with a dashed line.
+   * Emphasizes the given quantity with a dashed line parallel to
+   * the y-axis.
    * @param q the quantity value to emphasize
    */
   mEmphasizeQuantityDashedLine : function(q) {
@@ -202,7 +208,7 @@ GraphView.prototype = {
     }
       
     this.mIndicatorCtx.stroke(); // finalize the drawing
-  },
+  }, // mEmphasizeQuantityDashedLine
 };
 
 /**

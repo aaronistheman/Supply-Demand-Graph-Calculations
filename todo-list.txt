@@ -6,7 +6,7 @@ Contents:
 
 Next:
 -transfer any remains of (old) graph.js
-  -emphasize equil quantity
+  -remove graph.js and traces of it
 -settings
   -see Note #1
 -hi-liting controller
