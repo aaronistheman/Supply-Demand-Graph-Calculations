@@ -52,8 +52,14 @@ GraphView.prototype = {
       alertAndThrowException("data parameter is of wrong type");
     
     this.redrawDemand(data.getDemand());
-    this.redrawSupply(data.getSupply());
+    this.redrawSupply(data.getSupply())
+    
+    // Emphasize certain values with solid line
     this.redrawWorldPriceLine(data.wp);
+    
+    // Emphasize certain values with dashed line
+    this.mEmphasizeQuantityDashedLine(data.getLowestEffectiveQuantity());
+    this.mEmphasizeQuantityDashedLine(data.eq);
   },
 
   /**
@@ -174,6 +180,35 @@ GraphView.prototype = {
     
     this.mAxesCtx.stroke();
   }, // mDrawYAxis()
+  
+  /**
+   * Emphasizes the given quantity with a dashed line parallel to
+   * the y-axis.
+   * @param q the quantity value to emphasize
+   */
+  mEmphasizeQuantityDashedLine : function(q) {
+    this.mIndicatorCtx.moveTo(q * this.mIndicatorCanvas.width, 0);
+    var isDrawingDash = true;
+    
+    // Starting from the x-axis, draw vertical dashes until reached top
+    for (var y = 0; y < this.mIndicatorCanvas.height;
+      y += GraphView.dashLength) {
+      if (isDrawingDash) {
+        // draw dash
+        this.mIndicatorCtx.lineTo(q *
+          this.mIndicatorCanvas.width, GraphView.maxY * y);
+      }
+      else { // not drawing dash
+        // skip drawing dash here
+        this.mIndicatorCtx.moveTo(q *
+          this.mIndicatorCanvas.width, GraphView.maxY * y);
+      }
+      
+      isDrawingDash = !isDrawingDash;
+    }
+      
+    this.mIndicatorCtx.stroke(); // finalize the drawing
+  }, // mEmphasizeQuantityDashedLine
 };
 
 /**
@@ -196,7 +231,7 @@ GraphView.numGapsY = GraphView.numTicksY + 1;
 GraphView.tickLength = 10;
 GraphView.halfTick = GraphView.tickLength / 2;
 
-GraphView.dashLength = 10;
+GraphView.dashLength = 10; // for drawing dashed lines
 
 // each tick usually has a label near it (e.g. 1.20)
 GraphView.labelOffset = 20; // how far label is from respective axis

@@ -5,14 +5,13 @@ Contents:
 -Considerable
 
 Next:
--transfer any remains of (old) main.js and graph.js
 -settings
   -see Note #1
 -hi-liting controller
   -point value is highlighted (e.g. quantity demanded): perhaps show
   with a line on the canvas
   -area value is highlighted (e.g. deadweight loss): color the area
--end
+-end (also see "Eventually" section)
   -see if any parts of the program (that could be done more than
   once) take too long
     -ideas for improving speed:
@@ -110,6 +109,7 @@ Eventually:
     of the graph whose final data point's x-coordinate is lowest,
     then the graphs don't interact, and this should be said
     -report error if no semi-colon where expected one
+  -read "what is graphed" from file
 -use AngularJS to note errorneous text field inputs
   -e.g. price floor or ceiling has to matter
 -(if not done yet) clean up script.js

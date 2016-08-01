@@ -77,6 +77,10 @@ EconomyModel.prototype = {
     return this.mSupply;
   },
   
+  getLowestEffectiveQuantity : function() {
+    return this.mLowestQuantity;
+  },
+  
   /*
   getLowestEffectivePrice : function() {
     return this.mLowestPrice;
