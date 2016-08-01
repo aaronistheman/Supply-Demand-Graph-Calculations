@@ -65,8 +65,15 @@ GraphView.prototype = {
   /**
    * Doesn't clean the canvas before drawing
    * @param points array of instances of Point
+   * @param canvas
+   * @param ctx
+   * @param color of type string (e.g. "red")
    */
-  mDrawGraph : function(points, canvas, ctx) {
+  mDrawGraph : function(points, canvas, ctx, color) {
+    // set up context
+    ctx.strokeStyle = color; // apply color
+    ctx.lineWidth = 5;
+    
     // Move to the first point
     ctx.beginPath();
     ctx.moveTo(canvas.width * points[0].q(), canvas.height * points[0].p());
@@ -83,7 +90,7 @@ GraphView.prototype = {
   redrawSupply : function(supply) {
     GraphView.clearCanvas(this.mSupplyCanvas, this.mSupplyCtx);
     this.mDrawGraph(supply.getPoints(), this.mSupplyCanvas,
-      this.mSupplyCtx);
+      this.mSupplyCtx, "red");
   },
 
   /**
@@ -92,7 +99,7 @@ GraphView.prototype = {
   redrawDemand : function(demand) {
     GraphView.clearCanvas(this.mDemandCanvas, this.mDemandCtx);
     this.mDrawGraph(demand.getPoints(), this.mDemandCanvas,
-      this.mDemandCtx);
+      this.mDemandCtx, "black");
   },
   
   /**
