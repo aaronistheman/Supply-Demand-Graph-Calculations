@@ -68,17 +68,20 @@ GraphView.prototype = {
    * @param canvas
    * @param ctx
    * @param color of type string (e.g. "red")
+   * @param offset how much to add to a point's price when plotting it
    */
-  mDrawGraph : function(points, canvas, ctx, color) {
+  mDrawGraph : function(points, canvas, ctx, color, offset=0) {
     // set up context
     ctx.strokeStyle = color; // apply color
     ctx.lineWidth = 5;
     
     // Move to the first point
     ctx.beginPath();
-    ctx.moveTo(canvas.width * points[0].q(), canvas.height * points[0].p());
+    ctx.moveTo(canvas.width * points[0].q(),
+      canvas.height * (points[0].p() + offset));
     for (var i in points) {
-      ctx.lineTo(canvas.width * points[i].q(), canvas.height * points[i].p());
+      ctx.lineTo(canvas.width * points[i].q(),
+        canvas.height * (points[i].p() + offset));
     }
 
     ctx.stroke();
