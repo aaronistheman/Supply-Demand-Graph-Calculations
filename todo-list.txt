@@ -8,10 +8,21 @@ Next:
   -open, private economy: DONE
   -closed, public economy
     -(excise) tax or subsidy on supply:
-      -how to sense change from SettingsController
-        -
-      -how to apply change (recalculations) to EconomyModel
-        -
+      -how to sense changes from SettingsController; list by change
+        -entering/changing form value
+          -add "update" buttons
+            -if clicked, appropriate form (tax or subsidy) is read, then
+            model method is called so that offset is appropriately adjusted
+        -change drop box (from supply to demand or vice-versa)
+          -probably should react to changing the option, rather than using
+          a button
+            -adjust offset appropriately
+      -how to apply change (recalculations) to EconomyModel (easy)
+        -treat things as if supply outright moved (which it did)
+          -probably need to manually call the methods to recalculate:
+            -equilibrium
+            -qs and qd
+          -accessing to supply's points should apply the offset
       -how to show the change in GraphView
         -simply apply an offset (if a tax or subsidy) and draw
         another supply graph in blue
@@ -24,10 +35,11 @@ Next:
         -equilibrium
         -total revenue
           -make sure total revenue uses quantity demanded
+          -make sure the method does this right
         -welfare
       -calculate
         -tax revenue
-        -deadweight loss
+        -deadweight loss (zero)
     -(sales?) tax or subsidy on demand:
       -location of "active demand"
       -recalculate:
@@ -35,7 +47,7 @@ Next:
         -welfare
       -calculate
         -tax revenue
-        -deadweight loss
+        -deadweight loss (zero)
     -price mechanism:
       -dashed line for where mechanism is
       -floor or ceiling:
@@ -45,6 +57,10 @@ Next:
           -welfare
         -calculate
           -deadweight loss
+    -if user privatizes economy or opens economy; disable:
+      -tax
+      -subsidy
+      -price mechanism
   -open, public economy
     -tariff
       -recalculate:
@@ -140,3 +156,5 @@ CSS in one of the card games
 -when change is made, hi lite the fields that changed, and have
 a button to clear the hi lites
 -replace "data" variable name with "economyModel"
+-reapply settings when apply-able (e.g. if user opens economy, apply
+the last used world price)
