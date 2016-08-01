@@ -8,12 +8,18 @@ Next:
   -open, private economy: DONE
   -closed, public economy
     -(excise) tax or subsidy on supply:
-      -to test, draw a trivial graph offset from the supply one
-      -how to find location of "active supply":
+      -how to sense change from SettingsController
+        -
+      -how to apply change (recalculations) to EconomyModel
+        -
+      -how to show the change in GraphView
+        -simply apply an offset (if a tax or subsidy) and draw
+        another supply graph in blue
+      [-how to find location of "active supply":
         -add or subtract from supply, but when? ideas:
           -when the change is realized, go through all supply points
           -have a method that returns an active supply value that
-          finds the supply point then applies tax/subsidy to it
+          finds the supply point then applies tax/subsidy to it]
       -recalculate:
         -equilibrium
         -total revenue
