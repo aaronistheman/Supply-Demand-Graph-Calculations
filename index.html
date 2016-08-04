@@ -80,7 +80,7 @@
 
           <div> <!-- tax info -->
             <!-- figure out what the user wants taxed -->
-            <p>Tax On: <select data-ng-model="taxed">
+            <p>Tax On: <select id="what-taxed" data-ng-model="taxed">
               <option value="demand">Demand</option>
               <option value="supply">Supply</option>
             </select></p>
@@ -99,7 +99,8 @@
 
           <div> <!-- subsidy info -->
             <!-- figure out what the user wants subsidized -->
-            <br><p>Subsidy For: <select data-ng-model="subsidized">
+            <br><p>Subsidy For: <select id="what-subsidized"
+              data-ng-model="subsidized">
               <option value="demand">Demand</option>
               <option value="supply">Supply</option>
             </select></p>

@@ -28,13 +28,15 @@ SettingsController.prototype = {
         economyModel, textView, graphView, this);
     });
     $("#b-tax-amount").click(function() {
-      SettingsController.taxAmountChangeHandler();
+      SettingsController.taxAmountChangeHandler(
+        economyModel, textView, graphView);
     });
     $("#b-subsidy-amount").click(function() {
-      SettingsController.subsidyAmountChangeHandler();
+      SettingsController.subsidyAmountChangeHandler(
+        economyModel, textView, graphView);
     });
   },
-};
+}; // SettingsController.prototype
 
 /**
  * @param economyModel instance of EconomyModel
@@ -85,14 +87,17 @@ SettingsController.closingEconomyHandler =
   }
 }; // closingEconomyHandler()
 
-
 /**
- *
+ * @param economyModel instance of EconomyModel
+ * @param textView instance of TextView
+ * @param graphView instance of GraphView
+ * @param checkbox the HTML checkbox element that was acted on
  */
 SettingsController.taxAmountChangeHandler =
-  function() {
+  function(economyModel, textView, graphView) {
   // check if demand or supply is being adjusted
-  alert("tax amount changed");
+  alert("tax amount changing for: " + textView.getWhatTaxed());
+  
 
   // clear both tax amounts
   
@@ -102,9 +107,12 @@ SettingsController.taxAmountChangeHandler =
 };
 
 /**
- *
+ * @param economyModel instance of EconomyModel
+ * @param textView instance of TextView
+ * @param graphView instance of GraphView
+ * @param checkbox the HTML checkbox element that was acted on
  */
 SettingsController.subsidyAmountChangeHandler =
-  function() {
-  alert("subsidy amount changed");  
+  function(economyModel, textView, graphView) {
+  alert("subsidy amount changing for: " + textView.getWhatSubsidized());
 };

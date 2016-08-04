@@ -14,7 +14,7 @@ Next:
             -if clicked, appropriate form (tax or subsidy) is read, then
             model method is called so that offset is appropriately adjusted
             (based on drop down)
-              -see which of supply and demand is being adjusted
+              -follow pseudocode
         -if change drop box (from supply to demand or vice-versa)
           -probably should react to changing the option, rather than using
           a button

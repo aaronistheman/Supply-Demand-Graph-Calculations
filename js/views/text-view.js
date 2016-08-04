@@ -28,11 +28,21 @@ function TextView(industryName) {
   
   // For closed, public economy
   this.$taxAmount = $("#tax-amount");
+  this.$whatTaxed = $("#what-taxed");
   this.$subsidyAmount = $("#subsidy-amount");
+  this.$whatSubsidized = $("#what-subsidized");
 } // TextView
 
 TextView.prototype = {
   constructor : TextView,
+  
+  getWhatTaxed : function() {
+    return this.$whatTaxed.val();
+  },
+  
+  getWhatSubsidized : function() {
+    return this.$whatSubsidized.val();
+  },
   
   /**
    * @param data instance of EconomyModel
