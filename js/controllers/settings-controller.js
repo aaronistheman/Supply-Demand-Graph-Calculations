@@ -27,6 +27,12 @@ SettingsController.prototype = {
       SettingsController.closingEconomyHandler(
         economyModel, textView, graphView, this);
     });
+    $("#b-tax-amount").click(function() {
+      SettingsController.taxAmountChangeHandler();
+    });
+    $("#b-subsidy-amount").click(function() {
+      SettingsController.subsidyAmountChangeHandler();
+    });
   },
 };
 
@@ -78,3 +84,27 @@ SettingsController.closingEconomyHandler =
     graphView.updateAll(economyModel);
   }
 }; // closingEconomyHandler()
+
+
+/**
+ *
+ */
+SettingsController.taxAmountChangeHandler =
+  function() {
+  // check if demand or supply is being adjusted
+  alert("tax amount changed");
+
+  // clear both tax amounts
+  
+  
+  // apply new tax amount to right graph
+  
+};
+
+/**
+ *
+ */
+SettingsController.subsidyAmountChangeHandler =
+  function() {
+  alert("subsidy amount changed");  
+};
