@@ -176,6 +176,7 @@ EconomyModel.prototype = {
    * @param amount
    */
   setTax : function(whichGraph, amount) {
+    alert("setTax: " + whichGraph + " " + amount);
     // clear both tax amounts
     // this.mDemandTax = this.mSupplyTax = 0;
   
@@ -188,7 +189,7 @@ EconomyModel.prototype = {
    * @param amount
    */
   setSubsidy : function(whichGraph, amount) {
-    alert("setSubsidy ain't implemented yet, yo");
+    alert("setSubsidy: " + whichGraph + " " + amount);
   }, // setSubsidy()
   
   /**

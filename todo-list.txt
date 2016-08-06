@@ -10,12 +10,12 @@ Next:
     -(excise) tax or subsidy on supply:
       -how to sense changes from SettingsController; list by change
         -if change drop box (from supply to demand or vice-versa)
-          -probably should react to changing the option, rather than using
-          a button
-            -adjust offset appropriately
+          -set up this handler
       -how to apply change (recalculations) to EconomyModel (easy)
         -setTax()
         -setSubsidy()
+        -if change drop box
+          -adjust offset appropriately
         -treat things as if supply outright moved (which it did)
           -probably need to manually call the methods to recalculate:
             -equilibrium

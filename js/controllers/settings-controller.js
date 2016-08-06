@@ -95,7 +95,8 @@ SettingsController.closingEconomyHandler =
  */
 SettingsController.taxAmountChangeHandler =
   function(economyModel, textView, graphView) {
-  economyModel.setTax(textView.getWhatTaxed(), amount);
+  economyModel.setTax(textView.getWhatTaxed(),
+    textView.getTaxAmount());
 };
 
 /**
@@ -106,5 +107,6 @@ SettingsController.taxAmountChangeHandler =
  */
 SettingsController.subsidyAmountChangeHandler =
   function(economyModel, textView, graphView) {
-  economyModel.setSubsidy(textView.getWhatSubsidized(), amount);
+  economyModel.setSubsidy(textView.getWhatSubsidized(),
+    textView.getSubsidyAmount());
 };

@@ -27,9 +27,9 @@ function TextView(industryName) {
   this.$wp = $("#world-p"); // world price
   
   // For closed, public economy
-  this.$taxAmount = $("#tax-amount");
+  this.$taxAmount = $("#new-tax-amount");
   this.$whatTaxed = $("#what-taxed");
-  this.$subsidyAmount = $("#subsidy-amount");
+  this.$subsidyAmount = $("#new-subsidy-amount");
   this.$whatSubsidized = $("#what-subsidized");
 } // TextView
 
@@ -40,8 +40,16 @@ TextView.prototype = {
     return this.$whatTaxed.val();
   },
   
+  getTaxAmount : function() {
+    return this.$taxAmount.val();
+  },
+  
   getWhatSubsidized : function() {
     return this.$whatSubsidized.val();
+  },
+  
+  getSubsidyAmount : function() {
+    return this.$subsidyAmount.val();
   },
   
   /**
