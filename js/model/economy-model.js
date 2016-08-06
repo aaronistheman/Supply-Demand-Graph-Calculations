@@ -31,6 +31,12 @@ function EconomyModel(supplyDataString, demandDataString) {
   this.priceMechanism;
   this.pmAmount; // price mechanism's amount
   
+  // Tax/subsidy settings
+  this.mDemandTax = 0;
+  this.mDemandSubsidy = 0;
+  this.mSupplyTax = 0;
+  this.mSupplySubsidy = 0;
+  
   this.mNumRectangles = 100000; // usually for Riemann sums
   
   this.mSupply = new PiecewiseFunction();
@@ -75,6 +81,31 @@ EconomyModel.prototype = {
   
   getSupply : function() {
     return this.mSupply;
+  },
+  
+  /**
+   * I decided that a positive offset indicates a subsidy.
+   */
+  getDemandOffset : function() {
+    return this.mDemandSubsidy - this.mDemandTax;
+  },
+  
+  /**
+   * I decided that a positive offset indicates a subsidy.
+   */
+  getSupplyOffset : function() {
+    return this.mSupplySubsidy - this.mSupplyTax;
+  },
+  
+  getTaxAmount : function() {
+    // Since only one of demand and supply can be taxed (in this program):
+    return Math.max(this.mDemandTax, this.mSupplyTax);
+  },
+  
+  getSubsidyAmount : function() {
+    // Since only one of demand and supply can be subsidized
+    // (in this program):
+    return Math.max(this.mDemandSubsidy, this.mSupplySubsidy);
   },
   
   getLowestEffectiveQuantity : function() {
@@ -139,6 +170,27 @@ EconomyModel.prototype = {
       this.qd = this.qs = this.eq;
     }
   }, // setWp()
+  
+  /**
+   * @param whichGraph should be a Graph constant
+   * @param amount
+   */
+  setTax : function(whichGraph, amount) {
+    alert("setTax: " + whichGraph + " " + amount);
+    // clear both tax amounts
+    // this.mDemandTax = this.mSupplyTax = 0;
+  
+    // apply new tax amount to right graph
+    
+  }, // setTax()
+  
+  /**
+   * @param whichGraph should be a Graph constant
+   * @param amount
+   */
+  setSubsidy : function(whichGraph, amount) {
+    alert("setSubsidy: " + whichGraph + " " + amount);
+  }, // setSubsidy()
   
   /**
    * @return instance of Price

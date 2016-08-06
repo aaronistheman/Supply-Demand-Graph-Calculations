@@ -15,18 +15,42 @@ function TextView(industryName) {
   this.$eq = $("#eq-q"); // equilibrium quantity display
   this.$ep = $("#eq-p"); // equilibrium price display
   this.$tr = $("#total-rev");
-  this.$wp = $("#world-p"); // world price
   this.$cs = $("#con-s"); // consumer surplus
   this.$ps = $("#pro-s"); // producer surplus
   this.$es = $("#eco-s"); // economic surplus
   this.$state = $("#state");
   this.$qd = $("#qd"); // quantity demanded
   this.$qs = $("#qs"); // quantity supply
+  
+  // For open economy
   this.$imports = $("#imports"); // number of imports
+  this.$wp = $("#world-p"); // world price
+  
+  // For closed, public economy
+  this.$taxAmount = $("#new-tax-amount");
+  this.$whatTaxed = $("#what-taxed");
+  this.$subsidyAmount = $("#new-subsidy-amount");
+  this.$whatSubsidized = $("#what-subsidized");
 } // TextView
 
 TextView.prototype = {
   constructor : TextView,
+  
+  getWhatTaxed : function() {
+    return this.$whatTaxed.val();
+  },
+  
+  getTaxAmount : function() {
+    return this.$taxAmount.val();
+  },
+  
+  getWhatSubsidized : function() {
+    return this.$whatSubsidized.val();
+  },
+  
+  getSubsidyAmount : function() {
+    return this.$subsidyAmount.val();
+  },
   
   /**
    * @param data instance of EconomyModel
@@ -55,11 +79,16 @@ TextView.prototype = {
     var es = data.getEconomicSurplus(cs, ps);
     this.$es.html(es.forDisplay());
     
+    // world price
     if (data.wp)
       this.$wp.html(Price.forDisplay(data.wp));
     else
       this.$wp.html("None");
     
     this.$imports.html(data.getNumberImports());
+    
+    // tax and subsidy info
+    this.$taxAmount.html(data.getTaxAmount());
+    this.$subsidyAmount.html(data.getSubsidyAmount());
   },
 };

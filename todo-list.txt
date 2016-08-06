@@ -8,16 +8,11 @@ Next:
   -open, private economy: DONE
   -closed, public economy
     -(excise) tax or subsidy on supply:
-      -how to sense changes from SettingsController; list by change
-        -entering/changing form value
-          -add "update" buttons
-            -if clicked, appropriate form (tax or subsidy) is read, then
-            model method is called so that offset is appropriately adjusted
-        -change drop box (from supply to demand or vice-versa)
-          -probably should react to changing the option, rather than using
-          a button
-            -adjust offset appropriately
       -how to apply change (recalculations) to EconomyModel (easy)
+        -setTax()
+        -setSubsidy()
+        -if change drop box
+          -adjust offset appropriately
         -treat things as if supply outright moved (which it did)
           -probably need to manually call the methods to recalculate:
             -equilibrium
@@ -40,6 +35,7 @@ Next:
       -calculate
         -tax revenue
         -deadweight loss (zero)
+      -fix default controller values
     -(sales?) tax or subsidy on demand:
       -location of "active demand"
       -recalculate:

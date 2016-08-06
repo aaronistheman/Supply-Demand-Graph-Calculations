@@ -27,8 +27,24 @@ SettingsController.prototype = {
       SettingsController.closingEconomyHandler(
         economyModel, textView, graphView, this);
     });
+    $("#b-tax-amount").click(function() {
+      SettingsController.taxAmountChangeHandler(
+        economyModel, textView, graphView);
+    });
+    $("#b-subsidy-amount").click(function() {
+      SettingsController.subsidyAmountChangeHandler(
+        economyModel, textView, graphView);
+    });
+    $("#what-taxed").change(function() {
+      SettingsController.whatTaxedChangeHandler(
+        economyModel, textView, graphView);
+    });
+    $("#what-subsidized").change(function() {
+      SettingsController.whatSubsidizedChangeHandler(
+        economyModel, textView, graphView);
+    });
   },
-};
+}; // SettingsController.prototype
 
 /**
  * @param economyModel instance of EconomyModel
@@ -78,3 +94,47 @@ SettingsController.closingEconomyHandler =
     graphView.updateAll(economyModel);
   }
 }; // closingEconomyHandler()
+
+/**
+ * @param economyModel instance of EconomyModel
+ * @param textView instance of TextView
+ * @param graphView instance of GraphView
+ * @param checkbox the HTML checkbox element that was acted on
+ */
+SettingsController.taxAmountChangeHandler =
+  function(economyModel, textView, graphView) {
+  economyModel.setTax(textView.getWhatTaxed(),
+    textView.getTaxAmount());
+};
+
+/**
+ * @param economyModel instance of EconomyModel
+ * @param textView instance of TextView
+ * @param graphView instance of GraphView
+ * @param checkbox the HTML checkbox element that was acted on
+ */
+SettingsController.subsidyAmountChangeHandler =
+  function(economyModel, textView, graphView) {
+  economyModel.setSubsidy(textView.getWhatSubsidized(),
+    textView.getSubsidyAmount());
+};
+
+/**
+ * @param economyModel instance of EconomyModel
+ * @param textView instance of TextView
+ * @param graphView instance of GraphView
+ */
+SettingsController.whatTaxedChangeHandler =
+  function(economyModel, textView, graphView) {
+  alert("whatTaxedChangeHandler()");
+};
+
+/**
+ * @param economyModel instance of EconomyModel
+ * @param textView instance of TextView
+ * @param graphView instance of GraphView
+ */
+SettingsController.whatSubsidizedChangeHandler =
+  function(economyModel, textView, graphView) {
+  alert("whatSubsidizedChangeHandler()");
+};

@@ -59,10 +59,10 @@
         type="checkbox" data-ng-model="isClosed" /></p>
       <div data-ng-show="!isClosed">
         <p>World price: 
-          <span id="world-p"></span>
+          <span id="world-p"></span> <!-- Display of world price -->
           
           <!-- For changing world price -->
-          <span id="new-wp-wrapper">$<input type="number" id="new-wp" /></span>
+          <span id="indent-wrapper">$<input type="number" id="new-wp" /></span>
           <input type="button" value="Update" id="b-world-p" />  
         </p>
         <p>Number of imports: <span id="imports">0</span></p>
@@ -80,25 +80,41 @@
 
           <div> <!-- tax info -->
             <!-- figure out what the user wants taxed -->
-            <p>Tax On: <select data-ng-model="taxed">
+            <p>Tax On: <select id="what-taxed" data-ng-model="taxed">
               <option value="demand">Demand</option>
               <option value="supply">Supply</option>
             </select></p>
 
-            <p>How Much: <input type="number"
-              name="tax-amount" value=0 /></p>
+            <p>How Much:
+              <!-- Display of active tax amount -->
+              <span id="tax-amount"></span>
+              
+              <!-- For changing tax amount -->
+              <span id="indent-wrapper">
+                <input type="number" id="new-tax-amount" value=0 /></span>
+              <input type="button" value="Update" id="b-tax-amount" />
+            </p>
             <p>Tax Revenue: <span id="tax-revenue"></span></p>
           </div> <!-- tax info -->
 
           <div> <!-- subsidy info -->
             <!-- figure out what the user wants subsidized -->
-            <br><p>Subsidy For: <select data-ng-model="subsidized">
+            <br><p>Subsidy For: <select id="what-subsidized"
+              data-ng-model="subsidized">
               <option value="demand">Demand</option>
               <option value="supply">Supply</option>
             </select></p>
 
-            <p>How Much: <input type="number"
-              name="subsidy-amount" value=0 /></p>
+            <p>How Much:
+              <!-- Display of active subsidy amount -->
+              <span id="subsidy-amount"></span>
+              
+              <!-- For changing subsidy amount -->
+              <span id="indent-wrapper">
+                <input type="number" id="new-subsidy-amount" value=0 />
+              </span>
+              <input type="button" value="Update" id="b-subsidy-amount" />
+            </p>
           </div> <!-- subsidy info -->
 
           <div> <!-- price mechanism info -->
