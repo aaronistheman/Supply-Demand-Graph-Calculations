@@ -8,9 +8,6 @@ Next:
   -open, private economy: DONE
   -closed, public economy
     -(excise) tax or subsidy on supply:
-      -how to sense changes from SettingsController; list by change
-        -if change drop box (from supply to demand or vice-versa)
-          -set up this handler
       -how to apply change (recalculations) to EconomyModel (easy)
         -setTax()
         -setSubsidy()

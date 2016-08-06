@@ -35,6 +35,14 @@ SettingsController.prototype = {
       SettingsController.subsidyAmountChangeHandler(
         economyModel, textView, graphView);
     });
+    $("#what-taxed").change(function() {
+      SettingsController.whatTaxedChangeHandler(
+        economyModel, textView, graphView);
+    });
+    $("#what-subsidized").change(function() {
+      SettingsController.whatSubsidizedChangeHandler(
+        economyModel, textView, graphView);
+    });
   },
 }; // SettingsController.prototype
 
@@ -109,4 +117,24 @@ SettingsController.subsidyAmountChangeHandler =
   function(economyModel, textView, graphView) {
   economyModel.setSubsidy(textView.getWhatSubsidized(),
     textView.getSubsidyAmount());
+};
+
+/**
+ * @param economyModel instance of EconomyModel
+ * @param textView instance of TextView
+ * @param graphView instance of GraphView
+ */
+SettingsController.whatTaxedChangeHandler =
+  function(economyModel, textView, graphView) {
+  alert("whatTaxedChangeHandler()");
+};
+
+/**
+ * @param economyModel instance of EconomyModel
+ * @param textView instance of TextView
+ * @param graphView instance of GraphView
+ */
+SettingsController.whatSubsidizedChangeHandler =
+  function(economyModel, textView, graphView) {
+  alert("whatSubsidizedChangeHandler()");
 };
