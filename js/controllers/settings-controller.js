@@ -95,15 +95,7 @@ SettingsController.closingEconomyHandler =
  */
 SettingsController.taxAmountChangeHandler =
   function(economyModel, textView, graphView) {
-  // check if demand or supply is being adjusted
-  alert("tax amount changing for: " + textView.getWhatTaxed());
-  
-
-  // clear both tax amounts
-  
-  
-  // apply new tax amount to right graph
-  
+  economyModel.setTax(textView.getWhatTaxed(), amount);
 };
 
 /**
@@ -114,5 +106,5 @@ SettingsController.taxAmountChangeHandler =
  */
 SettingsController.subsidyAmountChangeHandler =
   function(economyModel, textView, graphView) {
-  alert("subsidy amount changing for: " + textView.getWhatSubsidized());
+  economyModel.setSubsidy(textView.getWhatSubsidized(), amount);
 };

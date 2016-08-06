@@ -172,6 +172,26 @@ EconomyModel.prototype = {
   }, // setWp()
   
   /**
+   * @param whichGraph should be a Graph constant
+   * @param amount
+   */
+  setTax : function(whichGraph, amount) {
+    // clear both tax amounts
+    // this.mDemandTax = this.mSupplyTax = 0;
+  
+    // apply new tax amount to right graph
+    
+  }, // setTax()
+  
+  /**
+   * @param whichGraph should be a Graph constant
+   * @param amount
+   */
+  setSubsidy : function(whichGraph, amount) {
+    alert("setSubsidy ain't implemented yet, yo");
+  }, // setSubsidy()
+  
+  /**
    * @return instance of Price
    */
   getTotalRevenue : function() {
