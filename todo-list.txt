@@ -9,10 +9,9 @@ Next:
   -closed, public economy
     -(excise) tax or subsidy on supply:
       -how to apply change (recalculations) to EconomyModel (easy)
-        -if change drop box
-          -adjust offset appropriately
         -treat things as if supply outright moved (which it did)
-          -probably need to manually call the methods to recalculate:
+          -probably need to manually call the methods to recalculate
+          (for change tax, subsidy, or either drop downs):
             -equilibrium
             -qs and qd
           -accessing to supply's points should apply the offset

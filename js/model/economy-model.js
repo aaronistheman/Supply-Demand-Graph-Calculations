@@ -206,6 +206,24 @@ EconomyModel.prototype = {
   }, // setSubsidy()
   
   /**
+   * Swaps tax on demand with tax on supply.
+   */
+  switchTaxedGraph : function() {
+    var temp = this.mDemandTax;
+    this.mDemandTax = this.mSupplyTax;
+    this.mSupplyTax = temp;
+  },
+  
+  /**
+   * Swaps subsidy on demand with subsidy on supply.
+   */
+  switchSubsidizedGraph : function() {
+    var temp = this.mDemandSubsidy;
+    this.mDemandSubsidy = this.mSupplySubsidy;
+    this.mSupplySubsidy = temp;
+  },
+  
+  /**
    * @return instance of Price
    */
   getTotalRevenue : function() {

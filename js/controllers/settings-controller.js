@@ -126,7 +126,7 @@ SettingsController.subsidyAmountChangeHandler =
  */
 SettingsController.whatTaxedChangeHandler =
   function(economyModel, textView, graphView) {
-  alert("whatTaxedChangeHandler()");
+  economyModel.switchTaxedGraph();
 };
 
 /**
@@ -136,5 +136,5 @@ SettingsController.whatTaxedChangeHandler =
  */
 SettingsController.whatSubsidizedChangeHandler =
   function(economyModel, textView, graphView) {
-  alert("whatSubsidizedChangeHandler()");
+  economyModel.switchSubsidizedGraph();
 };
