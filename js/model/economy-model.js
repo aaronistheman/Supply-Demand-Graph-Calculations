@@ -176,12 +176,16 @@ EconomyModel.prototype = {
    * @param amount
    */
   setTax : function(whichGraph, amount) {
-    alert("setTax: " + whichGraph + " " + amount);
     // clear both tax amounts
-    // this.mDemandTax = this.mSupplyTax = 0;
+    this.mDemandTax = this.mSupplyTax = 0;
   
     // apply new tax amount to right graph
-    
+    if (whichGraph == Graph.Supply)
+      this.mSupplyTax = amount;
+    else if (whichGraph == Graph.Demand)
+      this.mDemandTax = amount;
+    else
+      alertAndThrowException("Invalid whichGraph given to setTax()");
   }, // setTax()
   
   /**
@@ -189,7 +193,16 @@ EconomyModel.prototype = {
    * @param amount
    */
   setSubsidy : function(whichGraph, amount) {
-    alert("setSubsidy: " + whichGraph + " " + amount);
+    // clear both subsidy amounts
+    this.mDemandSubsidy = this.mSupplySubsidy = 0;
+    
+    // apply new subsidy amount to right graph
+    if (whichGraph == Graph.Supply)
+      this.mSupplySubsidy = amount;
+    else if (whichGraph == Graph.Demand)
+      this.mDemandSubsidy = amount;
+    else
+      alertAndThrowException("Invalid whichGraph given to setSubsidy()");
   }, // setSubsidy()
   
   /**

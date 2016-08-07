@@ -9,8 +9,6 @@ Next:
   -closed, public economy
     -(excise) tax or subsidy on supply:
       -how to apply change (recalculations) to EconomyModel (easy)
-        -setTax()
-        -setSubsidy()
         -if change drop box
           -adjust offset appropriately
         -treat things as if supply outright moved (which it did)
@@ -21,6 +19,7 @@ Next:
       -how to show the change in GraphView
         -simply apply an offset (if a tax or subsidy) and draw
         another supply graph in blue
+        -remove lingering alerts
       [-how to find location of "active supply":
         -add or subtract from supply, but when? ideas:
           -when the change is realized, go through all supply points
