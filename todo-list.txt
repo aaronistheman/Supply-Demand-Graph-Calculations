@@ -15,6 +15,7 @@ Next:
             -equilibrium
             -qs and qd
           -accessing to supply's points should apply the offset
+            -apply correct offset to getP()
       -how to show the change in GraphView
         -simply apply an offset (if a tax or subsidy) and draw
         another supply graph in blue
@@ -34,6 +35,7 @@ Next:
         -tax revenue
         -deadweight loss (zero)
       -fix default controller values
+      -verify changes are correct
     -(sales?) tax or subsidy on demand:
       -location of "active demand"
       -recalculate:

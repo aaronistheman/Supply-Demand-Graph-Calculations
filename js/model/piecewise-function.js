@@ -28,8 +28,9 @@ PiecewiseFunction.prototype = {
   
   /**
    * @param q just the quantity value (NOT instance of Quantity)
+   * @param offset value to apply to the obtained price
    */
-  getP : function(q) {
+  getP : function(q, offset=0) {
     // find the first point below x and first point above it
     var before = null;
     var after = null;
@@ -46,7 +47,7 @@ PiecewiseFunction.prototype = {
       // Get the slope between the two points, then use that slope
       // to approximate/interpolate what the price-to-return is
       var slope = (after.p() - before.p()) / (after.q() - before.q());
-      return before.p() + (q - before.q()) * slope;
+      return before.p() + offset + (q - before.q()) * slope;
     }
     else {
       /**
@@ -58,7 +59,7 @@ PiecewiseFunction.prototype = {
        * going a little bit outside of range.
        */
 
-      return this._points[this._points.length - 1].p();
+      return this._points[this._points.length - 1].p() + offset;
     }
   }, // getP()
 
