@@ -9,6 +9,9 @@ Next:
   -closed, public economy
     -(excise) tax or subsidy on supply:
       -how to apply change (recalculations) to EconomyModel (easy)
+        -debugging:
+          -try tests for offsets
+          -more tests for getP?
         -accessing to supply's points should apply the offset
           -apply correct offset to getP():
             -cs

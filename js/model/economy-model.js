@@ -245,7 +245,7 @@ EconomyModel.prototype = {
     var range = this.qd - this.mLowestQuantity;
     var step = range / this.mNumRectangles;
     var answer = 0;
-    var effectivePrice = this.mGetEffectiveWelfareQuantity();
+    var effectivePrice = this.mGetEffectiveWelfarePrice();
     
     // Execute the Riemann summation
     for (var q = this.mLowestQuantity + step, i = 0;
@@ -268,7 +268,7 @@ EconomyModel.prototype = {
     var range = this.qs - this.mLowestQuantity;
     var step = range / this.mNumRectangles;
     var answer = 0;
-    var effectivePrice = this.mGetEffectiveWelfareQuantity();
+    var effectivePrice = this.mGetEffectiveWelfarePrice();
     
     // Execute the Riemann summation
     for (var q = this.mLowestQuantity + step, i = 0;
@@ -505,13 +505,13 @@ EconomyModel.prototype = {
   }, // mUpdateEquilibriumPoint()
   
   /**
-   * @return the quantity value that should be used for welfare
+   * @return the price value that should be used for welfare
    * measurements
    */
-  mGetEffectiveWelfareQuantity : function() {
+  mGetEffectiveWelfarePrice : function() {
     if (this.wp)
       return this.wp
     else
       return this.ep
-  }, // mGetEffectiveWelfareQuantity()
+  }, // mGetEffectiveWelfarePrice()
 };
