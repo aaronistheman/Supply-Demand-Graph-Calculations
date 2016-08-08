@@ -103,8 +103,17 @@ SettingsController.closingEconomyHandler =
  */
 SettingsController.taxAmountChangeHandler =
   function(economyModel, textView, graphView) {
-  economyModel.setTax(textView.getWhatTaxed(),
-    textView.getTaxAmount());
+  // Determine what's being taxed
+  var whatTaxed;
+  if (textView.getWhatTaxed() == "demand")
+    whatTaxed = Graph.Demand;
+  else
+    whatTaxed = Graph.Supply;
+    
+  economyModel.setTax(whatTaxed, textView.getTaxAmount());
+  
+  textView.updateAll(economyModel);
+  graphView.updateAll(economyModel);
 };
 
 /**
@@ -115,8 +124,17 @@ SettingsController.taxAmountChangeHandler =
  */
 SettingsController.subsidyAmountChangeHandler =
   function(economyModel, textView, graphView) {
-  economyModel.setSubsidy(textView.getWhatSubsidized(),
-    textView.getSubsidyAmount());
+  // Determine what's being subsidized
+  var whatSubsidized;
+  if (textView.getWhatTaxed() == "demand")
+    whatSubsidized = Graph.Demand;
+  else
+    whatSubsidized = Graph.Supply;
+    
+  economyModel.setSubsidy(whatSubsidized, textView.getSubsidyAmount());
+  
+  textView.updateAll(economyModel);
+  graphView.updateAll(economyModel);
 };
 
 /**
@@ -127,6 +145,9 @@ SettingsController.subsidyAmountChangeHandler =
 SettingsController.whatTaxedChangeHandler =
   function(economyModel, textView, graphView) {
   economyModel.switchTaxedGraph();
+  
+  textView.updateAll(economyModel);
+  graphView.updateAll(economyModel);
 };
 
 /**
@@ -137,4 +158,7 @@ SettingsController.whatTaxedChangeHandler =
 SettingsController.whatSubsidizedChangeHandler =
   function(economyModel, textView, graphView) {
   economyModel.switchSubsidizedGraph();
+  
+  textView.updateAll(economyModel);
+  graphView.updateAll(economyModel);
 };
