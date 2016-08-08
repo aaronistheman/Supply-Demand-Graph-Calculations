@@ -9,13 +9,13 @@ Next:
   -closed, public economy
     -(excise) tax or subsidy on supply:
       -how to apply change (recalculations) to EconomyModel (easy)
-        -treat things as if supply outright moved (which it did)
-          -probably need to manually call the methods to recalculate
-          (for change tax, subsidy, or either drop downs):
-            -equilibrium
-            -qs and qd
-          -accessing to supply's points should apply the offset
-            -apply correct offset to getP()
+        -accessing to supply's points should apply the offset
+          -apply correct offset to getP():
+            -cs
+            -ps
+            -equil (x4)
+        -manually call the cs, ps, and equil methods
+        (for change tax, subsidy, or either drop downs)
       -how to show the change in GraphView
         -simply apply an offset (if a tax or subsidy) and draw
         another supply graph in blue

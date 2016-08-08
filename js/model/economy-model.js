@@ -84,17 +84,19 @@ EconomyModel.prototype = {
   },
   
   /**
-   * I decided that a positive offset indicates a subsidy.
+   * A subsidy moves demand vertically up and thus makes a positive offset,
+   * while a tax does the opposite.
    */
-  getDemandOffset : function() {
+  getDemandVerticalOffset : function() {
     return this.mDemandSubsidy - this.mDemandTax;
   },
   
   /**
-   * I decided that a positive offset indicates a subsidy.
+   * A subsidy moves supply vertically down and thus makes a negative offset,
+   * while a tax does the opposite.
    */
-  getSupplyOffset : function() {
-    return this.mSupplySubsidy - this.mSupplyTax;
+  getSupplyVerticalOffset : function() {
+    return this.mSupplyTax - this.mSupplySubsidy;
   },
   
   getTaxAmount : function() {
