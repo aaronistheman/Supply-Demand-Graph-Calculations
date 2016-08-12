@@ -58,6 +58,7 @@ GraphView.prototype = {
     this.redrawWorldPriceLine(data.wp);
     
     // Emphasize certain values with dashed line
+    GraphView.clearCanvas(this.mIndicatorCanvas, this.mIndicatorCtx);
     this.mEmphasizeQuantityDashedLine(data.getLowestEffectiveQuantity());
     this.mEmphasizeQuantityDashedLine(data.eq);
   },
@@ -66,12 +67,13 @@ GraphView.prototype = {
    * Doesn't clean the canvas before drawing
    * @param points array of instances of Point
    * @param canvas
-   * @param ctx
+   * @param ctx (is restored before function ends)
    * @param color of type string (e.g. "red")
    * @param offset how much to add to a point's price when plotting it
    */
   mDrawGraph : function(points, canvas, ctx, color, offset=0) {
     // set up context
+    ctx.save();
     ctx.strokeStyle = color; // apply color
     ctx.lineWidth = 5;
     
@@ -85,6 +87,7 @@ GraphView.prototype = {
     }
 
     ctx.stroke();
+    ctx.restore();
   },
 
   /**
@@ -193,7 +196,8 @@ GraphView.prototype = {
   
   /**
    * Emphasizes the given quantity with a dashed line parallel to
-   * the y-axis.
+   * the y-axis. Doesn't clear the indicator canvas, in case this
+   * method is used to emphasize multiple quantities.
    * @param q the quantity value to emphasize
    */
   mEmphasizeQuantityDashedLine : function(q) {

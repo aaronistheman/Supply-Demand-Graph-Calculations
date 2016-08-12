@@ -174,10 +174,14 @@ EconomyModel.prototype = {
   }, // setWp()
   
   /**
+   * @pre economy is closed
    * @param whichGraph should be a Graph constant
    * @param amount
    */
   setTax : function(whichGraph, amount) {
+    if (this.wp)
+      alertAndThrowException("Can't call setTax() if open economy");
+    
     // clear both tax amounts
     this.mDemandTax = this.mSupplyTax = 0;
   
@@ -191,10 +195,14 @@ EconomyModel.prototype = {
   }, // setTax()
   
   /**
+   * @pre economy is closed
    * @param whichGraph should be a Graph constant
    * @param amount
    */
   setSubsidy : function(whichGraph, amount) {
+    if (this.wp)
+      alertAndThrowException("Can't call setSubsidy() if open economy");
+    
     // clear both subsidy amounts
     this.mDemandSubsidy = this.mSupplySubsidy = 0;
     
