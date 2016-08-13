@@ -9,16 +9,16 @@ Next:
   -closed, public economy
     -(excise) tax or subsidy on supply:
       -how to apply change (recalculations) to EconomyModel (easy)
-        -debugging:
-          -try tests for offsets
-          -more tests for getP?
+        -figure out why consumer surplus becomes negative if demand
+        is taxed by 0.15
+          -use tests to see what's going on
+            -the problem is in the switching of the tax
+            -either fix getConsumerSurplus() now or later
         -accessing to supply's points should apply the offset
           -apply correct offset to getP():
             -cs
             -ps
             -equil (x4)
-        -manually call the cs, ps, and equil methods
-        (for change tax, subsidy, or either drop downs)
       -how to show the change in GraphView
         -simply apply an offset (if a tax or subsidy) and draw
         another supply graph in blue
@@ -36,7 +36,10 @@ Next:
         -welfare
       -calculate
         -tax revenue
+          -already has skeleton
         -deadweight loss (zero)
+          -already has skeleton
+      -should all offsets be allowed?
       -fix default controller values
       -verify changes are correct
     -(sales?) tax or subsidy on demand:

@@ -192,6 +192,9 @@ EconomyModel.prototype = {
       this.mDemandTax = amount;
     else
       alertAndThrowException("Invalid whichGraph given to setTax()");
+    
+    this.mUpdateEquilibriumPoint();
+    this.qs = this.qd = this.eq;
   }, // setTax()
   
   /**
@@ -213,6 +216,9 @@ EconomyModel.prototype = {
       this.mDemandSubsidy = amount;
     else
       alertAndThrowException("Invalid whichGraph given to setSubsidy()");
+    
+    this.mUpdateEquilibriumPoint();
+    this.qs = this.qd = this.eq;
   }, // setSubsidy()
   
   /**
@@ -222,6 +228,9 @@ EconomyModel.prototype = {
     var temp = this.mDemandTax;
     this.mDemandTax = this.mSupplyTax;
     this.mSupplyTax = temp;
+    
+    this.mUpdateEquilibriumPoint();
+    this.qs = this.qd = this.eq;
   },
   
   /**
@@ -231,6 +240,9 @@ EconomyModel.prototype = {
     var temp = this.mDemandSubsidy;
     this.mDemandSubsidy = this.mSupplySubsidy;
     this.mSupplySubsidy = temp;
+    
+    this.mUpdateEquilibriumPoint();
+    this.qs = this.qd = this.eq;
   },
   
   /**
@@ -259,7 +271,8 @@ EconomyModel.prototype = {
     for (var q = this.mLowestQuantity + step, i = 0;
       i < this.mNumRectangles; q += step, ++i)
     {
-      answer += (this.mDemand.getP(q) - effectivePrice) * step;
+      answer += (this.mDemand.getP(q, this.getDemandVerticalOffset())
+        - effectivePrice) * step;
     }
     
     return (new Price(answer));
@@ -282,7 +295,8 @@ EconomyModel.prototype = {
     for (var q = this.mLowestQuantity + step, i = 0;
       i < this.mNumRectangles; q += step, ++i)
     {
-      answer += (effectivePrice - this.mSupply.getP(q)) * step;
+      answer += (effectivePrice - this.mSupply.getP(q,
+        this.getSupplyVerticalOffset())) * step;
     }
     
     return (new Price(answer));
@@ -333,8 +347,10 @@ EconomyModel.prototype = {
     
     // Determine starting points
     var qVal = this.mLowestQuantity;
-    var dVal = this.mDemand.getP(qVal);
-    var sVal = this.mSupply.getP(qVal);
+    var dVal = this.mDemand.getP(qVal,
+      this.getDemandVerticalOffset());
+    var sVal = this.mSupply.getP(qVal,
+      this.getSupplyVerticalOffset());
     
     var oldD = dVal;
     // var oldS = sVal;
@@ -351,8 +367,10 @@ EconomyModel.prototype = {
       
       // Advance one step
       qVal += step;
-      dVal = this.mDemand.getP(qVal);
-      sVal = this.mSupply.getP(qVal);
+      dVal = this.mDemand.getP(qVal,
+        this.getDemandVerticalOffset());
+      sVal = this.mSupply.getP(qVal,
+        this.getSupplyVerticalOffset());
     }
     
     if (qVal > this._highestQuantity)
