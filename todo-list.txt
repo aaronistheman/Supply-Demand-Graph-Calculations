@@ -8,8 +8,6 @@ Next:
   -open, private economy: DONE
   -closed, public economy
     -(excise) tax or subsidy on supply:
-      -how to show the change in GraphView
-        -remove lingering alerts
       -how to apply change (recalculations) to EconomyModel (easy)
         -see if stuff works; maybe make many tests
           -PROBLEM: somewhere along the line, equilibrium quantity
@@ -21,10 +19,9 @@ Next:
         -either fix getConsumerSurplus() now or later
         -accessing to supply's points should apply the offset
           -apply correct offset to getP():
-            -cs
-            -ps
+            -cs <-- SEEMS DONE
+            -ps <-- SEEMS DONE
             -equil (x4)
-        -should display amounts after the "How Much:"
       [-how to find location of "active supply":
         -add or subtract from supply, but when? ideas:
           -when the change is realized, go through all supply points

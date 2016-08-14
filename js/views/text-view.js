@@ -27,8 +27,10 @@ function TextView(industryName) {
   this.$wp = $("#world-p"); // world price
   
   // For closed, public economy
+  this.$taxDisplay = $("#tax-amount");
   this.$taxAmount = $("#new-tax-amount");
   this.$whatTaxed = $("#what-taxed");
+  this.$subsidyDisplay = $("#subsidy-amount");
   this.$subsidyAmount = $("#new-subsidy-amount");
   this.$whatSubsidized = $("#what-subsidized");
 } // TextView
@@ -88,7 +90,7 @@ TextView.prototype = {
     this.$imports.html(data.getNumberImports());
     
     // tax and subsidy info
-    this.$taxAmount.html(data.getTaxAmount());
-    this.$subsidyAmount.html(data.getSubsidyAmount());
-  },
+    this.$taxDisplay.html(data.getTaxAmount());
+    this.$subsidyDisplay.html(data.getSubsidyAmount());
+  }, // updateAll()
 };
