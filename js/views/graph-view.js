@@ -12,7 +12,7 @@ function GraphView() {
   if (!(this instanceof GraphView))
     alertAndThrowException("Forgot 'new' before GraphView constructor");
   
-  this.mStoreElements(); // <-- list of members in this method
+  this.mStoreElements(); // <-- A list of members is in this method.
   this.drawAxes(); // should only be done once
 } // GraphView
 
@@ -51,8 +51,8 @@ GraphView.prototype = {
     if (!(data instanceof EconomyModel))
       alertAndThrowException("data parameter is of wrong type");
     
-    this.redrawDemand(data.getDemand());
-    this.redrawSupply(data.getSupply())
+    this.redrawDemand(data.getDemand(), data.getDemandVerticalOffset());
+    this.redrawSupply(data.getSupply(), data.getSupplyVerticalOffset());
     
     // Emphasize certain values with solid line
     this.redrawWorldPriceLine(data.wp);
@@ -93,19 +93,31 @@ GraphView.prototype = {
   /**
    * @param supply instance of PiecewiseFunction
    */
-  redrawSupply : function(supply) {
+  redrawSupply : function(supply, verticalOffset=0) {
     GraphView.clearCanvas(this.mSupplyCanvas, this.mSupplyCtx);
     this.mDrawGraph(supply.getPoints(), this.mSupplyCanvas,
       this.mSupplyCtx, "red");
+      
+    // if need an offset supply graph, too
+    if (verticalOffset != 0) {      
+      this.mDrawGraph(supply.getPoints(), this.mSupplyCanvas,
+        this.mSupplyCtx, "blue", verticalOffset);
+    }
   },
 
   /**
    * @param demand instance of PiecewiseFunction
    */
-  redrawDemand : function(demand) {
+  redrawDemand : function(demand, verticalOffset=0) {
     GraphView.clearCanvas(this.mDemandCanvas, this.mDemandCtx);
     this.mDrawGraph(demand.getPoints(), this.mDemandCanvas,
       this.mDemandCtx, "black");
+    
+    // if need an offset demand graph, too
+    if (verticalOffset != 0) {
+      this.mDrawGraph(demand.getPoints(), this.mDemandCanvas,
+        this.mDemandCtx, "blue", verticalOffset);
+    }
   },
   
   /**

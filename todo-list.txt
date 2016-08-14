@@ -8,21 +8,23 @@ Next:
   -open, private economy: DONE
   -closed, public economy
     -(excise) tax or subsidy on supply:
+      -how to show the change in GraphView
+        -remove lingering alerts
       -how to apply change (recalculations) to EconomyModel (easy)
-        -figure out why consumer surplus becomes negative if demand
-        is taxed by 0.15
-          -use tests to see what's going on
-            -the problem is in the switching of the tax
-            -either fix getConsumerSurplus() now or later
+        -see if stuff works; maybe make many tests
+          -PROBLEM: somewhere along the line, equilibrium quantity
+          isn't properly updated
+            -think of some way to ensure the correct things get updated
+          -tests for:
+            -domestic total revenue
+            -...
+        -either fix getConsumerSurplus() now or later
         -accessing to supply's points should apply the offset
           -apply correct offset to getP():
             -cs
             -ps
             -equil (x4)
-      -how to show the change in GraphView
-        -simply apply an offset (if a tax or subsidy) and draw
-        another supply graph in blue
-        -remove lingering alerts
+        -should display amounts after the "How Much:"
       [-how to find location of "active supply":
         -add or subtract from supply, but when? ideas:
           -when the change is realized, go through all supply points
