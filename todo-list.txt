@@ -9,15 +9,15 @@ Next:
   -closed, public economy
     -(excise) tax or subsidy on supply:
       -how to apply change (recalculations) to EconomyModel
+          -tests for:
+            -domestic total revenue
+            -... (what else?)
         -see if stuff works; maybe make many tests
           -PROBLEM: somewhere along the line, equilibrium quantity
           isn't properly updated
             -BIGGER PROBLEM: I'm no longer able to reproduce this problem.
             -think of some way to ensure the correct things get updated
               -don't be afraid to use another custom type or two
-          -tests for:
-            -domestic total revenue
-            -...
         -either fix getConsumerSurplus() now or later
         -accessing to supply's points should apply the offset
           -apply correct offset to getP():
@@ -25,7 +25,7 @@ Next:
             -ps <-- SEEMS DONE
             -equil (x4)
         -is the user's given offset rounded?
-      [-how to find location of "active supply":
+      -DELETE THIS NOTE?: [-how to find location of "active supply":
         -add or subtract from supply, but when? ideas:
           -when the change is realized, go through all supply points
           -have a method that returns an active supply value that
@@ -43,7 +43,9 @@ Next:
           -already has skeleton
       -should all offsets be allowed?
       -fix default controller values
-      -verify changes are correct
+      -verify changes are correct; testing
+        -don't just use tests that have linear graphs
+        -look at cases in which rounding matters
     -(sales?) tax or subsidy on demand:
       -location of "active demand"
       -recalculate:
