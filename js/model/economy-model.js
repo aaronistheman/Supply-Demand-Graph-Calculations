@@ -540,4 +540,14 @@ EconomyModel.prototype = {
     else
       return this.ep
   }, // mGetEffectiveWelfarePrice()
+  
+  /**
+   * Convenient method for having this model recalculate the values
+   * of its members that are not recalculated by default. (For
+   * example, consumer surplus is always recalculated (when the
+   * view objects look for it), but quantity supplied isn't.)
+   */
+  // mRecalculateDomesticHardcodedValues : function() {
+    
+  // },
 };

@@ -8,7 +8,7 @@ Next:
   -open, private economy: DONE
   -closed, public economy
     -subsidy/tax on supply/demand:
-      -is the user's given offset rounded?
+      -split tests among multiple files; one test per tested method?
       -figure out which cases have been tested, and see if they
       conform sufficiently to the notes below (put DONE in front
       if so)
@@ -55,6 +55,8 @@ Next:
           -when the change is realized, go through all supply points
           -have a method that returns an active supply value that
           finds the supply point then applies tax/subsidy to it]
+      -is the user's given offset rounded?
+        -should it be?
       -should all offsets be allowed?
       -fix default controller values
     -price mechanism: (see the commit in which the todo list was detailed
