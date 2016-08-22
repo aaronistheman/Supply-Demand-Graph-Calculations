@@ -8,7 +8,11 @@ Next:
   -open, private economy: DONE
   -closed, public economy
     -subsidy/tax on supply/demand:
-      -split tests among multiple files; one test per tested method?
+      -split tests among multiple files
+        -split up EconomyModel unit tests (into different files
+        because will be more tests)
+        -split up integration tests, because there will be many more
+        of them
       -figure out which cases have been tested, and see if they
       conform sufficiently to the notes below (put DONE in front
       if so)
