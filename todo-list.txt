@@ -9,8 +9,8 @@ Next:
   -closed, public economy
     -subsidy/tax on supply/demand:
       -split tests among multiple files
-        -split up EconomyModel unit tests (into different files
-        because will be more tests)
+        -put "use strict" at top of each
+        -maybe rename the "all" ones to just test-all.js
         -split up integration tests, because there will be many more
         of them
       -figure out which cases have been tested, and see if they
