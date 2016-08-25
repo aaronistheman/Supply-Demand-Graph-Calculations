@@ -8,7 +8,6 @@ Next:
   -open, private economy: DONE
   -closed, public economy
     -subsidy/tax on supply/demand:
-      -split tests among multiple files; one test per tested method?
       -figure out which cases have been tested, and see if they
       conform sufficiently to the notes below (put DONE in front
       if so)
