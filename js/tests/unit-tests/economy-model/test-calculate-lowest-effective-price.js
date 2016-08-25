@@ -1,3 +1,5 @@
+"use strict";
+
 var currentTestedFile = "model/economy-model.js";
 
 /*

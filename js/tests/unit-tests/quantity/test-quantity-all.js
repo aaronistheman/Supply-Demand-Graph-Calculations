@@ -1,3 +1,5 @@
+"use strict";
+
 var currentTestedFile = "utility/quantity.js";
 
 QUnit.module(currentTestedFile + ", Quantity.prototype.get()");

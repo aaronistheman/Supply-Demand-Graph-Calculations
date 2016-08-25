@@ -1,3 +1,5 @@
+"use strict";
+
 var currentTestedFile = "utility/price.js";
 
 QUnit.module(currentTestedFile + ", Price.prototype.get()");

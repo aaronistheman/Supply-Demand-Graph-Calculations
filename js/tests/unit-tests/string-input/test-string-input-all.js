@@ -1,3 +1,5 @@
+"use strict";
+
 var currentTestedFile = "model/string-input.js";
 
 QUnit.module(currentTestedFile + ", StringInput.prototype.getChar()");

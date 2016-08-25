@@ -1,3 +1,5 @@
+"use strict";
+
 var currentTestedFile = "model/piecewise-function.js";
 
 QUnit.module(currentTestedFile +

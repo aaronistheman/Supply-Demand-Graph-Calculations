@@ -4,7 +4,6 @@ start Notepad++ todo-list.txt
 start Notepad++ js/main.js
 REM start Notepad++ js/model/string-input.js
 start Notepad++ test.html
-start Notepad++ js/tests/unit-tests.js
 REM start Notepad++ js/controller.js
 REM start Notepad++ js/model/piecewise-function.js
 start Notepad++ js/model/economy-model.js
