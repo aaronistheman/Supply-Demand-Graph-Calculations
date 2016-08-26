@@ -3,9 +3,7 @@
 QUnit.module("mix of setting and toggling tax and subsidy");
 
   QUnit.test("switch demand tax: correct equilibrium", function(assert) {
-    var supplyPoints = "30 0.30 ; 60 0.60 ; 90 0.90";
-    var demandPoints = "30 0.90 ; 60 0.60 ; 90 0.30";
-    var data = new EconomyModel(supplyPoints, demandPoints);
+    var data = getLinearGraph1();
     
     // net movement: demand up 0.10; supply up 0.20
     data.setTax(Graph.Demand, 0.20);
@@ -19,9 +17,7 @@ QUnit.module("mix of setting and toggling tax and subsidy");
   QUnit.test("switch both tax and subsidy: equilibrium check",
     function(assert)
   {
-    var supplyPoints = "30 0.30 ; 60 0.60 ; 90 0.90";
-    var demandPoints = "30 0.90 ; 60 0.60 ; 90 0.30";
-    var data = new EconomyModel(supplyPoints, demandPoints);
+    var data = getLinearGraph1();
     
     // net movement: demand down 0.30; supply down 0.10
     data.setTax(Graph.Supply, 0.30);

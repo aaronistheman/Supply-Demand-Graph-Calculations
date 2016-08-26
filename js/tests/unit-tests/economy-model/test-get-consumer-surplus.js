@@ -35,9 +35,7 @@ QUnit.module(currentTestedFile +
   */
   
   QUnit.test("correct value yet again!", function(assert) {
-    var data = new EconomyModel(
-      "30 0.30 ; 60 0.60 ; 90 0.90",
-      "30 0.90 ; 60 0.60 ; 90 0.30");
+    var data = getLinearGraph1();
     
     assert.deepEqual(data.getConsumerSurplus().get(),
       4.50); // hand-calculated
