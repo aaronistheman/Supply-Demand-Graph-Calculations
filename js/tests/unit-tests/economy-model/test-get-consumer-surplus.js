@@ -23,7 +23,7 @@ QUnit.module(currentTestedFile +
       23.50); // hand-calculated
   });
   
-  /*
+  /* Has rounding error
   QUnit.test("correct value yet again!", function(assert) {
     var data = new EconomyModel(
       "30 0.60 ; 60 0.90 ; 90 1.20",

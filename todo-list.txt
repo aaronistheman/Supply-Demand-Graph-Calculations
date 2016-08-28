@@ -13,7 +13,7 @@ Next:
       if so)
       -tests for (all these values should be recalculated):
         (
-        -NOTE: should be done for each of the following:
+        -NOTE: should be done (twice?) for each of the following:
           -1) subsidy on demand
           -2) tax on demand
           -3) subsidy on supply
@@ -31,8 +31,11 @@ Next:
           -make sure the method does this right
             -always use quantity demanded? or should the minimum
             of QD and QS be used?
-        -consumer/producer surplus (tests that don't have the
-        previously encountered problem); total surplus?
+        -consumer/producer surplus
+          -either:
+            -tests that don't have the
+              previously encountered problem
+            -put off until address rounding issues
         -deadweight loss (should be zero; only price mechanism
         and tariff/quota cause deadweight loss?
           -already has skeleton
@@ -43,19 +46,9 @@ Next:
         -BIGGER PROBLEM: I'm no longer able to reproduce this problem.
       -SUGGESTION: think of some way to ensure the correct things get updated
         -don't be afraid to use another custom type or two
-      -either fix getConsumerSurplus() now or later
+      -either fix getConsumerSurplus() and getProducerSurplus() now or later
         -there might be commented out tests to make note of
-      -DELETE THIS NOTE?:
-      [accessing to supply's points should apply the offset
-        -apply correct offset to getP():
-          -cs <-- SEEMS DONE
-          -ps <-- SEEMS DONE
-          -equil (x4)]
-      -DELETE THIS NOTE?: [-how to find location of "active supply":
-        -add or subtract from supply, but when? ideas:
-          -when the change is realized, go through all supply points
-          -have a method that returns an active supply value that
-          finds the supply point then applies tax/subsidy to it]
+        -may need to add welfare tests if are none in integration tests
       -user's offset
         -is the user's given offset rounded?
           -should it be?
