@@ -17,7 +17,7 @@ Next:
           -1) subsidy on demand
           -2) tax on demand
           -3) subsidy on supply
-          -4) tax on supply
+          **CURRENT**-4) tax on supply
           -5) simple mixes; e.g.
             -tax and subsidy on demand
             -tax on supply; subsidy on demand
@@ -36,11 +36,9 @@ Next:
             -tests that don't have the
               previously encountered problem
             -put off until address rounding issues
-        -deadweight loss (should be zero; only price mechanism
-        and tariff/quota cause deadweight loss?
-          -already has skeleton
+        -deadweight loss (should be zero if subsidy; only tax, price mechanism
+        and tariff/quota cause deadweight loss)
         -tax revenue
-          -method already has skeleton
       -PROBLEM: somewhere along the line, equilibrium quantity
       isn't properly updated
         -BIGGER PROBLEM: I'm no longer able to reproduce this problem.
@@ -55,6 +53,11 @@ Next:
         -should all offsets be allowed?
       -finishing touches
         -fix default controller values
+    -getDeadweightLoss()
+      -have text-view use this method and display it as Price value
+      -make unit tests involving it
+      -uncomment out the integration tests involving it
+      -implement it
     -price mechanism: (see the commit in which the todo list was detailed
     for the subsidy/taxation)
       -dashed line for where mechanism is
@@ -84,6 +87,10 @@ Next:
         -deadweight loss (in an unexpected area)
         -number of imports (given)
         -tariff revenue N/A
+-does getTaxRevenue() still need the use of min?
+  -in fact, I might be going about it wrong. It shouldn't necessarily
+  be the minimum. (e.g. If supply is taxed, then government makes
+  tax revenue off of how much is produced (i.e. qs), even if qd is lower.)
 -hi-liting controller
   -point value is highlighted (e.g. quantity demanded): perhaps show
   with a line on the canvas

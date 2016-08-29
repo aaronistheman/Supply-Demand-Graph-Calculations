@@ -327,13 +327,25 @@ EconomyModel.prototype = {
     else // if are exports (or no trade)
       return 0;
   },
-  
+
+  /**
+   * @return a Price object
+   */
   getDeadweightLoss : function() {
-    // decide what type of object is returned
+    // will be implemented in a correct way later
+    return new Price(1);
   },
   
+  /**
+   * @return a Price object
+   */
   getTaxRevenue : function() {
-    
+    // It may be incorrect to always take the minimum of the
+    // two quantities; I'll look into this later.
+    // Max of the two taxes is taken because at least one of
+    // them must be zero, so this obtains the tax magnitude.
+    return new Price(Math.min(this.qd, this.qs)
+      * Math.max(this.mSupplyTax, this.mDemandTax));
   },
   
   /**

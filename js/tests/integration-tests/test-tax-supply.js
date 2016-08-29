@@ -56,4 +56,21 @@ QUnit.module("tax on supply");
   });
   */
   
+  /*
+  QUnit.test("correct deadweight loss", function(assert) {
+    var data = getLinearGraph1();
+    
+    data.setTax(Graph.Supply, 0.1);
+    assert.deepEqual(data.getDeadweightLoss().get(),
+      Price.get((60 - 55) * (0.65 - 0.55) / 2)); // worked out by hand
+  });
+  */
   
+  QUnit.test("correct tax revenue", function(assert) {
+    var data = getLinearGraph1();
+    
+    var taxAmount = 0.1;
+    data.setTax(Graph.Supply, taxAmount);
+    assert.deepEqual(data.getTaxRevenue().get(),
+      Price.get(taxAmount * 55)); // hand-determined
+  });
