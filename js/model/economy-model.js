@@ -334,7 +334,7 @@ EconomyModel.prototype = {
   getDeadweightLoss : function() {
     // will be implemented in a correct way later
     return new Price(1);
-  },
+  }, // getDeadweightLoss()
   
   /**
    * @return a Price object
@@ -346,7 +346,7 @@ EconomyModel.prototype = {
     // them must be zero, so this obtains the tax magnitude.
     return new Price(Math.min(this.qd, this.qs)
       * Math.max(this.mSupplyTax, this.mDemandTax));
-  },
+  }, // getTaxRevenue()
   
   /**
    * @return a new Point instance representing where the supply and

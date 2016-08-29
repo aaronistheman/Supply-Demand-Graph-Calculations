@@ -27,3 +27,11 @@ QUnit.module(currentTestedFile +
     assert.deepEqual(eqPoint.q(), 70);
     assert.deepEqual(eqPoint.p(), 0.50);
   });
+  
+  QUnit.test("correct point found", function(assert) {
+    var data = getComplicatedGraph1();
+    var eqPoint = data.calculateEquilibriumPoint()
+    
+    assert.deepEqual(eqPoint.q(), 70);
+    assert.deepEqual(eqPoint.p(), 0.75);
+  });
