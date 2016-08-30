@@ -14,9 +14,9 @@ Next:
       -tests for (all these values should be recalculated):
         (
         -NOTE: should be done (twice?) for each of the following:
-          **CURRENT**-1) subsidy on demand
+          -1) subsidy on demand <-- DONE
           -2) tax on demand <-- DONE
-          -3) subsidy on supply
+          **CURRENT**-3) subsidy on supply
           -4) tax on supply <-- DONE
           -5) simple mixes; e.g.
             -tax and subsidy on demand
