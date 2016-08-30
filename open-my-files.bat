@@ -14,4 +14,5 @@ start Notepad++ js/views/graph-view.js
 start Notepad++ js/controllers/settings-controller.js
 REM start Notepad++ js/controllers/emphasis-controller.js
 start Notepad++ js/tests/sample-graphs.js
+start Notepad++ open-my-files.bat
 exit

@@ -14,10 +14,10 @@ Next:
       -tests for (all these values should be recalculated):
         (
         -NOTE: should be done (twice?) for each of the following:
-          -1) subsidy on demand
-          -2) tax on demand
+          **CURRENT**-1) subsidy on demand
+          -2) tax on demand <-- DONE
           -3) subsidy on supply
-          **CURRENT**-4) tax on supply
+          -4) tax on supply <-- DONE
           -5) simple mixes; e.g.
             -tax and subsidy on demand
             -tax on supply; subsidy on demand
@@ -36,6 +36,7 @@ Next:
             -tests that don't have the
               previously encountered problem
             -put off until address rounding issues
+          -either way, make sure the above 6 cases have welfare tests
         -deadweight loss (should be zero if subsidy; only tax, price mechanism
         and tariff/quota cause deadweight loss)
         -tax revenue
@@ -87,6 +88,7 @@ Next:
         -deadweight loss (in an unexpected area)
         -number of imports (given)
         -tariff revenue N/A
+-domestic revenue shouldn't include tax revenue
 -does getTaxRevenue() still need the use of min?
   -in fact, I might be going about it wrong. It shouldn't necessarily
   be the minimum. (e.g. If supply is taxed, then government makes
