@@ -10,10 +10,6 @@ QUnit.module("tax on supply");
     assert.deepEqual(data.ep, 0.75);
   });
   
-  // QUnit.test("correct domestic equilibrium", function(assert) {
-    // var data = 
-  // });
-  
   QUnit.test("correct quantity demanded/supplied", function(assert) {
     var data = getLinearGraph1();
     

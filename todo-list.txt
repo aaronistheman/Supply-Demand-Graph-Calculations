@@ -16,9 +16,9 @@ Next:
         -NOTE: should be done (twice?) for each of the following:
           -1) subsidy on demand <-- DONE
           -2) tax on demand <-- DONE
-          **CURRENT**-3) subsidy on supply
+          -3) subsidy on supply <-- DONE
           -4) tax on supply <-- DONE
-          -5) simple mixes; e.g.
+          **CURRENT**-5) simple mixes; e.g.
             -tax and subsidy on demand
             -tax on supply; subsidy on demand
           -6) a few complicated mixes? (list some here)
