@@ -2,57 +2,22 @@ Contents:
 -Next
 -Eventually
 -Considerable
+-Notes on Testing
 
 Next:
 -remaining calculations/actions:
   -open, private economy: DONE
   -closed, public economy
-    -subsidy/tax on supply/demand:
-      -tests for (all these values should be recalculated):
-        (
-        -NOTE: should be done (twice?) for each of the following:
-          -1) subsidy on demand <-- DONE
-          -2) tax on demand <-- DONE
-          -3) subsidy on supply <-- DONE
-          -4) tax on supply <-- DONE
-          -5) simple mixes; e.g.  <-- DONE
-            -tax and subsidy on demand <-- DONE
-            -tax and subsidy on supply <-- DONE
-            -tax on supply; subsidy on demand <-- DONE
-            -tax on demand; subsidy on supply <-- DONE
-          -6) a few complicated mixes? (list some here) <-- DONE
-            -set and toggle tax and subsidy <-- DONE
-        )
-        -domestic equilibrium
-        -quantity demanded/supplied? (or is this unnecessary, given
-        the assignments at the end of the setter methods)
-        -domestic total revenue
-          -make sure the method does this right
-            -always use quantity demanded? or should the minimum
-            of QD and QS be used?
-        -consumer/producer surplus
-          -either:
-            -tests that don't have the
-              previously encountered problem
-            -put off until address rounding issues
-          -either way, make sure the above 6 cases have welfare tests
-        -deadweight loss (should be zero if subsidy; only tax, price mechanism
-        and tariff/quota cause deadweight loss)
-        -tax revenue
-      -either fix getConsumerSurplus() and getProducerSurplus() now or later
-        -there might be commented out tests to make note of
-        -may need to add welfare tests if are none in integration tests
-      -user's offset
-        -is the user's given offset rounded?
-          -should it be?
-        -should all offsets be allowed?
-      -finishing touches
-        -fix default controller values
+    -fix getConsumerSurplus() and getProducerSurplus()
+      -there might be commented out tests to make note of
+      -may need to add welfare tests if are none in integration tests
     -getDeadweightLoss()
       -have text-view use this method and display it as Price value
       -make unit tests involving it
       -uncomment out the integration tests involving it
       -implement it
+        -should be zero if subsidy; only tax, price mechanism, and
+        tarriff/quota cause deadweight loss (test all of this)
     -price mechanism: (see the commit in which the todo list was detailed
     for the subsidy/taxation)
       -dashed line for where mechanism is
@@ -63,10 +28,15 @@ Next:
           -welfare
         -calculate
           -deadweight loss
+    -make sure getTotalRevenue() is correct
+      -always use quantity demanded? or should the minimum
+      of QD and QS be used?
     -if user privatizes economy or opens economy; disable:
       -tax
       -subsidy
       -price mechanism
+    -finishing touches
+      -fix default controller values
   -open, public economy
     -tariff
       -recalculate:
@@ -166,6 +136,29 @@ CSS in one of the card games
   -or would this require too much assuming about the data?
 -when change is made, hi lite the fields that changed, and have
 a button to clear the hi lites
--replace "data" variable name with "economyModel"
 -reapply settings when apply-able (e.g. if user opens economy, apply
 the last used world price)
+
+Notes on Testing:
+-tests for:
+(
+-NOTE: should be done (twice?) for each of the following:
+  -1) subsidy on demand <-- DONE
+  -2) tax on demand <-- DONE
+  -3) subsidy on supply <-- DONE
+  -4) tax on supply <-- DONE
+  -5) simple mixes; e.g.  <-- DONE
+    -tax and subsidy on demand <-- DONE
+    -tax and subsidy on supply <-- DONE
+    -tax on supply; subsidy on demand <-- DONE
+    -tax on demand; subsidy on supply <-- DONE
+  -6) a few complicated mixes? (list some here) <-- DONE
+    -set and toggle tax and subsidy <-- DONE
+)
+-domestic equilibrium
+-quantity demanded/supplied? (or is this unnecessary, given
+the assignments at the end of the setter methods)
+-domestic total revenue
+-consumer/producer surplus
+-deadweight loss
+-tax revenue

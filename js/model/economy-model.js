@@ -182,6 +182,11 @@ EconomyModel.prototype = {
     if (this.wp)
       alertAndThrowException("Can't call setTax() if open economy");
     
+    if (amount < 0) {
+      alert("User error: can't have negative tax");
+      return;
+    }
+    
     // clear both tax amounts
     this.mDemandTax = this.mSupplyTax = 0;
   
@@ -205,6 +210,11 @@ EconomyModel.prototype = {
   setSubsidy : function(whichGraph, amount) {
     if (this.wp)
       alertAndThrowException("Can't call setSubsidy() if open economy");
+    
+    if (amount < 0) {
+      alert("User error: can't have negative subsidy");
+      return;
+    }
     
     // clear both subsidy amounts
     this.mDemandSubsidy = this.mSupplySubsidy = 0;
