@@ -12,7 +12,7 @@ function GraphView() {
   if (!(this instanceof GraphView))
     alertAndThrowException("Forgot 'new' before GraphView constructor");
   
-  this.mStoreElements(); // <-- list of members in this method
+  this.mStoreElements(); // <-- A list of members is in this method.
   this.drawAxes(); // should only be done once
 } // GraphView
 
@@ -51,13 +51,14 @@ GraphView.prototype = {
     if (!(data instanceof EconomyModel))
       alertAndThrowException("data parameter is of wrong type");
     
-    this.redrawDemand(data.getDemand());
-    this.redrawSupply(data.getSupply())
+    this.redrawDemand(data.getDemand(), data.getDemandVerticalOffset());
+    this.redrawSupply(data.getSupply(), data.getSupplyVerticalOffset());
     
     // Emphasize certain values with solid line
     this.redrawWorldPriceLine(data.wp);
     
     // Emphasize certain values with dashed line
+    GraphView.clearCanvas(this.mIndicatorCanvas, this.mIndicatorCtx);
     this.mEmphasizeQuantityDashedLine(data.getLowestEffectiveQuantity());
     this.mEmphasizeQuantityDashedLine(data.eq);
   },
@@ -66,12 +67,13 @@ GraphView.prototype = {
    * Doesn't clean the canvas before drawing
    * @param points array of instances of Point
    * @param canvas
-   * @param ctx
+   * @param ctx (is restored before function ends)
    * @param color of type string (e.g. "red")
    * @param offset how much to add to a point's price when plotting it
    */
   mDrawGraph : function(points, canvas, ctx, color, offset=0) {
     // set up context
+    ctx.save();
     ctx.strokeStyle = color; // apply color
     ctx.lineWidth = 5;
     
@@ -85,24 +87,37 @@ GraphView.prototype = {
     }
 
     ctx.stroke();
+    ctx.restore();
   },
 
   /**
    * @param supply instance of PiecewiseFunction
    */
-  redrawSupply : function(supply) {
+  redrawSupply : function(supply, verticalOffset=0) {
     GraphView.clearCanvas(this.mSupplyCanvas, this.mSupplyCtx);
     this.mDrawGraph(supply.getPoints(), this.mSupplyCanvas,
       this.mSupplyCtx, "red");
+      
+    // if need an offset supply graph, too
+    if (verticalOffset != 0) {      
+      this.mDrawGraph(supply.getPoints(), this.mSupplyCanvas,
+        this.mSupplyCtx, "blue", verticalOffset);
+    }
   },
 
   /**
    * @param demand instance of PiecewiseFunction
    */
-  redrawDemand : function(demand) {
+  redrawDemand : function(demand, verticalOffset=0) {
     GraphView.clearCanvas(this.mDemandCanvas, this.mDemandCtx);
     this.mDrawGraph(demand.getPoints(), this.mDemandCanvas,
       this.mDemandCtx, "black");
+    
+    // if need an offset demand graph, too
+    if (verticalOffset != 0) {
+      this.mDrawGraph(demand.getPoints(), this.mDemandCanvas,
+        this.mDemandCtx, "blue", verticalOffset);
+    }
   },
   
   /**
@@ -193,7 +208,8 @@ GraphView.prototype = {
   
   /**
    * Emphasizes the given quantity with a dashed line parallel to
-   * the y-axis.
+   * the y-axis. Doesn't clear the indicator canvas, in case this
+   * method is used to emphasize multiple quantities.
    * @param q the quantity value to emphasize
    */
   mEmphasizeQuantityDashedLine : function(q) {

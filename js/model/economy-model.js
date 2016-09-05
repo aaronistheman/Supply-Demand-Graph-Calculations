@@ -84,17 +84,19 @@ EconomyModel.prototype = {
   },
   
   /**
-   * I decided that a positive offset indicates a subsidy.
+   * A subsidy moves demand vertically up and thus makes a positive offset,
+   * while a tax does the opposite.
    */
-  getDemandOffset : function() {
+  getDemandVerticalOffset : function() {
     return this.mDemandSubsidy - this.mDemandTax;
   },
   
   /**
-   * I decided that a positive offset indicates a subsidy.
+   * A subsidy moves supply vertically down and thus makes a negative offset,
+   * while a tax does the opposite.
    */
-  getSupplyOffset : function() {
-    return this.mSupplySubsidy - this.mSupplyTax;
+  getSupplyVerticalOffset : function() {
+    return this.mSupplyTax - this.mSupplySubsidy;
   },
   
   getTaxAmount : function() {
@@ -172,25 +174,86 @@ EconomyModel.prototype = {
   }, // setWp()
   
   /**
+   * @pre economy is closed
    * @param whichGraph should be a Graph constant
    * @param amount
    */
   setTax : function(whichGraph, amount) {
-    alert("setTax: " + whichGraph + " " + amount);
+    if (this.wp)
+      alertAndThrowException("Can't call setTax() if open economy");
+    
+    if (amount < 0) {
+      alert("User error: can't have negative tax");
+      return;
+    }
+    
     // clear both tax amounts
-    // this.mDemandTax = this.mSupplyTax = 0;
+    this.mDemandTax = this.mSupplyTax = 0;
   
     // apply new tax amount to right graph
+    if (whichGraph == Graph.Supply)
+      this.mSupplyTax = amount;
+    else if (whichGraph == Graph.Demand)
+      this.mDemandTax = amount;
+    else
+      alertAndThrowException("Invalid whichGraph given to setTax()");
     
+    this.mUpdateEquilibriumPoint();
+    this.qs = this.qd = this.eq;
   }, // setTax()
   
   /**
+   * @pre economy is closed
    * @param whichGraph should be a Graph constant
    * @param amount
    */
   setSubsidy : function(whichGraph, amount) {
-    alert("setSubsidy: " + whichGraph + " " + amount);
+    if (this.wp)
+      alertAndThrowException("Can't call setSubsidy() if open economy");
+    
+    if (amount < 0) {
+      alert("User error: can't have negative subsidy");
+      return;
+    }
+    
+    // clear both subsidy amounts
+    this.mDemandSubsidy = this.mSupplySubsidy = 0;
+    
+    // apply new subsidy amount to right graph
+    if (whichGraph == Graph.Supply)
+      this.mSupplySubsidy = amount;
+    else if (whichGraph == Graph.Demand)
+      this.mDemandSubsidy = amount;
+    else
+      alertAndThrowException("Invalid whichGraph given to setSubsidy()");
+    
+    this.mUpdateEquilibriumPoint();
+    this.qs = this.qd = this.eq;
   }, // setSubsidy()
+  
+  /**
+   * Swaps tax on demand with tax on supply.
+   */
+  switchTaxedGraph : function() {
+    var temp = this.mDemandTax;
+    this.mDemandTax = this.mSupplyTax;
+    this.mSupplyTax = temp;
+    
+    this.mUpdateEquilibriumPoint();
+    this.qs = this.qd = this.eq;
+  },
+  
+  /**
+   * Swaps subsidy on demand with subsidy on supply.
+   */
+  switchSubsidizedGraph : function() {
+    var temp = this.mDemandSubsidy;
+    this.mDemandSubsidy = this.mSupplySubsidy;
+    this.mSupplySubsidy = temp;
+    
+    this.mUpdateEquilibriumPoint();
+    this.qs = this.qd = this.eq;
+  },
   
   /**
    * @return instance of Price
@@ -212,13 +275,14 @@ EconomyModel.prototype = {
     var range = this.qd - this.mLowestQuantity;
     var step = range / this.mNumRectangles;
     var answer = 0;
-    var effectivePrice = this.mGetEffectiveWelfareQuantity();
+    var effectivePrice = this.mGetEffectiveWelfarePrice();
     
     // Execute the Riemann summation
     for (var q = this.mLowestQuantity + step, i = 0;
       i < this.mNumRectangles; q += step, ++i)
     {
-      answer += (this.mDemand.getP(q) - effectivePrice) * step;
+      answer += (this.mDemand.getP(q, this.getDemandVerticalOffset())
+        - effectivePrice) * step;
     }
     
     return (new Price(answer));
@@ -235,13 +299,14 @@ EconomyModel.prototype = {
     var range = this.qs - this.mLowestQuantity;
     var step = range / this.mNumRectangles;
     var answer = 0;
-    var effectivePrice = this.mGetEffectiveWelfareQuantity();
+    var effectivePrice = this.mGetEffectiveWelfarePrice();
     
     // Execute the Riemann summation
     for (var q = this.mLowestQuantity + step, i = 0;
       i < this.mNumRectangles; q += step, ++i)
     {
-      answer += (effectivePrice - this.mSupply.getP(q)) * step;
+      answer += (effectivePrice - this.mSupply.getP(q,
+        this.getSupplyVerticalOffset())) * step;
     }
     
     return (new Price(answer));
@@ -272,14 +337,26 @@ EconomyModel.prototype = {
     else // if are exports (or no trade)
       return 0;
   },
-  
+
+  /**
+   * @return a Price object
+   */
   getDeadweightLoss : function() {
-    // decide what type of object is returned
-  },
+    // will be implemented in a correct way later
+    return new Price(1);
+  }, // getDeadweightLoss()
   
+  /**
+   * @return a Price object
+   */
   getTaxRevenue : function() {
-    
-  },
+    // It may be incorrect to always take the minimum of the
+    // two quantities; I'll look into this later.
+    // Max of the two taxes is taken because at least one of
+    // them must be zero, so this obtains the tax magnitude.
+    return new Price(Math.min(this.qd, this.qs)
+      * Math.max(this.mSupplyTax, this.mDemandTax));
+  }, // getTaxRevenue()
   
   /**
    * @return a new Point instance representing where the supply and
@@ -292,8 +369,10 @@ EconomyModel.prototype = {
     
     // Determine starting points
     var qVal = this.mLowestQuantity;
-    var dVal = this.mDemand.getP(qVal);
-    var sVal = this.mSupply.getP(qVal);
+    var dVal = this.mDemand.getP(qVal,
+      this.getDemandVerticalOffset());
+    var sVal = this.mSupply.getP(qVal,
+      this.getSupplyVerticalOffset());
     
     var oldD = dVal;
     // var oldS = sVal;
@@ -310,8 +389,10 @@ EconomyModel.prototype = {
       
       // Advance one step
       qVal += step;
-      dVal = this.mDemand.getP(qVal);
-      sVal = this.mSupply.getP(qVal);
+      dVal = this.mDemand.getP(qVal,
+        this.getDemandVerticalOffset());
+      sVal = this.mSupply.getP(qVal,
+        this.getSupplyVerticalOffset());
     }
     
     if (qVal > this._highestQuantity)
@@ -472,13 +553,23 @@ EconomyModel.prototype = {
   }, // mUpdateEquilibriumPoint()
   
   /**
-   * @return the quantity value that should be used for welfare
+   * @return the price value that should be used for welfare
    * measurements
    */
-  mGetEffectiveWelfareQuantity : function() {
+  mGetEffectiveWelfarePrice : function() {
     if (this.wp)
       return this.wp
     else
       return this.ep
-  }, // mGetEffectiveWelfareQuantity()
+  }, // mGetEffectiveWelfarePrice()
+  
+  /**
+   * Convenient method for having this model recalculate the values
+   * of its members that are not recalculated by default. (For
+   * example, consumer surplus is always recalculated (when the
+   * view objects look for it), but quantity supplied isn't.)
+   */
+  // mRecalculateDomesticHardcodedValues : function() {
+    
+  // },
 };

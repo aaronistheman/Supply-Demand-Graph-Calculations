@@ -21,8 +21,14 @@ However, regarding real life, I suspect that
 doing so could increase domestic supply, but this scenario was not
 covered in the AP curriculum.)
 
-Admittedly, the code is a little messy, mainly because I let the Graph
-custom type become too big and because I didn't plan too well ahead.
+Notes on Code
+-------------
+
+Throughout the code (specifically the comments), I sometimes say
+the supply graph moves up/down, which may be deceptive, since
+up/down corresponds to decrease/increase for the supply graph. (I
+think the more accepted terms are "left" and "right", but these
+terms would conflict with how the program offsets the graphs.)
 
 Features
 --------

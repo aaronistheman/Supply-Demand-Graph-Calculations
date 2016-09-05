@@ -2,49 +2,24 @@ Contents:
 -Next
 -Eventually
 -Considerable
+-Notes on Testing
 
 Next:
 -remaining calculations/actions:
   -open, private economy: DONE
   -closed, public economy
-    -(excise) tax or subsidy on supply:
-      -how to apply change (recalculations) to EconomyModel (easy)
-        -setTax()
-        -setSubsidy()
-        -if change drop box
-          -adjust offset appropriately
-        -treat things as if supply outright moved (which it did)
-          -probably need to manually call the methods to recalculate:
-            -equilibrium
-            -qs and qd
-          -accessing to supply's points should apply the offset
-      -how to show the change in GraphView
-        -simply apply an offset (if a tax or subsidy) and draw
-        another supply graph in blue
-      [-how to find location of "active supply":
-        -add or subtract from supply, but when? ideas:
-          -when the change is realized, go through all supply points
-          -have a method that returns an active supply value that
-          finds the supply point then applies tax/subsidy to it]
-      -recalculate:
-        -equilibrium
-        -total revenue
-          -make sure total revenue uses quantity demanded
-          -make sure the method does this right
-        -welfare
-      -calculate
-        -tax revenue
-        -deadweight loss (zero)
-      -fix default controller values
-    -(sales?) tax or subsidy on demand:
-      -location of "active demand"
-      -recalculate:
-        -equilibrium
-        -welfare
-      -calculate
-        -tax revenue
-        -deadweight loss (zero)
-    -price mechanism:
+    -fix getConsumerSurplus() and getProducerSurplus()
+      -there might be commented out tests to make note of
+      -may need to add welfare tests if are none in integration tests
+    -getDeadweightLoss()
+      -have text-view use this method and display it as Price value
+      -make unit tests involving it
+      -uncomment out the integration tests involving it
+      -implement it
+        -should be zero if subsidy; only tax, price mechanism, and
+        tarriff/quota cause deadweight loss (test all of this)
+    -price mechanism: (see the commit in which the todo list was detailed
+    for the subsidy/taxation)
       -dashed line for where mechanism is
       -floor or ceiling:
         -recalculate (if equilibrium isn't reached):
@@ -53,10 +28,15 @@ Next:
           -welfare
         -calculate
           -deadweight loss
+    -make sure getTotalRevenue() is correct
+      -always use quantity demanded? or should the minimum
+      of QD and QS be used?
     -if user privatizes economy or opens economy; disable:
       -tax
       -subsidy
       -price mechanism
+    -finishing touches
+      -fix default controller values
   -open, public economy
     -tariff
       -recalculate:
@@ -72,6 +52,11 @@ Next:
         -deadweight loss (in an unexpected area)
         -number of imports (given)
         -tariff revenue N/A
+-domestic revenue shouldn't include tax revenue
+-does getTaxRevenue() still need the use of min?
+  -in fact, I might be going about it wrong. It shouldn't necessarily
+  be the minimum. (e.g. If supply is taxed, then government makes
+  tax revenue off of how much is produced (i.e. qs), even if qd is lower.)
 -hi-liting controller
   -point value is highlighted (e.g. quantity demanded): perhaps show
   with a line on the canvas
@@ -151,6 +136,29 @@ CSS in one of the card games
   -or would this require too much assuming about the data?
 -when change is made, hi lite the fields that changed, and have
 a button to clear the hi lites
--replace "data" variable name with "economyModel"
 -reapply settings when apply-able (e.g. if user opens economy, apply
 the last used world price)
+
+Notes on Testing:
+-tests for:
+(
+-NOTE: should be done (twice?) for each of the following:
+  -1) subsidy on demand <-- DONE
+  -2) tax on demand <-- DONE
+  -3) subsidy on supply <-- DONE
+  -4) tax on supply <-- DONE
+  -5) simple mixes; e.g.  <-- DONE
+    -tax and subsidy on demand <-- DONE
+    -tax and subsidy on supply <-- DONE
+    -tax on supply; subsidy on demand <-- DONE
+    -tax on demand; subsidy on supply <-- DONE
+  -6) a few complicated mixes? (list some here) <-- DONE
+    -set and toggle tax and subsidy <-- DONE
+)
+-domestic equilibrium
+-quantity demanded/supplied? (or is this unnecessary, given
+the assignments at the end of the setter methods)
+-domestic total revenue
+-consumer/producer surplus
+-deadweight loss
+-tax revenue
