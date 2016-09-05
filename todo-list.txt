@@ -18,11 +18,11 @@ Next:
           -2) tax on demand <-- DONE
           -3) subsidy on supply <-- DONE
           -4) tax on supply <-- DONE
-          **CURRENT**-5) simple mixes; e.g.
+          -5) simple mixes; e.g.  <-- DONE
             -tax and subsidy on demand <-- DONE
             -tax and subsidy on supply <-- DONE
-            -tax on supply; subsidy on demand
-            -tax on demand; subsidy on supply
+            -tax on supply; subsidy on demand <-- DONE
+            -tax on demand; subsidy on supply <-- DONE
           -6) a few complicated mixes? (list some here)
             -set and toggle tax and subsidy
         -NOTE: don't just use tests that have linear graphs
