@@ -8,9 +8,6 @@ Next:
   -open, private economy: DONE
   -closed, public economy
     -subsidy/tax on supply/demand:
-      -figure out which cases have been tested, and see if they
-      conform sufficiently to the notes below (put DONE in front
-      if so)
       -tests for (all these values should be recalculated):
         (
         -NOTE: should be done (twice?) for each of the following:
@@ -23,10 +20,8 @@ Next:
             -tax and subsidy on supply <-- DONE
             -tax on supply; subsidy on demand <-- DONE
             -tax on demand; subsidy on supply <-- DONE
-          -6) a few complicated mixes? (list some here)
-            -set and toggle tax and subsidy
-        -NOTE: don't just use tests that have linear graphs
-        -NOTE: look at cases in which rounding matters
+          -6) a few complicated mixes? (list some here) <-- DONE
+            -set and toggle tax and subsidy <-- DONE
         )
         -domestic equilibrium
         -quantity demanded/supplied? (or is this unnecessary, given
@@ -44,11 +39,6 @@ Next:
         -deadweight loss (should be zero if subsidy; only tax, price mechanism
         and tariff/quota cause deadweight loss)
         -tax revenue
-      -PROBLEM: somewhere along the line, equilibrium quantity
-      isn't properly updated
-        -BIGGER PROBLEM: I'm no longer able to reproduce this problem.
-      -SUGGESTION: think of some way to ensure the correct things get updated
-        -don't be afraid to use another custom type or two
       -either fix getConsumerSurplus() and getProducerSurplus() now or later
         -there might be commented out tests to make note of
         -may need to add welfare tests if are none in integration tests
