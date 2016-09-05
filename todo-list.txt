@@ -8,9 +8,6 @@ Next:
 -remaining calculations/actions:
   -open, private economy: DONE
   -closed, public economy
-    -fix getConsumerSurplus() and getProducerSurplus()
-      -there might be commented out tests to make note of
-      -may need to add welfare tests if are none in integration tests
     -getDeadweightLoss()
       -have text-view use this method and display it as Price value
       -make unit tests involving it

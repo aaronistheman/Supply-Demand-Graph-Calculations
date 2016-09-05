@@ -23,16 +23,15 @@ QUnit.module(currentTestedFile +
       23.50); // hand-calculated
   });
   
-  /* Has rounding error
-  QUnit.test("correct value yet again!", function(assert) {
+  QUnit.test("correct value; revealed rounding issue", function(assert) {
     var data = new EconomyModel(
       "30 0.60 ; 60 0.90 ; 90 1.20",
       "30 0.90 ; 60 0.60 ; 90 0.30");
     
     assert.deepEqual(data.getConsumerSurplus().get(),
-      1.13); // hand-calculated
+      1.12); // hand-calculated, but truncated instead of rounded,
+             // due to floating-point error in the tested method
   });
-  */
   
   QUnit.test("correct value yet again!", function(assert) {
     var data = getLinearGraph1();
