@@ -13,6 +13,17 @@ QUnit.module("tax and subsidy both on demand");
     assert.deepEqual(data.ep, 0.75);
   });
 
+  QUnit.test("correct equilibrium", function(assert) {
+    var data = getLinearGraph1();
+    
+    // net demand movement: down 0.10
+    data.setTax(Graph.Demand, 0.20);
+    data.setSubsidy(Graph.Demand, 0.10);
+    
+    assert.deepEqual(data.eq, 55);
+    assert.deepEqual(data.ep, 0.55);
+  });
+
   QUnit.test("correct domestic total revenue", function(assert) {
     var data = getLinearGraph1();
     
@@ -23,14 +34,15 @@ QUnit.module("tax and subsidy both on demand");
     assert.deepEqual(data.getTotalRevenue().get(),
       47.61); // hand-calculated
   });
-
-  QUnit.test("correct equilibrium", function(assert) {
+  
+  QUnit.test("correct tax revenue", function(assert) {
     var data = getLinearGraph1();
     
     // net demand movement: down 0.10
-    data.setTax(Graph.Demand, 0.20);
+    var taxAmount = 0.2;
+    data.setTax(Graph.Demand, taxAmount);
     data.setSubsidy(Graph.Demand, 0.10);
     
-    assert.deepEqual(data.eq, 55);
-    assert.deepEqual(data.ep, 0.55);
+    assert.deepEqual(data.getTaxRevenue().get(),
+      Price.get(taxAmount * 55)); // hand-determined
   });

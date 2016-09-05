@@ -19,14 +19,18 @@ Next:
           -3) subsidy on supply <-- DONE
           -4) tax on supply <-- DONE
           **CURRENT**-5) simple mixes; e.g.
-            -tax and subsidy on demand
+            -tax and subsidy on demand <-- DONE
+            -tax and subsidy on supply <-- DONE
             -tax on supply; subsidy on demand
+            -tax on demand; subsidy on supply
           -6) a few complicated mixes? (list some here)
+            -set and toggle tax and subsidy
         -NOTE: don't just use tests that have linear graphs
         -NOTE: look at cases in which rounding matters
         )
         -domestic equilibrium
-        -quantity demanded/supplied
+        -quantity demanded/supplied? (or is this unnecessary, given
+        the assignments at the end of the setter methods)
         -domestic total revenue
           -make sure the method does this right
             -always use quantity demanded? or should the minimum
