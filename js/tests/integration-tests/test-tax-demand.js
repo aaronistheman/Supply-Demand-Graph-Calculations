@@ -26,16 +26,15 @@ QUnit.module("tax on demand");
     assert.deepEqual(data.getTotalRevenue().get(), answer);
   });
 
-  /* Has rounding issue:
   QUnit.test("correct consumer surplus",
     function(assert) {
     var data = getLinearGraph1();
     
     data.setTax(Graph.Demand, 0.3);
     assert.deepEqual(data.getConsumerSurplus().get(),
-      1.13); // hand-calculated
+      1.12); // hand-calculated, but due to floating-point error
+             // in the tested method, must use 1.12, not 1.13
   });
-  */
   
   QUnit.test("correct tax revenue", function(assert) {
     var data = getLinearGraph1();

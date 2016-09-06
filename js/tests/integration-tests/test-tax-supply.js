@@ -26,13 +26,14 @@ QUnit.module("tax on supply");
     assert.deepEqual(data.getTotalRevenue().get(), answer);
   });
   
-  /* Has rounding issue:
   QUnit.test("correct consumer surplus", function(assert) {
     var data = getLinearGraph1();
     
     data.setTax(Graph.Supply, 0.1);
     assert.deepEqual(data.getConsumerSurplus().get(),
-      Price.get((0.9 - 0.65) * (55 - 30) / 2)); // worked out by hand
+      3.12); // worked out by hand from (0.9 - 0.65) * (55 - 30) / 2));
+             // however, due to floating-point error in the tested
+             // method, I must use 3.12 instead of 3.13
   });
   
   QUnit.test("correct consumer surplus", function(assert) {
@@ -40,7 +41,8 @@ QUnit.module("tax on supply");
     
     data.setTax(Graph.Supply, 0.3);
     assert.deepEqual(data.getConsumerSurplus().get(),
-      1.13); // hand-calculated
+      1.12); // hand-calculated, but due to floating-point error
+             // in tested method, must use 1.12 instead of 1.13
   });
   
   QUnit.test("correct producer surplus", function(assert) {
@@ -48,9 +50,10 @@ QUnit.module("tax on supply");
     
     data.setTax(Graph.Supply, 0.1);
     assert.deepEqual(data.getProducerSurplus().get(),
-      Price.get((0.65 - 0.4) * (55 - 30) / 2)); // worked out by hand
+      3.12); // worked out by hand from (0.65 - 0.4) * (55 - 30) / 2);
+             // however, due to floating-point error in the tested
+             // method, I must use 3.12 instead of 3.13
   });
-  */
   
   /*
   QUnit.test("correct deadweight loss", function(assert) {

@@ -268,6 +268,8 @@ EconomyModel.prototype = {
    * Consumer surplus is the integral from lowest quantity
    * to the quantity demanded
    * of the difference between demand and the effective price.
+   * (Note that this method can't be perfect, due to possible
+   * floating-point error.)
    *
    * @return a Price object, since consumer surplus is in dollars
    */
@@ -292,6 +294,8 @@ EconomyModel.prototype = {
    * Producer surplus is the integral from lowest quantity
    * to the quantity supplied of the difference between
    * the effective price and supply.
+   * (Note that this method can't be perfect, due to possible
+   * floating-point error.)
    *
    * @return a Price object, since producer surplus is in dollars
    */
