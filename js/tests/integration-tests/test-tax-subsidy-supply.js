@@ -46,3 +46,9 @@ QUnit.module("tax and subsidy both on supply");
     assert.deepEqual(data.getTaxRevenue().get(),
       Price.get(taxAmount * 55));
   });
+  
+  QUnit.test("subsidy creates no deadweight loss", function(assert) {
+    var data = getLinearGraph1();
+    data.setSubsidy(Graph.Supply, 0.2);
+    assert.deepEqual(data.getDeadweightLoss().get(), 0);
+  });

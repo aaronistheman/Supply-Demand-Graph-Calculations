@@ -55,7 +55,6 @@ QUnit.module("tax on supply");
              // method, I must use 3.12 instead of 3.13
   });
   
-  /*
   QUnit.test("correct deadweight loss", function(assert) {
     var data = getLinearGraph1();
     
@@ -63,7 +62,14 @@ QUnit.module("tax on supply");
     assert.deepEqual(data.getDeadweightLoss().get(),
       Price.get((60 - 55) * (0.65 - 0.55) / 2)); // worked out by hand
   });
-  */
+  
+  QUnit.test("correct deadweight loss", function(assert) {
+    var data = getLinearGraph2();
+    
+    data.setTax(Graph.Supply, 0.3);
+    assert.deepEqual(data.getDeadweightLoss().get(),
+      Price.get((60 - 50) * (0.70 - 0.40) / 2)); // worked out by hand
+  });
   
   QUnit.test("correct tax revenue", function(assert) {
     var data = getLinearGraph1();

@@ -9,12 +9,9 @@ Next:
   -open, private economy: DONE
   -closed, public economy
     -getDeadweightLoss()
+      -implement
+        -Riemann sums
       -have text-view use this method and display it as Price value
-      -make unit tests involving it
-      -uncomment out the integration tests involving it
-      -implement it
-        -should be zero if subsidy; only tax, price mechanism, and
-        tarriff/quota cause deadweight loss (test all of this)
     -price mechanism: (see the commit in which the todo list was detailed
     for the subsidy/taxation)
       -dashed line for where mechanism is
