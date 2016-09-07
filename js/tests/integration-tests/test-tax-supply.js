@@ -10,6 +10,17 @@ QUnit.module("tax on supply");
     assert.deepEqual(data.ep, 0.75);
   });
   
+  QUnit.test("can still obtain 'pre-tax' domestic equilibrium",
+    function(assert)
+  {
+    var data = getLinearGraph1();
+    data.setTax(Graph.Supply, 0.3);
+    var eqPoint = data.calculateEquilibriumPoint(true);
+    
+    assert.deepEqual(eqPoint.q(), 60);
+    assert.deepEqual(eqPoint.p(), 0.60);
+  });
+  
   QUnit.test("correct quantity demanded/supplied", function(assert) {
     var data = getLinearGraph1();
     

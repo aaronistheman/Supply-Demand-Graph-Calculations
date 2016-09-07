@@ -10,7 +10,6 @@ Next:
   -closed, public economy
     -getDeadweightLoss()
       -implement
-        -Riemann sums
       -have text-view use this method and display it as Price value
     -price mechanism: (see the commit in which the todo list was detailed
     for the subsidy/taxation)
@@ -47,6 +46,7 @@ Next:
         -number of imports (given)
         -tariff revenue N/A
 -domestic revenue shouldn't include tax revenue
+-what is deadweight loss if is tax, price mechanism, and tariff/quota?
 -does getTaxRevenue() still need the use of min?
   -in fact, I might be going about it wrong. It shouldn't necessarily
   be the minimum. (e.g. If supply is taxed, then government makes
