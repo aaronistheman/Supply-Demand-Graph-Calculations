@@ -346,10 +346,33 @@ EconomyModel.prototype = {
    * @return a Price object
    */
   getDeadweightLoss : function() {
-    // else {
+    if (this.mDemandTax > 0 || this.mSupplyTax > 0) { // if there is a tax
+      /**
+       * In this case, deadweight loss is the integral from
+       * the current equilibrium quantity to the formerly current
+       * equilibrium quantity of the difference between.
+       */
+      
+      // Set up Riemann sum
+      var formerEqQ = this.calculateEquilibriumPoint(true).q();
+      var range = formerEqQ - this.eq;
+      var step = range / this.mNumRectangles;
+      var answer = 0;
+      
+      // Execute "right Riemann sum"
+      for (var q = this.eq + step, i = 0;
+        i < this.mNumRectangles; q += step, ++i)
+      {
+        answer += step
+          * (this.mDemand.getP(q, 0) - this.mSupply.getP(q, 0));
+      }
+      
+      return (new Price(answer));
+    } // if there is a tax
+    else {
       // Be default, there is no deadweight loss
       return new Price(0);
-    // }
+    }
   }, // getDeadweightLoss()
   
   /**

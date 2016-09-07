@@ -9,7 +9,12 @@ Next:
   -open, private economy: DONE
   -closed, public economy
     -getDeadweightLoss()
-      -implement
+      -make integration tests that calculate deadweight loss if both
+      tax and subsidy; cases:
+        -tax and subsidy cancel each other => no DWL
+        -tax on supply overpowers subsidy on demand => which of the
+        two resulting triangles in DWL?
+        -etc.
       -have text-view use this method and display it as Price value
     -price mechanism: (see the commit in which the todo list was detailed
     for the subsidy/taxation)
