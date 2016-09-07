@@ -346,8 +346,10 @@ EconomyModel.prototype = {
    * @return a Price object
    */
   getDeadweightLoss : function() {
-    // will be implemented in a correct way later
-    return new Price(1);
+    // else {
+      // Be default, there is no deadweight loss
+      return new Price(0);
+    // }
   }, // getDeadweightLoss()
   
   /**
