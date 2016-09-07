@@ -25,3 +25,9 @@ QUnit.module("subsidy on demand");
     var answer = Price.get(70 * 0.70);
     assert.deepEqual(data.getTotalRevenue().get(), answer);
   });
+  
+  QUnit.test("subsidy creates no deadweight loss", function(assert) {
+    var data = getLinearGraph1();
+    data.setSubsidy(Graph.Demand, 0.2);
+    assert.deepEqual(data.getDeadweightLoss().get(), 0);
+  });

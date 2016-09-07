@@ -346,8 +346,33 @@ EconomyModel.prototype = {
    * @return a Price object
    */
   getDeadweightLoss : function() {
-    // will be implemented in a correct way later
-    return new Price(1);
+    if (this.mDemandTax > 0 || this.mSupplyTax > 0) { // if there is a tax
+      /**
+       * In this case, deadweight loss is the integral from
+       * the current equilibrium quantity to the formerly current
+       * equilibrium quantity of the difference between.
+       */
+      
+      // Set up Riemann sum
+      var formerEqQ = this.calculateEquilibriumPoint(true).q();
+      var range = formerEqQ - this.eq;
+      var step = range / this.mNumRectangles;
+      var answer = 0;
+      
+      // Execute "right Riemann sum"
+      for (var q = this.eq + step, i = 0;
+        i < this.mNumRectangles; q += step, ++i)
+      {
+        answer += step
+          * (this.mDemand.getP(q, 0) - this.mSupply.getP(q, 0));
+      }
+      
+      return (new Price(answer));
+    } // if there is a tax
+    else {
+      // Be default, there is no deadweight loss
+      return new Price(0);
+    }
   }, // getDeadweightLoss()
   
   /**
@@ -363,20 +388,28 @@ EconomyModel.prototype = {
   }, // getTaxRevenue()
   
   /**
+   * @param ignoreOffset set to true to ignore any offset to supply
+   * and/or demand
    * @return a new Point instance representing where the supply and
    * demand graphs (first) intersect
    */
-  calculateEquilibriumPoint : function() {
+  calculateEquilibriumPoint : function(ignoreOffset=false) {
+    if (ignoreOffset) {
+      var demandOffset = 0, supplyOffset = 0;
+    }
+    else {
+      var demandOffset = this.getDemandVerticalOffset();
+      var supplyOffset = this.getSupplyVerticalOffset();
+    }
+    
     // Calculate step magnitude
     var range = this.mHighestQuantity - this.mLowestQuantity;
     var step = range / this.mNumRectangles;
     
     // Determine starting points
     var qVal = this.mLowestQuantity;
-    var dVal = this.mDemand.getP(qVal,
-      this.getDemandVerticalOffset());
-    var sVal = this.mSupply.getP(qVal,
-      this.getSupplyVerticalOffset());
+    var dVal = this.mDemand.getP(qVal, demandOffset);
+    var sVal = this.mSupply.getP(qVal, supplyOffset);
     
     var oldD = dVal;
     // var oldS = sVal;
@@ -393,10 +426,8 @@ EconomyModel.prototype = {
       
       // Advance one step
       qVal += step;
-      dVal = this.mDemand.getP(qVal,
-        this.getDemandVerticalOffset());
-      sVal = this.mSupply.getP(qVal,
-        this.getSupplyVerticalOffset());
+      dVal = this.mDemand.getP(qVal, demandOffset);
+      sVal = this.mSupply.getP(qVal, supplyOffset);
     }
     
     if (qVal > this._highestQuantity)

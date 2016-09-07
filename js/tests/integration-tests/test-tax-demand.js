@@ -36,6 +36,22 @@ QUnit.module("tax on demand");
              // in the tested method, must use 1.12, not 1.13
   });
   
+  QUnit.test("correct deadweight loss", function(assert) {
+    var data = getLinearGraph1();
+    
+    data.setTax(Graph.Demand, 0.1);
+    assert.deepEqual(data.getDeadweightLoss().get(),
+      Price.get((60 - 55) * (0.65 - 0.55) / 2)); // worked out by hand
+  });
+  
+  QUnit.test("correct deadweight loss", function(assert) {
+    var data = getLinearGraph2();
+    
+    data.setTax(Graph.Demand, 0.3);
+    assert.deepEqual(data.getDeadweightLoss().get(),
+      Price.get((60 - 50) * (0.70 - 0.40) / 2)); // worked out by hand
+  });
+  
   QUnit.test("correct tax revenue", function(assert) {
     var data = getLinearGraph1();
     
