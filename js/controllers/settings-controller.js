@@ -181,7 +181,7 @@ SettingsController.whatSubsidizedChangeHandler =
  */
 SettingsController.priceMechanismTypeChanged =
   function(economyModel, textView, graphView) {
-  alert("Price mechanism type changed");
+  // alert("Price mechanism type changed");
       
   // economyModel....();
   
@@ -196,9 +196,8 @@ SettingsController.priceMechanismTypeChanged =
  */
 SettingsController.priceMechanismAmountChanged =
   function(economyModel, textView, graphView) {
-  alert("Price mechanism magnitude updated");
-    
-  // economyModel....();
+  var newPm = parseFloat($("#new-pm-amount").val());
+  economyModel.setPriceMechanismAmount(newPm);
   
   textView.updateAll(economyModel);
   graphView.updateAll(economyModel);

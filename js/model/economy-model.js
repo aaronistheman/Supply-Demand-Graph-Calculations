@@ -174,6 +174,14 @@ EconomyModel.prototype = {
   }, // setWp()
   
   /**
+   * Lumps together the operations associated with setting a new
+   * price mechanism.
+   */
+  setPriceMechanismAmount : function(newPm) {
+    this.pmAmount = newPm;
+  }, // setPriceMechanismAmount()
+  
+  /**
    * @pre economy is closed
    * @param whichGraph should be a Graph constant
    * @param amount

@@ -10,13 +10,13 @@ Next:
   -closed, public economy
     -price mechanism: (see the commit in which the todo list was detailed
     for the subsidy/taxation)
-      -edit GraphView
-        -allow the user to specify the amount
+      -at some point, change this.priceMechanism to this.whichPriceMechanism
       -write integraion tests; edit EconomyModel
       -possible events:
         -the magnitude of the price mechanism is updated
           -input-checking
             -reject price mechanisms that don't matter
+              -would have to store the price mechanism type in EconomyModel
         -the kind of the price mechanism is changed or cancelled
       -recalculations (if equilibrium isn't reached):
         -mark that equilibrium isn't reached
