@@ -121,13 +121,15 @@
           </div> <!-- subsidy info -->
 
           <div> <!-- price mechanism info -->
-            <br><p>Price Mechanism: <select data-ng-model="priceMechanism">
+            <br><p>Price Mechanism: <select id="price-mech-type"
+              data-ng-model="priceMechanism">
               <option value="none">None</option>
               <option value="floor">Floor</option>
               <option value="ceiling">Ceiling</option>
             </select></p>
             <div data-ng-show="priceMechanism != 'none'">
               <p>How Much: <input type="number" name="p-mech" value=0 /></p>
+              <input type="button" value="Update" id="b-price-mech-amount" />
             </div>
           </div> <!-- price mechanism info -->
 

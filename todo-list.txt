@@ -1,12 +1,8 @@
 Contents:
 -Next
--Eventually
 -Considerable
 -Notes on Testing
 -Notes on Deadweight Loss
-
-CONTINUE, BUT IGNORE DEADWEIGHT LOSS, SINCE IT CAUSES COMPLICATIONS;
-note this in readme; GO QUICK
 
 Next:
 -remaining calculations/actions:
@@ -15,13 +11,16 @@ Next:
     -price mechanism: (see the commit in which the todo list was detailed
     for the subsidy/taxation)
       -dashed line for where mechanism is
-      -floor or ceiling:
-        -recalculate (if equilibrium isn't reached):
-          -mark that equilibrium isn't reached
-          -total revenue
-          -welfare
-        -calculate
-          -deadweight loss
+      -write integraion tests
+      -possible events:
+        -the magnitude of the price mechanism is updated
+          -input-checking
+            -reject price mechanisms that don't matter
+        -the kind of the price mechanism is changed or cancelled
+      -recalculations (if equilibrium isn't reached):
+        -mark that equilibrium isn't reached
+        -total revenue
+        -welfare
     -make sure getTotalRevenue() is correct
       -always use quantity demanded? or should the minimum
       of QD and QS be used?
@@ -64,14 +63,9 @@ Next:
   -make sure correct state is shown if disequilibrium
   -when (if ever) to implement the other part of getEconomicSurplus()?
     -erase alert in it at some point
-  -describe the use of MVC in the readme
-
-Eventually:
--use AngularJS or plain JavaScript/jQuery to note errorneous text field
-inputs
-  -e.g. price floor or ceiling has to matter
--have workarounds for calculations that reach the boundaries of the
-supply or demand points
+  -readme
+    -describe the use of MVC
+    -describe omission of deadweight loss
 
 Considerable:
 -should there be a version of update() that only updates
@@ -80,6 +74,9 @@ compared to the time to make it work
   -ideas
     -"update filters"
 -figure out if where I initially set up qd and qs is best
+-have workarounds for calculations that reach the boundaries of the
+supply or demand points
+  -if this is still an issue, make a test to reveal it
 -have some context wrapper custom type so I don't have to keep
 putting the width and height in
 -graph input read from a file
