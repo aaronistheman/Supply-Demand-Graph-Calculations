@@ -343,6 +343,12 @@ EconomyModel.prototype = {
   },
 
   /**
+   * NOTE: This method is not used in the application itself,
+   * because I (Aaron) did not have the Economics background
+   * needed to analyze complex cases of deadweight loss.
+   * (e.g. How is deadweight loss calculated if there is a tax,
+   * a price mechanism, and a tariff/quota?)
+   *
    * @return a Price object
    */
   getDeadweightLoss : function() {
