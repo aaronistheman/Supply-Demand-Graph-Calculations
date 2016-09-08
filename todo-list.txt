@@ -54,44 +54,35 @@ Next:
 -hi-liting controller
   -point value is highlighted (e.g. quantity demanded): perhaps show
   with a line on the canvas
-  -area value is highlighted (e.g. deadweight loss): color the area
+  -area value is highlighted (e.g. tax revenue): color the area
 -end (also see "Eventually" section)
-  -see if any parts of the program (that could be done more than
-  once) take too long
-    -ideas for improving speed:
-      -replace ng-show/hide with ng-if, and just reapply event handlers
-      when appropriate
-  -robustly test with variety of supply and demand data, including
-  ones that make non-monotonic graphs
   -where to say what industry it is?
   -make sure these are done
     -getNumberImports()
-    -getDeadweightLoss()
-    -getTaxRevenue()
   -at some point, getTotalRevenue() MUST be
   changed, since total revenue = price x QD
-  -figure out if where I initially set up qd and qs is best
   -make sure correct state is shown if disequilibrium
-  -make sure everything is put in correct folder
-    -should constants.js be in utility?
-    -why are Quantity and Price in the utility folder?
-    -adjust tests if needed
-  -the maxes seem a little deceptive, since they are not visible
-  due to the label offset
-  -have some context wrapper custom type so I don't have to keep
-  putting the width and height in
-  -should there be a version of update() that only updates
-  specific fields, or would the time saved be too insignificant
-  compared to the time to make it work
-    -ideas
-      -"update filters"
   -when (if ever) to implement the other part of getEconomicSurplus()?
     -erase alert in it at some point
-  -remove Graph custom type and usage of it
   -describe the use of MVC in the readme
 
 Eventually:
--graph input
+-use AngularJS or plain JavaScript/jQuery to note errorneous text field
+inputs
+  -e.g. price floor or ceiling has to matter
+-have workarounds for calculations that reach the boundaries of the
+supply or demand points
+
+Considerable:
+-should there be a version of update() that only updates
+specific fields, or would the time saved be too insignificant
+compared to the time to make it work
+  -ideas
+    -"update filters"
+-figure out if where I initially set up qd and qs is best
+-have some context wrapper custom type so I don't have to keep
+putting the width and height in
+-graph input read from a file
   -pick a way to get user's input to make the graph;
     -ideas regarding how to get the input:
       -have user paste them in certain format in text field
@@ -105,17 +96,8 @@ Eventually:
     then the graphs don't interact, and this should be said
     -report error if no semi-colon where expected one
   -read "what is graphed" from file
--use AngularJS to note errorneous text field inputs
-  -e.g. price floor or ceiling has to matter
--(if not done yet) clean up script.js
--mention the format of the input strings in readme
--when hover over some measurement (e.g. producer surplus), hi lite
-(on a separate canvas in the stack) the regarded region
--have workarounds for calculations that reach the boundaries of the
-supply or demand points
-
-Considerable:
--look into AJAX, just in case it can help somehow
+-the graph maxes seem a little deceptive, since they are not visible
+due to the label offset
 -allow graphing of firm or aggregate
   -could use AngularJS if possible
   -could change the fields shown (in response to what the user wants
