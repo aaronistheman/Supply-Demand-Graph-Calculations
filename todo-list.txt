@@ -10,8 +10,9 @@ Next:
   -closed, public economy
     -price mechanism: (see the commit in which the todo list was detailed
     for the subsidy/taxation)
-      -dashed line for where mechanism is
-      -write integraion tests
+      -edit GraphView
+        -allow the user to specify the amount
+      -write integraion tests; edit EconomyModel
       -possible events:
         -the magnitude of the price mechanism is updated
           -input-checking
@@ -21,6 +22,7 @@ Next:
         -mark that equilibrium isn't reached
         -total revenue
         -welfare
+      -edit TextView
     -make sure getTotalRevenue() is correct
       -always use quantity demanded? or should the minimum
       of QD and QS be used?
