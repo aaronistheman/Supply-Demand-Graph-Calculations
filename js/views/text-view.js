@@ -33,6 +33,7 @@ function TextView(industryName) {
   this.$subsidyDisplay = $("#subsidy-amount");
   this.$subsidyAmount = $("#new-subsidy-amount");
   this.$whatSubsidized = $("#what-subsidized");
+  this.$pmAmount = $("#pm-amount");
 } // TextView
 
 TextView.prototype = {
@@ -92,5 +93,8 @@ TextView.prototype = {
     // tax and subsidy info
     this.$taxDisplay.html(data.getTaxAmount());
     this.$subsidyDisplay.html(data.getSubsidyAmount());
+    
+    // price mechanism info
+    this.$pmAmount.html(data.pmAmount);
   }, // updateAll()
 };

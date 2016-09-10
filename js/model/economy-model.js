@@ -24,12 +24,12 @@ function EconomyModel(supplyDataString, demandDataString) {
   this.qd; // quantity demanded (by domestic demanders) value
   this.qs; // quantity supplied (by domestic suppliers) value
   this.wp; // world price
-  this.taxAmount;
   this.whatTaxed; // should have a Graph constant value
-  this.subsidyAmount;
   this.whatSubsidized; // should have a Graph constant value
-  this.priceMechanism;
-  this.pmAmount; // price mechanism's amount
+  
+  // Price mechanism stuff
+  this.whichPm; // which price mechanism
+  this.pmAmount = 0; // price mechanism's amount
   
   // Tax/subsidy settings
   this.mDemandTax = 0;

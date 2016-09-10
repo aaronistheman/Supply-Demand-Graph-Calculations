@@ -10,8 +10,11 @@ Next:
   -closed, public economy
     -price mechanism: (see the commit in which the todo list was detailed
     for the subsidy/taxation)
-      -at some point, change this.priceMechanism to this.whichPriceMechanism
-      -write integraion tests; edit EconomyModel
+      -go through EconomyModel constructor and erase unused variables
+      -write integraion tests (see possible events for ideas on
+      what to test); edit EconomyModel
+        -price ceiling
+        -price floor
       -possible events:
         -the magnitude of the price mechanism is updated
           -input-checking
@@ -23,6 +26,10 @@ Next:
         -total revenue
         -welfare
       -edit TextView
+      -if user turns off price mechanism (with the drop-down box),
+      set it to 0
+        -the price mechanism line should be erased
+        -etc.
     -make sure getTotalRevenue() is correct
       -always use quantity demanded? or should the minimum
       of QD and QS be used?
@@ -47,11 +54,13 @@ Next:
         [-deadweight loss (in an unexpected area)]
         -number of imports (given)
         -tariff revenue N/A
--domestic revenue shouldn't include tax revenue
--does getTaxRevenue() still need the use of min?
-  -in fact, I might be going about it wrong. It shouldn't necessarily
-  be the minimum. (e.g. If supply is taxed, then government makes
-  tax revenue off of how much is produced (i.e. qs), even if qd is lower.)
+-lingering concerns
+  -domestic revenue shouldn't include tax revenue
+  -does getTaxRevenue() still need the use of min?
+    -in fact, I might be going about it wrong. It shouldn't necessarily
+    be the minimum. (e.g. If supply is taxed, then government makes
+    tax revenue off of how much is produced (i.e. qs), even if qd is lower.)
+  -display tax revenue
 -hi-liting controller
   -point value is highlighted (e.g. quantity demanded): perhaps show
   with a line on the canvas

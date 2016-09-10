@@ -129,8 +129,11 @@
               <option value="ceiling">Ceiling</option>
             </select></p>
             <div data-ng-show="priceMechanism != 'none'">
-              <p>How Much: <input type="number" name="p-mech" value=0
-                id="new-pm-amount" /></p>
+              <p>How Much:
+                <span id="pm-amount"></span>
+                <input type="number" name="p-mech" value=0
+                  id="new-pm-amount" />
+              </p>
               <input type="button" value="Update" id="b-price-mech-amount" />
             </div>
           </div> <!-- price mechanism info -->
