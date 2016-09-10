@@ -24,8 +24,6 @@ function EconomyModel(supplyDataString, demandDataString) {
   this.qd; // quantity demanded (by domestic demanders) value
   this.qs; // quantity supplied (by domestic suppliers) value
   this.wp; // world price
-  this.whatTaxed; // should have a Graph constant value
-  this.whatSubsidized; // should have a Graph constant value
   
   // Price mechanism stuff
   this.whichPm; // which price mechanism
@@ -36,6 +34,8 @@ function EconomyModel(supplyDataString, demandDataString) {
   this.mDemandSubsidy = 0;
   this.mSupplyTax = 0;
   this.mSupplySubsidy = 0;
+  // this.whatTaxed; // should have a Graph constant value
+  // this.whatSubsidized; // should have a Graph constant value
   
   this.mNumRectangles = 100000; // usually for Riemann sums
   
@@ -176,9 +176,11 @@ EconomyModel.prototype = {
   /**
    * Lumps together the operations associated with setting a new
    * price mechanism.
+   * @param whichPriceMechanism should be a Graph constant
+   * @param amount
    */
-  setPriceMechanismAmount : function(newPm) {
-    this.pmAmount = newPm;
+  setPriceMechanismAmount : function(whichPriceMechanism, amount) {
+    this.pmAmount = amount;
   }, // setPriceMechanismAmount()
   
   /**

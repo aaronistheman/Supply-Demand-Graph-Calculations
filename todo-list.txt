@@ -10,11 +10,18 @@ Next:
   -closed, public economy
     -price mechanism: (see the commit in which the todo list was detailed
     for the subsidy/taxation)
-      -go through EconomyModel constructor and erase unused variables
       -write integraion tests (see possible events for ideas on
       what to test); edit EconomyModel
-        -price ceiling
-        -price floor
+        -NOT DONE YET
+          -price floor's magnitude updated
+          -price mechanism's type is changed
+            -floor to ceiling
+            -ceiling to floor
+          -price mechanism's type is cancelled
+          -reject invalid price mechanism (should this be unit test)
+          -simple mixes, perhaps with at least one different kind of graph
+        -DONE
+          -price ceiling's magnitude updated
       -possible events:
         -the magnitude of the price mechanism is updated
           -input-checking
@@ -55,6 +62,7 @@ Next:
         -number of imports (given)
         -tariff revenue N/A
 -lingering concerns
+  -move constants.js into utility, since controller uses it
   -domestic revenue shouldn't include tax revenue
   -does getTaxRevenue() still need the use of min?
     -in fact, I might be going about it wrong. It shouldn't necessarily
