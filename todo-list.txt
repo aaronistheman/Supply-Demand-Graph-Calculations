@@ -13,15 +13,15 @@ Next:
       -write integraion tests (see possible events for ideas on
       what to test); edit EconomyModel
         -NOT DONE YET
-          -price floor's magnitude updated
           -price mechanism's type is changed
             -floor to ceiling
             -ceiling to floor
           -price mechanism's type is cancelled
           -reject invalid price mechanism (should this be unit test)
-          -simple mixes, perhaps with at least one different kind of graph
+          -simple mixes? perhaps with at least one different kind of graph
         -DONE
           -price ceiling's magnitude updated
+          -price floor's magnitude updated
       -possible events:
         -the magnitude of the price mechanism is updated
           -input-checking
