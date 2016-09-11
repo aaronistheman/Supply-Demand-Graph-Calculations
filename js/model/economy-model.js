@@ -322,7 +322,7 @@ EconomyModel.prototype = {
    * @return a Price object, since consumer surplus is in dollars
    */
   getConsumerSurplus : function() {
-    var range = this.qd - this.mLowestQuantity;
+    var range = Math.min(this.qd, this.qs) - this.mLowestQuantity;
     var step = range / this.mNumRectangles;
     var answer = 0;
     var effectivePrice = this.mGetEffectiveWelfarePrice();
@@ -348,7 +348,7 @@ EconomyModel.prototype = {
    * @return a Price object, since producer surplus is in dollars
    */
   getProducerSurplus : function() {
-    var range = this.qs - this.mLowestQuantity;
+    var range = Math.min(this.qd, this.qs) - this.mLowestQuantity;
     var step = range / this.mNumRectangles;
     var answer = 0;
     var effectivePrice = this.mGetEffectiveWelfarePrice();
@@ -710,8 +710,12 @@ EconomyModel.prototype = {
    * measurements
    */
   mGetEffectiveWelfarePrice : function() {
+    // There can't be both world price and price mechanism simultaneously,
+    // so can handle the two cases separately
     if (this.wp)
       return this.wp
+    else if (this.pmAmount)
+      return this.pmAmount;
     else
       return this.ep
   }, // mGetEffectiveWelfarePrice()

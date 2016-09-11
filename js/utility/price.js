@@ -32,6 +32,10 @@ Price.prototype = {
   forDisplay : function() {
     return "$" + this.mVal.toFixed(2);
   },
+  
+  getForTesting : function() {
+    return Price.getForTesting(this.mVal);
+  },
 };
 
 /**
@@ -47,4 +51,12 @@ Price.get = function(unroundedPriceValue) {
  */
 Price.forDisplay = function(unroundedPriceValue) {
   return "$" + unroundedPriceValue.toFixed(2);
+};
+
+/**
+ * @return value of unroundedPriceValue rounded in a way that avoids
+ * rounding errors during unit tests
+ */
+Price.getForTesting = function(unroundedPriceValue) {
+  return Math.round(unroundedPriceValue * 1000) / 1000;
 };

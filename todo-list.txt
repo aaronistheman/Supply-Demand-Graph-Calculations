@@ -10,10 +10,6 @@ Next:
   -closed, public economy
     -price mechanism: (see the commit in which the todo list was detailed
     for the subsidy/taxation)
-      -make the methods involved in the integration tests incorporate
-      the price mechanisms
-        -consumer surplus
-        -producer surplus
       -implement now (to pass tests)
         -TBA
       -write integraion tests; edit EconomyModel
@@ -22,7 +18,6 @@ Next:
             -floor to ceiling
             -ceiling to floor
           -price mechanism's type is cancelled
-          -reject invalid price mechanism (should this be unit test)
           -simple mixes? perhaps with at least one different kind of graph
         -DONE
           -price ceiling's magnitude updated

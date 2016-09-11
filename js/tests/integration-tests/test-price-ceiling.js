@@ -48,8 +48,8 @@ QUnit.module("price ceiling's amount updated");
     var handCalculatedCS = (45 - 30) * (0.75 - 0.45)
       + ((45 - 30) * (0.90 - 0.75) / 2);
     
-    assert.deepEqual(data.getConsumerSurplus().get(),
-      Price.get(handCalculatedCS));
+    assert.deepEqual(data.getConsumerSurplus().getForTesting(),
+      Price.getForTesting(handCalculatedCS));
   });
   
   QUnit.test("correct producer surplus", function(assert) {
@@ -58,6 +58,6 @@ QUnit.module("price ceiling's amount updated");
     
     var handCalculatedPS = (45 - 30) * (0.45 - 0.30) / 2;
     
-    assert.deepEqual(data.getProducerSurplus().get(),
-      Price.get(handCalculatedPS));
+    assert.deepEqual(data.getProducerSurplus().getForTesting(),
+      Price.getForTesting(handCalculatedPS));
   });
