@@ -29,6 +29,11 @@ SettingsController.prototype = {
         economyModel, textView, graphView, this);
     });
     
+    $("#public-private-checkbox").change(function() {
+      SettingsController.publicizingOrPrivatizingEconomyHandler(
+        economyModel, textView, graphView, this);
+    });
+    
     $("#b-tax-amount").click(function() {
       SettingsController.taxAmountChangeHandler(
         economyModel, textView, graphView);
@@ -112,6 +117,25 @@ SettingsController.closingOrOpeningEconomyHandler =
   }
 }; // closingOrOpeningEconomyHandler()
 
+/**
+ * @param economyModel instance of EconomyModel
+ * @param textView instance of TextView
+ * @param graphView instance of GraphView
+ * @param checkbox the HTML checkbox element that was acted on
+ */
+SettingsController.publicizingOrPrivatizingEconomyHandler =
+  function(economyModel, textView, graphView, checkbox) {
+  if (checkbox.checked) { // if checked the box to publicize economy
+    // nothing for now
+  }
+  else { // if user desires to privatize economy
+    cancelClosedPublicEconomy(economyModel, textView);
+    
+    textView.updateAll(economyModel);
+    graphView.updateAll(economyModel);
+  }
+}; // closingOrOpeningEconomyHandler()
+
 function cancelClosedPublicEconomy(economyModel, textView) {
   // Cancel price mechanism
   economyModel.switchPriceMechanism(Mechanism.None);
@@ -137,7 +161,6 @@ function cancelClosedPublicEconomy(economyModel, textView) {
  * @param economyModel instance of EconomyModel
  * @param textView instance of TextView
  * @param graphView instance of GraphView
- * @param checkbox the HTML checkbox element that was acted on
  */
 SettingsController.taxAmountChangeHandler =
   function(economyModel, textView, graphView) {
@@ -158,7 +181,6 @@ SettingsController.taxAmountChangeHandler =
  * @param economyModel instance of EconomyModel
  * @param textView instance of TextView
  * @param graphView instance of GraphView
- * @param checkbox the HTML checkbox element that was acted on
  */
 SettingsController.subsidyAmountChangeHandler =
   function(economyModel, textView, graphView) {
