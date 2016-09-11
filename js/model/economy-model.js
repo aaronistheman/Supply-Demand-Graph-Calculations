@@ -24,18 +24,18 @@ function EconomyModel(supplyDataString, demandDataString) {
   this.qd; // quantity demanded (by domestic demanders) value
   this.qs; // quantity supplied (by domestic suppliers) value
   this.wp; // world price
-  this.taxAmount;
-  this.whatTaxed; // should have a Graph constant value
-  this.subsidyAmount;
-  this.whatSubsidized; // should have a Graph constant value
-  this.priceMechanism;
-  this.pmAmount; // price mechanism's amount
+  
+  // Price mechanism stuff
+  this.whichPm = Mechanism.None; // which price mechanism
+  this.pmAmount = 0; // price mechanism's amount
   
   // Tax/subsidy settings
   this.mDemandTax = 0;
   this.mDemandSubsidy = 0;
   this.mSupplyTax = 0;
   this.mSupplySubsidy = 0;
+  // this.whatTaxed; // should have a Graph constant value
+  // this.whatSubsidized; // should have a Graph constant value
   
   this.mNumRectangles = 100000; // usually for Riemann sums
   
@@ -173,6 +173,88 @@ EconomyModel.prototype = {
     }
   }, // setWp()
   
+  mIsValidPriceMechanismAmount : function(whichPriceMechanism, amount) {
+    if (amount <= 0) {
+      alert("User Error: Price mechanism amount must be positive number");
+      return false;
+    }
+    else if (whichPriceMechanism == Mechanism.Ceiling) {
+      if (amount >= this.ep) {
+        alert("User Error: Price ceiling must be below equilibrium price");
+        return false;
+      }
+      else
+        return true;
+    }
+    else if (whichPriceMechanism == Mechanism.Floor) {
+      if (amount <= this.ep) {
+        alert("User Error: Price floor must be above equilibrium price");
+        return false;
+      }
+      else
+        return true;
+    }
+    else
+      alertAndThrowException("Invalid whichPriceMechanism value");
+  }, // mIsValidPriceMechanismAmount()
+  
+  /**
+   * Lumps together the operations associated with setting a new
+   * price mechanism.
+   * @param whichPriceMechanism should be a Graph constant
+   * @param amount
+   */
+  setPriceMechanismAmount : function(whichPriceMechanism, amount) {
+    if (this.wp)
+      alertAndThrowException("Can't set price mechanism if open economy");
+    
+    // if not valid input
+    if(!this.mIsValidPriceMechanismAmount(whichPriceMechanism, amount))
+      return;
+    
+    this.whichPm = whichPriceMechanism;
+    this.pmAmount = amount;
+    
+    this.mUpdateEquilibriumPoint();
+    if (this.whichPm == Mechanism.Ceiling) {
+      this.qs = Quantity.get(this.calculatePriceCeilingQs());
+      this.qd = Quantity.get(this.calculatePriceCeilingQd());
+    }
+    else { // price floor
+      this.qs = Quantity.get(this.calculatePriceFloorQs());
+      this.qd = Quantity.get(this.calculatePriceFloorQd());
+    }
+  }, // setPriceMechanismAmount()
+  
+  /**
+   * Switches the type of the price mechanism, while taking some
+   * measures to avoid leaving the user with an invalid price mechanism.
+   *
+   * @param newMechanism the price mechanism to switch to;
+   * should be a constant of the Mechanism object
+   */
+  switchPriceMechanism : function(newMechanism) {
+    // If the mechanism didn't really change, then this method shouldn't
+    // have been called
+    if (this.whichPm == newMechanism)
+      alertAndThrowException("switchPriceMechanism() called when "
+        + "no switch occurred");
+      
+    switch (newMechanism) {
+    case Mechanism.Ceiling:
+    case Mechanism.Floor:
+    case Mechanism.None:
+      this.whichPm = newMechanism;
+      this.pmAmount = 0; // otherwise, the user could end up with an invalid
+                         // new price mechanism
+      this.qs = this.qd = this.eq; // since price mechanism is disabled
+                                   // (although the type is switched)
+      break;
+    default:
+      alertAndThrowException("Invalid newMechanism in switchPriceMechanism()");
+    }
+  }, // switchPriceMechanism()
+  
   /**
    * @pre economy is closed
    * @param whichGraph should be a Graph constant
@@ -259,9 +341,13 @@ EconomyModel.prototype = {
    * @return instance of Price
    */
   getTotalRevenue : function() {
-    // I know this isn't right and will eventually
-    // fix it; TR = price x min(qd, qs) (what's "price"?)
-    return new Price(Math.min(this.qs, this.qd) * this.ep);
+    var priceToUse;
+    if (this.pmAmount)
+      priceToUse = this.pmAmount;
+    else
+      priceToUse = this.ep;
+    
+    return new Price(Math.min(this.qs, this.qd) * priceToUse);
   },
   
   /**
@@ -274,7 +360,7 @@ EconomyModel.prototype = {
    * @return a Price object, since consumer surplus is in dollars
    */
   getConsumerSurplus : function() {
-    var range = this.qd - this.mLowestQuantity;
+    var range = Math.min(this.qd, this.qs) - this.mLowestQuantity;
     var step = range / this.mNumRectangles;
     var answer = 0;
     var effectivePrice = this.mGetEffectiveWelfarePrice();
@@ -300,7 +386,7 @@ EconomyModel.prototype = {
    * @return a Price object, since producer surplus is in dollars
    */
   getProducerSurplus : function() {
-    var range = this.qs - this.mLowestQuantity;
+    var range = Math.min(this.qd, this.qs) - this.mLowestQuantity;
     var step = range / this.mNumRectangles;
     var answer = 0;
     var effectivePrice = this.mGetEffectiveWelfarePrice();
@@ -500,14 +586,75 @@ EconomyModel.prototype = {
   },
   */
   
+  calculatePriceCeilingQs : function() {
+    if (!this.pmAmount)
+      alertAndThrowException("Must be a price mechanism");
+    
+    // if price ceiling is so low that extrapolation on the user's
+    // given supply graph data would occur
+    if (this.pmAmount < this.mSPoints[0].p())
+      return undefined;
+    
+    return this.mSupply.getQ(this.pmAmount, this.eq,
+      this.mSPoints[0].q(), this.mNumRectangles,
+      function(currentPrice, goalPrice) { return currentPrice > goalPrice; });
+  }, // calculatePriceCeilingQs
+  
+  calculatePriceCeilingQd : function() {
+    if (!this.pmAmount)
+      alertAndThrowException("Must be a price mechanism");
+    
+    // if price ceiling is so low that extrapolation on the user's
+    // given demand graph data would occur
+    if (this.pmAmount < this.mDPoints[this.mDPoints.length - 1].p())
+      return undefined;
+    
+    return this.mDemand.getQ(this.pmAmount, this.eq,
+      this.mDPoints[this.mDPoints.length - 1].q(), this.mNumRectangles,
+      function(currentPrice, goalPrice) { return currentPrice > goalPrice; });
+  }, // calculatePriceCeilingQd()
+  
+  calculatePriceFloorQs : function() {
+    if (!this.pmAmount)
+      alertAndThrowException("Must be a price mechanism");
+    
+    // if price floor is so high that extrapolation on the user's
+    // given supply graph data would occur
+    if (this.pmAmount > this.mSPoints[this.mSPoints.length - 1].p())
+      return undefined;
+    
+    return this.mSupply.getQ(this.pmAmount, this.eq,
+      this.mSPoints[this.mSPoints.length - 1].q(), this.mNumRectangles,
+      function(currentPrice, goalPrice) { return currentPrice < goalPrice; });
+      
+  }, // calculatePriceFloorQs()
+  
+  calculatePriceFloorQd : function() {
+    if (!this.pmAmount)
+      alertAndThrowException("Must be a price mechanism");
+    
+    // if price floor is so high that extrapolation on the user's
+    // given demand graph data would occur
+    if (this.pmAmount > this.mDPoints[0].p())
+      return undefined;
+    
+    return this.mDemand.getQ(this.pmAmount, this.eq,
+      this.mDPoints[0].q(), this.mNumRectangles,
+      function(currentPrice, goalPrice) { return currentPrice < goalPrice; });
+  }, // calculatePriceFloorQd()
+  
   /**
    * @return the quantity demanded at the current world price
    */
   calculateWorldQd : function() {
+    // if world price would cause extrapolation beyond user's
+    // given demand graph data
     if (this.wp < this.mDPoints[this.mDPoints.length - 1].p()) {
       throw "fail";
     }
 
+    // Set up a traversal from the equilibrium quantity to last
+    // demand quantity
     var range = this.mDPoints[this.mDPoints.length - 1].q() - this.eq;
     var step = range / this.mNumRectangles;
     var q = this.eq;
@@ -529,10 +676,13 @@ EconomyModel.prototype = {
    * @return the quantity supplied at the current world price
    */
   calculateWorldQs : function() {
+    // if world price would cause extrapolation beyond user's
+    // given supply graph data
     if (this.wp < this.mSPoints[0].p()) {
       throw "fail";
     }
 
+    // Set up a traversal from first supply quantity to equilibrium quantity
     var range = this.eq - this.mSPoints[0].q();
     var step = range / this.mNumRectangles;
     var q = this.eq;
@@ -598,8 +748,12 @@ EconomyModel.prototype = {
    * measurements
    */
   mGetEffectiveWelfarePrice : function() {
+    // There can't be both world price and price mechanism simultaneously,
+    // so can handle the two cases separately
     if (this.wp)
       return this.wp
+    else if (this.pmAmount)
+      return this.pmAmount;
     else
       return this.ep
   }, // mGetEffectiveWelfarePrice()

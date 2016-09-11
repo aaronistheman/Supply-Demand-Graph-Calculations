@@ -1,36 +1,22 @@
 Contents:
 -Next
--Eventually
 -Considerable
 -Notes on Testing
 -Notes on Deadweight Loss
-
-CONTINUE, BUT IGNORE DEADWEIGHT LOSS, SINCE IT CAUSES COMPLICATIONS;
-note this in readme; GO QUICK
 
 Next:
 -remaining calculations/actions:
   -open, private economy: DONE
   -closed, public economy
-    -price mechanism: (see the commit in which the todo list was detailed
-    for the subsidy/taxation)
-      -dashed line for where mechanism is
-      -floor or ceiling:
-        -recalculate (if equilibrium isn't reached):
-          -mark that equilibrium isn't reached
-          -total revenue
-          -welfare
-        -calculate
-          -deadweight loss
-    -make sure getTotalRevenue() is correct
-      -always use quantity demanded? or should the minimum
-      of QD and QS be used?
+    -more integration tests
+      -mixing price mechanism, tax, and/or subsidy
     -if user privatizes economy or opens economy; disable:
       -tax
       -subsidy
       -price mechanism
     -finishing touches
       -fix default controller values
+  -reorganize integration tests
   -open, public economy
     -tariff
       -recalculate:
@@ -46,11 +32,14 @@ Next:
         [-deadweight loss (in an unexpected area)]
         -number of imports (given)
         -tariff revenue N/A
--domestic revenue shouldn't include tax revenue
--does getTaxRevenue() still need the use of min?
-  -in fact, I might be going about it wrong. It shouldn't necessarily
-  be the minimum. (e.g. If supply is taxed, then government makes
-  tax revenue off of how much is produced (i.e. qs), even if qd is lower.)
+-lingering concerns
+  -move constants.js into utility, since controller uses it
+  -domestic revenue shouldn't include tax revenue
+  -does getTaxRevenue() still need the use of min?
+    -in fact, I might be going about it wrong. It shouldn't necessarily
+    be the minimum. (e.g. If supply is taxed, then government makes
+    tax revenue off of how much is produced (i.e. qs), even if qd is lower.)
+  -display tax revenue
 -hi-liting controller
   -point value is highlighted (e.g. quantity demanded): perhaps show
   with a line on the canvas
@@ -64,14 +53,9 @@ Next:
   -make sure correct state is shown if disequilibrium
   -when (if ever) to implement the other part of getEconomicSurplus()?
     -erase alert in it at some point
-  -describe the use of MVC in the readme
-
-Eventually:
--use AngularJS or plain JavaScript/jQuery to note errorneous text field
-inputs
-  -e.g. price floor or ceiling has to matter
--have workarounds for calculations that reach the boundaries of the
-supply or demand points
+  -readme
+    -describe the use of MVC
+    -describe omission of deadweight loss
 
 Considerable:
 -should there be a version of update() that only updates
@@ -80,6 +64,9 @@ compared to the time to make it work
   -ideas
     -"update filters"
 -figure out if where I initially set up qd and qs is best
+-have workarounds for calculations that reach the boundaries of the
+supply or demand points
+  -if this is still an issue, make a test to reveal it
 -have some context wrapper custom type so I don't have to keep
 putting the width and height in
 -graph input read from a file

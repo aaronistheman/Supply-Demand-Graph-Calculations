@@ -37,11 +37,16 @@ GraphView.prototype = {
     
     this.mIndicatorCanvas = $("#graph-indicators")[0];
     this.mIndicatorCtx = this.mIndicatorCanvas.getContext('2d');
-    GraphView.applyGraphContextSettings(this.mIndicatorCanvas, this.mIndicatorCtx);
+    GraphView.applyGraphContextSettings(this.mIndicatorCanvas,
+      this.mIndicatorCtx);
     
     this.mWpCanvas = $("#wp-canvas")[0];
     this.mWpCtx = this.mWpCanvas.getContext('2d');
     GraphView.applyGraphContextSettings(this.mWpCanvas, this.mWpCtx);
+    
+    this.mPmCanvas = $("#pm-canvas")[0];
+    this.mPmCtx = this.mPmCanvas.getContext('2d');
+    GraphView.applyGraphContextSettings(this.mPmCanvas, this.mPmCtx);
   }, // mStoreElements()
   
   /**
@@ -56,6 +61,7 @@ GraphView.prototype = {
     
     // Emphasize certain values with solid line
     this.redrawWorldPriceLine(data.wp);
+    this.redrawPriceMechanismLine(data.pmAmount);
     
     // Emphasize certain values with dashed line
     GraphView.clearCanvas(this.mIndicatorCanvas, this.mIndicatorCtx);
@@ -117,6 +123,22 @@ GraphView.prototype = {
     if (verticalOffset != 0) {
       this.mDrawGraph(demand.getPoints(), this.mDemandCanvas,
         this.mDemandCtx, "blue", verticalOffset);
+    }
+  },
+  
+  /**
+   * Services as erased method if price mechanism is undefined
+   * @param pm value of the price mechanism
+   */
+  redrawPriceMechanismLine : function(pm) {
+    GraphView.clearCanvas(this.mPmCanvas, this.mPmCtx);
+  
+    if (pm) {
+      var ctx = this.mPmCtx;
+      var y = pm * this.mPmCanvas.height;
+      ctx.moveTo(0, y);
+      ctx.lineTo(GraphView.maxX * this.mPmCanvas.width, y);
+      ctx.stroke();
     }
   },
   

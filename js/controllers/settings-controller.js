@@ -23,10 +23,12 @@ SettingsController.prototype = {
       SettingsController.newWorldPriceHandler(
         economyModel, textView, graphView);
     });
+    
     $("#closed-open-checkbox").change(function() {
       SettingsController.closingEconomyHandler(
         economyModel, textView, graphView, this);
     });
+    
     $("#b-tax-amount").click(function() {
       SettingsController.taxAmountChangeHandler(
         economyModel, textView, graphView);
@@ -41,6 +43,15 @@ SettingsController.prototype = {
     });
     $("#what-subsidized").change(function() {
       SettingsController.whatSubsidizedChangeHandler(
+        economyModel, textView, graphView);
+    });
+    
+    $("#price-mech-type").change(function() {
+      SettingsController.priceMechanismTypeChanged(
+        economyModel, textView, graphView);
+    });
+    $("#b-price-mech-amount").click(function() {
+      SettingsController.priceMechanismAmountChanged(
         economyModel, textView, graphView);
     });
   },
@@ -162,3 +173,33 @@ SettingsController.whatSubsidizedChangeHandler =
   textView.updateAll(economyModel);
   graphView.updateAll(economyModel);
 };
+
+/**
+ * @param economyModel instance of EconomyModel
+ * @param textView instance of TextView
+ * @param graphView instance of GraphView
+ */
+SettingsController.priceMechanismTypeChanged =
+  function(economyModel, textView, graphView) {
+  var whichPm = $("#price-mech-type").val();
+  economyModel.switchPriceMechanism(toMechanism(whichPm));
+  
+  textView.updateAll(economyModel);
+  graphView.updateAll(economyModel);
+};
+
+/**
+ * @param economyModel instance of EconomyModel
+ * @param textView instance of TextView
+ * @param graphView instance of GraphView
+ */
+SettingsController.priceMechanismAmountChanged =
+  function(economyModel, textView, graphView) {
+  var whichPm = $("#price-mech-type").val();
+  var newPm = parseFloat($("#new-pm-amount").val());
+  economyModel.setPriceMechanismAmount(toMechanism(whichPm), newPm);
+  
+  textView.updateAll(economyModel);
+  graphView.updateAll(economyModel);
+};
+

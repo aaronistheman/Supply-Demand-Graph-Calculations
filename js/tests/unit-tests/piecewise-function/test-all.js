@@ -46,6 +46,74 @@ QUnit.module(currentTestedFile +
   });
 
 QUnit.module(currentTestedFile +
+  ", PiecewiseFunction.prototype.getQ()");
+  
+  QUnit.test("correct value going forward", function(assert) {
+    var pf = new PiecewiseFunction();
+    pf.insert(new Point(3, 0.30));
+    pf.insert(new Point(5, 0.50));
+    pf.insert(new Point(9, 0.90));
+    
+    var quantity = pf.getQ(0.80, 6, 9, 500,
+      function(a,b) { return a < b; });
+    assert.deepEqual(Quantity.get(quantity), 8);
+  });
+  
+  QUnit.test("correct value going forward #2", function(assert) {
+    // zig-zagging function
+    var pf = new PiecewiseFunction();
+    pf.insert(new Point(2, 0.30));
+    pf.insert(new Point(4, 0.60));
+    pf.insert(new Point(6, 0.30));
+    pf.insert(new Point(8, 0.60));
+    pf.insert(new Point(10, 0.30));
+    pf.insert(new Point(12, 0.60));
+    pf.insert(new Point(14, 0.30));
+    
+    var quantity = pf.getQ(0.45, 4, 12, 500,
+      function(a,b) { return a > b; }); 
+    assert.deepEqual(Quantity.get(quantity), 5);
+  });
+  
+  QUnit.test("correct value going backward", function(assert) {
+    var pf = new PiecewiseFunction();
+    pf.insert(new Point(3, 0.30));
+    pf.insert(new Point(7, 0.70));
+    pf.insert(new Point(9, 0.90));
+    
+    var quantity = pf.getQ(0.40, 6, 3, 500,
+      function(a,b) { return a > b; });
+    assert.deepEqual(Quantity.get(quantity), 4);
+  });
+  
+  QUnit.test("correct value going backward #2", function(assert) {
+    // zig-zagging function
+    var pf = new PiecewiseFunction();
+    pf.insert(new Point(2, 0.30));
+    pf.insert(new Point(4, 0.60));
+    pf.insert(new Point(6, 0.30));
+    pf.insert(new Point(8, 0.60));
+    pf.insert(new Point(10, 0.30));
+    pf.insert(new Point(12, 0.60));
+    pf.insert(new Point(14, 0.30));
+    
+    var quantity = pf.getQ(0.45, 10, 4, 500,
+      function(a,b) { return a < b; }); 
+    assert.deepEqual(Quantity.get(quantity), 9);
+  });
+  
+  QUnit.test("correct value going backward #3", function(assert) {
+    var pf = new PiecewiseFunction();
+    pf.insert(new Point(30, 0.90));
+    pf.insert(new Point(60, 0.60));
+    pf.insert(new Point(90, 0.30));
+    
+    var quantity = pf.getQ(0.75, 60, 30, 500,
+      function(a,b) { return a < b; });
+    assert.deepEqual(Quantity.get(quantity), 45);
+  });
+
+QUnit.module(currentTestedFile +
   ", PiecewiseFunction.prototype.insert()");
 
   QUnit.test("error-checking works", function(assert) {
