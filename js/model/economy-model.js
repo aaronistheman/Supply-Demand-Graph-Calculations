@@ -540,7 +540,17 @@ EconomyModel.prototype = {
   */
   
   calculatePriceCeilingQs : function() {
-    return this.qs; // to be implemented correctly
+    if (!this.pmAmount)
+      alertAndThrowException("Must be a price mechanism");
+    
+    // if price ceiling is so low that extrapolation on the user's
+    // given supply graph data would occur
+    if (this.pmAmount < this.mSPoints[0].p())
+      return undefined;
+    
+    return this.mSupply.getQ(this.pmAmount, this.eq,
+      this.mSPoints[0].q(), this.mNumRectangles,
+      function(currentPrice, goalPrice) { return currentPrice > goalPrice; });
   }, // calculatePriceCeilingQs
   
   calculatePriceCeilingQd : function() {
@@ -554,7 +564,7 @@ EconomyModel.prototype = {
     
     return this.mDemand.getQ(this.pmAmount, this.eq,
       this.mDPoints[this.mDPoints.length - 1].q(), this.mNumRectangles,
-      function(a, b) { return a > b; });
+      function(currentPrice, goalPrice) { return currentPrice > goalPrice; });
   }, // calculatePriceCeilingQd()
   
   /**
