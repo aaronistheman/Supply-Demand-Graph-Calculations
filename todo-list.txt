@@ -12,6 +12,13 @@ Next:
     for the subsidy/taxation)
       -make the methods involved in the integration tests incorporate
       the price mechanisms
+        -quantity demanded/supplied, correct state
+          -need a method to calculate QS and QD; ideas:
+            -THIS ONE: specialized methods (like calculateWorldQD/QS())
+            -generalize the aforementioned world price methods
+        -domestic producers' revenue
+        -consumer surplus
+        -producer surplus
       -implement now (to pass tests)
         -TBA
       -write integraion tests; edit EconomyModel
@@ -37,6 +44,8 @@ Next:
     -make sure getTotalRevenue() is correct
       -always use quantity demanded? or should the minimum
       of QD and QS be used?
+    -more integration tests
+      -mixing price mechanism, tax, and/or subsidy
     -if user privatizes economy or opens economy; disable:
       -tax
       -subsidy

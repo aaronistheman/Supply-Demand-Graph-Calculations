@@ -37,7 +37,7 @@ QUnit.module("price floor's amount updated");
     var qd = 45;
     data.setPriceMechanismAmount(Mechanism.Floor, priceFloor);
     
-    assert.deepEqual(data.getTotalRevenue().get,
+    assert.deepEqual(data.getTotalRevenue().get(),
       Price.get(priceFloor * qd));
   });
   

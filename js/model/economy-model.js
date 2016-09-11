@@ -207,7 +207,9 @@ EconomyModel.prototype = {
     this.pmAmount = amount;
     
     this.mUpdateEquilibriumPoint();
-    this.qs = this.qd = this.eq;
+    this.qs = Quantity.get(this.calculatePriceCeilingQs());
+    this.qd = Quantity.get(this.calculatePriceCeilingQd());
+    // this.qs = this.qd = this.eq;
   }, // setPriceMechanismAmount()
   
   /**
@@ -536,6 +538,14 @@ EconomyModel.prototype = {
       this.mDemand.getP(this.mHighestQuantity)));
   },
   */
+  
+  calculatePriceCeilingQs : function() {
+    return this.qs; // to be implemented correctly
+  },
+  
+  calculatePriceCeilingQd : function() {
+    return this.qd; // to be implemented correctly
+  },
   
   /**
    * @return the quantity demanded at the current world price
