@@ -303,9 +303,13 @@ EconomyModel.prototype = {
    * @return instance of Price
    */
   getTotalRevenue : function() {
-    // I know this isn't right and will eventually
-    // fix it; TR = price x min(qd, qs) (what's "price"?)
-    return new Price(Math.min(this.qs, this.qd) * this.ep);
+    var priceToUse;
+    if (this.pmAmount)
+      priceToUse = this.pmAmount;
+    else
+      priceToUse = this.ep;
+    
+    return new Price(Math.min(this.qs, this.qd) * priceToUse);
   },
   
   /**

@@ -12,7 +12,6 @@ Next:
     for the subsidy/taxation)
       -make the methods involved in the integration tests incorporate
       the price mechanisms
-        -domestic producers' revenue
         -consumer surplus
         -producer surplus
       -implement now (to pass tests)
