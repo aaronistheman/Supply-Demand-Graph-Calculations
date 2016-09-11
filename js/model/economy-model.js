@@ -174,10 +174,26 @@ EconomyModel.prototype = {
   }, // setWp()
   
   mIsValidPriceMechanismAmount : function(whichPriceMechanism, amount) {
-    if (whichPriceMechanism == Mechanism.Ceiling)
-      return amount < this.ep;
-    else if (whichPriceMechanism == Mechanism.Floor)
-      return amount > this.ep;
+    if (amount <= 0) {
+      alert("User Error: Price mechanism amount must be positive number");
+      return false;
+    }
+    else if (whichPriceMechanism == Mechanism.Ceiling) {
+      if (amount >= this.ep) {
+        alert("User Error: Price ceiling must be below equilibrium price");
+        return false;
+      }
+      else
+        return true;
+    }
+    else if (whichPriceMechanism == Mechanism.Floor) {
+      if (amount <= this.ep) {
+        alert("User Error: Price floor must be above equilibrium price");
+        return false;
+      }
+      else
+        return true;
+    }
     else
       alertAndThrowException("Invalid whichPriceMechanism value");
   }, // mIsValidPriceMechanismAmount()
@@ -192,16 +208,9 @@ EconomyModel.prototype = {
     if (this.wp)
       alertAndThrowException("Can't set price mechanism if open economy");
     
-    if(!this.mIsValidPriceMechanismAmount(whichPriceMechanism, amount)) {
-      if (whichPriceMechanism == Mechanism.Ceiling)
-        alert("User Error: Price ceiling must be below equilibrium price");
-      else if (whichPriceMechanism == Mechanism.Floor)
-        alert("User Error: Price floor must be above equilibrium price");
-      else
-        alertAndThrowException("Invalid whichPriceMechanism value");
-      
+    // if not valid input
+    if(!this.mIsValidPriceMechanismAmount(whichPriceMechanism, amount))
       return;
-    } // if not valid input
     
     this.whichPm = whichPriceMechanism;
     this.pmAmount = amount;
