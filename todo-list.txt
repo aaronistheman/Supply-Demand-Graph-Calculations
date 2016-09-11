@@ -8,12 +8,11 @@ Next:
 -remaining calculations/actions:
   -open, private economy: DONE
   -closed, public economy
-    -more integration tests
-      -mixing price mechanism, tax, and/or subsidy
     -if user privatizes economy or opens economy; disable:
       -tax
       -subsidy
       -price mechanism
+    -perhaps don't allow both tax/subsidy and price mechanism
     -finishing touches
       -fix default controller values
   -open, public economy
@@ -43,6 +42,10 @@ Next:
   -point value is highlighted (e.g. quantity demanded): perhaps show
   with a line on the canvas
   -area value is highlighted (e.g. tax revenue): color the area
+-fix (or don't fix and mention in readme or somewhere)
+  -mixing price mechanism, tax, and/or subsidy
+    -e.g. tax supply 0.10, subsidy demand 0.30, and price ceiling 0.65,
+    then look at quantity demanded
 -end (also see "Eventually" section)
   -where to say what industry it is?
   -make sure these are done
