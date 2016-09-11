@@ -5,6 +5,8 @@ Contents:
 -Notes on Deadweight Loss
 
 Next:
+-ERROR: subsidy is backwards (e.g. if is set to demand, is really a subsidy
+on supply)
 -remaining calculations/actions:
   -open, private economy: DONE
   -closed, public economy
