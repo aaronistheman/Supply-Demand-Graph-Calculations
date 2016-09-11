@@ -11,20 +11,22 @@ Next:
     -price mechanism: (see the commit in which the todo list was detailed
     for the subsidy/taxation)
       -implement now (to pass tests)
-        -TBA
+        -switchPriceMechanism()
+          -implementation
+            -set price mechanism amount to zero to avoid invalid amount
+          -if works, then
+            -the price mechanism line should be erased
       -write integraion tests; edit EconomyModel
         -NOT DONE YET
-          -price mechanism's type is changed
-            -floor to ceiling
-            -ceiling to floor
           -price mechanism's type is cancelled
           -simple mixes? perhaps with at least one different kind of graph
         -DONE
           -price ceiling's magnitude updated
           -price floor's magnitude updated
+          -price mechanism's type is changed (both cases set amount to zero)
+            -floor to ceiling
+            -ceiling to floor
       -implement after writing tests
-        -the kind of the price mechanism is changed
-          -set price mechanism amount to zero to avoid invalid amount
         -price mechanism is cancelled
           -if user turns off price mechanism (with the drop-down box),
           set it to 0

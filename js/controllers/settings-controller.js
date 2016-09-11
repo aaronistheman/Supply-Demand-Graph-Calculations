@@ -181,9 +181,7 @@ SettingsController.whatSubsidizedChangeHandler =
  */
 SettingsController.priceMechanismTypeChanged =
   function(economyModel, textView, graphView) {
-  // alert("Price mechanism type changed");
-      
-  // economyModel....();
+  economyModel.switchPriceMechanism();
   
   textView.updateAll(economyModel);
   graphView.updateAll(economyModel);

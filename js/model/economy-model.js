@@ -226,6 +226,10 @@ EconomyModel.prototype = {
     }
   }, // setPriceMechanismAmount()
   
+  switchPriceMechanism : function() {
+    // alert("switchPriceMechanism()");
+  },
+  
   /**
    * @pre economy is closed
    * @param whichGraph should be a Graph constant
