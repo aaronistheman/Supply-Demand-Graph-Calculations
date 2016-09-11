@@ -552,23 +552,9 @@ EconomyModel.prototype = {
     if (this.pmAmount < this.mDPoints[this.mDPoints.length - 1].p())
       return undefined;
     
-    // Set up a traversal from the equilibrium quantity to last
-    // demand quantity
-    var range = this.mDPoints[this.mDPoints.length - 1].q() - this.eq;
-    var step = range / this.mNumRectangles;
-    var q = this.eq; // starting quantity
-    var price = this.mDemand.getP(q); // starting price
-    
-    // Go forward from equilibrium point until price would become
-    // lower than price ceiling, at which point, should stop
-    // and return the current quantity
-    while (price > this.pmAmount) {
-      // advance
-      q += step;
-      price = this.mDemand.getP(q);
-    }
-    
-    return q;
+    return this.mDemand.getQ(this.pmAmount, this.eq,
+      this.mDPoints[this.mDPoints.length - 1].q(), this.mNumRectangles,
+      function(a, b) { return a > b; });
   }, // calculatePriceCeilingQd()
   
   /**

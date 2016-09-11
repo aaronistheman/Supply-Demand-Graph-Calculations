@@ -10,6 +10,7 @@ Next:
   -closed, public economy
     -price mechanism: (see the commit in which the todo list was detailed
     for the subsidy/taxation)
+      -apply getQ()
       -make the methods involved in the integration tests incorporate
       the price mechanisms
         -quantity demanded/supplied, correct state
