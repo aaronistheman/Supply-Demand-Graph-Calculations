@@ -58,6 +58,6 @@ QUnit.module("price ceiling's amount updated");
     
     var handCalculatedPS = (45 - 30) * (0.45 - 0.30) / 2;
     
-    assert.deepEqual(data.getProducerSurplus.get(),
+    assert.deepEqual(data.getProducerSurplus().get(),
       Price.get(handCalculatedPS));
   });

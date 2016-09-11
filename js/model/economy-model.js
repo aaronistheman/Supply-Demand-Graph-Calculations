@@ -173,6 +173,15 @@ EconomyModel.prototype = {
     }
   }, // setWp()
   
+  mIsValidPriceMechanismAmount : function(whichPriceMechanism, amount) {
+    if (whichPriceMechanism == Mechanism.Ceiling)
+      return amount < this.ep;
+    else if (whichPriceMechanism == Mechanism.Floor)
+      return amount > this.ep;
+    else
+      alertAndThrowException("Invalid whichPriceMechanism value");
+  }, // mIsValidPriceMechanismAmount()
+  
   /**
    * Lumps together the operations associated with setting a new
    * price mechanism.
@@ -180,7 +189,25 @@ EconomyModel.prototype = {
    * @param amount
    */
   setPriceMechanismAmount : function(whichPriceMechanism, amount) {
+    if (this.wp)
+      alertAndThrowException("Can't set price mechanism if open economy");
+    
+    if(!this.mIsValidPriceMechanismAmount(whichPriceMechanism, amount)) {
+      if (whichPriceMechanism == Mechanism.Ceiling)
+        alert("User Error: Price ceiling must be below equilibrium price");
+      else if (whichPriceMechanism == Mechanism.Floor)
+        alert("User Error: Price floor must be above equilibrium price");
+      else
+        alertAndThrowException("Invalid whichPriceMechanism value");
+      
+      return;
+    } // if not valid input
+    
+    this.whichPm = whichPriceMechanism;
     this.pmAmount = amount;
+    
+    this.mUpdateEquilibriumPoint();
+    this.qs = this.qd = this.eq;
   }, // setPriceMechanismAmount()
   
   /**

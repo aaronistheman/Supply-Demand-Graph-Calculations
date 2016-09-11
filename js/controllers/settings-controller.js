@@ -196,8 +196,9 @@ SettingsController.priceMechanismTypeChanged =
  */
 SettingsController.priceMechanismAmountChanged =
   function(economyModel, textView, graphView) {
+  var whichPm = $("#price-mech-type").val();
   var newPm = parseFloat($("#new-pm-amount").val());
-  economyModel.setPriceMechanismAmount(undefined, newPm);
+  economyModel.setPriceMechanismAmount(toMechanism(whichPm), newPm);
   
   textView.updateAll(economyModel);
   graphView.updateAll(economyModel);

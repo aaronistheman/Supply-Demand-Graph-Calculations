@@ -10,8 +10,11 @@ Next:
   -closed, public economy
     -price mechanism: (see the commit in which the todo list was detailed
     for the subsidy/taxation)
-      -write integraion tests (see possible events for ideas on
-      what to test); edit EconomyModel
+      -make the methods involved in the integration tests incorporate
+      the price mechanisms
+      -implement now (to pass tests)
+        -TBA
+      -write integraion tests; edit EconomyModel
         -NOT DONE YET
           -price mechanism's type is changed
             -floor to ceiling
@@ -22,21 +25,15 @@ Next:
         -DONE
           -price ceiling's magnitude updated
           -price floor's magnitude updated
-      -possible events:
-        -the magnitude of the price mechanism is updated
-          -input-checking
-            -reject price mechanisms that don't matter
-              -would have to store the price mechanism type in EconomyModel
-        -the kind of the price mechanism is changed or cancelled
-      -recalculations (if equilibrium isn't reached):
-        -mark that equilibrium isn't reached
-        -total revenue
-        -welfare
+      -implement after writing tests
+        -the kind of the price mechanism is changed
+          -set price mechanism amount to zero to avoid invalid amount
+        -price mechanism is cancelled
+          -if user turns off price mechanism (with the drop-down box),
+          set it to 0
+            -the price mechanism line should be erased
+            -etc. (what else?)
       -edit TextView
-      -if user turns off price mechanism (with the drop-down box),
-      set it to 0
-        -the price mechanism line should be erased
-        -etc.
     -make sure getTotalRevenue() is correct
       -always use quantity demanded? or should the minimum
       of QD and QS be used?
