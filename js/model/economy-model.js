@@ -236,7 +236,7 @@ EconomyModel.prototype = {
   switchPriceMechanism : function(newMechanism) {
     // If the mechanism didn't really change, then this method shouldn't
     // have been called
-    if (this.whichPm == newMechanism)
+    if (this.whichPm != Mechanism.None && this.whichPm == newMechanism)
       alertAndThrowException("switchPriceMechanism() called when "
         + "no switch occurred");
       
