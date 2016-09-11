@@ -137,7 +137,7 @@ SettingsController.subsidyAmountChangeHandler =
   function(economyModel, textView, graphView) {
   // Determine what's being subsidized
   var whatSubsidized;
-  if (textView.getWhatTaxed() == "demand")
+  if (textView.getWhatSubsidized() == "demand")
     whatSubsidized = Graph.Demand;
   else
     whatSubsidized = Graph.Supply;
