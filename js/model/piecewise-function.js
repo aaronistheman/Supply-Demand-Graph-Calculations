@@ -78,14 +78,31 @@ PiecewiseFunction.prototype = {
    * quantity) instead of forwards (increasing quantity)
    * @param comparisonFunction is for deciding that the correct quantity
    * has been reached; the returned quantity is the quantity that
-   * happens to be being examined when comparisonFunciton returns false
+   * happens to be being examined when comparisonFunction returns false
    * for the first time; its first argument is the price of the currently
    * examined point, and its second argument is the given argument price
    * @return Quantity value
    */
-  getQ : function(price, startQ, endQ) {
-    return undefined;
-  },
+  getQ : function(price, startQ, endQ, numRectangles, comparisonFunction) {
+    // Set up a traversal from startQ to endQ
+    var range = endQ - startQ;
+    var step = range / numRectangles; // is negative if endQ < startQ
+    
+    // Set up start of the traversal
+    var currentQuantity = startQ;
+    var currentPrice = this.getP(currentQuantity); // start price
+    
+    // Traverse points from equilibrium point until reach the quantity
+    // that corresponds to the given price (that is, until the
+    // comparisonFunction returns false)
+    while (comparisonFunction(currentPrice, price)) {
+      // advance
+      currentQuantity += step;
+      currentPrice = this.getP(currentQuantity);
+    }
+    
+    return currentQuantity;
+  }, // getQ()
 
   /**
    * @param point instance of Point

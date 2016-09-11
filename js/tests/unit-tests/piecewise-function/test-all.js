@@ -56,7 +56,7 @@ QUnit.module(currentTestedFile +
     
     var quantity = pf.getQ(0.80, 6, 9, 500,
       function(a,b) { return a < b; });
-    assert.deepEqual(quantity, 8);
+    assert.deepEqual(Quantity.get(quantity), 8);
   });
   
   QUnit.test("correct value going forward #2", function(assert) {
@@ -72,7 +72,7 @@ QUnit.module(currentTestedFile +
     
     var quantity = pf.getQ(0.45, 4, 12, 500,
       function(a,b) { return a > b; }); 
-    assert.deepEqual(quantity, 5);
+    assert.deepEqual(Quantity.get(quantity), 5);
   });
   
   QUnit.test("correct value going backward", function(assert) {
@@ -83,7 +83,7 @@ QUnit.module(currentTestedFile +
     
     var quantity = pf.getQ(0.40, 6, 3, 500,
       function(a,b) { return a > b; });
-    assert.deepEqual(quantity, 4);
+    assert.deepEqual(Quantity.get(quantity), 4);
   });
   
   QUnit.test("correct value going backward #2", function(assert) {
@@ -99,7 +99,7 @@ QUnit.module(currentTestedFile +
     
     var quantity = pf.getQ(0.45, 10, 4, 500,
       function(a,b) { return a < b; }); 
-    assert.deepEqual(quantity, 9);
+    assert.deepEqual(Quantity.get(quantity), 9);
   });
 
 QUnit.module(currentTestedFile +
