@@ -7,9 +7,7 @@ Contents:
 Next:
 -remaining calculations/actions:
   -open, private economy: DONE
-  -closed, public economy
-    -finishing touches
-      -fix default controller values
+  -closed, public economy: DONE
   -open, public economy
     -tariff
       -recalculate:
