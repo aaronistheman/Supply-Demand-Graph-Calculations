@@ -16,7 +16,6 @@ Next:
       -price mechanism
     -finishing touches
       -fix default controller values
-  -reorganize integration tests
   -open, public economy
     -tariff
       -recalculate:
