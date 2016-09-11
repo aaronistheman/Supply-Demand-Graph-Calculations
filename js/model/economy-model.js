@@ -212,6 +212,7 @@ EconomyModel.prototype = {
       this.qd = Quantity.get(this.calculatePriceCeilingQd());
     }
     else { // price floor
+      this.qs = Quantity.get(this.calculatePriceFloorQs());
       this.qd = Quantity.get(this.calculatePriceFloorQd());
     }
   }, // setPriceMechanismAmount()
@@ -571,13 +572,28 @@ EconomyModel.prototype = {
       function(currentPrice, goalPrice) { return currentPrice > goalPrice; });
   }, // calculatePriceCeilingQd()
   
+  calculatePriceFloorQs : function() {
+    if (!this.pmAmount)
+      alertAndThrowException("Must be a price mechanism");
+    
+    // if price floor is so high that extrapolation on the user's
+    // given supply graph data would occur
+    if (this.pmAmount > this.mSPoints[this.mSPoints.length - 1].p())
+      return undefined;
+    
+    return this.mSupply.getQ(this.pmAmount, this.eq,
+      this.mSPoints[this.mSPoints.length - 1].q(), this.mNumRectangles,
+      function(currentPrice, goalPrice) { return currentPrice < goalPrice; });
+      
+  }, // calculatePriceFloorQs()
+  
   calculatePriceFloorQd : function() {
     if (!this.pmAmount)
       alertAndThrowException("Must be a price mechanism");
     
-    // if price ceiling is so low that extrapolation on the user's
+    // if price floor is so high that extrapolation on the user's
     // given demand graph data would occur
-    if (this.pmAmount < this.mDPoints[this.mDPoints.length - 1].p())
+    if (this.pmAmount > this.mDPoints[0].p())
       return undefined;
     
     return this.mDemand.getQ(this.pmAmount, this.eq,

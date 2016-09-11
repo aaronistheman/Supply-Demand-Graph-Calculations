@@ -10,16 +10,8 @@ Next:
   -closed, public economy
     -price mechanism: (see the commit in which the todo list was detailed
     for the subsidy/taxation)
-      -apply getQ()
       -make the methods involved in the integration tests incorporate
       the price mechanisms
-        -quantity demanded/supplied, correct state
-          -make general version of calculatePriceCeilingQD(),
-          calculateWorldQd(), etc. and APPLY IT: calculateQuantity()
-            -write skeleton
-            -write tests
-            -implement
-            -apply it, keeping the error-checking out of it
         -domestic producers' revenue
         -consumer surplus
         -producer surplus
