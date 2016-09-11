@@ -101,6 +101,17 @@ QUnit.module(currentTestedFile +
       function(a,b) { return a < b; }); 
     assert.deepEqual(Quantity.get(quantity), 9);
   });
+  
+  QUnit.test("correct value going backward #3", function(assert) {
+    var pf = new PiecewiseFunction();
+    pf.insert(new Point(30, 0.90));
+    pf.insert(new Point(60, 0.60));
+    pf.insert(new Point(90, 0.30));
+    
+    var quantity = pf.getQ(0.75, 60, 30, 500,
+      function(a,b) { return a < b; });
+    assert.deepEqual(Quantity.get(quantity), 45);
+  });
 
 QUnit.module(currentTestedFile +
   ", PiecewiseFunction.prototype.insert()");

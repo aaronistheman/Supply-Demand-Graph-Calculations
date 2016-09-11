@@ -207,9 +207,13 @@ EconomyModel.prototype = {
     this.pmAmount = amount;
     
     this.mUpdateEquilibriumPoint();
-    this.qs = Quantity.get(this.calculatePriceCeilingQs());
-    this.qd = Quantity.get(this.calculatePriceCeilingQd());
-    // this.qs = this.qd = this.eq;
+    if (this.whichPm == Mechanism.Ceiling) {
+      this.qs = Quantity.get(this.calculatePriceCeilingQs());
+      this.qd = Quantity.get(this.calculatePriceCeilingQd());
+    }
+    else { // price floor
+      this.qd = Quantity.get(this.calculatePriceFloorQd());
+    }
   }, // setPriceMechanismAmount()
   
   /**
@@ -566,6 +570,20 @@ EconomyModel.prototype = {
       this.mDPoints[this.mDPoints.length - 1].q(), this.mNumRectangles,
       function(currentPrice, goalPrice) { return currentPrice > goalPrice; });
   }, // calculatePriceCeilingQd()
+  
+  calculatePriceFloorQd : function() {
+    if (!this.pmAmount)
+      alertAndThrowException("Must be a price mechanism");
+    
+    // if price ceiling is so low that extrapolation on the user's
+    // given demand graph data would occur
+    if (this.pmAmount < this.mDPoints[this.mDPoints.length - 1].p())
+      return undefined;
+    
+    return this.mDemand.getQ(this.pmAmount, this.eq,
+      this.mDPoints[0].q(), this.mNumRectangles,
+      function(currentPrice, goalPrice) { return currentPrice < goalPrice; });
+  }, // calculatePriceFloorQd()
   
   /**
    * @return the quantity demanded at the current world price
