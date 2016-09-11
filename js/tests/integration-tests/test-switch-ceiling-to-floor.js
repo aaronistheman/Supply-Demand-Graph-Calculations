@@ -7,7 +7,7 @@ QUnit.module("switch price ceiling to floor");
     case 1:
       var data = getLinearGraph1();
       data.setPriceMechanismAmount(Mechanism.Ceiling, 0.45);
-      data.switchPriceMechanism();
+      data.switchPriceMechanism(Mechanism.Floor);
       return data;
     default:
       alertAndThrowException("Invalid setupNum");
@@ -36,12 +36,13 @@ QUnit.module("switch price ceiling to floor");
   QUnit.test("correct quantity supplied", function(assert) {
     var data = testSwitchCeilingToFloorSetUp(1);
     
+    assert.deepEqual(data.qs, 60);
   });
   
   QUnit.test("correct state", function(assert) {
     var data = testSwitchCeilingToFloorSetUp(1);
     
-    assert.deepEqual(data.qs, 60)
+    assert.deepEqual(data.getState(), States.Equilibrium);
   });
   
   QUnit.test("correct domestic producers' revenue", function(assert) {
@@ -54,13 +55,13 @@ QUnit.module("switch price ceiling to floor");
   QUnit.test("correct consumer surplus", function(assert) {
     var data = testSwitchCeilingToFloorSetUp(1);
     
-    assert.deepEqual(data.getConsumerSurplus.getForTesting(),
+    assert.deepEqual(data.getConsumerSurplus().getForTesting(),
       Price.getForTesting((60 - 30) * (0.90 - 0.60) / 2));
   });
   
   QUnit.test("correct producer surplus", function(assert) {
     var data = testSwitchCeilingToFloorSetUp(1);
     
-    assert.deepEqual(data.getProducerSurplus.getForTesting(),
+    assert.deepEqual(data.getProducerSurplus().getForTesting(),
       Price.getForTesting((60 - 30) * (0.60 - 0.30) / 2));
   });

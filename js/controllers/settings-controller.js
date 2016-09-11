@@ -181,7 +181,8 @@ SettingsController.whatSubsidizedChangeHandler =
  */
 SettingsController.priceMechanismTypeChanged =
   function(economyModel, textView, graphView) {
-  economyModel.switchPriceMechanism();
+  var whichPm = $("#price-mech-type").val();
+  economyModel.switchPriceMechanism(toMechanism(whichPm));
   
   textView.updateAll(economyModel);
   graphView.updateAll(economyModel);

@@ -11,11 +11,7 @@ Next:
     -price mechanism: (see the commit in which the todo list was detailed
     for the subsidy/taxation)
       -implement now (to pass tests)
-        -switchPriceMechanism()
-          -implementation
-            -set price mechanism amount to zero to avoid invalid amount
-          -if works, then
-            -the price mechanism line should be erased
+        -TBA
       -write integraion tests; edit EconomyModel
         -NOT DONE YET
           -price mechanism's type is cancelled

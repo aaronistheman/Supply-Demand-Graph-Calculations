@@ -26,7 +26,7 @@ function EconomyModel(supplyDataString, demandDataString) {
   this.wp; // world price
   
   // Price mechanism stuff
-  this.whichPm; // which price mechanism
+  this.whichPm = Mechanism.None; // which price mechanism
   this.pmAmount = 0; // price mechanism's amount
   
   // Tax/subsidy settings
@@ -226,9 +226,34 @@ EconomyModel.prototype = {
     }
   }, // setPriceMechanismAmount()
   
-  switchPriceMechanism : function() {
-    // alert("switchPriceMechanism()");
-  },
+  /**
+   * Switches the type of the price mechanism, while taking some
+   * measures to avoid leaving the user with an invalid price mechanism.
+   *
+   * @param newMechanism the price mechanism to switch to;
+   * should be a constant of the Mechanism object
+   */
+  switchPriceMechanism : function(newMechanism) {
+    // If the mechanism didn't really change, then this method shouldn't
+    // have been called
+    if (this.whichPm == newMechanism)
+      alertAndThrowException("switchPriceMechanism() called when "
+        + "no switch occurred");
+      
+    switch (newMechanism) {
+    case Mechanism.Ceiling:
+    case Mechanism.Floor:
+    case Mechanism.None:
+      this.whichPm = newMechanism;
+      this.pmAmount = 0; // otherwise, the user could end up with an invalid
+                         // new price mechanism
+      this.qs = this.qd = this.eq; // since price mechanism is disabled
+                                   // (although the type is switched)
+      break;
+    default:
+      alertAndThrowException("Invalid newMechanism in switchPriceMechanism()");
+    }
+  }, // switchPriceMechanism()
   
   /**
    * @pre economy is closed

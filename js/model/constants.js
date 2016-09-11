@@ -25,6 +25,8 @@ function toMechanism(str) {
       return Mechanism.Floor;
     case "ceiling": case "Ceiling":
       return Mechanism.Ceiling;
+    case "none": case "None":
+      return Mechanism.None;
     default:
       alertAndThrowException("Unmatched argument for toMechanism()");
   }
