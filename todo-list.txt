@@ -13,9 +13,12 @@ Next:
       -make the methods involved in the integration tests incorporate
       the price mechanisms
         -quantity demanded/supplied, correct state
-          -need a method to calculate QS and QD; ideas:
-            -THIS ONE: specialized methods (like calculateWorldQD/QS())
-            -generalize the aforementioned world price methods
+          -make general version of calculatePriceCeilingQD(),
+          calculateWorldQd(), etc. and APPLY IT: calculateQuantity()
+            -write skeleton
+            -write tests
+            -implement
+            -apply it, keeping the error-checking out of it
         -domestic producers' revenue
         -consumer surplus
         -producer surplus
