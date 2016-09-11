@@ -12,7 +12,6 @@ Next:
       -tax
       -subsidy
       -price mechanism
-    -perhaps don't allow both tax/subsidy and price mechanism
     -finishing touches
       -fix default controller values
   -open, public economy
@@ -44,6 +43,7 @@ Next:
   -area value is highlighted (e.g. tax revenue): color the area
 -fix (or don't fix and mention in readme or somewhere)
   -mixing price mechanism, tax, and/or subsidy
+    -perhaps don't allow both tax/subsidy and price mechanism
     -e.g. tax supply 0.10, subsidy demand 0.30, and price ceiling 0.65,
     then look at quantity demanded
 -end (also see "Eventually" section)

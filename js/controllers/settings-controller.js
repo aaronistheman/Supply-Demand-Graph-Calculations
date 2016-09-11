@@ -25,7 +25,7 @@ SettingsController.prototype = {
     });
     
     $("#closed-open-checkbox").change(function() {
-      SettingsController.closingEconomyHandler(
+      SettingsController.closingOrOpeningEconomyHandler(
         economyModel, textView, graphView, this);
     });
     
@@ -97,14 +97,41 @@ SettingsController.newWorldPriceHandler =
  * @param graphView instance of GraphView
  * @param checkbox the HTML checkbox element that was acted on
  */
-SettingsController.closingEconomyHandler =
+SettingsController.closingOrOpeningEconomyHandler =
   function(economyModel, textView, graphView, checkbox) {
   if (checkbox.checked) { // if checked the box to close economy
     economyModel.setWp(undefined);
     textView.updateAll(economyModel);
     graphView.updateAll(economyModel);
   }
-}; // closingEconomyHandler()
+  else { // if user desires to open economy
+    cancelClosedPublicEconomy(economyModel, textView);
+    
+    textView.updateAll(economyModel);
+    graphView.updateAll(economyModel);
+  }
+}; // closingOrOpeningEconomyHandler()
+
+function cancelClosedPublicEconomy(economyModel, textView) {
+  // Cancel price mechanism
+  economyModel.switchPriceMechanism(Mechanism.None);
+  
+  // Cancel tax (but maintain the graph in case graph gets switched)
+  var whatTaxed;
+  if (textView.getWhatTaxed() == "demand")
+    whatTaxed = Graph.Demand;
+  else
+    whatTaxed = Graph.Supply;
+  economyModel.setTax(whatTaxed, 0);
+  
+  // Cancel subsidy (but maintain the graph in case graph gets switched)
+  var whatSubsidized;
+  if (textView.getWhatSubsidized() == "demand")
+    whatSubsidized = Graph.Demand;
+  else
+    whatSubsidized = Graph.Supply;
+  economyModel.setSubsidy(whatSubsidized, 0);
+} // cancelClosedPublicEconomy()
 
 /**
  * @param economyModel instance of EconomyModel
