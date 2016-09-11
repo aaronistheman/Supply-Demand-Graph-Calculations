@@ -13,16 +13,13 @@ Next:
       -recalculate:
         -welfare
       -calculate:
-        [-deadweight loss (in an unexpected area)]
         -number of imports
         -tariff revenue
     -import quota
       -recalculate:
         -welfare
       -calculate:
-        [-deadweight loss (in an unexpected area)]
         -number of imports (given)
-        -tariff revenue N/A
 -lingering concerns
   -move constants.js into utility, since controller uses it
   -domestic revenue shouldn't include tax revenue
@@ -31,22 +28,14 @@ Next:
     be the minimum. (e.g. If supply is taxed, then government makes
     tax revenue off of how much is produced (i.e. qs), even if qd is lower.)
   -display tax revenue
--hi-liting controller
-  -point value is highlighted (e.g. quantity demanded): perhaps show
-  with a line on the canvas
-  -area value is highlighted (e.g. tax revenue): color the area
 -fix (or don't fix and mention in readme or somewhere)
   -mixing price mechanism, tax, and/or subsidy
     -perhaps don't allow both tax/subsidy and price mechanism
     -e.g. tax supply 0.10, subsidy demand 0.30, and price ceiling 0.65,
     then look at quantity demanded
 -end (also see "Eventually" section)
-  -where to say what industry it is?
   -make sure these are done
     -getNumberImports()
-  -at some point, getTotalRevenue() MUST be
-  changed, since total revenue = price x QD
-  -make sure correct state is shown if disequilibrium
   -when (if ever) to implement the other part of getEconomicSurplus()?
     -erase alert in it at some point
   -readme
@@ -54,6 +43,10 @@ Next:
     -describe omission of deadweight loss
 
 Considerable:
+-hi-liting controller
+  -point value is highlighted (e.g. quantity demanded): perhaps show
+  with a line on the canvas
+  -area value is highlighted (e.g. tax revenue): color the area
 -should there be a version of update() that only updates
 specific fields, or would the time saved be too insignificant
 compared to the time to make it work
@@ -66,6 +59,7 @@ supply or demand points
 -have some context wrapper custom type so I don't have to keep
 putting the width and height in
 -graph input read from a file
+  -in this data, user would give the graph's title (i.e. what is graphed)
   -pick a way to get user's input to make the graph;
     -ideas regarding how to get the input:
       -have user paste them in certain format in text field
