@@ -62,6 +62,30 @@ PiecewiseFunction.prototype = {
       return this._points[this._points.length - 1].p() + offset;
     }
   }, // getP()
+  
+  /**
+   * Gets a quantity associated with the given price. This is more
+   * complicated then getP() because, although each quantity is mapped
+   * to one price, each price may be mapped to multiple quantities.
+   *
+   * @pre there exists a quantity in the given range [startQ, endQ]
+   * that matches the given price
+   * @param price a Price value
+   * @param startQ quantity value to start the point-by-point traversal at
+   * @param endQ quantity value that is the last one that will be
+   * traversed (e.g. last quantity in supply graph);
+   * if endQ < startQ, then the traversal will go backwards (decreasing
+   * quantity) instead of forwards (increasing quantity)
+   * @param comparisonFunction is for deciding that the correct quantity
+   * has been reached; the returned quantity is the quantity that
+   * happens to be being examined when comparisonFunciton returns false
+   * for the first time; its first argument is the price of the currently
+   * examined point, and its second argument is the given argument price
+   * @return Quantity value
+   */
+  getQ : function(price, startQ, endQ) {
+    return undefined;
+  },
 
   /**
    * @param point instance of Point

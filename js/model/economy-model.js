@@ -552,7 +552,7 @@ EconomyModel.prototype = {
     if (this.pmAmount < this.mDPoints[this.mDPoints.length - 1].p())
       return undefined;
     
-    // Set up a Riemann sum from the equilibrium quantity to last
+    // Set up a traversal from the equilibrium quantity to last
     // demand quantity
     var range = this.mDPoints[this.mDPoints.length - 1].q() - this.eq;
     var step = range / this.mNumRectangles;
@@ -581,7 +581,7 @@ EconomyModel.prototype = {
       throw "fail";
     }
 
-    // Set up a Riemann sum from the equilibrium quantity to last
+    // Set up a traversal from the equilibrium quantity to last
     // demand quantity
     var range = this.mDPoints[this.mDPoints.length - 1].q() - this.eq;
     var step = range / this.mNumRectangles;
@@ -610,7 +610,7 @@ EconomyModel.prototype = {
       throw "fail";
     }
 
-    // Set up a Riemann sum from first supply quantity to equilibrium quantity
+    // Set up a traversal from first supply quantity to equilibrium quantity
     var range = this.eq - this.mSPoints[0].q();
     var step = range / this.mNumRectangles;
     var q = this.eq;
