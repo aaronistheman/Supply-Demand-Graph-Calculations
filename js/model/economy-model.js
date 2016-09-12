@@ -171,6 +171,7 @@ EconomyModel.prototype = {
       }
     }
     else { // if user eliminated world price
+      this.cancelTariff();
       this.wp = undefined;
       this.qd = this.qs = this.eq;
     }
@@ -196,6 +197,10 @@ EconomyModel.prototype = {
     else
       return true;
   }, // mIsValidTariff()
+  
+  cancelTariff : function() {
+    this.setTariffAmount(0);
+  },
   
   setTariffAmount : function(amount) {
     if (!this.mIsValidTariff(amount))
