@@ -37,6 +37,9 @@ function EconomyModel(supplyDataString, demandDataString) {
   // this.whatTaxed; // should have a Graph constant value
   // this.whatSubsidized; // should have a Graph constant value
   
+  // Tariff stuff
+  this.tariffAmount = 0;
+  
   this.mNumRectangles = 100000; // usually for Riemann sums
   
   this.mSupply = new PiecewiseFunction();
@@ -199,7 +202,7 @@ EconomyModel.prototype = {
   }, // mIsValidPriceMechanismAmount()
   
   setTariffAmount : function(amount) {
-    alert("setTariffAmount(): " + amount);
+    this.tariffAmount = amount;
   }, // setTariffAmount()
   
   /**
