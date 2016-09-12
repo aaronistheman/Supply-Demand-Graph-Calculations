@@ -816,9 +816,16 @@ EconomyModel.prototype = {
    * measurements
    */
   mGetEffectiveWelfarePrice : function() {
-    // There can't be both world price and price mechanism simultaneously,
-    // so can handle the two cases separately
-    if (this.wp)
+    /**
+     * Notes regarding the order of the below cases:
+     * 1) There can't be both world price and price mechanism simultaneously,
+     * so I can handle the two cases separately.
+     * 2) A tariff takes precedence over the world price, because
+     * that's how a tariff works for the country imposing it.
+     */
+    if (this.tariffAmount)
+      return this.tariffAmount;
+    else if (this.wp)
       return this.wp
     else if (this.pmAmount)
       return this.pmAmount;

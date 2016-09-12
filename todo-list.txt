@@ -9,10 +9,7 @@ Next:
   -open, private economy: DONE
   -closed, public economy: DONE
   -open, public economy (tariff)
-    -EconomyModel
-      -calculate:
-        -welfare
-    -the following actions elminate the tariff
+    -the following actions elminate the tariff (SettingsController)
       -eliminating world price
       -privatizing economy
       -closing economy
