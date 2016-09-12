@@ -185,6 +185,14 @@ EconomyModel.prototype = {
       alert("User Error: Tariff can't be negative");
       return false;
     }
+    else if (amount >= this.ep) {
+      alert("User Error: Tariff must be less than domestic price");
+      return false;
+    }
+    else if (amount != 0 && amount <= this.wp) {
+      alert("User Error: Tariff must be greater than world price");
+      return false;
+    }
     else
       return true;
   }, // mIsValidTariff()
