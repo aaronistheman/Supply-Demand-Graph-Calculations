@@ -217,7 +217,7 @@ EconomyModel.prototype = {
    * @return a Price object
    */
   getTariffRevenue : function() {
-    return undefined;
+    return new Price(this.getNumberImports() * (this.tariffAmount - this.wp));
   },
   
   mIsValidPriceMechanismAmount : function(whichPriceMechanism, amount) {
