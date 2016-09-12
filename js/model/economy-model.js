@@ -196,6 +196,13 @@ EconomyModel.prototype = {
     this.tariffAmount = amount;
   }, // setTariffAmount()
   
+  /**
+   * @return a Price object
+   */
+  getTariffRevenue : function() {
+    return undefined;
+  },
+  
   mIsValidPriceMechanismAmount : function(whichPriceMechanism, amount) {
     if (amount <= 0) {
       alert("User Error: Price mechanism amount must be positive number");

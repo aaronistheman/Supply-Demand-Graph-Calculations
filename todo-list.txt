@@ -10,12 +10,15 @@ Next:
   -closed, public economy: DONE
   -open, public economy (tariff)
     -EconomyModel
-      -calculate (integration tests):
+      -calculate:
         -welfare
         -number of imports
         -tariff revenue
           -display this
-      -eliminating world price eliminates tariff
+    -the following actions elminate the tariff
+      -eliminating world price
+      -privatizing economy
+      -closing economy
 -lingering concerns
   -move constants.js into utility, since controller uses it
   -domestic revenue shouldn't include tax revenue
