@@ -533,8 +533,10 @@ EconomyModel.prototype = {
    * @return a Price object
    */
   getTaxRevenue : function() {
-    // It may be incorrect to always take the minimum of the
-    // two quantities; I'll look into this later.
+    // Minimum of the two domestic quantities is
+    // taken because I'm (boldly) assuming (for this simplified model)
+    // that this minimum is how much is produced (even though this
+    // may contradict the definition of quantity "supplied").
     // Max of the two taxes is taken because at least one of
     // them must be zero, so this obtains the tax magnitude.
     return new Price(Math.min(this.qd, this.qs)

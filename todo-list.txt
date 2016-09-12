@@ -5,7 +5,6 @@ Contents:
 
 Next:
 -lingering concerns
-  -display tax revenue
   -when (if ever) to implement the other part of getEconomicSurplus()?
     -erase alert in it at some point
 -fix (or don't fix and mention in readme or somewhere)
