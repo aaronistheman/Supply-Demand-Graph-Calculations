@@ -205,7 +205,8 @@ EconomyModel.prototype = {
     
     this.mUpdateEquilibriumPoint();
     if (amount == 0) { // if ending tariff
-      this.qd = this.qs = this.eq;
+      this.qd = Quantity.get(this.calculateWorldQd());
+      this.qs = Quantity.get(this.calculateWorldQs());
     }
     else { // if creating/changing tariff
       this.qd = Quantity.get(this.calculateTariffQd());
@@ -388,6 +389,7 @@ EconomyModel.prototype = {
   },
   
   /**
+   * Gets total DOMESTIC producers' revenue.
    * @return instance of Price
    */
   getTotalRevenue : function() {
@@ -396,6 +398,8 @@ EconomyModel.prototype = {
       priceToUse = this.pmAmount;
     else if (this.tariffAmount)
       priceToUse = this.tariffAmount;
+    else if (this.wp)
+      priceToUse = this.wp;
     else
       priceToUse = this.ep;
     
