@@ -198,6 +198,10 @@ EconomyModel.prototype = {
       alertAndThrowException("Invalid whichPriceMechanism value");
   }, // mIsValidPriceMechanismAmount()
   
+  setTariffAmount : function(amount) {
+    alert("setTariffAmount(): " + amount);
+  }, // setTariffAmount()
+  
   /**
    * Lumps together the operations associated with setting a new
    * price mechanism.

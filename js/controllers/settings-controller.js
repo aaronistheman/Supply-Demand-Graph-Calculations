@@ -59,6 +59,11 @@ SettingsController.prototype = {
       SettingsController.priceMechanismAmountChanged(
         economyModel, textView, graphView);
     });
+    
+    $("#b-tariff-amount").click(function() {
+      SettingsController.tariffAmountChanged(
+        economyModel, textView, graphView);
+    });
   },
 }; // SettingsController.prototype
 
@@ -252,3 +257,10 @@ SettingsController.priceMechanismAmountChanged =
   graphView.updateAll(economyModel);
 };
 
+SettingsController.tariffAmountChanged =
+  function(economyModel, textView, graphView) {
+  economyModel.setTariffAmount(parseFloat($("#new-tariff-amount").val()));
+  
+  textView.updateAll(economyModel);
+  graphView.updateAll(economyModel);
+};

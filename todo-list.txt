@@ -8,11 +8,15 @@ Next:
 -remaining calculations/actions:
   -open, private economy: DONE
   -closed, public economy: DONE
-  -open, public economy
-    -tariff
-      -recalculate:
+  -open, public economy (tariff)
+    -TextView
+      -update the part that displays tariff amount
+    -GraphView
+      -draw horizontal line for tariff amount
+    -EconomyModel
+      -reject negative tariff
+      -calculate (integration tests):
         -welfare
-      -calculate:
         -number of imports
         -tariff revenue
           -display this
