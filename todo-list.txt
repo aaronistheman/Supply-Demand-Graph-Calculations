@@ -1,20 +1,9 @@
 Contents:
 -Next
 -Considerable
--Notes on Testing
--Notes on Deadweight Loss
+-Old Notes on Deadweight Loss
 
 Next:
--lingering concerns
-  -move constants.js into utility, since controller uses it
-  -domestic revenue shouldn't include tax revenue
-  -does getTaxRevenue() still need the use of min?
-    -in fact, I might be going about it wrong. It shouldn't necessarily
-    be the minimum. (e.g. If supply is taxed, then government makes
-    tax revenue off of how much is produced (i.e. qs), even if qd is lower.)
-  -display tax revenue
-  -when (if ever) to implement the other part of getEconomicSurplus()?
-    -erase alert in it at some point
 -fix (or don't fix and mention in readme or somewhere)
   -mixing price mechanism, tax, and/or subsidy
     -perhaps don't allow both tax/subsidy and price mechanism
@@ -40,6 +29,10 @@ specific fields, or would the time saved be too insignificant
 compared to the time to make it work
   -ideas
     -"update filters"
+-does getTaxRevenue() still need the use of min?
+  -in fact, I might be going about it wrong. It shouldn't necessarily
+  be the minimum. (e.g. If supply is taxed, then government makes
+  tax revenue off of how much is produced (i.e. qs), even if qd is lower.)
 -figure out if where I initially set up qd and qs is best
 -have workarounds for calculations that reach the boundaries of the
 supply or demand points
@@ -80,31 +73,7 @@ a button to clear the hi lites
 -reapply settings when apply-able (e.g. if user opens economy, apply
 the last used world price)
 
-Notes on Testing:
--tests for:
-(
--NOTE: should be done (twice?) for each of the following:
-  -1) subsidy on demand <-- DONE
-  -2) tax on demand <-- DONE
-  -3) subsidy on supply <-- DONE
-  -4) tax on supply <-- DONE
-  -5) simple mixes; e.g.  <-- DONE
-    -tax and subsidy on demand <-- DONE
-    -tax and subsidy on supply <-- DONE
-    -tax on supply; subsidy on demand <-- DONE
-    -tax on demand; subsidy on supply <-- DONE
-  -6) a few complicated mixes? (list some here) <-- DONE
-    -set and toggle tax and subsidy <-- DONE
-)
--domestic equilibrium
--quantity demanded/supplied? (or is this unnecessary, given
-the assignments at the end of the setter methods)
--domestic total revenue
--consumer/producer surplus
--deadweight loss
--tax revenue
-
-Notes on Deadweight Loss:
+Old Notes on Deadweight Loss (cancelled feature):
 -EconomyModel.prototype.getDeadweightLoss()
   -make integration tests that calculate deadweight loss if both
   tax and subsidy; cases:

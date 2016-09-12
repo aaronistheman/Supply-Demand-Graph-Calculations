@@ -171,14 +171,15 @@ EconomyModel.prototype = {
       }
     }
     else { // if user eliminated world price
-      this.cancelTariff();
+      if (this.wp)
+        this.cancelTariff();
       this.wp = undefined;
       this.qd = this.qs = this.eq;
     }
   }, // setWp()
   
   mIsValidTariff : function(amount) {
-    if (!this.wp) {
+    if (amount != 0 && !this.wp) {
       alert("User Error: Can't set tariff unless is world price");
       return false;
     }
@@ -464,19 +465,14 @@ EconomyModel.prototype = {
   },
   
   /**
-   * Specify both parameters to avoid recalculation.
+   * Economic surplus is also known as total welfare.
+   *
    * @param cs consumer surplus; Price object
    * @param ps producer surplus; Price object
    * @return a Price object
    */
   getEconomicSurplus : function(cs, ps) {
-    if (arguments.length == 2)
-      return new Price(cs.getUnrounded() + ps.getUnrounded());
-    else {
-      ; // calculate total surplus
-      
-      alertAndThrowException("getEconomicSurplus() not fully implemented");
-    }
+    return new Price(cs.getUnrounded() + ps.getUnrounded());
   },
   
   /**
@@ -532,8 +528,10 @@ EconomyModel.prototype = {
    * @return a Price object
    */
   getTaxRevenue : function() {
-    // It may be incorrect to always take the minimum of the
-    // two quantities; I'll look into this later.
+    // Minimum of the two domestic quantities is
+    // taken because I'm (boldly) assuming (for this simplified model)
+    // that this minimum is how much is produced (even though this
+    // may contradict the definition of quantity "supplied").
     // Max of the two taxes is taken because at least one of
     // them must be zero, so this obtains the tax magnitude.
     return new Price(Math.min(this.qd, this.qs)

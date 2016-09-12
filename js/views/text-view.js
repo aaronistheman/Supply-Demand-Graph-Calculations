@@ -30,6 +30,7 @@ function TextView(industryName) {
   this.$taxDisplay = $("#tax-amount");
   this.$taxAmount = $("#new-tax-amount");
   this.$whatTaxed = $("#what-taxed");
+  this.$taxRevenue = $("#tax-revenue");
   this.$subsidyDisplay = $("#subsidy-amount");
   this.$subsidyAmount = $("#new-subsidy-amount");
   this.$whatSubsidized = $("#what-subsidized");
@@ -96,6 +97,7 @@ TextView.prototype = {
     
     // tax and subsidy info
     this.$taxDisplay.html(data.getTaxAmount());
+    this.$taxRevenue.html(data.getTaxRevenue().forDisplay());
     this.$subsidyDisplay.html(data.getSubsidyAmount());
     
     // price mechanism info
