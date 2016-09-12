@@ -171,14 +171,15 @@ EconomyModel.prototype = {
       }
     }
     else { // if user eliminated world price
-      this.cancelTariff();
+      if (this.wp)
+        this.cancelTariff();
       this.wp = undefined;
       this.qd = this.qs = this.eq;
     }
   }, // setWp()
   
   mIsValidTariff : function(amount) {
-    if (!this.wp) {
+    if (amount != 0 && !this.wp) {
       alert("User Error: Can't set tariff unless is world price");
       return false;
     }
