@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="utf-8" />
+<title>QUnit Unit Tests</title>
+<link rel="stylesheet" href="css/qunit-1.23.1.css" />
+
+</head>
+<body>
+
+<div id="qunit"></div>
+<div id="qunit-fixture"></div>
+
+<!-- QUnit -->
+<script src="js/tests/qunit-1.23.1.js"></script>
+
+<script src="js/jquery.min.js"></script>
+
+<!-- The project's non-test, non-library JS files -->
+<script src="js/utility/utility.js"></script>
+<script src="js/utility/price.js"></script>
+<script src="js/utility/quantity.js"></script>
+<script src="js/utility/constants.js"></script>
+<script src="js/model/point.js"></script>
+<script src="js/model/piecewise-function.js"></script>
+<script src="js/model/string-input.js"></script>
+<script src="js/model/economy-model.js"></script>
+<script src="js/main.js"></script>
+
+<!-- After including program JS files -->
+<script src="js/tests/sample-graphs.js"></script>
+<script src="js/tests/unit-tests/quantity/test-all.js"></script>
+<script src="js/tests/unit-tests/price/test-all.js"></script>
+<script src="js/tests/unit-tests/string-input/test-all.js"></script>
+<script src="js/tests/unit-tests/piecewise-function/test-all.js"></script>
+<script src="js/tests/unit-tests/economy-model/test-calculate-equilibrium-point.js"></script>
+<script src="js/tests/unit-tests/economy-model/test-calculate-highest-quantity.js"></script>
+<script src="js/tests/unit-tests/economy-model/test-calculate-lowest-effective-price.js"></script>
+<script src="js/tests/unit-tests/economy-model/test-calculate-lowest-quantity.js"></script>
+<script src="js/tests/unit-tests/economy-model/test-calculate-world-qd.js"></script>
+<script src="js/tests/unit-tests/economy-model/test-calculate-world-qs.js"></script>
+<script src="js/tests/unit-tests/economy-model/test-get-consumer-surplus.js"></script>
+<script src="js/tests/unit-tests/economy-model/test-get-producer-surplus.js"></script>
+<script src="js/tests/unit-tests/economy-model/test-get-state.js"></script>
+<script src="js/tests/unit-tests/economy-model/test-get-deadweight-loss.js"></script>
+<script src="js/tests/unit-tests/economy-model/test-calculate-price-ceiling-qd.js"></script>
+<script src="js/tests/integration-tests/closed-public/subsidy-tax/test-tax-supply.js"></script>
+<script src="js/tests/integration-tests/closed-public/subsidy-tax/test-tax-demand.js"></script>
+<script src="js/tests/integration-tests/closed-public/subsidy-tax/test-subsidy-supply.js"></script>
+<script src="js/tests/integration-tests/closed-public/subsidy-tax/test-subsidy-demand.js"></script>
+<script src="js/tests/integration-tests/closed-public/subsidy-tax/test-tax-subsidy-supply.js"></script>
+<script src="js/tests/integration-tests/closed-public/subsidy-tax/test-tax-subsidy-demand.js"></script>
+<script src="js/tests/integration-tests/closed-public/subsidy-tax/test-tax-supply-subsidy-demand.js"></script>
+<script src="js/tests/integration-tests/closed-public/subsidy-tax/test-tax-demand-subsidy-supply.js"></script>
+<script src="js/tests/integration-tests/closed-public/subsidy-tax/test-set-and-toggle-tax-subsidy.js"></script>
+<script src="js/tests/integration-tests/closed-public/price-mechanism/test-price-ceiling.js"></script>
+<script src="js/tests/integration-tests/closed-public/price-mechanism/test-price-floor.js"></script>
+<script src="js/tests/integration-tests/closed-public/price-mechanism/test-switch-floor-to-ceiling.js"></script>
+<script src="js/tests/integration-tests/closed-public/price-mechanism/test-switch-ceiling-to-floor.js"></script>
+<script src="js/tests/integration-tests/closed-public/price-mechanism/test-cancel-price-mechanism.js"></script>
+<script src="js/tests/integration-tests/open-public/tariff/test-set-tariff.js"></script>
+<script src="js/tests/integration-tests/open-public/tariff/test-cancel-tariff.js"></script>
+
+</body>
+</html>

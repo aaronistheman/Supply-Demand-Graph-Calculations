@@ -1,0 +1,81 @@
+Contents:
+-Next
+-Considerable
+-Old Notes on Deadweight Loss
+
+Next:
+-...
+
+Considerable:
+-import quota
+  -recalculate:
+    -welfare
+  -calculate:
+    -number of imports (given)
+-hi-liting controller
+  -point value is highlighted (e.g. quantity demanded): perhaps show
+  with a line on the canvas
+  -area value is highlighted (e.g. tax revenue): color the area
+-should there be a version of update() that only updates
+specific fields, or would the time saved be too insignificant
+compared to the time to make it work
+  -ideas
+    -"update filters"
+-does getTaxRevenue() still need the use of min?
+  -in fact, I might be going about it wrong. It shouldn't necessarily
+  be the minimum. (e.g. If supply is taxed, then government makes
+  tax revenue off of how much is produced (i.e. qs), even if qd is lower.)
+-figure out if where I initially set up qd and qs is best
+-have workarounds for calculations that reach the boundaries of the
+supply or demand points
+  -if this is still an issue, make a test to reveal it
+-have some context wrapper custom type so I don't have to keep
+putting the width and height in
+-graph input read from a file
+  -in this data, user would give the graph's title (i.e. what is graphed)
+  -pick a way to get user's input to make the graph;
+    -ideas regarding how to get the input:
+      -have user paste them in certain format in text field
+      -read from file, if possible with just JavaScript/jQuery
+    -ideas regarding the input itself:
+      -perhaps have it be specified there what is being graphed
+      -get the maxes from the inputs
+  -graph/input warnings/errors
+    -if any calculation's integration goes past the final data point
+    of the graph whose final data point's x-coordinate is lowest,
+    then the graphs don't interact, and this should be said
+    -report error if no semi-colon where expected one
+  -read "what is graphed" from file
+-the graph maxes seem a little deceptive, since they are not visible
+due to the label offset
+-allow graphing of firm or aggregate
+  -could use AngularJS if possible
+  -could change the fields shown (in response to what the user wants
+  to graph) (perhaps with AJAX or PHP or ASP or something)
+-can probably afford to lower number of Riemann rectangles
+-option to save applied inputs and apply them later
+  -could use MongoDB and Node.js for this
+-allow the panels to be in more than one column; see how it was done with
+CSS in one of the card games
+-using tables to more neatly present the calculated data
+-limit each text field's size?
+  -or would this require too much assuming about the data?
+-fix mixing price mechanism, tax, and/or subsidy
+  -perhaps don't allow both tax/subsidy and price mechanism
+  -e.g. tax supply 0.10, subsidy demand 0.30, and price ceiling 0.65,
+  then look at quantity demanded
+-when change is made, hi lite the fields that changed, and have
+a button to clear the hi lites
+-reapply settings when apply-able (e.g. if user opens economy, apply
+the last used world price)
+
+Old Notes on Deadweight Loss (cancelled feature):
+-EconomyModel.prototype.getDeadweightLoss()
+  -make integration tests that calculate deadweight loss if both
+  tax and subsidy; cases:
+    -tax and subsidy cancel each other => no DWL
+    -tax on supply overpowers subsidy on demand => which of the
+    two resulting triangles in DWL?
+    -etc.
+  -have text-view use this method and display it as Price value
+-what is deadweight loss if are tax, price mechanism, and tariff/quota?

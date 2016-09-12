@@ -1,0 +1,52 @@
+/**
+ * For the entire wrapper around body
+ */
+
+#wrapper {
+  position: relative;
+}
+
+#wrapper > * {
+  position: absolute;
+}
+
+/**
+ * The graph canvases
+ */
+
+canvas.graph {
+  top: 70px;
+}
+
+canvas#axes-graph {
+  /* Because this canvas is behind the others in its stack */
+  background-color: #eee;
+}
+
+/**
+ * For all the "panels" (i.e. the parts beside the graph)
+ */
+
+#beside-graph {
+  left: 500px;
+}
+
+#beside-graph .panel:not(:first-child) {
+  margin-top: 20px;
+}
+
+/**
+ * For each individual "panel" beside the graph
+ */
+
+.panel p {
+  margin: 0px;
+}
+
+/**
+ * Particular stylings
+ */
+
+#indent-wrapper {
+  margin-left: 1em;
+}
