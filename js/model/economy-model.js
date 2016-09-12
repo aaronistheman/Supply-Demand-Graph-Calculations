@@ -465,19 +465,14 @@ EconomyModel.prototype = {
   },
   
   /**
-   * Specify both parameters to avoid recalculation.
+   * Economic surplus is also known as total welfare.
+   *
    * @param cs consumer surplus; Price object
    * @param ps producer surplus; Price object
    * @return a Price object
    */
   getEconomicSurplus : function(cs, ps) {
-    if (arguments.length == 2)
-      return new Price(cs.getUnrounded() + ps.getUnrounded());
-    else {
-      ; // calculate total surplus
-      
-      alertAndThrowException("getEconomicSurplus() not fully implemented");
-    }
+    return new Price(cs.getUnrounded() + ps.getUnrounded());
   },
   
   /**
