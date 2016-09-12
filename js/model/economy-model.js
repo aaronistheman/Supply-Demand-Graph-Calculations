@@ -202,6 +202,15 @@ EconomyModel.prototype = {
       return;
     
     this.tariffAmount = amount;
+    
+    this.mUpdateEquilibriumPoint();
+    if (amount == 0) { // if ending tariff
+      this.qd = this.qs = this.eq;
+    }
+    else { // if creating/changing tariff
+      this.qd = Quantity.get(this.calculateTariffQd());
+      this.qs = Quantity.get(this.calculateTariffQs());
+    }
   }, // setTariffAmount()
   
   /**
@@ -623,6 +632,18 @@ EconomyModel.prototype = {
       this.mDemand.getP(this.mHighestQuantity)));
   },
   */
+  
+  calculateTariffQd : function() {
+    return this.mDemand.getQ(this.tariffAmount, this.eq,
+      this.mDPoints[this.mDPoints.length - 1].q(), this.mNumRectangles,
+      function(currentPrice, goalPrice) { return currentPrice > goalPrice; });
+  }, // calculateTariffQd()
+  
+  calculateTariffQs : function() {
+    return this.mSupply.getQ(this.tariffAmount, this.eq,
+      this.mSPoints[0].q(), this.mNumRectangles,
+      function(currentPrice, goalPrice) { return currentPrice > goalPrice; });
+  }, // calculateTariffQs()
   
   calculatePriceCeilingQs : function() {
     if (!this.pmAmount)
