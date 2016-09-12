@@ -176,6 +176,26 @@ EconomyModel.prototype = {
     }
   }, // setWp()
   
+  mIsValidTariff : function(amount) {
+    if (!this.wp) {
+      alert("User Error: Can't set tariff unless is world price");
+      return false;
+    }
+    else if (amount < 0) {
+      alert("User Error: Tariff can't be negative");
+      return false;
+    }
+    else
+      return true;
+  }, // mIsValidTariff()
+  
+  setTariffAmount : function(amount) {
+    if (!this.mIsValidTariff(amount))
+      return;
+    
+    this.tariffAmount = amount;
+  }, // setTariffAmount()
+  
   mIsValidPriceMechanismAmount : function(whichPriceMechanism, amount) {
     if (amount <= 0) {
       alert("User Error: Price mechanism amount must be positive number");
@@ -200,10 +220,6 @@ EconomyModel.prototype = {
     else
       alertAndThrowException("Invalid whichPriceMechanism value");
   }, // mIsValidPriceMechanismAmount()
-  
-  setTariffAmount : function(amount) {
-    this.tariffAmount = amount;
-  }, // setTariffAmount()
   
   /**
    * Lumps together the operations associated with setting a new

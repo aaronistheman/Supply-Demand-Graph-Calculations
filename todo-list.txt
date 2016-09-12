@@ -10,14 +10,12 @@ Next:
   -closed, public economy: DONE
   -open, public economy (tariff)
     -EconomyModel
-      -input-checking
-        -reject tariff if is no world price
-        -reject negative tariff
       -calculate (integration tests):
         -welfare
         -number of imports
         -tariff revenue
           -display this
+      -eliminating world price eliminates tariff
 -lingering concerns
   -move constants.js into utility, since controller uses it
   -domestic revenue shouldn't include tax revenue
