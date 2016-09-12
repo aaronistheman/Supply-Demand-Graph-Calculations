@@ -9,11 +9,11 @@ Next:
   -open, private economy: DONE
   -closed, public economy: DONE
   -open, public economy (tariff)
+    -integration tests for canceling tariff (because qd and qs
+    should use world price methods)
     -EconomyModel
       -calculate:
         -welfare
-        -tariff revenue
-          -display this
     -the following actions elminate the tariff
       -eliminating world price
       -privatizing economy

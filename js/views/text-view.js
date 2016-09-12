@@ -37,6 +37,7 @@ function TextView(industryName) {
   
   // For open, public economy
   this.$tariffAmount = $("#tariff");
+  this.$tariffRevenue = $("#tariff-revenue");
 } // TextView
 
 TextView.prototype = {
@@ -101,5 +102,6 @@ TextView.prototype = {
     this.$pmAmount.html(data.pmAmount);
     
     this.$tariffAmount.html(data.tariffAmount);
+    this.$tariffRevenue.html(data.getTariffRevenue().forDisplay());
   }, // updateAll()
 };
