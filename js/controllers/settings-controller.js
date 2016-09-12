@@ -30,8 +30,10 @@ SettingsController.prototype = {
     });
     
     $("#public-private-checkbox").change(function() {
+      var economyIsOpen = !($("#closed-open-checkbox")[0].checked);
+      
       SettingsController.publicizingOrPrivatizingEconomyHandler(
-        economyModel, textView, graphView, this);
+        economyModel, textView, graphView, this, economyIsOpen);
     });
     
     $("#b-tax-amount").click(function() {
@@ -57,6 +59,11 @@ SettingsController.prototype = {
     });
     $("#b-price-mech-amount").click(function() {
       SettingsController.priceMechanismAmountChanged(
+        economyModel, textView, graphView);
+    });
+    
+    $("#b-tariff-amount").click(function() {
+      SettingsController.tariffAmountChanged(
         economyModel, textView, graphView);
     });
   },
@@ -105,6 +112,7 @@ SettingsController.newWorldPriceHandler =
 SettingsController.closingOrOpeningEconomyHandler =
   function(economyModel, textView, graphView, checkbox) {
   if (checkbox.checked) { // if checked the box to close economy
+    cancelOpenPublicEconomy(economyModel);
     economyModel.setWp(undefined);
     textView.updateAll(economyModel);
     graphView.updateAll(economyModel);
@@ -124,17 +132,24 @@ SettingsController.closingOrOpeningEconomyHandler =
  * @param checkbox the HTML checkbox element that was acted on
  */
 SettingsController.publicizingOrPrivatizingEconomyHandler =
-  function(economyModel, textView, graphView, checkbox) {
+  function(economyModel, textView, graphView, checkbox, economyIsOpen) {
   if (checkbox.checked) { // if checked the box to publicize economy
     // nothing for now
   }
   else { // if user desires to privatize economy
-    cancelClosedPublicEconomy(economyModel, textView);
+    if (economyIsOpen)
+      cancelOpenPublicEconomy(economyModel);
+    else
+      cancelClosedPublicEconomy(economyModel, textView);
     
     textView.updateAll(economyModel);
     graphView.updateAll(economyModel);
   }
 }; // closingOrOpeningEconomyHandler()
+
+function cancelOpenPublicEconomy(economyModel) {
+  economyModel.cancelTariff();
+} // cancelOpenPublicEconomy()
 
 function cancelClosedPublicEconomy(economyModel, textView) {
   // Cancel price mechanism
@@ -252,3 +267,10 @@ SettingsController.priceMechanismAmountChanged =
   graphView.updateAll(economyModel);
 };
 
+SettingsController.tariffAmountChanged =
+  function(economyModel, textView, graphView) {
+  economyModel.setTariffAmount(parseFloat($("#new-tariff-amount").val()));
+  
+  textView.updateAll(economyModel);
+  graphView.updateAll(economyModel);
+};

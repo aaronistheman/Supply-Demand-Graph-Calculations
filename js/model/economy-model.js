@@ -37,6 +37,9 @@ function EconomyModel(supplyDataString, demandDataString) {
   // this.whatTaxed; // should have a Graph constant value
   // this.whatSubsidized; // should have a Graph constant value
   
+  // Tariff stuff
+  this.tariffAmount = 0;
+  
   this.mNumRectangles = 100000; // usually for Riemann sums
   
   this.mSupply = new PiecewiseFunction();
@@ -168,10 +171,63 @@ EconomyModel.prototype = {
       }
     }
     else { // if user eliminated world price
+      this.cancelTariff();
       this.wp = undefined;
       this.qd = this.qs = this.eq;
     }
   }, // setWp()
+  
+  mIsValidTariff : function(amount) {
+    if (!this.wp) {
+      alert("User Error: Can't set tariff unless is world price");
+      return false;
+    }
+    else if (amount < 0) {
+      alert("User Error: Tariff can't be negative");
+      return false;
+    }
+    else if (amount >= this.ep) {
+      alert("User Error: Tariff must be less than domestic price");
+      return false;
+    }
+    else if (amount != 0 && amount <= this.wp) {
+      alert("User Error: Tariff must be greater than world price");
+      return false;
+    }
+    else
+      return true;
+  }, // mIsValidTariff()
+  
+  cancelTariff : function() {
+    this.setTariffAmount(0);
+  },
+  
+  setTariffAmount : function(amount) {
+    if (!this.mIsValidTariff(amount))
+      return;
+    
+    this.tariffAmount = amount;
+    
+    this.mUpdateEquilibriumPoint();
+    if (amount == 0) { // if ending tariff
+      this.qd = Quantity.get(this.calculateWorldQd());
+      this.qs = Quantity.get(this.calculateWorldQs());
+    }
+    else { // if creating/changing tariff
+      this.qd = Quantity.get(this.calculateTariffQd());
+      this.qs = Quantity.get(this.calculateTariffQs());
+    }
+  }, // setTariffAmount()
+  
+  /**
+   * @return a Price object
+   */
+  getTariffRevenue : function() {
+    if (!this.tariffAmount) // if no tariff, is no tariff revenue
+      return new Price(0);
+    else
+      return new Price(this.getNumberImports() * (this.tariffAmount - this.wp));
+  },
   
   mIsValidPriceMechanismAmount : function(whichPriceMechanism, amount) {
     if (amount <= 0) {
@@ -338,12 +394,17 @@ EconomyModel.prototype = {
   },
   
   /**
+   * Gets total DOMESTIC producers' revenue.
    * @return instance of Price
    */
   getTotalRevenue : function() {
     var priceToUse;
     if (this.pmAmount)
       priceToUse = this.pmAmount;
+    else if (this.tariffAmount)
+      priceToUse = this.tariffAmount;
+    else if (this.wp)
+      priceToUse = this.wp;
     else
       priceToUse = this.ep;
     
@@ -586,6 +647,18 @@ EconomyModel.prototype = {
   },
   */
   
+  calculateTariffQd : function() {
+    return this.mDemand.getQ(this.tariffAmount, this.eq,
+      this.mDPoints[this.mDPoints.length - 1].q(), this.mNumRectangles,
+      function(currentPrice, goalPrice) { return currentPrice > goalPrice; });
+  }, // calculateTariffQd()
+  
+  calculateTariffQs : function() {
+    return this.mSupply.getQ(this.tariffAmount, this.eq,
+      this.mSPoints[0].q(), this.mNumRectangles,
+      function(currentPrice, goalPrice) { return currentPrice > goalPrice; });
+  }, // calculateTariffQs()
+  
   calculatePriceCeilingQs : function() {
     if (!this.pmAmount)
       alertAndThrowException("Must be a price mechanism");
@@ -748,9 +821,16 @@ EconomyModel.prototype = {
    * measurements
    */
   mGetEffectiveWelfarePrice : function() {
-    // There can't be both world price and price mechanism simultaneously,
-    // so can handle the two cases separately
-    if (this.wp)
+    /**
+     * Notes regarding the order of the below cases:
+     * 1) There can't be both world price and price mechanism simultaneously,
+     * so I can handle the two cases separately.
+     * 2) A tariff takes precedence over the world price, because
+     * that's how a tariff works for the country imposing it.
+     */
+    if (this.tariffAmount)
+      return this.tariffAmount;
+    else if (this.wp)
       return this.wp
     else if (this.pmAmount)
       return this.pmAmount;

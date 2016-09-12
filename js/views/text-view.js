@@ -34,6 +34,10 @@ function TextView(industryName) {
   this.$subsidyAmount = $("#new-subsidy-amount");
   this.$whatSubsidized = $("#what-subsidized");
   this.$pmAmount = $("#pm-amount");
+  
+  // For open, public economy
+  this.$tariffAmount = $("#tariff");
+  this.$tariffRevenue = $("#tariff-revenue");
 } // TextView
 
 TextView.prototype = {
@@ -96,5 +100,8 @@ TextView.prototype = {
     
     // price mechanism info
     this.$pmAmount.html(data.pmAmount);
+    
+    this.$tariffAmount.html(data.tariffAmount);
+    this.$tariffRevenue.html(data.getTariffRevenue().forDisplay());
   }, // updateAll()
 };
