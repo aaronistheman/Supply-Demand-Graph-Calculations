@@ -5,12 +5,6 @@ Contents:
 -Notes on Deadweight Loss
 
 Next:
--remaining calculations/actions:
-  -open, private economy: DONE
-  -closed, public economy: DONE
-  -open, public economy (tariff)
-    -the following actions elminate the tariff (SettingsController)
-      -closing economy
 -lingering concerns
   -move constants.js into utility, since controller uses it
   -domestic revenue shouldn't include tax revenue

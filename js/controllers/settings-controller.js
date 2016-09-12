@@ -112,6 +112,7 @@ SettingsController.newWorldPriceHandler =
 SettingsController.closingOrOpeningEconomyHandler =
   function(economyModel, textView, graphView, checkbox) {
   if (checkbox.checked) { // if checked the box to close economy
+    cancelOpenPublicEconomy(economyModel);
     economyModel.setWp(undefined);
     textView.updateAll(economyModel);
     graphView.updateAll(economyModel);
