@@ -19,7 +19,7 @@ I made it with HTML, CSS, JavaScript, jQuery, AngularJS, and QUnit.
 Implementation-Specific Features
 --------------------------------
 
-* MVC (Model-View-Controller) format for this program.
+* MVC (Model-View-Controller) format.
 
 * Unit/integration tests with QUnit, including 182 assertions total.
 
@@ -30,7 +30,8 @@ Implementation-Specific Features
 supplied by the user (for supply/demand graphs) to make acceptably
 accurate calculations.
 
-* Riemann sums to calculate graph-dependent values such as consumer
+* Riemann sums to approximate integrals for calculating
+graph-dependent values such as consumer
 surplus, using the interpolations facilitated by the aforementioned
 PiecewiseFunction custom type.
 
@@ -56,8 +57,18 @@ if the user does not check the box for "Government", then he/she
 will not be asked where the price floor is. (This is the limit
 of my AngularJS use.)
 
-Notes on Code
--------------
+How to Run Application
+----------------------
+
+Run index.html on a browser that supports HTML Canvas content.
+
+How to Run Unit and Integration Tests
+-------------------------------------
+
+Run test.html on a modern browser.
+
+Note on Terminology
+-------------------
 
 Throughout the code (specifically the comments), I sometimes say
 the supply graph moves up/down, which may be deceptive, since
@@ -73,22 +84,13 @@ Latest release: v0.1
 Please check the Releases section on GitHub for the latest information:
 https://github.com/aaronistheman/Supply-Demand-Graph-Calculations/releases
 
-How to Run Application
-----------------------
-
-Run index.html on a browser that supports HTML Canvas content.
-
-How to Run Unit and Integration Tests
--------------------------------------
-
-Run test.html on a modern browser.
-
 Helpful Resources
 -----------------
 
-"HTML5 Canvas Cookbook" by Eric Rowell;
-"The Principles of Object-Oriented JavaScript" by Nicholas C. Zakas;
-W3Schools.com
+* "The Principles of Object-Oriented JavaScript" by Nicholas C. Zakas
+* "HTML5 Canvas Cookbook" by Eric Rowell
+* W3Schools.com
+* QUnit API Documentation
 
 Author
 ------
@@ -104,7 +106,7 @@ which I suspect I did not do the right thing. (e.g. Setting the world
 price above the domestic equilibrium price does nothing in the program.
 However, regarding real life, I suspect that
 doing so could increase domestic supply, but this scenario was not
-covered in the AP curriculum.)
+covered in the AP curriculum, so I ignored it.)
 
 Contact Information
 -------------------
