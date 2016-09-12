@@ -15,11 +15,7 @@ Next:
       -calculate:
         -number of imports
         -tariff revenue
-    -import quota
-      -recalculate:
-        -welfare
-      -calculate:
-        -number of imports (given)
+          -display this
 -lingering concerns
   -move constants.js into utility, since controller uses it
   -domestic revenue shouldn't include tax revenue
@@ -43,6 +39,11 @@ Next:
     -describe omission of deadweight loss
 
 Considerable:
+-import quota
+  -recalculate:
+    -welfare
+  -calculate:
+    -number of imports (given)
 -hi-liting controller
   -point value is highlighted (e.g. quantity demanded): perhaps show
   with a line on the canvas

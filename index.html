@@ -143,15 +143,15 @@
         <div data-ng-show="!isClosed"> <!-- if open, public economy -->
 
           <div> <!-- trade info -->
-            <br><p>Trade Factor: <select data-ng-model="tradeFactor">
-              <option value="none">None</option>
-              <option value="tariff">Tariff</option>
-              <option value="quota">Quota</option>
-            </select></p>
-            <div data-ng-show="tradeFactor != 'none'">
-              <p>How Much: <input type="number" name="trade-factor"
-                value=0 /></p>
-            </div>
+            <p>Tariff amount:
+              <span id="tariff"></span> <!-- Display of tariff -->
+              
+              <!-- For changing trade factor -->
+              <span id="indent-wrapper">
+                <input type="number" id="new-tariff-amount" value=0 />
+              </span>
+              <input type="button" value="Update" id="b-tariff-amount" />
+            </p>
           </div> <!-- trade info -->
 
         </div> <!-- if open, public economy -->
