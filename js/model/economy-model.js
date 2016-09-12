@@ -391,6 +391,8 @@ EconomyModel.prototype = {
     var priceToUse;
     if (this.pmAmount)
       priceToUse = this.pmAmount;
+    else if (this.tariffAmount)
+      priceToUse = this.tariffAmount;
     else
       priceToUse = this.ep;
     

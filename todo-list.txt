@@ -11,9 +11,7 @@ Next:
   -open, public economy (tariff)
     -EconomyModel
       -calculate:
-        -correct domestic producers' revenue
         -welfare
-        -number of imports
         -tariff revenue
           -display this
     -the following actions elminate the tariff
